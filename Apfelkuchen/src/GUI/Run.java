@@ -1,11 +1,15 @@
 package GUI;
-
+/**
+ * @author Yury Kalinin
+ * Start of window with 1194, 550 size
+ *
+ */
 public class Run {
 	public static void main( String args[] )
 	   {
 
-		 WindowTwo window1 = new WindowTwo();
-		 window1.setWindow(1194, 550);
+		 Window window = new Window();
+		 window.setWindow(1194, 550);
 		
 	   }
 }
