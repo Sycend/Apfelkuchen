@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+
+
+
+	<de>
+		<title>Apfehlkuchen</title>
+		<experiment>Versuchsnummer</experiment>
+		<mnuHelp>Help</mnuHelp>
+		<mnuItemAbout>About</mnuItemAbout>
+		<temperature>Temperatur</temperature>
+		<time>Backzeit</time>
+
+		<diameter>"Durchmesser</diameter>
+		<height>Höhe </height>
+		
+		<results>"Bewertug</results>
+		<buttonNext>Optimieren</buttonNext>
+		<buttonOk>
+			Neuer Versuch
+		</buttonOk>
+
+		<buttonOKTipText>Hovered Over ME Test</buttonOKTipText>
+		<buttonNextTipText>Hovered Over ME Test2</buttonNextTipText>>
+		
+		
+		
+	</de>
+    
+
+
+</root>
