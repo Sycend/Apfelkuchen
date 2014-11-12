@@ -11,7 +11,7 @@ public class Test1 {
 		new Test1();
 	}
 	
-	/*
+	
 	 * Test for simple plots
 	 */
 	public Test1() {
