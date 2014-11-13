@@ -27,33 +27,33 @@ public class Window extends JFrame {
 
 	protected static int windowSize1;
 	protected static int windowSize2;
-
+	
 	private JMenu mnuHelp;
 	private JMenuItem mnuItemAbout;
 	private JMenuBar mb;
-	private JComboBox temperatureBox;
-	private JComboBox timeBox;
+	private JLabel counterNumber;
+	private JLabel experimentLabel;
+	private JLabel resultsLabel;
 	private JLabel temperatureLabel;
 	private JLabel timeLabel;
+	private JLabel heightLabel;
+	private JLabel diameterLabel;
 	private JTextField temperatureField;
 	private JTextField timeField;
-	private JLabel diameterLabel;
 	private JTextField diameterField;
-	private JLabel heightLabel;
 	private JTextField heightField;
-	private JLabel resultsLabel;
 	private JButton buttonOk;
 	private JButton buttonNext;
 	private JTextField resultsField;
 	private JSlider slider;
 	private JComboBox diameterBox;
 	private JComboBox heightBox;
+	private JComboBox temperatureBox;
+	private JComboBox timeBox;
 	private JFrame frame;
 	private JPanel panel;
 	private JButton newExperiment;
 	private int counter = 1;
-	private JLabel counterNumber;
-	private JLabel experimentLabel;
 
 	public void setWindow(int windowSize1, int windowSize2) {
 		try {
