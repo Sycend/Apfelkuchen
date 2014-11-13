@@ -1,5 +1,5 @@
 package GUI;
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -219,7 +219,7 @@ public class UnitTable {
 		values[21][2] = 0;
 		values[22][2] = 0;
 		
-		//°K
+		//K
 		values[0][3] = 0;
 		values[1][3] = 0;
 		values[2][3] = 0;
@@ -256,7 +256,7 @@ public class UnitTable {
 		return s;
 	}
 	
-	public static int Test0(double n) {
+	/*public static int Test0(double n) {
 		//energy_J_high = n;
 		//return energy_J_high * energy_J_gradient;
 		return 0;
@@ -264,6 +264,6 @@ public class UnitTable {
 	
 	public static void testsquare() {
 		assertEquals(0, Test0(3));
-	}
+	}*/
 	
 }
