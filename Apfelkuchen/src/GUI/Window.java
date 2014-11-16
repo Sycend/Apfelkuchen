@@ -234,7 +234,7 @@ public class Window extends JFrame {
 		frame.add(panel);
 		frame.setSize(windowSize1, windowSize2);
 		frame.setVisible(true);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 

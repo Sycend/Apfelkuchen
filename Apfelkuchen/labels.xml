@@ -5,28 +5,46 @@
 
 	<de>
 		<title>Apfehlkuchen</title>
-		<experiment>Versuchsnummer</experiment>
+
 		<mnuHelp>Help</mnuHelp>
 		<mnuItemAbout>About</mnuItemAbout>
-		<temperature>Temperatur</temperature>
-		<time>Backzeit</time>
 
-		<diameter>"Durchmesser</diameter>
-		<height>Höhe </height>
-		
-		<results>"Bewertug</results>
 		<buttonNext>Optimieren</buttonNext>
 		<buttonOk>
-			Neuer Versuch
+			OK
 		</buttonOk>
-
+		<buttonOkExp>
+		Neuer Versuch
+		</buttonOkExp>
+		<buttonOkStart>
+		Start
+		</buttonOkStart>
+		<nameLabel>
+			Name für das Feld
+		</nameLabel>
+		<nameFeld>
+			Name
+		</nameFeld>
+		
+		<buttonNewField>
+		Neues Feld
+		</buttonNewField>
+		<buttonRemove>
+		Löschen
+		</buttonRemove>
+		<buttonNewStart>
+			Neu Starten
+		</buttonNewStart>
+		<experimentLabel>Versuch </experimentLabel>
 		<buttonOKTipText>Hovered Over ME Test</buttonOKTipText>
-		<buttonNextTipText>Hovered Over ME Test2</buttonNextTipText>>
+		<buttonNextTipText>Bestätigen die Eingaben</buttonNextTipText>
+		<errorSelection>Bitte wählen Sie eine Variante aus</errorSelection>
 		
-		
-		
+
+
+
 	</de>
-    
+
 
 
 </root>

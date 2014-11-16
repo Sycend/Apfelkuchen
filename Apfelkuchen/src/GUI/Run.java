@@ -10,6 +10,7 @@ public class Run {
 
 		 Window window = new Window();
 		 window.setWindow(1194, 550);
+//		 window.setWindow(1194, 550);
 		
 	   }
 }

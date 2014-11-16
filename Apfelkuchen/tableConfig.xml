@@ -1,15 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><root>
-    
-   
-    <measures><time><minute>Min</minute>
-    		<second>Sec</second>
-    		<test>test</test></time>
-    	<diameter><meter>Meter</meter></diameter>
-    	<height><meter>Meter</meter> </height>
-    	<temperature><grad>Grad</grad>
-    	<test>test</test></temperature>
-    	</measures>
-    
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+
+
+	<de>
+
+		<time>
+			Zeit
+		</time>
+		<diameter>
+			Durchmesser
+		</diameter>
+		<height>
+			Höhe
+		</height>
+		<temperature>
+			Temperatur
+		</temperature>
+	</de>
+
+
 
 
 </root>
