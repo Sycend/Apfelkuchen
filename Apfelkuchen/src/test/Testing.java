@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import GUI.UnitTable;
+//import GUI.UnitTable;
 
 /**
  * @author Dominik Hofmann, Mark Leibmann
@@ -10,8 +10,8 @@ import GUI.UnitTable;
  */
 public class Testing {
 	
-	@Test
-	public static void TestBattery(){
+	//@Test
+	/*public static void TestBattery(){
 		assertEquals(3, Test0(3));
 		assertEquals(7200, Test1(2));
 		assertEquals(3, Test2(3));
@@ -40,7 +40,7 @@ public class Testing {
 		UnitTable unitT = new UnitTable();
 		unitT.setTime_h_low(n);
 		return unitT.SI_low_time_h();
-	}
+	}*/
 	
 }
 
