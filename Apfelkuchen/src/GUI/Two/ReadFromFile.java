@@ -10,7 +10,7 @@ import java.io.File;
 
 /**
  * @author Dominik Hofmann
- * @version 1.2.4
+ * @version 1.2.5
  */
 
 public class ReadFromFile {
@@ -52,13 +52,13 @@ public class ReadFromFile {
 	 * @throws Exception 
 	 */
 	
-	public ArrayList<String> readLargeFile(String Inputfile) throws Exception {
+	public ArrayList<String> readFile(String Inputfile) throws Exception {
 		ArrayList<String> tmp = new ArrayList<String>();
 		File file = new File(Inputfile);
 		if (file.exists()) {
 			System.out.println("File: " + file.getAbsolutePath() + " Exists.");
 			FileInputStream f1 = new FileInputStream(file);
-		    BufferedReader br = new BufferedReader(new InputStreamReader(f1));
+		    BufferedReader br = new BufferedReader(new InputStreamReader(f1, "UTF-8"));
 		    String strLine;
 		    while ((strLine = br.readLine()) != null) {
 		    	tmp.add(strLine);
@@ -70,7 +70,7 @@ public class ReadFromFile {
 		return tmp;
 	}
 	
-	public ArrayList<String> readFile(String Inputfile) throws Exception {
+	/*public ArrayList<String> readFile(String Inputfile) throws Exception {
 		ArrayList<String> tmp = new ArrayList<String>();
 		File file = new File(Inputfile);
 		if (file.exists()) {
@@ -89,7 +89,7 @@ public class ReadFromFile {
 		}
 		scanner.close();
 		return tmp;
-	}
+	}*/
 	
 	
 	
