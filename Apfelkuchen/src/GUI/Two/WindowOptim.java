@@ -1,10 +1,5 @@
 package GUI.Two;
 
-/**
- * @author Yury Kalinin Window for diagrams 
- * 20141116
- *
- */
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -65,10 +60,9 @@ public class WindowOptim extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewStart) {
 					Run.changeNumExp(0);
-					Run.changeNameOfValue();
+
 					frame.setVisible(false);
-					WindowOne window = new WindowOne();
-					window.setWindow(597, 275);
+					Window window = new Window();
 
 				}
 			}

@@ -1,11 +1,5 @@
 package GUI.Two;
 
-/**
- * @author Yury Kalinin Main Window
- * 
- * 20141116
- *
- */
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -47,6 +41,8 @@ import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class Window extends JFrame {
 
@@ -60,30 +56,42 @@ public class Window extends JFrame {
 	private JLabel labelMax;
 	private JLabel labelSI;
 	private JLabel expTitle;
-	private JLabel labelNameofValue;
+	private JTextField labelNameofValue;
 	private JTextField textFieldMin;
 	private JTextField textFieldMax;
 	private JComboBox comboBoxSi;
-
+	private JTextField fieldAbrev;
+	private JLabel labelAbr;
+	private JLabel labelMinMaxSi;
+	private JTextField fieldSIMin;
 	private int numExp;
+	private String nameValue;
+	private JTextField fieldSIMax;
+	private JTextField fieldExpon;
+	private JLabel labelAbrev;
 
-	public Window(Vector nameOfValue) {
+	public Window() {
 
-		super(XMLDate.dateLabels("title"));
+		super("Tile");
 		setSize(1194, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		numExp = Run.getNumExp();
-		init(nameOfValue);
+		init();
 		setVisible(true);
 	}
 
-	public void init(Vector nameOfValue) {
-		int numberOfComp = nameOfValue.size();
+	public void init() {
+
+		int numberOfComp = 0;
+		Vector nameOfValue = new Vector();
+		nameOfValue = Run.getNameOfValue();
+
+		setVisible(false);// Window widow =new Window();
 		JComboBox form = new JComboBox();
 
 		JPanel contentPanel = new JPanel();
-		contentPanel.setSize(600, 400);
+		contentPanel.setSize(100, 100);
 
 		// ======== contentPanel ========
 
@@ -108,7 +116,7 @@ public class Window extends JFrame {
 		labelName.setText(XMLDate.dateLabels("nameFeld"));
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelName.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelName, new GridBagConstraints(0, 11, 1, 1, 0.0,
+		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
@@ -117,7 +125,7 @@ public class Window extends JFrame {
 		labelMin.setText("Min");
 		labelMin.setHorizontalAlignment(SwingConstants.CENTER);
 		labelMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelMin, new GridBagConstraints(1, 11, 1, 1, 0.0,
+		contentPanel.add(labelMin, new GridBagConstraints(2, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
@@ -126,7 +134,7 @@ public class Window extends JFrame {
 		labelMax.setText("Max");
 		labelMax.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelMax.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelMax, new GridBagConstraints(2, 11, 1, 1, 0.0,
+		contentPanel.add(labelMax, new GridBagConstraints(3, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
@@ -135,43 +143,55 @@ public class Window extends JFrame {
 		labelSI.setText("SI");
 		labelSI.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelSI.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelSI, new GridBagConstraints(3, 11, 1, 1, 0.0, 0.0,
+		contentPanel.add(labelSI, new GridBagConstraints(4, 13, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
 						0, 0, 5, 0), 0, 0));
+		// ---- label Abrevetation ----
+		labelAbr = new JLabel();
+		labelAbr.setText(" " + "Abkuerzung");
+		labelAbr.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelAbr.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPanel.add(labelAbr, new GridBagConstraints(1, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
 
-		int index = 0;
-		for (int i = 0; i < numberOfComp; i = i + 1) {
+		System.out.println(Run.getNumComp() + " adition");
+		for (int i = 0; i < Run.getNumComp(); i = i + 1) {
+			// --- Label Name -----
+			JLabel labelName = new JLabel();
+			System.out.println(nameOfValue.get(i).toString() + "*");
 
-			// ---- labelNameofValue----
-			labelNameofValue = new JLabel();
-			labelNameofValue.setText(nameOfValue.get(i).toString());
-			labelNameofValue.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			labelNameofValue.setHorizontalAlignment(SwingConstants.LEFT);
-			contentPanel.add(labelNameofValue, new GridBagConstraints(0,
-					12 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+			labelName.setText(nameOfValue.get(i).toString());
+			labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+			contentPanel.add(labelName, new GridBagConstraints(0, 14 + i, 1, 1,
+					0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			// ---- textFieldMin ----
+			// ---- textField Low- ----
 			textFieldMin = new JTextField();
 			if (numExp == 0) {
 				textFieldMin.setEnabled(false);
 			} else {
 				textFieldMin.setEnabled(true);
 			}
-			textFieldMin.setMinimumSize(new Dimension(80, 20));
-			contentPanel.add(textFieldMin, new GridBagConstraints(1, 12 + i, 1,
+			textFieldMin.setMinimumSize(new Dimension(70, 20));
+			textFieldMin.setMaximumSize(new Dimension(70, 20));
+			contentPanel.add(textFieldMin, new GridBagConstraints(2, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			// ---- textFieldMax ----
+			// ---- textField High----
 			textFieldMax = new JTextField();
 			if (numExp == 0) {
 				textFieldMax.setEnabled(false);
 			} else {
 				textFieldMax.setEnabled(true);
 			}
-			textFieldMax.setMinimumSize(new Dimension(80, 20));
-			contentPanel.add(textFieldMax, new GridBagConstraints(2, 12 + i, 1,
+
+			textFieldMax.setMaximumSize(new Dimension(70, 20));
+			textFieldMax.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldMax, new GridBagConstraints(3, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
@@ -181,16 +201,34 @@ public class Window extends JFrame {
 				comboBoxSi.setEnabled(false);
 			} else {
 				// System.out.println(nameOfValue.get(i).toString());
-				comboBoxSi = new JComboBox(XMLDate.informationBoxSI("de",
-						nameOfValue.get(i).toString()));
+				comboBoxSi = new JComboBox();
 				comboBoxSi.setEnabled(true);
+				comboBoxSi.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Object selectedItem = comboBoxSi.getSelectedItem();
+
+					}
+				});
 			}
-			contentPanel.add(comboBoxSi, new GridBagConstraints(3, 12 + i, 1,
+			contentPanel.add(comboBoxSi, new GridBagConstraints(4, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
+			// ---- Text Field Abrevetation ----
+			fieldAbrev = new JTextField();
+			if (numExp == 0) {
+				fieldAbrev.setEnabled(false);
+			} else {
+				fieldAbrev.setEnabled(true);
+			}
+			fieldAbrev.setMinimumSize(new Dimension(80, 20));
+			fieldAbrev.setMaximumSize(new Dimension(80, 20));
+			contentPanel.add(fieldAbrev, new GridBagConstraints(1, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			// ---- end of contentpanel ------
+			// ---- end of contentpanel Centre ------
 		}
+
 		JPanel p3 = new JPanel();
 
 		buttonNewField = new JButton(XMLDate.dateLabels("buttonNewField"));
@@ -204,11 +242,13 @@ public class Window extends JFrame {
 		buttonNewField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewField) {
-					WindowOne windowOne = new WindowOne();
-
-					windowOne.setWindow(1194, 550);
-
+					Run.changeNumComp();
+					WindowOne window = new WindowOne();
+					window.initWindowOne();
+					System.out.println("qw");
 					setVisible(false);
+					Window windowTwo = new Window();
+
 				}
 			}
 		});
@@ -228,7 +268,7 @@ public class Window extends JFrame {
 				if (e.getSource() == buttonRemove) {
 					Run.remove();
 					setVisible(false);
-					Window window = new Window(Run.nameOfValue);
+					Window window = new Window();
 
 				}
 			}
@@ -250,7 +290,7 @@ public class Window extends JFrame {
 				if (e.getSource() == buttonOk) {
 					Run.changeNumExp();
 					setVisible(false);
-					Window window = new Window(Run.nameOfValue);
+					Window window = new Window();
 
 				}
 			}
@@ -287,9 +327,93 @@ public class Window extends JFrame {
 		expTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		p4.add(expTitle);
 		getContentPane().add(p4, BorderLayout.NORTH);
+
 		scrollpane = new JScrollPane(contentPanel);
 
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
+		// --- content Panel East
+		JPanel contentPanelEST = new JPanel();
+		contentPanelEST.setSize(100, 100);
+		contentPanelEST.setLayout(new GridBagLayout());
+		((GridBagLayout) contentPanelEST.getLayout()).columnWidths = new int[] {
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		((GridBagLayout) contentPanelEST.getLayout()).rowHeights = new int[] {
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		((GridBagLayout) contentPanelEST.getLayout()).columnWeights = new double[] {
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
+		((GridBagLayout) contentPanelEST.getLayout()).rowWeights = new double[] {
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
+
+		// ---- label SI-Min ----
+
+		labelMinMaxSi = new JLabel();
+		labelMinMaxSi.setText("Minimum");
+		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanelEST.add(labelMinMaxSi, new GridBagConstraints(9, 13, 1, 1,
+				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
+		// --- label SI Max
+		labelMinMaxSi = new JLabel();
+		labelMinMaxSi.setText("Maximum");
+		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanelEST.add(labelMinMaxSi, new GridBagConstraints(10, 13, 1, 1,
+				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
+
+		for (int i = 0; i < Run.getNumComp(); i = i + 1) {
+
+			fieldSIMin = new JTextField();
+			if (numExp == 0) {
+				fieldSIMin.setEnabled(false);
+			} else {
+				fieldSIMin.setEnabled(true);
+			}
+			fieldSIMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			contentPanelEST.add(fieldSIMin, new GridBagConstraints(9, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+
+			fieldSIMax = new JTextField();
+			if (numExp == 0) {
+				fieldSIMax.setEnabled(false);
+			} else {
+				fieldSIMax.setEnabled(true);
+			}
+			fieldSIMax.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			contentPanelEST.add(fieldSIMax, new GridBagConstraints(10, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+
+			labelAbrev = new JLabel();
+			labelAbrev.setText("Abkuerzug");
+			labelAbrev.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			contentPanelEST.add(labelAbrev, new GridBagConstraints(12 + i, 13,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+
+			for (int j = 0; j < Run.getNumComp(); j++) {
+
+				fieldExpon = new JTextField();
+				if (numExp == 0) {
+					fieldExpon.setEnabled(false);
+				} else {
+					fieldExpon.setEnabled(true);
+				}
+				fieldExpon.setFont(new Font("Tahoma", Font.PLAIN, 16));
+				contentPanelEST.add(fieldExpon, new GridBagConstraints(12 + j,
+						14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+						GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			}
+
+		}
+		scrollpane = new JScrollPane(contentPanelEST);
+		getContentPane().add(scrollpane, BorderLayout.EAST);
 	}
 
 	private static String getExpTitle() {

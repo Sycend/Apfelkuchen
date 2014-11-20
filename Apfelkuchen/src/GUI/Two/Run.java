@@ -1,17 +1,16 @@
 package GUI.Two;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
-
-
 /**
- * @author Yury Kalinin Start of window 
- * 20141116
+ * @author Yury Kalinin Start of window with 1194, 550 size
  *
  */
 public class Run {
-	public static Vector nameOfValue;
-	public static boolean state;
+	private static Vector nameOfValue;
+	public static ArrayList Si;
+	private static int numberOfComp=0;
 
 	private static int numExp;
 
@@ -19,14 +18,18 @@ public class Run {
 
 		numExp = 0;
 		nameOfValue = new Vector();
-		WindowOne window = new WindowOne();
 
-		window.setWindow(597, 275);
+System.out.println(nameOfValue.size());
 
+		Window window = new Window();
 	}
 
 	public static void remove() {
-		nameOfValue.remove(nameOfValue.indexOf(nameOfValue.lastElement()));
+		System.out.println(numberOfComp+"run comp");
+		nameOfValue.remove(numberOfComp-1);
+		
+		numberOfComp--;
+		
 
 	}
 
@@ -42,8 +45,33 @@ public class Run {
 		numExp = value;
 	}
 
-	public static void changeNameOfValue() {
-		nameOfValue = new Vector();
+
+	
+	public static void changeNumComp(){
+		System.out.println(numberOfComp);
+		numberOfComp++;
+	}
+	
+	public static int getNumComp(){
+		return nameOfValue.size();
+	}
+	
+	public static Vector getNameOfValue(){
+		return nameOfValue;
+		
 	}
 
+	public static void AddNameValue(String nameValue) {
+		System.out.println(nameValue + " Run");
+		nameOfValue.add(nameValue);
+		for (int i = 1; i < nameOfValue.size(); i++) {
+			System.out.println(nameOfValue.get(i).toString());
+		}
+
+	}
+
+
+	public static int getnameOfValueSize() {
+		return nameOfValue.size();
+	}
 }
