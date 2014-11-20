@@ -1,26 +1,28 @@
 package GUI.Two;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 /**
- * @author Yury Kalinin Start of window with 1194, 550 size
- *
+ * @author Yury Kalinin, Dominik Hofmann
+ * Start of window with 1194, 550 size
  */
 public class Run {
 	private static Vector nameOfValue;
-	public static ArrayList Si;
 	private static int numberOfComp=0;
+	public static ArrayList Si;
+	public static List<UnitTable> unitTable = new ArrayList<UnitTable>();
 
 	private static int numExp;
 
 	public static void main(String args[]) {
-
+		
 		numExp = 0;
 		nameOfValue = new Vector();
-
-System.out.println(nameOfValue.size());
-
+		
+		System.out.println(nameOfValue.size());
+		
 		Window window = new Window();
 	}
 
@@ -29,8 +31,6 @@ System.out.println(nameOfValue.size());
 		nameOfValue.remove(numberOfComp-1);
 		
 		numberOfComp--;
-		
-
 	}
 
 	public static int getNumExp() {
@@ -45,8 +45,6 @@ System.out.println(nameOfValue.size());
 		numExp = value;
 	}
 
-
-	
 	public static void changeNumComp(){
 		System.out.println(numberOfComp);
 		numberOfComp++;

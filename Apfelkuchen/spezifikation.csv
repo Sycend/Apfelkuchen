@@ -1,4 +1,4 @@
-TypName;unit;m;k;s;kel;mol;amp;cand;offset;gradient
+typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient
 Energie;J;2;1;-2;0;0;0;0;0;1
 Energie;Joule;2;1;2;0;0;0;0;0;1
 Energie;kJ;2;1;2;0;0;0;0;0;1000
