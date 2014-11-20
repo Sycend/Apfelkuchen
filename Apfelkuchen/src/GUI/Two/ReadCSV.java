@@ -23,7 +23,7 @@ public class ReadCSV {
 	        System.out.println("-------------------------- Neue Zeile:"); 
 	        final StringTokenizer st = new StringTokenizer(content.get(i), ";"); 
 	        while (st.hasMoreTokens()) {  
-	            System.out.println("Nächste Spalte:" + st.nextToken()); 
+	            System.out.println("Naechste Spalte:" + st.nextToken()); 
 	        } 
 		}
 	}
