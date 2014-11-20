@@ -1,15 +1,11 @@
 package GUI.Two;
 
-
-
 /**
  * @author Dominik Hofmann
  * @version 1.1.0
  */
 
 public class UnitTable {
-	//TODO
-	//auslesen von csv datei
 	
 	/** Usage Example **/
 	/*	List<UnitTable> unitTable = new ArrayList<UnitTable>();
@@ -42,7 +38,7 @@ public class UnitTable {
 	private double gradient = 0.0;
 	private double low = 0;
 	private double high = 0;
-
+	
 	
 	public double getResultSILow() {
 		return this.getLow() * this.getGradient() + this.getOffset();

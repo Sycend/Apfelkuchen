@@ -6,6 +6,7 @@ import java.util.Vector;
 
 /**
  * @author Yury Kalinin, Dominik Hofmann
+ * @version 2.0.1
  * Start of window with 1194, 550 size
  */
 public class Run {
