@@ -10,14 +10,15 @@ import java.util.Locale;
 
 /**
  * @author Dominik Hofmann, Mark Leibmann
- * @version 1.1.0
+ * @version 1.1.1
  */
 public class ReadCSV {
 	
-	public static void readCSV() {
+	public static void readCSV(String Inputfile) {
+		System.out.println("Reading: "+Inputfile);
 		ArrayList<String> content = new ArrayList<String>();
 		try {
-			content = readFile("spezifikation.csv");
+			content = readFile(Inputfile);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,7 +75,44 @@ public class ReadCSV {
 			System.out.println("resultSILow: " + Run.unitTable.get(i).getResultSILow());
 			System.out.println("resultSIHigh: " + Run.unitTable.get(i).getResultSIHigh());
 		}*/
+		System.out.println("Done reading: "+ Inputfile);
 		
+	}
+	
+	public static void readCSV(File Inputfile) {
+		System.out.println("Reading: "+Inputfile.toString());
+		ArrayList<String> content = new ArrayList<String>();
+		try {
+			content = readFile(Inputfile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Starts at 1 so that the first row is ignored
+		for (int i = 1; i < content.size(); i++) {
+			try {
+				String[] parts = content.get(i).split(";");
+				UnitTable tempUnitTable = new UnitTable();
+				tempUnitTable.setTypeName(parts[0]);
+				tempUnitTable.setUnitName(parts[1]);
+				tempUnitTable.setM(Integer.parseInt(parts[2]));
+				tempUnitTable.setK(Integer.parseInt(parts[3]));
+				tempUnitTable.setS(Integer.parseInt(parts[4]));
+				tempUnitTable.setKel(Integer.parseInt(parts[5]));
+				tempUnitTable.setMol(Integer.parseInt(parts[6]));
+				tempUnitTable.setAmp(Integer.parseInt(parts[7]));
+				tempUnitTable.setCand(Integer.parseInt(parts[8]));
+				NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
+				Number number = format.parse(parts[9]);
+				tempUnitTable.setOffset(number.doubleValue());
+				number = format.parse(parts[10]);
+				tempUnitTable.setGradient(number.doubleValue());
+				Run.unitTable.add(tempUnitTable);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Done reading: "+ Inputfile.toString());
 	}
 	
 	/**

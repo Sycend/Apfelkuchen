@@ -17,14 +17,15 @@ public class Run {
 
 	private static int numExp;
 
-	public static void main(String args[]) {
+	public static void main(String args[]) {		
+		ReadCSV.readCSV("spezifikation.csv");
 		
 		numExp = 0;
 		nameOfValue = new Vector();
 		
 		System.out.println(nameOfValue.size());
 		
-		Window window = new Window();
+		Window window = new Window();		
 	}
 
 	public static void remove() {
