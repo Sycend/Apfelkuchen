@@ -2,9 +2,9 @@ typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient
 Energie;J;2;1;-2;0;0;0;0;0;1
 Energie;Joule;2;1;2;0;0;0;0;0;1
 Energie;kJ;2;1;2;0;0;0;0;0;1000
-Temp;C;0;0;0;1;0;0;0;273,15;1
-Temp;F;0;0;0;1;0;0;0;241;0,555555556
-Temp;R;0;0;0;1;0;0;0;273;0,8
+Temperatur;C;0;0;0;1;0;0;0;273,15;1
+Temperatur;F;0;0;0;1;0;0;0;241;0,555555556
+Temperatur;R;0;0;0;1;0;0;0;273;0,8
 Zeit;min;0;0;1;0;0;0;0;0;60
 Zeit;h;0;0;1;0;0;0;0;0;3600
 Zeit;Std;0;0;1;0;0;0;0;0;3600
