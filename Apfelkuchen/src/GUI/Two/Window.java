@@ -26,7 +26,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
-import javax.swing.JMenuBar;
+//import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -69,6 +69,8 @@ public class Window extends JFrame {
 	private JTextField fieldSIMax;
 	private JTextField fieldExpon;
 	private JLabel labelAbrev;
+	private JComboBox comboBoxDim;
+	private JLabel labelDim;
 
 	public Window() {
 
@@ -137,7 +139,14 @@ public class Window extends JFrame {
 		contentPanel.add(labelMax, new GridBagConstraints(3, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
-
+		// ---- label Dimensions ----
+		labelDim = new JLabel();
+		labelDim.setText("Dimensionen");
+		labelDim.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelDim.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelDim, new GridBagConstraints(5, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
 		// ---- label SI ----
 		labelSI = new JLabel();
 		labelSI.setText("SI");
@@ -194,13 +203,32 @@ public class Window extends JFrame {
 			contentPanel.add(textFieldMax, new GridBagConstraints(3, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			// --- JComboBox Dimensions------
+			if (numExp == 0) {
+				comboBoxDim = new JComboBox();
+
+				comboBoxDim.setEnabled(false);
+			} else {
+
+				comboBoxDim = new JComboBox();
+				comboBoxDim.setEnabled(true);
+				comboBoxDim.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Object selectedItem = comboBoxDim.getSelectedItem();
+
+					}
+				});
+			}
+			contentPanel.add(comboBoxDim, new GridBagConstraints(4, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 
 			if (numExp == 0) {
 				comboBoxSi = new JComboBox();
 
 				comboBoxSi.setEnabled(false);
 			} else {
-				// System.out.println(nameOfValue.get(i).toString());
+
 				comboBoxSi = new JComboBox();
 				comboBoxSi.setEnabled(true);
 				comboBoxSi.addActionListener(new ActionListener() {
@@ -210,7 +238,7 @@ public class Window extends JFrame {
 					}
 				});
 			}
-			contentPanel.add(comboBoxSi, new GridBagConstraints(4, 14 + i, 1,
+			contentPanel.add(comboBoxSi, new GridBagConstraints(5, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 			// ---- Text Field Abrevetation ----

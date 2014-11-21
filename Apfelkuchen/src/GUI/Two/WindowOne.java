@@ -7,7 +7,7 @@ public class WindowOne {
 	public void initWindowOne() {
 		JTextField name = new JTextField();
 		JTextField abrev = new JTextField();
-		Object[] message = { "Name", name, "Abkuerzung", abrev };
+		Object[] message = { "Name", name};
 
 		JOptionPane pane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE,
 				JOptionPane.OK_CANCEL_OPTION);
