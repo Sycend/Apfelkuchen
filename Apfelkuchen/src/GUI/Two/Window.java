@@ -56,21 +56,22 @@ public class Window extends JFrame {
 	private JLabel labelMax;
 	private JLabel labelSI;
 	private JLabel expTitle;
+	private JLabel labelAbr;
+	private JLabel labelMinMaxSi;
+	private JLabel labelAbrev;
+	private JLabel labelDim;
 	private JTextField labelNameofValue;
 	private JTextField textFieldMin;
 	private JTextField textFieldMax;
-	private JComboBox comboBoxSi;
 	private JTextField fieldAbrev;
-	private JLabel labelAbr;
-	private JLabel labelMinMaxSi;
 	private JTextField fieldSIMin;
-	private int numExp;
-	private String nameValue;
 	private JTextField fieldSIMax;
 	private JTextField fieldExpon;
-	private JLabel labelAbrev;
+	private JComboBox comboBoxSi;
 	private JComboBox comboBoxDim;
-	private JLabel labelDim;
+	private int numExp;
+	private String nameValue;
+
 
 	public Window() {
 
