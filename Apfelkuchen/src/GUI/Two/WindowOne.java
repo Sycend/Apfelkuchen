@@ -11,9 +11,12 @@ public class WindowOne {
 
 		JOptionPane pane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE,
 				JOptionPane.OK_CANCEL_OPTION);
-		pane.createDialog(null, "Titel").setVisible(true);
-		Run.AddNameValue(name.getText());
-		System.out.println(name.getText());
 
+		pane.createDialog("Titel").setVisible(true);	
+		if (pane.getValue().equals(JOptionPane.OK_OPTION)) {
+			Run.changeNumComp();
+			Run.AddNameValue(name.getText());
+			System.out.println(name.getText());
+		}
 	}
 }

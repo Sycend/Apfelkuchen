@@ -432,7 +432,6 @@ public class Window extends JFrame {
 		buttonNewField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewField) {
-					Run.changeNumComp();
 					WindowOne window = new WindowOne();
 					window.initWindowOne();
 					System.out.println("qw");
@@ -496,7 +495,6 @@ public class Window extends JFrame {
 		buttonNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNext) {
-
 					setVisible(false);
 					WindowOptim window = new WindowOptim();
 					window.setWindow();
