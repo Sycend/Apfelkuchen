@@ -1,4 +1,4 @@
-package test;
+package GUI.Two;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
