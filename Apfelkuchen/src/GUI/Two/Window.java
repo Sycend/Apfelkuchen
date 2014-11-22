@@ -1,4 +1,4 @@
-package GUI.Two;
+package test;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -101,7 +101,7 @@ public class Window extends JFrame {
 	}
 
 	public void init() {
-
+	
 		int numberOfComp = 0;
 		Vector nameOfValue = new Vector();
 		nameOfValue = Run.getNameOfValue();
@@ -177,7 +177,7 @@ public class Window extends JFrame {
 		
 		// ---- label low ----
 		labelLow = new JLabel();
-		labelLow.setText("Low");
+		labelLow.setText("Low"+" ");
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0,
@@ -186,7 +186,7 @@ public class Window extends JFrame {
 
 		// ---- label high ----
 		labelHigh = new JLabel();
-		labelHigh.setText("high");
+		labelHigh.setText("high"+" ");
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0,
@@ -195,7 +195,7 @@ public class Window extends JFrame {
 
 		// ---- label m ----
 		labelM = new JLabel();
-		labelM.setText("m");
+		labelM.setText("m"+"  ");
 		labelM.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelM.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelM, new GridBagConstraints(7, 13, 1, 1, 0.0, 0.0,
@@ -204,7 +204,7 @@ public class Window extends JFrame {
 		
 		// ---- label k ----
 		labelK = new JLabel();
-		labelK.setText("k");
+		labelK.setText("k"+"  ");
 		labelK.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelK.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelK, new GridBagConstraints(8, 13, 1, 1, 0.0, 0.0,
@@ -213,7 +213,7 @@ public class Window extends JFrame {
 		
 		// ---- label s ----
 		labelS = new JLabel();
-		labelS.setText("s");
+		labelS.setText("s"+"  ");
 		labelS.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelS.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelS, new GridBagConstraints(9, 13, 1, 1, 0.0, 0.0,
@@ -222,7 +222,7 @@ public class Window extends JFrame {
 		
 		// ---- label kel ----
 		labelKel = new JLabel();
-		labelKel.setText("kel");
+		labelKel.setText("kel"+"  ");
 		labelKel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelKel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelKel, new GridBagConstraints(10, 13, 1, 1, 0.0, 0.0,
@@ -231,7 +231,7 @@ public class Window extends JFrame {
 		
 		// ---- label mol ----
 		labelMol = new JLabel();
-		labelMol.setText("mol");
+		labelMol.setText("mol"+"  ");
 		labelMol.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelMol.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelMol, new GridBagConstraints(11, 13, 1, 1, 0.0, 0.0,
@@ -240,7 +240,7 @@ public class Window extends JFrame {
 		
 		// ---- label amp ----
 		labelAmp = new JLabel();
-		labelAmp.setText("amp");
+		labelAmp.setText("amp"+"  ");
 		labelAmp.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelAmp.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelAmp, new GridBagConstraints(12, 13, 1, 1, 0.0, 0.0,
@@ -249,12 +249,13 @@ public class Window extends JFrame {
 		
 		// ---- label cand ----
 		labelCand = new JLabel();
-		labelCand.setText("cand");
+		labelCand.setText("cand"+"  ");
 		labelCand.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelCand.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
 						0, 0, 5, 0), 0, 0));
+		
 
 		System.out.println(Run.getNumComp() + " adition");
 		for (int i = 0; i < Run.getNumComp(); i = i + 1) {
@@ -287,7 +288,7 @@ public class Window extends JFrame {
 				comboBoxRolle = new JComboBox();
 				comboBoxRolle.setEnabled(false);
 			} else {
-				comboBoxRolle = new JComboBox();
+				comboBoxRolle = new JComboBox(Run.getRolle());
 				comboBoxRolle.setEnabled(true);
 				comboBoxRolle.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -302,9 +303,15 @@ public class Window extends JFrame {
 			// --- JComboBox Dimensions------
 			if (numExp == 0) {
 				comboBoxDim = new JComboBox();
+				comboBoxDim.setMinimumSize(new Dimension(30, 20));
+				comboBoxDim.setPreferredSize(new Dimension(40, 20));
+				comboBoxDim.setMaximumSize(new Dimension(50, 20));
 				comboBoxDim.setEnabled(false);
 			} else {
 				comboBoxDim = new JComboBox();
+				comboBoxDim.setMinimumSize(new Dimension(40, 20));
+				comboBoxDim.setPreferredSize(new Dimension(40, 20));
+				comboBoxDim.setMaximumSize(new Dimension(50, 20));
 				comboBoxDim.setEnabled(true);
 				comboBoxDim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -319,10 +326,14 @@ public class Window extends JFrame {
 			// --- JComboBox Einheit------
 			if (numExp == 0) {
 				comboBoxEinheit = new JComboBox();
+				comboBoxEinheit.setMinimumSize(new Dimension(70, 20));
+				comboBoxEinheit.setPreferredSize(new Dimension(120, 20));
 				comboBoxEinheit.setEnabled(false);
 			} else {
 				comboBoxEinheit = new JComboBox();
 				comboBoxEinheit.setEnabled(true);
+				comboBoxEinheit.setMinimumSize(new Dimension(70, 20));
+				comboBoxEinheit.setPreferredSize(new Dimension(120, 20));
 				comboBoxEinheit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Object selectedItem = comboBoxEinheit.getSelectedItem();
@@ -337,6 +348,7 @@ public class Window extends JFrame {
 			textFieldLow = new JTextField();
 			textFieldLow.setMinimumSize(new Dimension(70, 20));
 			textFieldLow.setMaximumSize(new Dimension(70, 20));
+			textFieldLow.setPreferredSize(new Dimension(70, 20));
 			contentPanel.add(textFieldLow, new GridBagConstraints(5, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -508,6 +520,7 @@ public class Window extends JFrame {
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 		// --- content Panel East
 		JPanel contentPanelEST = new JPanel();
+		contentPanelEST.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanelEST.setSize(100, 100);
 		contentPanelEST.setLayout(new GridBagLayout());
 		((GridBagLayout) contentPanelEST.getLayout()).columnWidths = new int[] {
@@ -544,6 +557,8 @@ public class Window extends JFrame {
 		for (int i = 0; i < Run.getNumComp(); i = i + 1) {
 
 			fieldSILow = new JTextField();
+			fieldSILow.setMaximumSize(new Dimension(70, 20));
+			fieldSILow.setPreferredSize(new Dimension(70, 20));
 			if (numExp == 0) {
 				fieldSILow.setEnabled(false);
 			} else {
@@ -555,6 +570,8 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
 			fieldSIHigh = new JTextField();
+			fieldSIHigh.setMaximumSize(new Dimension(70, 20));
+			textFieldKel.setPreferredSize(new Dimension(70, 20));
 			if (numExp == 0) {
 				fieldSIHigh.setEnabled(false);
 			} else {
@@ -565,20 +582,7 @@ public class Window extends JFrame {
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			for (int j = 0; j < Run.getNumComp(); j++) {
-
-				fieldExpon = new JTextField();
-				if (numExp == 0) {
-					fieldExpon.setEnabled(false);
-				} else {
-					fieldExpon.setEnabled(true);
-				}
-				fieldExpon.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				contentPanelEST.add(fieldExpon, new GridBagConstraints(12 + j,
-						14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-						GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-			}
-
+			
 		}
 		scrollpane = new JScrollPane(contentPanelEST);
 		getContentPane().add(scrollpane, BorderLayout.EAST);

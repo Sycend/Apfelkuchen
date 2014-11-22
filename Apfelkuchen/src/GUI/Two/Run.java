@@ -1,4 +1,4 @@
-package GUI.Two;
+package test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,32 +6,31 @@ import java.util.Vector;
 
 /**
  * @author Yury Kalinin, Dominik Hofmann
- * @version 2.0.1
- * Start of window with 1194, 550 size
+ * @version 2.0.1 Start of window with 1194, 550 size
  */
 public class Run {
 	private static Vector nameOfValue;
-	private static int numberOfComp=0;
+	private static Vector rolle;
+	private static int numberOfComp = 0;
 	public static ArrayList Si;
 	public static List<UnitTable> unitTable = new ArrayList<UnitTable>();
 
 	private static int numExp;
 
-	public static void main(String args[]) {		
+	public static void main(String args[]) {
 		ReadCSV.readCSV("spezifikation.csv");
-		
+		rolle = new Vector();
+		setRolle();
 		numExp = 0;
 		nameOfValue = new Vector();
-		
-		System.out.println(nameOfValue.size());
-		
-		Window window = new Window();		
+
+		Window window = new Window();
 	}
 
 	public static void remove() {
-		System.out.println(numberOfComp+"run comp");
-		nameOfValue.remove(numberOfComp-1);
-		
+		System.out.println(numberOfComp + "run comp");
+		nameOfValue.remove(numberOfComp - 1);
+
 		numberOfComp--;
 	}
 
@@ -47,18 +46,18 @@ public class Run {
 		numExp = value;
 	}
 
-	public static void changeNumComp(){
+	public static void changeNumComp() {
 		System.out.println(numberOfComp);
 		numberOfComp++;
 	}
-	
-	public static int getNumComp(){
+
+	public static int getNumComp() {
 		return nameOfValue.size();
 	}
-	
-	public static Vector getNameOfValue(){
+
+	public static Vector getNameOfValue() {
 		return nameOfValue;
-		
+
 	}
 
 	public static void AddNameValue(String nameValue) {
@@ -70,8 +69,18 @@ public class Run {
 
 	}
 
-
 	public static int getnameOfValueSize() {
 		return nameOfValue.size();
+	}
+
+	public static void setRolle() {
+
+		rolle.add("controlled");
+		rolle.add("constant");
+		rolle.add("scale-up");
+	}
+
+	public static Vector getRolle() {
+		return rolle;
 	}
 }
