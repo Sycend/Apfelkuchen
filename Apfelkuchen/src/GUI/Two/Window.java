@@ -52,22 +52,38 @@ public class Window extends JFrame {
 	private JButton buttonNext;
 	private JButton buttonNewField;
 	private JLabel labelName;
-	private JLabel labelMin;
-	private JLabel labelMax;
-	private JLabel labelSI;
+	private JLabel labelLow;
+	private JLabel labelHigh;
+	private JLabel labelRolle;
+	private JLabel labelEinheit;
+	private JLabel labelM;
+	private JLabel labelK;
+	private JLabel labelS;
+	private JLabel labelKel;
+	private JLabel labelMol;
+	private JLabel labelAmp;
+	private JLabel labelCand;
 	private JLabel expTitle;
 	private JLabel labelAbr;
 	private JLabel labelMinMaxSi;
 	private JLabel labelAbrev;
 	private JLabel labelDim;
 	private JTextField labelNameofValue;
-	private JTextField textFieldMin;
-	private JTextField textFieldMax;
+	private JTextField textFieldM;
+	private JTextField textFieldK;
+	private JTextField textFieldS;
+	private JTextField textFieldKel;
+	private JTextField textFieldMol;
+	private JTextField textFieldAmp;
+	private JTextField textFieldCand;
+	private JTextField textFieldLow;
+	private JTextField textFieldHigh;
 	private JTextField fieldAbrev;
-	private JTextField fieldSIMin;
-	private JTextField fieldSIMax;
+	private JTextField fieldSILow;
+	private JTextField fieldSIHigh;
 	private JTextField fieldExpon;
-	private JComboBox comboBoxSi;
+	private JComboBox comboBoxRolle;
+	private JComboBox comboBoxEinheit;
 	private JComboBox comboBoxDim;
 	private int numExp;
 	private String nameValue;
@@ -122,40 +138,7 @@ public class Window extends JFrame {
 		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
-
-		// ---- label Min ----
-		labelMin = new JLabel();
-		labelMin.setText("Min");
-		labelMin.setHorizontalAlignment(SwingConstants.CENTER);
-		labelMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelMin, new GridBagConstraints(2, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
-
-		// ---- label Max ----
-		labelMax = new JLabel();
-		labelMax.setText("Max");
-		labelMax.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelMax.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelMax, new GridBagConstraints(3, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
-		// ---- label Dimensions ----
-		labelDim = new JLabel();
-		labelDim.setText("Dimensionen");
-		labelDim.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelDim.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelDim, new GridBagConstraints(5, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
-		// ---- label SI ----
-		labelSI = new JLabel();
-		labelSI.setText("SI");
-		labelSI.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelSI.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelSI, new GridBagConstraints(4, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 0), 0, 0));
+		
 		// ---- label Abrevetation ----
 		labelAbr = new JLabel();
 		labelAbr.setText(" " + "Abkuerzung");
@@ -164,6 +147,114 @@ public class Window extends JFrame {
 		contentPanel.add(labelAbr, new GridBagConstraints(1, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
+
+		// ---- label Rolle ---- 
+		labelRolle = new JLabel();
+		labelRolle.setText("Rolle");
+		labelRolle.setHorizontalAlignment(SwingConstants.CENTER);
+		labelRolle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(labelRolle, new GridBagConstraints(2, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
+		
+		// ---- label Dimensions ----
+		labelDim = new JLabel();
+		labelDim.setText("Dimension");
+		labelDim.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelDim.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelDim, new GridBagConstraints(3, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
+		
+		// ---- label Einheit----
+		labelEinheit = new JLabel();
+		labelEinheit.setText("Einheit");
+		labelEinheit.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelEinheit.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelEinheit, new GridBagConstraints(4, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
+		
+		// ---- label low ----
+		labelLow = new JLabel();
+		labelLow.setText("Low");
+		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
+		labelLow.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
+
+		// ---- label high ----
+		labelHigh = new JLabel();
+		labelHigh.setText("high");
+		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
+
+		// ---- label m ----
+		labelM = new JLabel();
+		labelM.setText("m");
+		labelM.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelM.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelM, new GridBagConstraints(7, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
+		
+		// ---- label k ----
+		labelK = new JLabel();
+		labelK.setText("k");
+		labelK.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelK.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelK, new GridBagConstraints(8, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
+		
+		// ---- label s ----
+		labelS = new JLabel();
+		labelS.setText("s");
+		labelS.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelS.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelS, new GridBagConstraints(9, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
+		
+		// ---- label kel ----
+		labelKel = new JLabel();
+		labelKel.setText("kel");
+		labelKel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelKel.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelKel, new GridBagConstraints(10, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
+		
+		// ---- label mol ----
+		labelMol = new JLabel();
+		labelMol.setText("mol");
+		labelMol.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelMol.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelMol, new GridBagConstraints(11, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
+		
+		// ---- label amp ----
+		labelAmp = new JLabel();
+		labelAmp.setText("amp");
+		labelAmp.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelAmp.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelAmp, new GridBagConstraints(12, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
+		
+		// ---- label cand ----
+		labelCand = new JLabel();
+		labelCand.setText("cand");
+		labelCand.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelCand.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
 
 		System.out.println(Run.getNumComp() + " adition");
 		for (int i = 0; i < Run.getNumComp(); i = i + 1) {
@@ -178,70 +269,6 @@ public class Window extends JFrame {
 					0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			// ---- textField Low- ----
-			textFieldMin = new JTextField();
-			if (numExp == 0) {
-				textFieldMin.setEnabled(false);
-			} else {
-				textFieldMin.setEnabled(true);
-			}
-			textFieldMin.setMinimumSize(new Dimension(70, 20));
-			textFieldMin.setMaximumSize(new Dimension(70, 20));
-			contentPanel.add(textFieldMin, new GridBagConstraints(2, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
-			// ---- textField High----
-			textFieldMax = new JTextField();
-			if (numExp == 0) {
-				textFieldMax.setEnabled(false);
-			} else {
-				textFieldMax.setEnabled(true);
-			}
-
-			textFieldMax.setMaximumSize(new Dimension(70, 20));
-			textFieldMax.setPreferredSize(new Dimension(70, 20));
-			contentPanel.add(textFieldMax, new GridBagConstraints(3, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-			// --- JComboBox Dimensions------
-			if (numExp == 0) {
-				comboBoxDim = new JComboBox();
-
-				comboBoxDim.setEnabled(false);
-			} else {
-
-				comboBoxDim = new JComboBox();
-				comboBoxDim.setEnabled(true);
-				comboBoxDim.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Object selectedItem = comboBoxDim.getSelectedItem();
-
-					}
-				});
-			}
-			contentPanel.add(comboBoxDim, new GridBagConstraints(4, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
-			if (numExp == 0) {
-				comboBoxSi = new JComboBox();
-
-				comboBoxSi.setEnabled(false);
-			} else {
-
-				comboBoxSi = new JComboBox();
-				comboBoxSi.setEnabled(true);
-				comboBoxSi.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Object selectedItem = comboBoxSi.getSelectedItem();
-
-					}
-				});
-			}
-			contentPanel.add(comboBoxSi, new GridBagConstraints(5, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 			// ---- Text Field Abrevetation ----
 			fieldAbrev = new JTextField();
 			if (numExp == 0) {
@@ -255,11 +282,133 @@ public class Window extends JFrame {
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
+			// --- JComboBox Rolle------
+			if (numExp == 0) {
+				comboBoxRolle = new JComboBox();
+				comboBoxRolle.setEnabled(false);
+			} else {
+				comboBoxRolle = new JComboBox();
+				comboBoxRolle.setEnabled(true);
+				comboBoxRolle.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+						Object selectedItem = comboBoxRolle.getSelectedItem();
+						}
+				});
+				}	
+			contentPanel.add(comboBoxRolle, new GridBagConstraints(2, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
+						
+			// --- JComboBox Dimensions------
+			if (numExp == 0) {
+				comboBoxDim = new JComboBox();
+				comboBoxDim.setEnabled(false);
+			} else {
+				comboBoxDim = new JComboBox();
+				comboBoxDim.setEnabled(true);
+				comboBoxDim.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Object selectedItem = comboBoxDim.getSelectedItem();
+				}
+				});
+			}
+			contentPanel.add(comboBoxDim, new GridBagConstraints(3, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
+			
+			// --- JComboBox Einheit------
+			if (numExp == 0) {
+				comboBoxEinheit = new JComboBox();
+				comboBoxEinheit.setEnabled(false);
+			} else {
+				comboBoxEinheit = new JComboBox();
+				comboBoxEinheit.setEnabled(true);
+				comboBoxEinheit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Object selectedItem = comboBoxEinheit.getSelectedItem();
+				}
+				});
+			}
+			contentPanel.add(comboBoxEinheit, new GridBagConstraints(4, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
+						
+			// ---- textField Low- ----
+			textFieldLow = new JTextField();
+			textFieldLow.setMinimumSize(new Dimension(70, 20));
+			textFieldLow.setMaximumSize(new Dimension(70, 20));
+			contentPanel.add(textFieldLow, new GridBagConstraints(5, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+
+			// ---- textField High----
+			textFieldHigh = new JTextField();
+			textFieldHigh.setMaximumSize(new Dimension(70, 20));
+			textFieldHigh.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldHigh, new GridBagConstraints(6, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			
+			// ---- textField m----
+			textFieldM = new JTextField();
+			textFieldM.setMaximumSize(new Dimension(70, 20));
+			textFieldM.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldM, new GridBagConstraints(7, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			
+			// ---- textField k----
+			textFieldK = new JTextField();
+			textFieldK.setMaximumSize(new Dimension(70, 20));
+			textFieldK.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldK, new GridBagConstraints(8, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			
+			// ---- textField s----
+			textFieldS = new JTextField();
+			textFieldS.setMaximumSize(new Dimension(70, 20));
+			textFieldS.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldS, new GridBagConstraints(9, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			
+			// ---- textField Kel----
+			textFieldKel = new JTextField();
+			textFieldKel.setMaximumSize(new Dimension(70, 20));
+			textFieldKel.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldKel, new GridBagConstraints(10, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			
+			// ---- textField mol----
+			textFieldMol = new JTextField();
+			textFieldMol.setMaximumSize(new Dimension(70, 20));
+			textFieldMol.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldMol, new GridBagConstraints(11, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			
+			// ---- textField amp----
+			textFieldAmp = new JTextField();
+			textFieldAmp.setMaximumSize(new Dimension(70, 20));
+			textFieldAmp.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldAmp, new GridBagConstraints(12, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			
+			// ---- textField cand----
+			textFieldCand = new JTextField();
+			textFieldCand.setMaximumSize(new Dimension(70, 20));
+			textFieldCand.setPreferredSize(new Dimension(70, 20));
+			contentPanel.add(textFieldCand, new GridBagConstraints(13, 14 + i, 1,
+					1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			// ---- end of contentpanel Centre ------
 		}
 
-		JPanel p3 = new JPanel();
-
+		JPanel p2 = new JPanel();
+		
 		buttonNewField = new JButton(XMLDate.dateLabels("buttonNewField"));
 		if (numExp == 0) {
 			buttonNewField.setEnabled(true);
@@ -282,7 +431,7 @@ public class Window extends JFrame {
 			}
 		});
 
-		p3.add(buttonNewField);
+		p2.add(buttonNewField);
 
 		buttonRemove = new JButton(XMLDate.dateLabels("buttonRemove"));
 		if (numExp == 0) {
@@ -298,14 +447,11 @@ public class Window extends JFrame {
 					Run.remove();
 					setVisible(false);
 					Window window = new Window();
-
 				}
 			}
 		});
-		p3.add(buttonRemove);
-		getContentPane().add(p3, BorderLayout.WEST);
-
-		JPanel p2 = new JPanel();
+		p2.add(buttonRemove);
+		
 		if (numExp == 0) {
 			buttonOk = new JButton(XMLDate.dateLabels("buttonOkStart"));
 		} else {
@@ -346,9 +492,9 @@ public class Window extends JFrame {
 				}
 			}
 		});
-		p2.add(buttonNext);
+		p2.add(buttonNext);	
 		getContentPane().add(p2, BorderLayout.SOUTH);
-
+		
 		JPanel p4 = new JPanel();
 		expTitle = new JLabel();
 		expTitle.setText(Window.getExpTitle());
@@ -382,14 +528,14 @@ public class Window extends JFrame {
 		// ---- label SI-Min ----
 
 		labelMinMaxSi = new JLabel();
-		labelMinMaxSi.setText("Minimum");
+		labelMinMaxSi.setText("SI-Low");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanelEST.add(labelMinMaxSi, new GridBagConstraints(9, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 		// --- label SI Max
 		labelMinMaxSi = new JLabel();
-		labelMinMaxSi.setText("Maximum");
+		labelMinMaxSi.setText("SI_High");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanelEST.add(labelMinMaxSi, new GridBagConstraints(10, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -397,32 +543,25 @@ public class Window extends JFrame {
 
 		for (int i = 0; i < Run.getNumComp(); i = i + 1) {
 
-			fieldSIMin = new JTextField();
+			fieldSILow = new JTextField();
 			if (numExp == 0) {
-				fieldSIMin.setEnabled(false);
+				fieldSILow.setEnabled(false);
 			} else {
-				fieldSIMin.setEnabled(true);
+				fieldSILow.setEnabled(true);
 			}
-			fieldSIMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			contentPanelEST.add(fieldSIMin, new GridBagConstraints(9, 14 + i,
+			fieldSILow.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			contentPanelEST.add(fieldSILow, new GridBagConstraints(9, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			fieldSIMax = new JTextField();
+			fieldSIHigh = new JTextField();
 			if (numExp == 0) {
-				fieldSIMax.setEnabled(false);
+				fieldSIHigh.setEnabled(false);
 			} else {
-				fieldSIMax.setEnabled(true);
+				fieldSIHigh.setEnabled(true);
 			}
-			fieldSIMax.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			contentPanelEST.add(fieldSIMax, new GridBagConstraints(10, 14 + i,
-					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
-			labelAbrev = new JLabel();
-			labelAbrev.setText("Abkuerzug");
-			labelAbrev.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			contentPanelEST.add(labelAbrev, new GridBagConstraints(12 + i, 13,
+			fieldSIHigh.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			contentPanelEST.add(fieldSIHigh, new GridBagConstraints(10, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
