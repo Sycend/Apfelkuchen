@@ -4,7 +4,7 @@
 
 
 	<de>
-		<title>Apfehlkuchen</title>
+		<title>Apfelkuchen</title>
 
 		<mnuHelp>Help</mnuHelp>
 		<mnuItemAbout>About</mnuItemAbout>
@@ -14,10 +14,10 @@
 			OK
 		</buttonOk>
 		<buttonOkExp>
-		Neuer Versuch
+			Neuer Versuch
 		</buttonOkExp>
 		<buttonOkStart>
-		Start
+			Start
 		</buttonOkStart>
 		<nameLabel>
 			Name für das Feld
@@ -25,12 +25,12 @@
 		<nameFeld>
 			Name
 		</nameFeld>
-		
+
 		<buttonNewField>
-		Neues Feld
+			Neues Feld
 		</buttonNewField>
 		<buttonRemove>
-		Löschen
+			Löschen
 		</buttonRemove>
 		<buttonNewStart>
 			Neu Starten
@@ -39,7 +39,15 @@
 		<buttonOKTipText>Hovered Over ME Test</buttonOKTipText>
 		<buttonNextTipText>Bestätigen die Eingaben</buttonNextTipText>
 		<errorSelection>Bitte wählen Sie eine Variante aus</errorSelection>
+		<labelRolle>Rolle</labelRolle>
+		<labelDimension> Dimension</labelDimension>
+		<labelSIUnit>Einheit</labelSIUnit>
+		<labelLow>Min</labelLow>
+		<labelHigh>Max</labelHigh>
+		<labelSIMin>Si-Max</labelSIMin>
+		<labelSIMax>Si-Min</labelSIMax>
 		
+
 
 
 
