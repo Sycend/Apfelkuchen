@@ -78,15 +78,15 @@ public class Run {
 		return rolle;
 	}
 	
-	public static Vector<String> getUnits() {
+	public static String[] getUnits() {
 		//FIXME duplicates are returned as well
-		Vector<String> units = new Vector<String>();
+		String[] tmp = new String[Run.unitTable.size()];
 		if (Run.unitTable.size() > 0) {
 			for (int i = 0; i < Run.unitTable.size(); i++) {
-				units.add(Run.unitTable.get(i).getUnitName());
+				tmp[i] = Run.unitTable.get(i).getUnitName();//);
 			}
 		}
-		return units;
+		return tmp;
 	}
 	
 }
