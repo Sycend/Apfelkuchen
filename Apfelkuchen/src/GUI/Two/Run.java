@@ -83,7 +83,7 @@ public class Run {
 		String[] tmp = new String[Run.unitTable.size()];
 		if (Run.unitTable.size() > 0) {
 			for (int i = 0; i < Run.unitTable.size(); i++) {
-				tmp[i] = Run.unitTable.get(i).getUnitName();//);
+				tmp[i] = Run.unitTable.get(i).getUnitName();
 			}
 		}
 		return tmp;
