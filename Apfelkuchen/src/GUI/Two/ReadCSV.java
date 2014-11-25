@@ -39,7 +39,7 @@ public class ReadCSV {
 				System.out.println(parts[8]);
 				System.out.println(parts[9]);
 				System.out.println(parts[10]);*/
-				UnitTable tempUnitTable = new UnitTable();
+				RawUnits tempUnitTable = new RawUnits();
 				tempUnitTable.setTypeName(parts[0]);
 				tempUnitTable.setUnitName(parts[1]);
 				tempUnitTable.setM(Integer.parseInt(parts[2]));
@@ -54,7 +54,7 @@ public class ReadCSV {
 				tempUnitTable.setOffset(number.doubleValue());
 				number = format.parse(parts[10]);
 				tempUnitTable.setGradient(number.doubleValue());
-				Run.unitTable.add(tempUnitTable);
+				Run.rawUnits.add(tempUnitTable);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -92,7 +92,7 @@ public class ReadCSV {
 		for (int i = 1; i < content.size(); i++) {
 			try {
 				String[] parts = content.get(i).split(";");
-				UnitTable tempUnitTable = new UnitTable();
+				RawUnits tempUnitTable = new RawUnits();
 				tempUnitTable.setTypeName(parts[0]);
 				tempUnitTable.setUnitName(parts[1]);
 				tempUnitTable.setM(Integer.parseInt(parts[2]));
@@ -107,7 +107,7 @@ public class ReadCSV {
 				tempUnitTable.setOffset(number.doubleValue());
 				number = format.parse(parts[10]);
 				tempUnitTable.setGradient(number.doubleValue());
-				Run.unitTable.add(tempUnitTable);
+				Run.rawUnits.add(tempUnitTable);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

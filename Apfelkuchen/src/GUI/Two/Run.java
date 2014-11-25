@@ -14,7 +14,7 @@ public class Run {
 	private static int numberOfComp = 0;
 	private static int numExp;
 	public static ArrayList Si;
-	public static List<UnitTable> unitTable = new ArrayList<UnitTable>();
+	public static List<RawUnits> rawUnits = new ArrayList<RawUnits>();
 	
 	public static void main(String args[]) {
 		ReadCSV.readCSV("spezifikation.csv");
@@ -81,10 +81,10 @@ public class Run {
 	
 	public static String[] getUnits() {
 		//FIXME duplicates are returned as well
-		String[] tmp = new String[Run.unitTable.size()];
-		if (Run.unitTable.size() > 0) {
-			for (int i = 0; i < Run.unitTable.size(); i++) {
-				tmp[i] = Run.unitTable.get(i).getUnitName();
+		String[] tmp = new String[Run.rawUnits.size()];
+		if (Run.rawUnits.size() > 0) {
+			for (int i = 0; i < Run.rawUnits.size(); i++) {
+				tmp[i] = Run.rawUnits.get(i).getUnitName();
 			}
 		}
 		return tmp;

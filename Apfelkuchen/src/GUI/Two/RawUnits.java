@@ -1,15 +1,14 @@
 package GUI.Two;
 
 /**
- * @author Dominik Hofmann
+ * @author Dominik Hofmann, Mark Leibmann
  * @version 1.1.0
  */
 
-public class UnitTable {
+public class RawUnits {
 	
 	/** Usage Example **/
-	/*	List<UnitTable> unitTable = new ArrayList<UnitTable>();
-		UnitTable tempUnitTable = new UnitTable();
+	/*	UnitTable tempUnitTable = new UnitTable();
         tempUnitTable.setTypeName("Temperature");
         tempUnitTable.setUnitName("C");
         tempUnitTable.setLow(120);
@@ -18,13 +17,19 @@ public class UnitTable {
         tempUnitTable.setOffset(273.15);
         tempUnitTable.setKel(1);
         unitTable.add(tempUnitTable);
-        System.out.println("Type Name: "+unitTable.get(0).getTypeName());
-        System.out.println("Unit Name: "+unitTable.get(0).getUnitName());
-        System.out.println("Low: "+unitTable.get(0).getLow());
-        System.out.println("High: "+unitTable.get(0).getHigh());
-        System.out.println("resultSILow: "+unitTable.get(0).getResultSILow());
-        System.out.println("resultSIHigh: "+unitTable.get(0).getResultSIHigh());*/
+        System.out.println("Type Name: "+Run.unitTable.get(0).getTypeName());
+        System.out.println("Unit Name: "+Run.unitTable.get(0).getUnitName());
+        System.out.println("Low: "+Run.unitTable.get(0).getLow());
+        System.out.println("High: "+Run.unitTable.get(0).getHigh());
+        System.out.println("resultSILow: "+Run.unitTable.get(0).getResultSILow());
+        System.out.println("resultSIHigh: "+Run.unitTable.get(0).getResultSIHigh());*/
 
+	
+	/** TODO **/
+	//put m,k,s,kel,mol,amp,cand in an array
+	//remove settters and replace them with constructors 
+	//show resultSI values in GUI etc
+	//ability to write UnitsArray in csv file
 	private String typeName = "";
 	private String unitName = "";
 	private int m = 0;
