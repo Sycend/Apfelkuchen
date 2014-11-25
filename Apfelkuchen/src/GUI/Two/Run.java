@@ -1,28 +1,37 @@
 package GUI.Two;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Yury Kalinin, Dominik Hofmann
- * @version 2.0.3 Start of window with 1194, 550 size
+ * @version 2.0.4 Start of window with 1194, 550 size
  */
 public class Run {
-	private static Vector nameOfValue;
-	private static Vector<String> rolle;
+	private static Vector<String> nameOfValue = new Vector<String>();
+	private static String[] rolle = new String[] { "controlled", "constant", "scale-up", "dependent" };
 	private static int numberOfComp = 0;
-	private static int numExp;
+	private static int numExp = 0;
 	public static ArrayList Si;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 	
 	public static void main(String args[]) {
-		ReadCSV.readCSV("spezifikation.csv");
-		rolle = new Vector<String>();
-		setRolle();
-		numExp = 0;
-		nameOfValue = new Vector();
+		long startTime = System.nanoTime();
+		Thread readCSVThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				ReadCSV.readCSV("spezifikation.csv");
+			}
+		});
 		Window window = new Window();
+		readCSVThread.start();
+		long endTime = System.nanoTime();
+		long durationExecution = endTime - startTime;
+		long durationMilliSec = TimeUnit.MILLISECONDS.convert(durationExecution, TimeUnit.NANOSECONDS);
+		System.out.println("Execution Time: " + durationMilliSec + " MilliSec");
 	}
 	
 	public static void remove() {
@@ -52,11 +61,11 @@ public class Run {
 		return nameOfValue.size();
 	}
 	
-	public static Vector getNameOfValue() {
+	public static Vector<String> getNameOfValue() {
 		return nameOfValue;
 	}
 	
-	public static void AddNameValue(String nameValue) {
+	public static void addNameValue(String nameValue) {
 		System.out.println(nameValue + " Run");
 		nameOfValue.add(nameValue);
 		for (int i = 1; i < nameOfValue.size(); i++) {
@@ -64,30 +73,54 @@ public class Run {
 		}
 	}
 	
-	public static int getnameOfValueSize() {
+	public static int getNameOfValueSize() {
 		return nameOfValue.size();
 	}
 	
-	public static void setRolle() {
-		rolle.add("controlled");
-		rolle.add("constant");
-		rolle.add("scale-up");
-		rolle.add("dependent");
-	}
-	
-	public static Vector<String> getRolle() {
+	public static String[] getRolle() {
 		return rolle;
 	}
 	
 	public static String[] getUnits() {
-		//FIXME duplicates are returned as well
 		String[] tmp = new String[Run.unitsArray.size()];
-		if (Run.unitsArray.size() > 0) {
-			for (int i = 0; i < Run.unitsArray.size(); i++) {
-				tmp[i] = Run.unitsArray.get(i).getUnitName();
-			}
+		for (int i = 0; i < Run.unitsArray.size(); i++) {
+			tmp[i] = Run.unitsArray.get(i).getUnitName();
 		}
+		tmp = removeDuplicates(tmp);
 		return tmp;
 	}
 	
+	public static String[] getDimensions() {
+		String[] tmp = new String[Run.unitsArray.size()];
+		for (int i = 0; i < Run.unitsArray.size(); i++) {
+			tmp[i] = Run.unitsArray.get(i).getTypeName();
+		}
+		tmp = removeDuplicates(tmp);
+		return tmp;
+	}
+	
+	public static String[] removeDuplicates(String[] containsDuplicates) {
+		List<String> containsDuplicatesTmp = Arrays.asList(containsDuplicates);
+		List<String> tmp0 = new ArrayList<String>();
+		boolean duplicate = false;
+		if (containsDuplicatesTmp.size() > 0) {
+			for (int i = 0; i < containsDuplicatesTmp.size(); i++) {
+				if (tmp0.size() < 1) {
+					tmp0.add(containsDuplicatesTmp.get(i));
+				} else if (tmp0.size() > 0) {
+					for (int n = 0; n < tmp0.size(); n++) {
+						if (tmp0.get(n).equals(containsDuplicatesTmp.get(i))) {
+							duplicate = true;
+						}
+					}
+					if (duplicate == false) {
+						tmp0.add(containsDuplicatesTmp.get(i));
+					}
+					duplicate = false;
+				}
+			}
+		}
+		String[] tmp = new String[tmp0.size()];
+		return tmp0.toArray(tmp);
+	}
 }

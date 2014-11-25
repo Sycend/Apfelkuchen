@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -48,8 +49,8 @@ public class Window extends JFrame {
 
 	JScrollPane scrollpane;
 	private JButton buttonRemove;
-	private JButton buttonOk;
-	private JButton buttonNext;
+	private JButton buttonStart;
+	private JButton buttonOptimize;
 	private JButton buttonNewField;
 	private JLabel labelName;
 	private JLabel labelLow;
@@ -89,7 +90,6 @@ public class Window extends JFrame {
 	private String nameValue;
 
 	public Window() {
-
 		super(XMLDate.dateLabels("title"));
 		setSize(1194, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -105,7 +105,8 @@ public class Window extends JFrame {
 		Vector nameOfValue = new Vector();
 		nameOfValue = Run.getNameOfValue();
 
-		setVisible(false);// Window widow =new Window();
+		//setVisible(false);
+		dispose();
 		JComboBox form = new JComboBox();
 
 		JPanel contentPanel = new JPanel();
@@ -326,7 +327,7 @@ public class Window extends JFrame {
 				comboBoxDim.setMaximumSize(new Dimension(40, 20));
 				comboBoxDim.setEnabled(false);
 			} else {
-				comboBoxDim = new JComboBox();
+				comboBoxDim = new JComboBox(Run.getDimensions());
 				comboBoxDim.setMinimumSize(new Dimension(40, 20));
 				comboBoxDim.setPreferredSize(new Dimension(40, 20));
 				comboBoxDim.setMaximumSize(new Dimension(50, 20));
@@ -476,10 +477,20 @@ public class Window extends JFrame {
 		buttonNewField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewField) {
-					WindowOne window = new WindowOne();
-					window.initWindowOne();
+					JTextField name = new JTextField();
+					Object[] message = { "Name", name};
+					JOptionPane pane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE,
+							JOptionPane.OK_CANCEL_OPTION);
+					pane.createDialog(XMLDate.dateLabels("title")).setVisible(true);	
+					if (pane.getValue().equals(JOptionPane.OK_OPTION)) {
+						Run.changeNumComp();
+						Run.addNameValue(name.getText());
+						System.out.println(name.getText());
+					}
+					
 					System.out.println("qw");
-					setVisible(false);
+					dispose();
+					//setVisible(false);
 					Window windowTwo = new Window();
 				}
 			}
@@ -499,7 +510,8 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonRemove) {
 					Run.remove();
-					setVisible(false);
+					//setVisible(false);
+					dispose();
 					Window window = new Window();
 				}
 			}
@@ -507,41 +519,41 @@ public class Window extends JFrame {
 		p2.add(buttonRemove);
 
 		if (numExp == 0) {
-			buttonOk = new JButton(XMLDate.dateLabels("buttonOkStart"));
-
-			buttonOk.setFocusPainted(false);
-			buttonOk.setSize(110, 20);
-			buttonOk.setLocation(16, 16);
-			buttonOk.addActionListener(new ActionListener() {
+			buttonStart = new JButton(XMLDate.dateLabels("buttonOkStart"));
+			buttonStart.setFocusPainted(false);
+			buttonStart.setSize(110, 20);
+			buttonStart.setLocation(16, 16);
+			buttonStart.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (e.getSource() == buttonOk) {
+					if (e.getSource() == buttonStart) {
 						Run.changeNumExp();
-						setVisible(false);
+						//setVisible(false);
+						dispose();
 						Window window = new Window();
 					}
 				}
 			});
-			p2.add(buttonOk);
+			p2.add(buttonStart);
 		}
-		buttonNext = new JButton(XMLDate.dateLabels("buttonNext"));
-		buttonNext.setFocusPainted(false);
+		buttonOptimize = new JButton(XMLDate.dateLabels("buttonNext"));
+		buttonOptimize.setFocusPainted(false);
 		if (numExp == 0) {
-			buttonNext.setEnabled(false);
+			buttonOptimize.setEnabled(false);
 		} else {
-			buttonNext.setEnabled(true);
+			buttonOptimize.setEnabled(true);
 		}
-		buttonNext.setSize(110, 20);
-		buttonNext.setLocation(16, 16);
-		buttonNext.addActionListener(new ActionListener() {
+		buttonOptimize.setSize(110, 20);
+		buttonOptimize.setLocation(16, 16);
+		buttonOptimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonNext) {
+				if (e.getSource() == buttonOptimize) {
 					setVisible(false);
 					WindowOptim window = new WindowOptim();
 					window.setWindow();
 				}
 			}
 		});
-		p2.add(buttonNext);
+		p2.add(buttonOptimize);
 		getContentPane().add(p2, BorderLayout.NORTH);
 
 		scrollpane = new JScrollPane(contentPanel);
