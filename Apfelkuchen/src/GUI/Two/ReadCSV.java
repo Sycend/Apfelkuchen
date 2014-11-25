@@ -39,22 +39,22 @@ public class ReadCSV {
 				System.out.println(parts[8]);
 				System.out.println(parts[9]);
 				System.out.println(parts[10]);*/
-				RawUnits tempUnitTable = new RawUnits();
-				tempUnitTable.setTypeName(parts[0]);
-				tempUnitTable.setUnitName(parts[1]);
-				tempUnitTable.setM(Integer.parseInt(parts[2]));
-				tempUnitTable.setK(Integer.parseInt(parts[3]));
-				tempUnitTable.setS(Integer.parseInt(parts[4]));
-				tempUnitTable.setKel(Integer.parseInt(parts[5]));
-				tempUnitTable.setMol(Integer.parseInt(parts[6]));
-				tempUnitTable.setAmp(Integer.parseInt(parts[7]));
-				tempUnitTable.setCand(Integer.parseInt(parts[8]));
+				RawUnits tempRawUnits = new RawUnits();
+				tempRawUnits.setTypeName(parts[0]);
+				tempRawUnits.setUnitName(parts[1]);
+				tempRawUnits.setM(Integer.parseInt(parts[2]));
+				tempRawUnits.setK(Integer.parseInt(parts[3]));
+				tempRawUnits.setS(Integer.parseInt(parts[4]));
+				tempRawUnits.setKel(Integer.parseInt(parts[5]));
+				tempRawUnits.setMol(Integer.parseInt(parts[6]));
+				tempRawUnits.setAmp(Integer.parseInt(parts[7]));
+				tempRawUnits.setCand(Integer.parseInt(parts[8]));
 				NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
 				Number number = format.parse(parts[9]);
-				tempUnitTable.setOffset(number.doubleValue());
+				tempRawUnits.setOffset(number.doubleValue());
 				number = format.parse(parts[10]);
-				tempUnitTable.setGradient(number.doubleValue());
-				Run.rawUnits.add(tempUnitTable);
+				tempRawUnits.setGradient(number.doubleValue());
+				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -92,22 +92,22 @@ public class ReadCSV {
 		for (int i = 1; i < content.size(); i++) {
 			try {
 				String[] parts = content.get(i).split(";");
-				RawUnits tempUnitTable = new RawUnits();
-				tempUnitTable.setTypeName(parts[0]);
-				tempUnitTable.setUnitName(parts[1]);
-				tempUnitTable.setM(Integer.parseInt(parts[2]));
-				tempUnitTable.setK(Integer.parseInt(parts[3]));
-				tempUnitTable.setS(Integer.parseInt(parts[4]));
-				tempUnitTable.setKel(Integer.parseInt(parts[5]));
-				tempUnitTable.setMol(Integer.parseInt(parts[6]));
-				tempUnitTable.setAmp(Integer.parseInt(parts[7]));
-				tempUnitTable.setCand(Integer.parseInt(parts[8]));
+				RawUnits tempRawUnits = new RawUnits();
+				tempRawUnits.setTypeName(parts[0]);
+				tempRawUnits.setUnitName(parts[1]);
+				tempRawUnits.setM(Integer.parseInt(parts[2]));
+				tempRawUnits.setK(Integer.parseInt(parts[3]));
+				tempRawUnits.setS(Integer.parseInt(parts[4]));
+				tempRawUnits.setKel(Integer.parseInt(parts[5]));
+				tempRawUnits.setMol(Integer.parseInt(parts[6]));
+				tempRawUnits.setAmp(Integer.parseInt(parts[7]));
+				tempRawUnits.setCand(Integer.parseInt(parts[8]));
 				NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
 				Number number = format.parse(parts[9]);
-				tempUnitTable.setOffset(number.doubleValue());
+				tempRawUnits.setOffset(number.doubleValue());
 				number = format.parse(parts[10]);
-				tempUnitTable.setGradient(number.doubleValue());
-				Run.rawUnits.add(tempUnitTable);
+				tempRawUnits.setGradient(number.doubleValue());
+				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
