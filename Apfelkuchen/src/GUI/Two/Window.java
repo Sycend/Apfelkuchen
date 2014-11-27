@@ -268,11 +268,7 @@ public class Window extends JFrame {
 
 			// ---- TextField Abbreviation ----
 			JTextField fieldAbbreviationTemp = new JTextField();
-			if (numExp == 0) {
-				fieldAbbreviationTemp.setEnabled(true);
-			} else {
-				fieldAbbreviationTemp.setEnabled(true);
-			}
+			
 			fieldAbbreviationTemp.setMinimumSize(new Dimension(80, 20));
 			fieldAbbreviationTemp.setMaximumSize(new Dimension(80, 20));
 			contentPanel.add(fieldAbbreviationTemp, new GridBagConstraints(1, 14 + i, 1,
@@ -281,10 +277,7 @@ public class Window extends JFrame {
 			fieldAbbreviation.add(fieldAbbreviationTemp);
 
 			// --- JComboBox Rolle------
-			if (numExp == 0) {
-				comboBoxRolle = new JComboBox();
-				comboBoxRolle.setEnabled(false);
-			} else {
+			
 				comboBoxRolle = new JComboBox(Run.getRolle());
 				comboBoxRolle.setEnabled(true);
 				comboBoxRolle.addActionListener(new ActionListener() {
@@ -292,19 +285,13 @@ public class Window extends JFrame {
 						Object selectedItem = comboBoxRolle.getSelectedItem();
 					}
 				});
-			}
+			
 			contentPanel.add(comboBoxRolle, new GridBagConstraints(2, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 
 			// --- JComboBox Dimension------
-			if (numExp == 0) {
-				comboBoxDimension = new JComboBox();
-				comboBoxDimension.setMinimumSize(new Dimension(30, 20));
-				comboBoxDimension.setPreferredSize(new Dimension(40, 20));
-				comboBoxDimension.setMaximumSize(new Dimension(40, 20));
-				comboBoxDimension.setEnabled(false);
-			} else {
+			
 				comboBoxDimension = new JComboBox(Run.getDimensions());
 				comboBoxDimension.setMinimumSize(new Dimension(40, 20));
 				comboBoxDimension.setPreferredSize(new Dimension(40, 20));
@@ -315,18 +302,13 @@ public class Window extends JFrame {
 						Object selectedItem = comboBoxDimension.getSelectedItem();
 					}
 				});
-			}
+			
 			contentPanel.add(comboBoxDimension, new GridBagConstraints(3, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 
 			// --- JComboBox Unit------
-			if (numExp == 0) {
-				comboBoxUnit = new JComboBox();
-				comboBoxUnit.setMinimumSize(new Dimension(30, 20));
-				comboBoxUnit.setPreferredSize(new Dimension(20, 20));
-				comboBoxUnit.setEnabled(false);
-			} else {
+			
 				comboBoxUnit = new JComboBox(Run.getUnits());
 				comboBoxUnit.setEnabled(true);
 				comboBoxUnit.setMinimumSize(new Dimension(30, 20));
@@ -336,7 +318,7 @@ public class Window extends JFrame {
 						Object selectedItem = comboBoxUnit.getSelectedItem();
 					}
 				});
-			}
+		
 			contentPanel.add(comboBoxUnit, new GridBagConstraints(4, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
@@ -426,11 +408,7 @@ public class Window extends JFrame {
 			JTextField fieldSILowTemp = new JTextField();
 			fieldSILowTemp.setMaximumSize(new Dimension(40, 20));
 			fieldSILowTemp.setPreferredSize(new Dimension(40, 20));
-			if (numExp == 0) {
-				fieldSILowTemp.setEnabled(false);
-			} else {
-				fieldSILowTemp.setEnabled(true);
-			}
+			
 			textFieldresultSILow.add(fieldSILowTemp);
 
 			contentPanel.add(fieldSILowTemp, new GridBagConstraints(14, 14 + i, 1,
@@ -440,11 +418,7 @@ public class Window extends JFrame {
 			JTextField fieldSIHighTemp = new JTextField();
 			fieldSIHighTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldKelTemp.setPreferredSize(new Dimension(40, 20));
-			if (numExp == 0) {
-				fieldSIHighTemp.setEnabled(false);
-			} else {
-				fieldSIHighTemp.setEnabled(true);
-			}
+			
 			textFieldresultSIHigh.add(fieldSIHighTemp);
 
 			contentPanel.add(fieldSIHighTemp, new GridBagConstraints(15, 14 + i, 1,
@@ -456,11 +430,7 @@ public class Window extends JFrame {
 		JPanel p2 = new JPanel();
 		
 		buttonNewField = new JButton(XMLDate.dateLabels("buttonNewField"));
-		if (numExp == 0) {
-			buttonNewField.setEnabled(true);
-		} else {
-			buttonNewField.setEnabled(false);
-		}
+	
 		buttonNewField.setFocusPainted(false);
 		buttonNewField.setSize(110, 20);
 		buttonNewField.addActionListener(new ActionListener() {
@@ -488,11 +458,7 @@ public class Window extends JFrame {
 		p2.add(buttonNewField);
 
 		buttonRemove = new JButton(XMLDate.dateLabels("buttonRemove"));
-		if (numExp == 0) {
-			buttonRemove.setEnabled(true);
-		} else {
-			buttonRemove.setEnabled(false);
-		}
+		
 		buttonRemove.setFocusPainted(false);
 		buttonRemove.setSize(110, 20);
 		buttonRemove.addActionListener(new ActionListener() {
@@ -507,30 +473,10 @@ public class Window extends JFrame {
 		});
 		p2.add(buttonRemove);
 
-		if (numExp == 0) {
-			buttonStart = new JButton(XMLDate.dateLabels("buttonOkStart"));
-			buttonStart.setFocusPainted(false);
-			buttonStart.setSize(110, 20);
-			buttonStart.setLocation(16, 16);
-			buttonStart.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (e.getSource() == buttonStart) {
-						Run.changeNumExp();
-						//setVisible(false);
-						dispose();
-						Window window = new Window();
-					}
-				}
-			});
-			p2.add(buttonStart);
-		}
+	
 		buttonOptimize = new JButton(XMLDate.dateLabels("buttonNext"));
 		buttonOptimize.setFocusPainted(false);
-		if (numExp == 0) {
-			buttonOptimize.setEnabled(false);
-		} else {
-			buttonOptimize.setEnabled(true);
-		}
+		
 		buttonOptimize.setSize(110, 20);
 		buttonOptimize.setLocation(16, 16);
 		buttonOptimize.addActionListener(new ActionListener() {
