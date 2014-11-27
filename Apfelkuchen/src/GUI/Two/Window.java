@@ -1,49 +1,27 @@
 package GUI.Two;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-//import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Vector;
-
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 public class Window extends JFrame {
 
@@ -56,7 +34,7 @@ public class Window extends JFrame {
 	private JLabel labelLow;
 	private JLabel labelHigh;
 	private JLabel labelRolle;
-	private JLabel labelEinheit;
+	private JLabel labelUnit;
 	private JLabel labelM;
 	private JLabel labelK;
 	private JLabel labelS;
@@ -65,27 +43,26 @@ public class Window extends JFrame {
 	private JLabel labelAmp;
 	private JLabel labelCand;
 	private JLabel expTitle;
-	private JLabel labelAbr;
+	private JLabel labelAbbreviation;
 	private JLabel labelMinMaxSi;
-	private JLabel labelAbrev;
-	private JLabel labelDim;
-	private JTextField labelNameofValue;
-	private JTextField textFieldM;
-	private JTextField textFieldK;
-	private JTextField textFieldS;
-	private JTextField textFieldKel;
-	private JTextField textFieldMol;
-	private JTextField textFieldAmp;
-	private JTextField textFieldCand;
-	private JTextField textFieldLow;
-	private JTextField textFieldHigh;
-	private JTextField fieldAbrev;
-	private JTextField fieldSILow;
-	private JTextField fieldSIHigh;
-	private JTextField fieldExpon;
+	private JLabel labelDimension;
+	private ArrayList<JTextField> labelNameOfValue = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldM = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldK = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldS = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldKel = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldMol = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldAmp = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldCand = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldLow = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldHigh = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldresultSILow = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldresultSIHigh = new ArrayList<JTextField>();
+	private ArrayList<JTextField> fieldAbbreviation = new ArrayList<JTextField>();
+	private ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
 	private JComboBox comboBoxRolle;
-	private JComboBox comboBoxEinheit;
-	private JComboBox comboBoxDim;
+	private JComboBox comboBoxUnit;
+	private JComboBox comboBoxDimension;
 	private int numExp;
 	private String nameValue;
 
@@ -101,8 +78,8 @@ public class Window extends JFrame {
 
 	public void init() {
 
-		int numberOfComp = 0;
-		Vector nameOfValue = new Vector();
+		//int numberOfComp = 0;
+		Vector<String> nameOfValue = new Vector<String>();
 		nameOfValue = Run.getNameOfValue();
 
 		//setVisible(false);
@@ -133,7 +110,7 @@ public class Window extends JFrame {
 
 		JMenuBar mb = new JMenuBar();
 
-		// ---- labelName ----
+		// ---- label Name ----
 		labelName = new JLabel();
 		labelName.setText(XMLDate.dateLabels("nameFeld"));
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -142,12 +119,12 @@ public class Window extends JFrame {
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
-		// ---- label Abrevetation ----
-		labelAbr = new JLabel();
-		labelAbr.setText(" " + "Abkuerzung");
-		labelAbr.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelAbr.setHorizontalAlignment(SwingConstants.LEFT);
-		contentPanel.add(labelAbr, new GridBagConstraints(1, 13, 1, 1, 0.0,
+		// ---- label Abbreviation ----
+		labelAbbreviation = new JLabel();
+		labelAbbreviation.setText(" " + "Abkuerzung");
+		labelAbbreviation.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelAbbreviation.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPanel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
@@ -160,25 +137,25 @@ public class Window extends JFrame {
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
-		// ---- label Dimensions ----
-		labelDim = new JLabel();
-		labelDim.setText(XMLDate.dateLabels("labelDimension"));
-		labelDim.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelDim.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelDim, new GridBagConstraints(3, 13, 1, 1, 0.0,
+		// ---- label Dimension ----
+		labelDimension = new JLabel();
+		labelDimension.setText(XMLDate.dateLabels("labelDimension"));
+		labelDimension.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelDimension.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 0), 0, 0));
 
-		// ---- label Einheit----
-		labelEinheit = new JLabel();
-		labelEinheit.setText(XMLDate.dateLabels("labelSIUnit"));
-		labelEinheit.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelEinheit.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelEinheit, new GridBagConstraints(4, 13, 1, 1, 0.0,
+		// ---- label Unit----
+		labelUnit = new JLabel();
+		labelUnit.setText(XMLDate.dateLabels("labelSIUnit"));
+		labelUnit.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelUnit.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 0), 0, 0));
 
-		// ---- label low ----
+		// ---- label Low ----
 		labelLow = new JLabel();
 		labelLow.setText(XMLDate.dateLabels("labelLow") + " ");
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
@@ -187,7 +164,7 @@ public class Window extends JFrame {
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
-		// ---- label high ----
+		// ---- label High ----
 		labelHigh = new JLabel();
 		labelHigh.setText(XMLDate.dateLabels("labelHigh") + " ");
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -261,7 +238,7 @@ public class Window extends JFrame {
 
 		System.out.println(Run.getNumComp() + " adition");
 
-		// ---- label SI-Min ----
+		// ---- label SI Min ----
 
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMin") + " ");
@@ -289,18 +266,19 @@ public class Window extends JFrame {
 					0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			// ---- Text Field Abrevetation ----
-			fieldAbrev = new JTextField();
+			// ---- TextField Abbreviation ----
+			JTextField fieldAbbreviationTemp = new JTextField();
 			if (numExp == 0) {
-				fieldAbrev.setEnabled(true);
+				fieldAbbreviationTemp.setEnabled(true);
 			} else {
-				fieldAbrev.setEnabled(true);
+				fieldAbbreviationTemp.setEnabled(true);
 			}
-			fieldAbrev.setMinimumSize(new Dimension(80, 20));
-			fieldAbrev.setMaximumSize(new Dimension(80, 20));
-			contentPanel.add(fieldAbrev, new GridBagConstraints(1, 14 + i, 1,
+			fieldAbbreviationTemp.setMinimumSize(new Dimension(80, 20));
+			fieldAbbreviationTemp.setMaximumSize(new Dimension(80, 20));
+			contentPanel.add(fieldAbbreviationTemp, new GridBagConstraints(1, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			fieldAbbreviation.add(fieldAbbreviationTemp);
 
 			// --- JComboBox Rolle------
 			if (numExp == 0) {
@@ -319,153 +297,164 @@ public class Window extends JFrame {
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 
-			// --- JComboBox Dimensions------
+			// --- JComboBox Dimension------
 			if (numExp == 0) {
-				comboBoxDim = new JComboBox();
-				comboBoxDim.setMinimumSize(new Dimension(30, 20));
-				comboBoxDim.setPreferredSize(new Dimension(40, 20));
-				comboBoxDim.setMaximumSize(new Dimension(40, 20));
-				comboBoxDim.setEnabled(false);
+				comboBoxDimension = new JComboBox();
+				comboBoxDimension.setMinimumSize(new Dimension(30, 20));
+				comboBoxDimension.setPreferredSize(new Dimension(40, 20));
+				comboBoxDimension.setMaximumSize(new Dimension(40, 20));
+				comboBoxDimension.setEnabled(false);
 			} else {
-				comboBoxDim = new JComboBox(Run.getDimensions());
-				comboBoxDim.setMinimumSize(new Dimension(40, 20));
-				comboBoxDim.setPreferredSize(new Dimension(40, 20));
-				comboBoxDim.setMaximumSize(new Dimension(50, 20));
-				comboBoxDim.setEnabled(true);
-				comboBoxDim.addActionListener(new ActionListener() {
+				comboBoxDimension = new JComboBox(Run.getDimensions());
+				comboBoxDimension.setMinimumSize(new Dimension(40, 20));
+				comboBoxDimension.setPreferredSize(new Dimension(40, 20));
+				comboBoxDimension.setMaximumSize(new Dimension(50, 20));
+				comboBoxDimension.setEnabled(true);
+				comboBoxDimension.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Object selectedItem = comboBoxDim.getSelectedItem();
+						Object selectedItem = comboBoxDimension.getSelectedItem();
 					}
 				});
 			}
-			contentPanel.add(comboBoxDim, new GridBagConstraints(3, 14 + i, 1,
+			contentPanel.add(comboBoxDimension, new GridBagConstraints(3, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 
-			// --- JComboBox Einheit------
+			// --- JComboBox Unit------
 			if (numExp == 0) {
-				comboBoxEinheit = new JComboBox();
-				comboBoxEinheit.setMinimumSize(new Dimension(30, 20));
-				comboBoxEinheit.setPreferredSize(new Dimension(20, 20));
-				comboBoxEinheit.setEnabled(false);
+				comboBoxUnit = new JComboBox();
+				comboBoxUnit.setMinimumSize(new Dimension(30, 20));
+				comboBoxUnit.setPreferredSize(new Dimension(20, 20));
+				comboBoxUnit.setEnabled(false);
 			} else {
-				comboBoxEinheit = new JComboBox(Run.getUnits());
-				comboBoxEinheit.setEnabled(true);
-				comboBoxEinheit.setMinimumSize(new Dimension(30, 20));
-				comboBoxEinheit.setPreferredSize(new Dimension(20, 20));
-				comboBoxEinheit.addActionListener(new ActionListener() {
+				comboBoxUnit = new JComboBox(Run.getUnits());
+				comboBoxUnit.setEnabled(true);
+				comboBoxUnit.setMinimumSize(new Dimension(30, 20));
+				comboBoxUnit.setPreferredSize(new Dimension(20, 20));
+				comboBoxUnit.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Object selectedItem = comboBoxEinheit.getSelectedItem();
+						Object selectedItem = comboBoxUnit.getSelectedItem();
 					}
 				});
 			}
-			contentPanel.add(comboBoxEinheit, new GridBagConstraints(4, 14 + i,
+			contentPanel.add(comboBoxUnit, new GridBagConstraints(4, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 
-			// ---- textField Low- ----
-			textFieldLow = new JTextField();
-			textFieldLow.setMinimumSize(new Dimension(40, 20));
-			textFieldLow.setMaximumSize(new Dimension(40, 20));
-			textFieldLow.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldLow, new GridBagConstraints(5, 14 + i, 1,
+			// ---- TextField Low- ----
+			JTextField textFieldLowTemp = new JTextField();
+			textFieldLowTemp.setMinimumSize(new Dimension(40, 20));
+			textFieldLowTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldLowTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldLowTemp, new GridBagConstraints(5, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
+			textFieldLow.add(textFieldLowTemp);
 
-			// ---- textField High----
-			textFieldHigh = new JTextField();
-			textFieldHigh.setMaximumSize(new Dimension(40, 20));
-			textFieldHigh.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldHigh, new GridBagConstraints(6, 14 + i,
+			// ---- TextField High----
+			JTextField textFieldHighTemp = new JTextField();
+			textFieldHighTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldHighTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldHighTemp, new GridBagConstraints(6, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
+			textFieldHigh.add(textFieldHighTemp);
 
-			// ---- textField m----
-			textFieldM = new JTextField();
-			textFieldM.setMaximumSize(new Dimension(40, 20));
-			textFieldM.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldM, new GridBagConstraints(7, 14 + i, 1,
+			// ---- TextField m----
+			JTextField textFieldMTemp = new JTextField();
+			textFieldMTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldMTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldMTemp, new GridBagConstraints(7, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			textFieldM.add(textFieldMTemp);
 
-			// ---- textField k----
-			textFieldK = new JTextField();
-			textFieldK.setMaximumSize(new Dimension(20, 20));
-			textFieldK.setPreferredSize(new Dimension(20, 20));
-			contentPanel.add(textFieldK, new GridBagConstraints(8, 14 + i, 1,
+			// ---- TextField k----
+			JTextField textFieldKTemp = new JTextField();
+			textFieldKTemp.setMaximumSize(new Dimension(20, 20));
+			textFieldKTemp.setPreferredSize(new Dimension(20, 20));
+			contentPanel.add(textFieldKTemp, new GridBagConstraints(8, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			textFieldK.add(textFieldKTemp);
 
-			// ---- textField s----
-			textFieldS = new JTextField();
-			textFieldS.setMaximumSize(new Dimension(40, 20));
-			textFieldS.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldS, new GridBagConstraints(9, 14 + i, 1,
+			// ---- TextField s----
+			JTextField textFieldSTemp = new JTextField();
+			textFieldSTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldSTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldSTemp, new GridBagConstraints(9, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			textFieldS.add(textFieldSTemp);
 
-			// ---- textField Kel----
-			textFieldKel = new JTextField();
-			textFieldKel.setMaximumSize(new Dimension(40, 20));
-			textFieldKel.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldKel, new GridBagConstraints(10, 14 + i,
+			// ---- TextField kel----
+			JTextField textFieldKelTemp = new JTextField();
+			textFieldKelTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldKelTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldKelTemp, new GridBagConstraints(10, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			textFieldKel.add(textFieldKelTemp);
 
-			// ---- textField mol----
-			textFieldMol = new JTextField();
-			textFieldMol.setMaximumSize(new Dimension(40, 20));
-			textFieldMol.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldMol, new GridBagConstraints(11, 14 + i,
+			// ---- TextField mol----
+			JTextField textFieldMolTemp = new JTextField();
+			textFieldMolTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldMolTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldMolTemp, new GridBagConstraints(11, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			textFieldMol.add(textFieldMolTemp);
 
-			// ---- textField amp----
-			textFieldAmp = new JTextField();
-			textFieldAmp.setMaximumSize(new Dimension(40, 20));
-			textFieldAmp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldAmp, new GridBagConstraints(12, 14 + i,
+			// ---- TextField amp----
+			JTextField textFieldAmpTemp = new JTextField();
+			textFieldAmpTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldAmpTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldAmpTemp, new GridBagConstraints(12, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			textFieldAmp.add(textFieldAmpTemp);
 
-			// ---- textField cand----
-			textFieldCand = new JTextField();
-			textFieldCand.setMaximumSize(new Dimension(40, 20));
-			textFieldCand.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldCand, new GridBagConstraints(13, 14 + i,
+			// ---- TextField cand----
+			JTextField textFieldCandTemp = new JTextField();
+			textFieldCandTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldCandTemp.setPreferredSize(new Dimension(40, 20));
+			contentPanel.add(textFieldCandTemp, new GridBagConstraints(13, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+			textFieldCand.add(textFieldCandTemp);
 
-			fieldSILow = new JTextField();
-			fieldSILow.setMaximumSize(new Dimension(40, 20));
-			fieldSILow.setPreferredSize(new Dimension(40, 20));
+			JTextField fieldSILowTemp = new JTextField();
+			fieldSILowTemp.setMaximumSize(new Dimension(40, 20));
+			fieldSILowTemp.setPreferredSize(new Dimension(40, 20));
 			if (numExp == 0) {
-				fieldSILow.setEnabled(false);
+				fieldSILowTemp.setEnabled(false);
 			} else {
-				fieldSILow.setEnabled(true);
+				fieldSILowTemp.setEnabled(true);
 			}
+			textFieldresultSILow.add(fieldSILowTemp);
 
-			contentPanel.add(fieldSILow, new GridBagConstraints(14, 14 + i, 1,
+			contentPanel.add(fieldSILowTemp, new GridBagConstraints(14, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
-			fieldSIHigh = new JTextField();
-			fieldSIHigh.setMaximumSize(new Dimension(40, 20));
-			textFieldKel.setPreferredSize(new Dimension(40, 20));
+			JTextField fieldSIHighTemp = new JTextField();
+			fieldSIHighTemp.setMaximumSize(new Dimension(40, 20));
+			textFieldKelTemp.setPreferredSize(new Dimension(40, 20));
 			if (numExp == 0) {
-				fieldSIHigh.setEnabled(false);
+				fieldSIHighTemp.setEnabled(false);
 			} else {
-				fieldSIHigh.setEnabled(true);
+				fieldSIHighTemp.setEnabled(true);
 			}
+			textFieldresultSIHigh.add(fieldSIHighTemp);
 
-			contentPanel.add(fieldSIHigh, new GridBagConstraints(15, 14 + i, 1,
+			contentPanel.add(fieldSIHighTemp, new GridBagConstraints(15, 14 + i, 1,
 					1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			// ---- end of contentpanel Centre ------
 		}
-
+		
 		JPanel p2 = new JPanel();
-
+		
 		buttonNewField = new JButton(XMLDate.dateLabels("buttonNewField"));
 		if (numExp == 0) {
 			buttonNewField.setEnabled(true);
