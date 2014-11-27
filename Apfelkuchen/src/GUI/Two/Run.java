@@ -14,7 +14,7 @@ public class Run {
 	private static Vector<String> nameOfValue = new Vector<String>();
 	private static String[] rolle = new String[] { "controlled", "constant", "scale-up", "dependent" };
 	private static int numberOfComp = 0;
-	private static int numExp = 0;
+//	private static int numExp = 0;
 	public static ArrayList Si;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 	
@@ -40,17 +40,7 @@ public class Run {
 		numberOfComp--;
 	}
 	
-	public static int getNumExp() {
-		return numExp;
-	}
-	
-	public static void changeNumExp() {
-		numExp++;
-	}
-	
-	public static void changeNumExp(int value) {
-		numExp = value;
-	}
+
 	
 	public static void changeNumComp() {
 		System.out.println(numberOfComp);

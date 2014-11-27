@@ -62,7 +62,7 @@ public class Window extends JFrame {
 	private JComboBox comboBoxRolle;
 	private JComboBox comboBoxUnit;
 	private JComboBox comboBoxDimension;
-	private int numExp;
+
 	private String nameValue;
 
 	public Window() {
@@ -70,14 +70,14 @@ public class Window extends JFrame {
 		setSize(1194, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		numExp = Run.getNumExp();
+
 		init();
 		setVisible(true);
 	}
 
 	public void init() {
 
-		// int numberOfComp = 0;
+		
 		Vector<String> nameOfValue = new Vector<String>();
 		nameOfValue = Run.getNameOfValue();
 
@@ -496,13 +496,6 @@ public class Window extends JFrame {
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}
 
-	private static String getExpTitle() {
-		int number = Run.getNumExp();
-		if (number > 0) {
-			return XMLDate.dateLabels("experimentLabel") + number;
-		} else {
-			return "";
-		}
-	}
+	
 
 }

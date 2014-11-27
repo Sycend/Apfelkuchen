@@ -59,7 +59,7 @@ public class WindowOptim extends JFrame {
 		buttonNewStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewStart) {
-					Run.changeNumExp(0);
+			
 
 					frame.setVisible(false);
 					Window window = new Window();
