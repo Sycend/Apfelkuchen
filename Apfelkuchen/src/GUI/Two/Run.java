@@ -23,7 +23,7 @@ public class Run {
 		Thread readCSVThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				ReadCSV.readCSV("spezifikation.csv");
+				CSV.readCSV("spezifikation.csv");
 			}
 		});
 		Window window = new Window();

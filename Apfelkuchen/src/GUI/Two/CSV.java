@@ -1,8 +1,11 @@
 package GUI.Two;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -10,12 +13,133 @@ import java.util.Locale;
 
 /**
  * @author Dominik Hofmann, Mark Leibmann
- * @version 1.1.1
+ * @version 1.2.0
  */
-public class ReadCSV {
+public class CSV {
 	
+	/**
+	 * @param Inputfile
+	 * @throws IOException
+	 *             if it can't access the file
+	 * @throws IOException
+	 *             if it can't write to the file
+	 * @throws IOException
+	 *             if it can't close the FileWriter
+	 */
+	public static void writeCSV(String Inputfile) {
+		//FIXME currently we only append values we might
+		// want to delete the file we write to first
+		BufferedWriter fw = null;
+		try {
+			fw = new BufferedWriter(new FileWriter(new File(Inputfile), true));
+		} catch (IOException e) {
+			System.out.println("Can't access the file.");
+			e.printStackTrace();
+		}
+		try {
+			fw.append("typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient");
+			fw.newLine();
+			for (int i = 0; i < Run.unitsArray.size(); i++) {
+				fw.append(Run.unitsArray.get(i).getTypeName());
+				fw.append(";");
+				fw.append(Run.unitsArray.get(i).getUnitName());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getM());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getK());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getS());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getKel());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getMol());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getAmp());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getCand());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getOffset());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getGradient());
+				fw.newLine();
+			}
+			
+		} catch (IOException e) {
+			System.out.println("Can't write to file.");
+			e.printStackTrace();
+		}
+		try {
+			fw.close();
+		} catch (IOException e) {
+			System.out.println("Can't close the FileWriter.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @param Inputfile
+	 * @throws IOException
+	 *             if it can't access the file
+	 * @throws IOException
+	 *             if it can't write to the file
+	 * @throws IOException
+	 *             if it can't close the FileWriter
+	 */
+	public static void writeCSV(File Inputfile) {
+		BufferedWriter fw = null;
+		try {
+			fw = new BufferedWriter(new FileWriter(Inputfile, true));
+		} catch (IOException e) {
+			System.out.println("Can't access the file.");
+			e.printStackTrace();
+		}
+		try {
+			fw.append("typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient");
+			fw.newLine();
+			for (int i = 0; i < Run.unitsArray.size(); i++) {
+				fw.append(Run.unitsArray.get(i).getTypeName());
+				fw.append(";");
+				fw.append(Run.unitsArray.get(i).getUnitName());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getM());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getK());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getS());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getKel());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getMol());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getAmp());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getCand());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getOffset());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getGradient());
+				fw.newLine();
+			}
+			
+		} catch (IOException e) {
+			System.out.println("Can't write to file.");
+			e.printStackTrace();
+		}
+		try {
+			fw.close();
+		} catch (IOException e) {
+			System.out.println("Can't close the FileWriter.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @param Inputfile
+	 */
 	public static void readCSV(String Inputfile) {
-		System.out.println("Reading: "+Inputfile);
+		//FIXME make method hanlde comma and point spearated double values
+		//currently we handle only comma separated double values
+		System.out.println("Reading: " + Inputfile);
 		ArrayList<String> content = new ArrayList<String>();
 		try {
 			content = readFile(Inputfile);
@@ -26,7 +150,8 @@ public class ReadCSV {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//System.out.println("-------------------------- Neue Zeile:"); 
+				//System.out.println("- Neue Zeile -"); 
+				//typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient
 				String[] parts = content.get(i).split(";");
 				/*System.out.println(parts[0]);
 				System.out.println(parts[1]);
@@ -75,12 +200,15 @@ public class ReadCSV {
 			System.out.println("resultSILow: " + Run.unitTable.get(i).getResultSILow());
 			System.out.println("resultSIHigh: " + Run.unitTable.get(i).getResultSIHigh());
 		}*/
-		System.out.println("Done reading: "+ Inputfile);
+		System.out.println("Done reading: " + Inputfile);
 		
 	}
 	
+	/**
+	 * @param Inputfile
+	 */
 	public static void readCSV(File Inputfile) {
-		System.out.println("Reading: "+Inputfile.toString());
+		System.out.println("Reading: " + Inputfile.toString());
 		ArrayList<String> content = new ArrayList<String>();
 		try {
 			content = readFile(Inputfile);
@@ -112,7 +240,7 @@ public class ReadCSV {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Done reading: "+ Inputfile.toString());
+		System.out.println("Done reading: " + Inputfile.toString());
 	}
 	
 	/**
