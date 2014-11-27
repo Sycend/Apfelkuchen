@@ -13,9 +13,7 @@
 		<buttonOk>
 			OK
 		</buttonOk>
-		<buttonOkExp>
-			Neuer Versuch
-		</buttonOkExp>
+		
 		<buttonOkStart>
 			Start
 		</buttonOkStart>
@@ -27,7 +25,7 @@
 		</nameFeld>
 
 		<buttonNewField>
-			Neues Feld
+			Neue Instanz
 		</buttonNewField>
 		<buttonRemove>
 			Löschen
