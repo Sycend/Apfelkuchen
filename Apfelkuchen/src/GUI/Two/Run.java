@@ -24,6 +24,10 @@ public class Run {
 			@Override
 			public void run() {
 				CSV.readCSV("spezifikation.csv");
+				//writeCSV Test
+				/*RawUnits tempRaw = new RawUnits("Durchmesser", "cm", 1, 0, 0, 0, 0, 0, 0, 0.84, 0.9999);
+				unitsArray.add(tempRaw);
+				CSV.writeCSV("test.csv");*/
 			}
 		});
 		Window window = new Window();
