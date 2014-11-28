@@ -13,7 +13,7 @@ import java.util.Locale;
 
 /**
  * @author Dominik Hofmann, Mark Leibmann
- * @version 1.2.0
+ * @version 1.2.1
  */
 public class CSV {
 	
@@ -169,7 +169,6 @@ public class CSV {
 				NumberFormat format1 = NumberFormat.getInstance(Locale.GERMANY);
 				Number number1 = format1.parse(parts[10]);
 				RawUnits tempRawUnits = new RawUnits(parts[0],parts[1], Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),Integer.parseInt(parts[4]),Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),Integer.parseInt(parts[8]),number.doubleValue(),number1.doubleValue());
-
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -211,21 +210,11 @@ public class CSV {
 		for (int i = 1; i < content.size(); i++) {
 			try {
 				String[] parts = content.get(i).split(";");
-				RawUnits tempRawUnits = new RawUnits();
-				tempRawUnits.setTypeName(parts[0]);
-				tempRawUnits.setUnitName(parts[1]);
-				tempRawUnits.setM(Integer.parseInt(parts[2]));
-				tempRawUnits.setK(Integer.parseInt(parts[3]));
-				tempRawUnits.setS(Integer.parseInt(parts[4]));
-				tempRawUnits.setKel(Integer.parseInt(parts[5]));
-				tempRawUnits.setMol(Integer.parseInt(parts[6]));
-				tempRawUnits.setAmp(Integer.parseInt(parts[7]));
-				tempRawUnits.setCand(Integer.parseInt(parts[8]));
 				NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
 				Number number = format.parse(parts[9]);
-				tempRawUnits.setOffset(number.doubleValue());
-				number = format.parse(parts[10]);
-				tempRawUnits.setGradient(number.doubleValue());
+				NumberFormat format1 = NumberFormat.getInstance(Locale.GERMANY);
+				Number number1 = format1.parse(parts[10]);
+				RawUnits tempRawUnits = new RawUnits(parts[0],parts[1], Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),Integer.parseInt(parts[4]),Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),Integer.parseInt(parts[8]),number.doubleValue(),number1.doubleValue());
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();

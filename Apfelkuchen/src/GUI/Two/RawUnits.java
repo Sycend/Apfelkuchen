@@ -2,20 +2,16 @@ package GUI.Two;
 
 /**
  * @author Dominik Hofmann, Mark Leibmann
- * @version 1.1.0
+ * @version 1.1.1
  */
 
 public class RawUnits {
 	
 	/** TODO **/
-	//put m,k,s,kel,mol,amp,cand in an array
-	//(remove settters ?) and replace them with constructors 
-	//show resultSI values in GUI etc
-	
-	int siWerte[] = new int [7];
 	
 	private String typeName = "";
 	private String unitName = "";
+	int valuesSI[] = new int [7];
 	private double offset = 0.0;
 	private double gradient = 0.0;
 	private double low = 0;
@@ -61,69 +57,61 @@ public class RawUnits {
 	
 	
 	public int getM() {
-		return this.siWerte[0];
+		return this.valuesSI[0];
 		
 	}
 	
 	
 	public int getK() {
-		return this.siWerte[1];
+		return this.valuesSI[1];
 		
 	}
 	
 	public int getS() {
-		return this.siWerte[2];
+		return this.valuesSI[2];
 		
 	}
 	
 	
 	public int getKel() {
-		return this.siWerte[3];
+		return this.valuesSI[3];
 		
 	}
 	
 	
 	public int getMol() {
-		return this.siWerte[4];
+		return this.valuesSI[4];
 
 	}
 	
 	
 	public int getAmp() {
-		return 	this.siWerte[5];
+		return 	this.valuesSI[5];
 		
 	}
 	
 	
 	public int getCand() {
-		return this.siWerte[6];
-	}
-	
+		return this.valuesSI[6];
+	}	
 	
 	RawUnits(){  //StandardKonstruktor
 		
-	}
-	
-	
-	
+	}	
 	
 	RawUnits(String typeName, String unitName,int m, int k, int s,int kel, int mol, int amp, int cand, double offset, double gradient) {
-		
 		//ZuweisungsKonstruktor
-		
-		this.siWerte[0] = m;
-		this.siWerte[1] = k;
-		this.siWerte[2] = s;
-		this.siWerte[3] = kel;
-		this.siWerte[4] = mol;
-		this.siWerte[5] = amp;
-		this.siWerte[6] = cand;
-		
 		this.typeName = typeName;
 		this.unitName = unitName;
+		this.valuesSI[0] = m;
+		this.valuesSI[1] = k;
+		this.valuesSI[2] = s;
+		this.valuesSI[3] = kel;
+		this.valuesSI[4] = mol;
+		this.valuesSI[5] = amp;
+		this.valuesSI[6] = cand;
 		this.offset = offset;
-		this.gradient = gradient;
-		
+		this.gradient = gradient;		
 	}
 	
 }
