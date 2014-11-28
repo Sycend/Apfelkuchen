@@ -11,15 +11,11 @@ public class RawUnits {
 	//put m,k,s,kel,mol,amp,cand in an array
 	//(remove settters ?) and replace them with constructors 
 	//show resultSI values in GUI etc
+	
+	int siWerte[] = new int [7];
+	
 	private String typeName = "";
 	private String unitName = "";
-	private int m = 0;
-	private int k = 0;
-	private int s = 0;
-	private int kel = 0;
-	private int mol = 0;
-	private int amp = 0;
-	private int cand = 0;
 	private double offset = 0.0;
 	private double gradient = 0.0;
 	private double low = 0;
@@ -38,125 +34,95 @@ public class RawUnits {
 		return typeName;
 	}
 	
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
 	
 	public String getUnitName() {
 		return unitName;
 	}
 	
-	public void setUnitName(String unitName) {
-		this.unitName = unitName;
-	}
 	
 	public double getLow() {
 		return low;
 	}
 	
-	public void setLow(double low) {
-		this.low = low;
-	}
 	
 	public double getHigh() {
 		return high;
 	}
 	
-	public void setHigh(double high) {
-		this.high = high;
-	}
 	
 	public double getGradient() {
 		return gradient;
 	}
 	
-	public void setGradient(double gradient) {
-		this.gradient = gradient;
-	}
 	
 	public double getOffset() {
 		return offset;
 	}
 	
-	public void setOffset(double offset) {
-		this.offset = offset;
-	}
 	
 	public int getM() {
-		return m;
+		return this.siWerte[0];
+		
 	}
 	
-	public void setM(int m) {
-		this.m = m;
-	}
 	
 	public int getK() {
-		return k;
-	}
-	
-	public void setK(int k) {
-		this.k = k;
+		return this.siWerte[1];
+		
 	}
 	
 	public int getS() {
-		return s;
-	}
-	
-	public void setS(int s) {
-		this.s = s;
-	}
-	
-	public int getKel() {
-		return kel;
-	}
-	
-	public void setKel(int kel) {
-		this.kel = kel;
-	}
-	
-	public int getMol() {
-		return mol;
-	}
-	
-	public void setMol(int mol) {
-		this.mol = mol;
-	}
-	
-	public int getAmp() {
-		return amp;
-	}
-	
-	public void setAmp(int amp) {
-		this.amp = amp;
-	}
-	
-	public int getCand() {
-		return cand;
-	}
-	
-	public void setCand(int cand) {
-		this.cand = cand;
-	}
-	
-	RawUnits(){
+		return this.siWerte[2];
 		
 	}
 	
-	RawUnits(String typeName, String unitName, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient, double low, double high) {
+	
+	public int getKel() {
+		return this.siWerte[3];
+		
+	}
+	
+	
+	public int getMol() {
+		return this.siWerte[4];
+
+	}
+	
+	
+	public int getAmp() {
+		return 	this.siWerte[5];
+		
+	}
+	
+	
+	public int getCand() {
+		return this.siWerte[6];
+	}
+	
+	
+	RawUnits(){  //StandardKonstruktor
+		
+	}
+	
+	
+	
+	
+	RawUnits(String typeName, String unitName,int m, int k, int s,int kel, int mol, int amp, int cand, double offset, double gradient) {
+		
+		//ZuweisungsKonstruktor
+		
+		this.siWerte[0] = m;
+		this.siWerte[1] = k;
+		this.siWerte[2] = s;
+		this.siWerte[3] = kel;
+		this.siWerte[4] = mol;
+		this.siWerte[5] = amp;
+		this.siWerte[6] = cand;
 		
 		this.typeName = typeName;
 		this.unitName = unitName;
-		this.m = m;
-		this.k = k;
-		this.s = s;
-		this.kel = kel;
-		this.mol = mol;
-		this.amp = amp;
-		this.cand = cand;
 		this.offset = offset;
 		this.gradient = gradient;
-		this.low = low;
-		this.high = high;
 		
 	}
 	
