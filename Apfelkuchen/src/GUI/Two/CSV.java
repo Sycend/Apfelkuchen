@@ -18,7 +18,10 @@ import java.util.Locale;
 public class CSV {
 	
 	/**
-	 * @param Inputfile
+	 * This method writes the Run.unitsArray ArrayList into a file which is
+	 * converted from the String Inputfile, using the csv ; delimiter separated format
+	 * 
+	 * @param Inputfile A String which will be turned into a file and then written to
 	 * @throws IOException
 	 *             if it can't access the file
 	 * @throws IOException
@@ -77,7 +80,10 @@ public class CSV {
 	}
 	
 	/**
-	 * @param Inputfile
+	 * This method writes the Run.unitsArray ArrayList into a File Inputfile
+	 * using the csv ; delimiter separated format
+	 * 
+	 * @param Inputfile A File which will be written to
 	 * @throws IOException
 	 *             if it can't access the file
 	 * @throws IOException
@@ -134,7 +140,12 @@ public class CSV {
 	}
 	
 	/**
-	 * @param Inputfile
+	 * This method reads a String Inputfile line by line via the readFile method
+	 * and proceeds to split every line at the ; delimiter and puts those
+	 * values in a temp RawUnits Class which is then put in the Run.unitsArray
+	 * ArrayList
+	 * 
+	 * @param Inputfile A String that will be turned into a file and read
 	 */
 	public static void readCSV(String Inputfile) {
 		//FIXME make method hanlde comma and point spearated double values
@@ -183,7 +194,11 @@ public class CSV {
 	}
 	
 	/**
-	 * @param Inputfile
+	 * This method reads an Inputfile File line by line via the readFile method
+	 * and proceeds to split every line at the ; delimiter and puts those
+	 * values in a temp RawUnits Class which is then put in the Run.unitsArray
+	 * 
+	 * @param Inputfile A File that will be read
 	 */
 	public static void readCSV(File Inputfile) {
 		System.out.println("Reading: " + Inputfile.toString());
@@ -212,7 +227,11 @@ public class CSV {
 	}
 	
 	/**
-	 * @param Inputfile
+	 * This method takes a String as Inputfile and converts it into a File and reads it
+	 * line by line and returns an Arraylist containing every line that has been read from the
+	 * file located in Inputfile String
+	 * 
+	 * @param Inputfile A String that will be turned into a File and read line by line
 	 * @return an Arraylist containing every line that has been read from the
 	 *         file located in Inputfile String
 	 * @throws Exception 
@@ -236,7 +255,11 @@ public class CSV {
 	}
 	
 	/**
-	 * @param Inputfile
+	 * This method takes a File as Inputfile and reads it
+	 * line by line and returns an Arraylist containing every line that has been read from the
+	 * file located in Inputfile File
+	 * 
+	 * @param Inputfile A File that will be read line by line
 	 * @return an Arraylist containing every line that has been read from the
 	 *         file located in Inputfile File
 	 * @throws Exception 
