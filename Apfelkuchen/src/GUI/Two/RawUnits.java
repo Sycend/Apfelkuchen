@@ -138,4 +138,26 @@ public class RawUnits {
 		this.cand = cand;
 	}
 	
+	RawUnits(){
+		
+	}
+	
+	RawUnits(String typeName, String unitName, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient, double low, double high) {
+		
+		this.typeName = typeName;
+		this.unitName = unitName;
+		this.m = m;
+		this.k = k;
+		this.s = s;
+		this.kel = kel;
+		this.mol = mol;
+		this.amp = amp;
+		this.cand = cand;
+		this.offset = offset;
+		this.gradient = gradient;
+		this.low = low;
+		this.high = high;
+		
+	}
+	
 }
