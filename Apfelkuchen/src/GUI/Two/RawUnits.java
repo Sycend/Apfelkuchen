@@ -26,25 +26,23 @@ public class RawUnits {
 		return this.getHigh() * this.getGradient() + this.getOffset();
 	}
 	
+	/** Getters **/
+	
 	public String getTypeName() {
 		return typeName;
 	}
-	
 	
 	public String getUnitName() {
 		return unitName;
 	}
 	
-	
 	public double getLow() {
 		return low;
 	}
 	
-	
 	public double getHigh() {
 		return high;
 	}
-	
 	
 	public double getGradient() {
 		return gradient;
@@ -55,12 +53,10 @@ public class RawUnits {
 		return offset;
 	}
 	
-	
 	public int getM() {
 		return this.valuesSI[0];
 		
 	}
-	
 	
 	public int getK() {
 		return this.valuesSI[1];
@@ -72,24 +68,20 @@ public class RawUnits {
 		
 	}
 	
-	
 	public int getKel() {
 		return this.valuesSI[3];
 		
 	}
-	
 	
 	public int getMol() {
 		return this.valuesSI[4];
 
 	}
 	
-	
 	public int getAmp() {
 		return 	this.valuesSI[5];
 		
 	}
-	
 	
 	public int getCand() {
 		return this.valuesSI[6];
@@ -97,9 +89,9 @@ public class RawUnits {
 	
 	RawUnits(){  //StandardKonstruktor
 		
-	}	
+	}
 	
-	RawUnits(String typeName, String unitName,int m, int k, int s,int kel, int mol, int amp, int cand, double offset, double gradient) {
+	RawUnits(String typeName, String unitName, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) {
 		//ZuweisungsKonstruktor
 		this.typeName = typeName;
 		this.unitName = unitName;
@@ -111,7 +103,6 @@ public class RawUnits {
 		this.valuesSI[5] = amp;
 		this.valuesSI[6] = cand;
 		this.offset = offset;
-		this.gradient = gradient;		
+		this.gradient = gradient;
 	}
-	
 }

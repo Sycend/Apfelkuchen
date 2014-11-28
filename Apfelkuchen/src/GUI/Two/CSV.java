@@ -150,25 +150,13 @@ public class CSV {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//System.out.println("- Neue Zeile -"); 
 				//typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient
 				String[] parts = content.get(i).split(";");
-				/*System.out.println(parts[0]);
-				System.out.println(parts[1]);
-				System.out.println(parts[2]);
-				System.out.println(parts[3]);
-				System.out.println(parts[4]);
-				System.out.println(parts[5]);
-				System.out.println(parts[6]);
-				System.out.println(parts[7]);
-				System.out.println(parts[8]);
-				System.out.println(parts[9]);
-				System.out.println(parts[10]);*/
 				NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
 				Number number = format.parse(parts[9]);
 				NumberFormat format1 = NumberFormat.getInstance(Locale.GERMANY);
 				Number number1 = format1.parse(parts[10]);
-				RawUnits tempRawUnits = new RawUnits(parts[0],parts[1], Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),Integer.parseInt(parts[4]),Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),Integer.parseInt(parts[8]),number.doubleValue(),number1.doubleValue());
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), number.doubleValue(), number1.doubleValue());
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
