@@ -44,12 +44,13 @@
 		<labelHigh>Max</labelHigh>
 		<labelSIMin>Si-Max</labelSIMin>
 		<labelSIMax>Si-Min</labelSIMax>
-		
 
 
 
 
-	</de>
+
+		<errorTitleDialog>Fehler</errorTitleDialog>
+		<errorTextDialog>Bitte prüfen Sie eingaben</errorTextDialog></de>
 
 
 

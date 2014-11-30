@@ -70,14 +70,12 @@ public class Window extends JFrame {
 		setSize(1194, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-
 		init();
 		setVisible(true);
 	}
 
 	public void init() {
 
-		
 		Vector<String> nameOfValue = new Vector<String>();
 		nameOfValue = Run.getNameOfValue();
 
@@ -482,9 +480,24 @@ public class Window extends JFrame {
 		buttonOptimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonOptimize) {
-					setVisible(false);
-					WindowOptim window = new WindowOptim();
-					window.setWindow();
+					//--- check field Abbreviation---
+					String message = XMLDate.dateLabels("errorTextDialog") 
+							+ " für ";
+					String title = XMLDate.dateLabels("errorTitleDialog");
+					for (int i = 0; i < Run.getNumComp(); i++) {
+						String input = fieldAbbreviation.get(i).getText();
+						if ((new StringCheck().abbreviationCheck(input)) == false) { // if false appears dialog with error message
+
+							JOptionPane.showMessageDialog(new JFrame(), message
+									+ labelAbbreviation.getText(), title,
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						} else {
+							setVisible(false);
+							WindowOptim window = new WindowOptim();
+							window.setWindow();
+						}
+					}
 				}
 			}
 		});
@@ -495,7 +508,4 @@ public class Window extends JFrame {
 
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}
-
-	
-
 }
