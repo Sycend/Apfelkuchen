@@ -20,6 +20,8 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -61,7 +63,7 @@ public class Window extends JFrame {
 	private ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
 	private JComboBox comboBoxRolle;
 	private JComboBox comboBoxUnit;
-	private JComboBox comboBoxDimension;
+	private JTextField textFieldDimension;
 
 	private String nameValue;
 
@@ -287,20 +289,56 @@ public class Window extends JFrame {
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 
-			// --- JComboBox Dimension------
+			// --- JTextFiel Dimension with mouse event------
+			textFieldDimension = new JTextField();
+			JTextField textPointer = this.textFieldDimension;
+			textFieldDimension.setMinimumSize(new Dimension(40, 20));
+			textFieldDimension.setPreferredSize(new Dimension(40, 20));
+			textFieldDimension.setMaximumSize(new Dimension(50, 20));
+			textFieldDimension.setEnabled(true);
 
-			comboBoxDimension = new JComboBox(Run.getDimensions());
-			comboBoxDimension.setMinimumSize(new Dimension(40, 20));
-			comboBoxDimension.setPreferredSize(new Dimension(40, 20));
-			comboBoxDimension.setMaximumSize(new Dimension(50, 20));
-			comboBoxDimension.setEnabled(true);
-			comboBoxDimension.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Object selectedItem = comboBoxDimension.getSelectedItem();
+			// setSelectionItem(Run.getDimValue(i), Run.getDimField(i));
+
+			textFieldDimension.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+
+					TreeWindow windowTree = new TreeWindow(textPointer);
+
+					setVisible(false);
+
+					repaint();
+					setVisible(true);
+
 				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
 			});
 
-			contentPanel.add(comboBoxDimension, new GridBagConstraints(3,
+			contentPanel.add(textFieldDimension, new GridBagConstraints(3,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 
@@ -480,13 +518,19 @@ public class Window extends JFrame {
 		buttonOptimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonOptimize) {
-					//--- check field Abbreviation---
-					String message = XMLDate.dateLabels("errorTextDialog") 
+					// --- check field Abbreviation---
+					String message = XMLDate.dateLabels("errorTextDialog")
 							+ " für ";
 					String title = XMLDate.dateLabels("errorTitleDialog");
 					for (int i = 0; i < Run.getNumComp(); i++) {
 						String input = fieldAbbreviation.get(i).getText();
-						if ((new StringCheck().abbreviationCheck(input)) == false) { // if false appears dialog with error message
+						if ((new StringCheck().abbreviationCheck(input)) == false) { // if
+																						// false
+																						// appears
+																						// dialog
+																						// with
+																						// error
+																						// message
 
 							JOptionPane.showMessageDialog(new JFrame(), message
 									+ labelAbbreviation.getText(), title,
@@ -507,5 +551,13 @@ public class Window extends JFrame {
 		scrollpane = new JScrollPane(contentPanel);
 
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
+	}
+
+	public static void setSelectionItem(String newSelectionItem,
+			JTextField field) {
+
+		// selectionItem =newSelectionItem;
+		field.setText(newSelectionItem);
+
 	}
 }

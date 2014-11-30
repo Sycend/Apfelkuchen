@@ -1,0 +1,104 @@
+package GUI.Two;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+
+/**
+ * JTree Window for selection of dimensions
+ * 
+ * @author Yuri Kalinin
+ */
+
+public class TreeWindow extends JFrame {
+	private JTree tree;
+
+	private String selectedItem;
+	private JButton buttonOk;
+
+	public TreeWindow(JTextField textFieldPoiter) {
+		String[] nameSiUnit = (Run.getDimensions());
+
+		// create the root node
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle(XMLDate.dateLabels("title"));
+		this.setAlwaysOnTop(true);
+		this.setSize(400, 400);
+		this.setVisible(true);
+
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+
+		for (int i = 0; i < nameSiUnit.length; i++) {
+
+			// create the child nodes of root
+			DefaultMutableTreeNode node = new DefaultMutableTreeNode(
+					nameSiUnit[i]);
+			// create the child nodes of SI Unitname (Time->min, sec)
+
+			for (int j = 0; j < Run.unitsArray.size(); j++) {
+
+				if (nameSiUnit[i].equals(Run.unitsArray.get(j).getTypeName()))
+					node.add(new DefaultMutableTreeNode((Run.unitsArray.get(j)
+							.getUnitName())));
+				root.add(node);
+			}
+
+		}
+
+		// create the tree by passing in the root node
+		tree = new JTree(root);
+		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+		tree.setCellRenderer(renderer);
+		tree.setShowsRootHandles(true);
+		tree.setRootVisible(false);
+		add(new JScrollPane(tree));
+
+		buttonOk = new JButton("OK");
+		buttonOk.setMaximumSize(new Dimension(40, 20));
+		buttonOk.setPreferredSize(new Dimension(40, 20));
+		buttonOk.setFocusPainted(false);
+		buttonOk.setSize(110, 20);
+		buttonOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonOk) {
+
+					setVisible(false);
+
+					Window.setSelectionItem(selectedItem, textFieldPoiter);
+					Run.addNewDimensionTextObject(selectedItem, textFieldPoiter);
+					dispose();
+
+				}
+			}
+		});
+		add(buttonOk, BorderLayout.SOUTH);
+
+		tree.getSelectionModel().addTreeSelectionListener(
+				new TreeSelectionListener() {
+					@Override
+					public void valueChanged(TreeSelectionEvent e) {
+						DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree
+								.getLastSelectedPathComponent();
+						selectedItem = selectedNode.getUserObject().toString();
+
+					}
+				});
+
+	}
+
+}
