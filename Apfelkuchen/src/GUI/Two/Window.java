@@ -297,7 +297,7 @@ public class Window extends JFrame {
 			textFieldDimension.setMaximumSize(new Dimension(50, 20));
 			textFieldDimension.setEnabled(true);
 
-			// setSelectionItem(Run.getDimValue(i), Run.getDimField(i));
+			
 
 			textFieldDimension.addMouseListener(new MouseListener() {
 				@Override
@@ -305,7 +305,8 @@ public class Window extends JFrame {
 
 					TreeWindow windowTree = new TreeWindow(textPointer);
 
-					setVisible(false);
+
+				
 
 					repaint();
 					setVisible(true);
