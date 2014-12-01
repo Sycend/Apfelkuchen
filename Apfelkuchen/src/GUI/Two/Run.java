@@ -9,23 +9,18 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JTextField;
 
 /**
- * @author Yury Kalinin, Dominik Hofmann
- * @version 2.0.4 Start of window with 1194, 550 size
+ * @author Yuri Kalinin, Dominik Hofmann
+ * @version 2.0.5 Start of window with 1194, 550 size
  */
 public class Run {
-	private static Vector<String> nameOfValue = new Vector<String>();
 	private static String[] rolle = new String[] { "controlled", "constant",
 			"scale-up", "dependent" };
-	private static int numberOfComp = 0;
 	private static Vector dimensinsValue = new Vector();
-	private static Vector<JTextField> dimensionsObject = new Vector();
-
-	public static ArrayList Si;
-
+	private static Vector<JTextField> dimensionsObject = new Vector<JTextField>();
+	protected static int rows = 0;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 
 	public static void main(String args[]) {
-
 		long startTime = System.nanoTime();
 		Thread readCSVThread = new Thread(new Runnable() {
 			@Override
@@ -39,50 +34,21 @@ public class Run {
 				 */
 			}
 		});
-		Window window = new Window();
-
+		new Window();
 		readCSVThread.start();
 		long endTime = System.nanoTime();
 		long durationExecution = endTime - startTime;
 		long durationMilliSec = TimeUnit.MILLISECONDS.convert(
 				durationExecution, TimeUnit.NANOSECONDS);
 		System.out.println("Execution Time: " + durationMilliSec + " MilliSec");
-
 	}
 
-	public static void remove() {
-		System.out.println(numberOfComp + "run comp");
-		nameOfValue.remove(numberOfComp - 1);
-		// removeDimension(numberOfComp - 1);
-		numberOfComp--;
+	public static void addRow(){
+		rows++;
 	}
-
-	public static void changeNumComp() {
-		System.out.println(numberOfComp);
-		numberOfComp++;
-	}
-
-	public static int getNumComp() {
-		return nameOfValue.size();
-	}
-
-	public static Vector<String> getNameOfValue() {
-		return nameOfValue;
-	}
-
-	public static void addNameValue(String nameValue) {
-		System.out.println(nameValue + " Run");
-		for (int i = 0; i < unitsArray.size(); i++) {
-			System.out.println(unitsArray.get(i).toString());
-		}
-		nameOfValue.add(nameValue);
-		for (int i = 1; i < nameOfValue.size(); i++) {
-			System.out.println(nameOfValue.get(i).toString());
-		}
-	}
-
-	public static int getNameOfValueSize() {
-		return nameOfValue.size();
+	
+	public static void removeRow(){
+		rows--;
 	}
 
 	public static String[] getRolle() {
@@ -99,11 +65,9 @@ public class Run {
 	}
 
 	public static String[] getDimensions() {
-		int counter = 0;
 		String[] tmp = new String[Run.unitsArray.size()];
 		for (int i = 0; i < Run.unitsArray.size(); i++) {
 			tmp[i] = Run.unitsArray.get(i).getTypeName();
-
 		}
 		tmp = removeDuplicates(tmp);
 		return tmp;
@@ -135,14 +99,11 @@ public class Run {
 	}
 
 	public static void addNewDimensionTextObject(String value, JTextField obj) {
-
 		dimensinsValue.add(value);
-
 		dimensionsObject.add(obj);
 	}
 
 	public static String getDimValue(int index) {
-
 		return dimensinsValue.get(index).toString();
 	}
 
@@ -151,7 +112,6 @@ public class Run {
 	}
 
 	public static int getSizeDimensionVec() {
-
 		return dimensinsValue.size();
 	}
 
