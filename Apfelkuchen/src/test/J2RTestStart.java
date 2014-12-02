@@ -16,7 +16,7 @@ public class J2RTestStart {
 	if (i < n.length)
 		System.out.print(n[i] + " ");
 	for (int j = 0; j < mydim[0]; j++) {
-		System.out.print(results[i][j]);// Spalte/Zeilen
+		System.out.print(results[i][j]);// Spalte /Zeilen
 		System.out.print(" ");
 	}
 
