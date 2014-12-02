@@ -18,7 +18,7 @@ import java.util.Locale;
 public class CSV {
 	
 	/**
-	 * This method writes the Run.unitsArray ArrayList into a file which is
+	 * This method writes the Run.unitsArray ArrayList into a File, which is
 	 * converted from the String Inputfile, using the csv ; delimiter separated format
 	 * 
 	 * @param Inputfile A String which will be turned into a file and then written to
@@ -145,7 +145,7 @@ public class CSV {
 	 * values in a temp RawUnits Class which is then put in the Run.unitsArray
 	 * ArrayList
 	 * 
-	 * @param Inputfile A String that will be turned into a file and read
+	 * @param Inputfile A String that will be turned into a File and read
 	 */
 	public static void readCSV(String Inputfile) {
 		//FIXME make method hanlde comma and point spearated double values
@@ -194,8 +194,8 @@ public class CSV {
 	}
 	
 	/**
-	 * This method reads an Inputfile File line by line via the readFile method
-	 * and proceeds to split every line at the ; delimiter and puts those
+	 * This method reads a File Inputfile line by line via the readFile method
+	 * and proceeds to split every line at the ; delimiter and then puts those
 	 * values in a temp RawUnits Class which is then put in the Run.unitsArray
 	 * 
 	 * @param Inputfile A File that will be read
@@ -229,7 +229,7 @@ public class CSV {
 	/**
 	 * This method takes a String as Inputfile and converts it into a File and reads it
 	 * line by line and returns an Arraylist containing every line that has been read from the
-	 * file located in Inputfile String
+	 * File located in Inputfile String
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read line by line
 	 * @return an Arraylist containing every line that has been read from the
@@ -257,7 +257,7 @@ public class CSV {
 	/**
 	 * This method takes a File as Inputfile and reads it
 	 * line by line and returns an Arraylist containing every line that has been read from the
-	 * file located in Inputfile File
+	 * File located in Inputfile File
 	 * 
 	 * @param Inputfile A File that will be read line by line
 	 * @return an Arraylist containing every line that has been read from the

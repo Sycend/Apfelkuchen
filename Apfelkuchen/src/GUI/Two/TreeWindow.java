@@ -5,15 +5,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
-import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -27,7 +23,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 public class TreeWindow extends JFrame {
 	private JTree tree;
-
 	private String selectedItem;
 	private JButton buttonOk;
 
@@ -44,20 +39,16 @@ public class TreeWindow extends JFrame {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
 
 		for (int i = 0; i < nameSiUnit.length; i++) {
-
 			// create the child nodes of root
 			DefaultMutableTreeNode node = new DefaultMutableTreeNode(
 					nameSiUnit[i]);
 			// create the child nodes of SI Unitname (Time->min, sec)
-
 			for (int j = 0; j < Run.unitsArray.size(); j++) {
-
 				if (nameSiUnit[i].equals(Run.unitsArray.get(j).getTypeName()))
 					node.add(new DefaultMutableTreeNode((Run.unitsArray.get(j)
 							.getUnitName())));
 				root.add(node);
 			}
-
 		}
 
 		// create the tree by passing in the root node
@@ -98,7 +89,5 @@ public class TreeWindow extends JFrame {
 
 					}
 				});
-
 	}
-
 }
