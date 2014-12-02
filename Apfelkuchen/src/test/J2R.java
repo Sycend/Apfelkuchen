@@ -35,9 +35,9 @@ public class J2R {
 	}
 	private void initRskript()
 	{
-		RskriptSuggestVmatrix="C://Users/Florian/Documents/RSkript.R"; //Anpassen wenn bekannt ist wo Skript(e) untergebracht werden
+		//RskriptSuggestVmatrix="C://Users/Florian/Documents/RSkript.R"; //Anpassen wenn bekannt ist wo Skript(e) untergebracht werden
 		//RskriptSuggestVmatrix="C://Users/Clemens/Documents/RSkript.R"; //Anpassen wenn bekannt ist wo Skript(e) untergebracht werden
-		//RskriptSuggestVmatrix="D://Skript.R"; //Anpassen wenn bekannt ist wo Skript(e) untergebracht werden
+		RskriptSuggestVmatrix="D://Skript.R"; //Anpassen wenn bekannt ist wo Skript(e) untergebracht werden
 	}
 	private void initRCode()
 	{
