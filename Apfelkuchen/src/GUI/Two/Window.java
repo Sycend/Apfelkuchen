@@ -64,23 +64,15 @@ public class Window extends JFrame {
 	private ArrayList<JTextField> textFieldHigh = new ArrayList<JTextField>();
 	private ArrayList<JTextField> textFieldResultSILow = new ArrayList<JTextField>();
 	private ArrayList<JTextField> textFieldResultSIHigh = new ArrayList<JTextField>();
-	private ArrayList<JTextField> fieldAbbreviation = new ArrayList<JTextField>();
+	private ArrayList<JTextField> textFieldAbbreviation = new ArrayList<JTextField>();
 	private ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
 	private ArrayList<JTextField> textFieldDimension = new ArrayList<JTextField>();
-	private ArrayList<String> dateFromFieldString = new ArrayList<String>(); // save
-																				// information
-																				// from
-																				// Name
-																				// and
-																				// Abr
-																				// fields
-	private ArrayList<int[]> dateFromFieldInteger = new ArrayList<int[]>();
-
-	private JComboBox comboBoxRolle;
 	private ArrayList<JTextField> textFieldUnit = new ArrayList<JTextField>();
-
-	// private JComboBox comboBoxUnit;
-	// private String nameValue;
+	//save information from Name and Abr fields
+	private ArrayList<String> dateFromFieldString = new ArrayList<String>();
+	private ArrayList<int[]> dateFromFieldInteger = new ArrayList<int[]>();
+	private JComboBox comboBoxRolle;
+	
 
 	public Window() {
 		super(XMLDate.dateLabels("title"));
@@ -245,16 +237,14 @@ public class Window extends JFrame {
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 0), 0, 0));
 
-		// System.out.println(Run.getNumComp() + " adition");
-
 		// ---- label SI Min ----
-
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMin") + " ");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanel.add(labelMinMaxSi, new GridBagConstraints(14, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
+		
 		// --- label SI Max
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMax") + " ");
@@ -263,23 +253,9 @@ public class Window extends JFrame {
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
-		for (int i = 0; i < Run.rows; i++) { // i = i + 1 Run.getNumComp
-			// --- Label Name -----
-			/*
-			 * JLabel labelName = new JLabel();
-			 * System.out.println(nameOfValue.get(i).toString() + "*");
-			 * 
-			 * labelName.setText(nameOfValue.get(i).toString());
-			 * labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			 */
+		for (int i = 0; i < Run.rows; i++) {
 
-			/*
-			 * contentPanel.add(labelName, new GridBagConstraints(0, 14 + i, 1,
-			 * 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-			 * new Insets(0, 0, 5, 5), 0, 0));
-			 */
-
-			// ---- TextField Abbreviation ----
+			// ---- TextField Name ----
 			JTextField textFieldNameTemp = new JTextField();
 			textFieldNameTemp.setMinimumSize(new Dimension(80, 20));
 			textFieldNameTemp.setMaximumSize(new Dimension(80, 20));
@@ -295,10 +271,9 @@ public class Window extends JFrame {
 			contentPanel.add(fieldAbbreviationTemp, new GridBagConstraints(1,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-			fieldAbbreviation.add(fieldAbbreviationTemp);
+			textFieldAbbreviation.add(fieldAbbreviationTemp);
 
 			// --- JComboBox Rolle------
-
 			comboBoxRolle = new JComboBox(Run.getRolle());
 			comboBoxRolle.setEnabled(true);
 			comboBoxRolle.addActionListener(new ActionListener() {
@@ -306,7 +281,6 @@ public class Window extends JFrame {
 					Object selectedItem = comboBoxRolle.getSelectedItem();
 				}
 			});
-
 			contentPanel.add(comboBoxRolle, new GridBagConstraints(2, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
@@ -355,13 +329,12 @@ public class Window extends JFrame {
 			textFieldDimension.add(textFieldDimensionTemp);
 
 			// --- JComboBox Unit------
-			JTextField textFieldUnit = new JTextField();
+			JTextField textFieldUnitTemp = new JTextField();
+			textFieldUnitTemp.setMinimumSize(new Dimension(30, 20));
+			textPointerUnit = textFieldUnitTemp;
+			textFieldUnitTemp.setPreferredSize(new Dimension(20, 20));
 
-			textFieldUnit.setMinimumSize(new Dimension(30, 20));
-			textPointerUnit=  textFieldUnit ;
-			textFieldUnit.setPreferredSize(new Dimension(20, 20));
-
-			textFieldUnit.addMouseListener(new MouseListener() {
+			textFieldUnitTemp.addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					
@@ -392,9 +365,10 @@ public class Window extends JFrame {
 
 			});
 
-			contentPanel.add(textFieldUnit, new GridBagConstraints(4, 14 + i,
+			contentPanel.add(textFieldUnitTemp, new GridBagConstraints(4, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
+			textFieldUnit.add(textFieldUnitTemp);
 
 			// ---- TextField Low- ----
 			JTextField textFieldLowTemp = new JTextField();
@@ -546,8 +520,8 @@ public class Window extends JFrame {
 					String message = XMLDate.dateLabels("errorTextDialog")
 							+ " für ";
 					String title = XMLDate.dateLabels("errorTitleDialog");
-					for (int i = 0; i < fieldAbbreviation.size(); i++) {
-						String input = fieldAbbreviation.get(i).getText();
+					for (int i = 0; i < textFieldAbbreviation.size(); i++) {
+						String input = textFieldAbbreviation.get(i).getText();
 
 						// Shows an error dialog if false
 						if ((new StringCheck().abbreviationCheck(input)) == false) {
@@ -563,7 +537,7 @@ public class Window extends JFrame {
 					}
 					for (int i = 0; i < Run.rows; i++) {
 						dateFromFieldString.add(textFieldName.get(i).getText());
-						dateFromFieldString.add(fieldAbbreviation.get(i)
+						dateFromFieldString.add(textFieldAbbreviation.get(i)
 								.getText());
 						dateFromFieldString.add(textFieldM.get(i).getText());
 						dateFromFieldString.add(textFieldK.get(i).getText());
