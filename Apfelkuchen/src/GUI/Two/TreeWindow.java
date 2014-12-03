@@ -24,10 +24,13 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class TreeWindow extends JFrame {
 	private JTree tree;
 	private String selectedItem;
+	private String selectedItemParent;
 	private JButton buttonOk;
+	private String[] nameSiUnit;
+	private boolean checkNode = false;
 
-	public TreeWindow(JTextField textFieldPoiter) {
-		String[] nameSiUnit = (Run.getDimensions());
+	public TreeWindow(JTextField textFieldPoiter, JTextField textFieldPoiterUnit) {
+		nameSiUnit = (Run.getDimensions());
 
 		// create the root node
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,11 +45,15 @@ public class TreeWindow extends JFrame {
 			// create the child nodes of root
 			DefaultMutableTreeNode node = new DefaultMutableTreeNode(
 					nameSiUnit[i]);
+
+			root.add(node);
 			// create the child nodes of SI Unitname (Time->min, sec)
+
 			for (int j = 0; j < Run.unitsArray.size(); j++) {
 				if (nameSiUnit[i].equals(Run.unitsArray.get(j).getTypeName()))
 					node.add(new DefaultMutableTreeNode((Run.unitsArray.get(j)
 							.getUnitName())));
+
 				root.add(node);
 			}
 		}
@@ -67,13 +74,16 @@ public class TreeWindow extends JFrame {
 		buttonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonOk) {
+					if (checkNode == true) {
+						setVisible(false);
 
-					setVisible(false);
-
-					Window.setSelectionItem(selectedItem, textFieldPoiter);
-					Run.addNewDimensionTextObject(selectedItem, textFieldPoiter);
-					dispose();
-
+						Window.setSelectionItem(selectedItemParent,
+								selectedItem, textFieldPoiter,
+								textFieldPoiterUnit);
+						Run.addNewDimensionTextObject(selectedItemParent,
+								textFieldPoiter);
+						dispose();
+					}
 				}
 			}
 		});
@@ -85,9 +95,17 @@ public class TreeWindow extends JFrame {
 					public void valueChanged(TreeSelectionEvent e) {
 						DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree
 								.getLastSelectedPathComponent();
-						selectedItem = selectedNode.getUserObject().toString();
+						if (!selectedNode.getParent().toString().equals("Root")) {
+							selectedItem = selectedNode.getUserObject()
+									.toString();
+							selectedItemParent = selectedNode.getParent()
+									.toString();
+							checkNode = true;
+						}
 
 					}
 				});
+
 	}
-}
+
+	}

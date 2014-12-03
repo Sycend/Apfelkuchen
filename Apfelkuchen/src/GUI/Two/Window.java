@@ -2,6 +2,7 @@ package GUI.Two;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -23,11 +24,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 public class Window extends JFrame {
 
 	JScrollPane scrollpane;
+	private JTextField textPointer;
+	private JTextField textPointerUnit;
 	private JButton buttonRemove;
 	private JButton buttonOptimize;
 	private JButton buttonNewField;
@@ -47,6 +51,7 @@ public class Window extends JFrame {
 	private JLabel labelAbbreviation;
 	private JLabel labelMinMaxSi;
 	private JLabel labelDimension;
+
 	private ArrayList<JTextField> textFieldName = new ArrayList<JTextField>();
 	private ArrayList<JTextField> textFieldM = new ArrayList<JTextField>();
 	private ArrayList<JTextField> textFieldK = new ArrayList<JTextField>();
@@ -62,9 +67,20 @@ public class Window extends JFrame {
 	private ArrayList<JTextField> fieldAbbreviation = new ArrayList<JTextField>();
 	private ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
 	private ArrayList<JTextField> textFieldDimension = new ArrayList<JTextField>();
+	private ArrayList<String> dateFromFieldString = new ArrayList<String>(); // save
+																				// information
+																				// from
+																				// Name
+																				// and
+																				// Abr
+																				// fields
+	private ArrayList<int[]> dateFromFieldInteger = new ArrayList<int[]>();
+
 	private JComboBox comboBoxRolle;
-	private JComboBox comboBoxUnit;
-	private String nameValue;
+	private ArrayList<JTextField> textFieldUnit = new ArrayList<JTextField>();
+
+	// private JComboBox comboBoxUnit;
+	// private String nameValue;
 
 	public Window() {
 		super(XMLDate.dateLabels("title"));
@@ -229,7 +245,7 @@ public class Window extends JFrame {
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 0), 0, 0));
 
-		//System.out.println(Run.getNumComp() + " adition");
+		// System.out.println(Run.getNumComp() + " adition");
 
 		// ---- label SI Min ----
 
@@ -247,18 +263,22 @@ public class Window extends JFrame {
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
-		for (int i = 0; i < Run.rows; i++) { //i = i + 1 Run.getNumComp
+		for (int i = 0; i < Run.rows; i++) { // i = i + 1 Run.getNumComp
 			// --- Label Name -----
-			/*JLabel labelName = new JLabel();
-			System.out.println(nameOfValue.get(i).toString() + "*");
+			/*
+			 * JLabel labelName = new JLabel();
+			 * System.out.println(nameOfValue.get(i).toString() + "*");
+			 * 
+			 * labelName.setText(nameOfValue.get(i).toString());
+			 * labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			 */
 
-			labelName.setText(nameOfValue.get(i).toString());
-			labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));*/
+			/*
+			 * contentPanel.add(labelName, new GridBagConstraints(0, 14 + i, 1,
+			 * 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+			 * new Insets(0, 0, 5, 5), 0, 0));
+			 */
 
-			/*contentPanel.add(labelName, new GridBagConstraints(0, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));*/
-			
 			// ---- TextField Abbreviation ----
 			JTextField textFieldNameTemp = new JTextField();
 			textFieldNameTemp.setMinimumSize(new Dimension(80, 20));
@@ -293,16 +313,16 @@ public class Window extends JFrame {
 
 			// --- JTextFiel Dimension with mouse event------
 			JTextField textFieldDimensionTemp = new JTextField();
-			JTextField textPointer = textFieldDimensionTemp;
+			textPointer = textFieldDimensionTemp;
 			textFieldDimensionTemp.setMinimumSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setPreferredSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setMaximumSize(new Dimension(50, 20));
-			textFieldDimensionTemp.setEnabled(true);			
+			textFieldDimensionTemp.setEnabled(true);
 
 			textFieldDimensionTemp.addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					TreeWindow windowTree = new TreeWindow(textPointer);
+					mouseClick();
 					repaint();
 					setVisible(true);
 				}
@@ -333,20 +353,47 @@ public class Window extends JFrame {
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 			textFieldDimension.add(textFieldDimensionTemp);
-			
+
 			// --- JComboBox Unit------
-			comboBoxUnit = new JComboBox(Run.getUnits());
-			comboBoxUnit.setEnabled(true);
-			comboBoxUnit.setMinimumSize(new Dimension(30, 20));
-			comboBoxUnit.setPreferredSize(new Dimension(20, 20));
-			comboBoxUnit.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Object selectedItem = comboBoxUnit.getSelectedItem();
+			JTextField textFieldUnit = new JTextField();
+
+			textFieldUnit.setMinimumSize(new Dimension(30, 20));
+			textPointerUnit=  textFieldUnit ;
+			textFieldUnit.setPreferredSize(new Dimension(20, 20));
+
+			textFieldUnit.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					mouseClick();
+					repaint();
+					setVisible(true);
 				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
 			});
 
-			contentPanel.add(comboBoxUnit, new GridBagConstraints(4, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldUnit, new GridBagConstraints(4, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 
 			// ---- TextField Low- ----
@@ -463,8 +510,9 @@ public class Window extends JFrame {
 				if (e.getSource() == buttonNewField) {
 					Run.addRow();
 					dispose();
-					// setVisible(false);
+
 					Window windowTwo = new Window();
+
 				}
 			}
 		});
@@ -500,7 +548,8 @@ public class Window extends JFrame {
 					String title = XMLDate.dateLabels("errorTitleDialog");
 					for (int i = 0; i < fieldAbbreviation.size(); i++) {
 						String input = fieldAbbreviation.get(i).getText();
-						//Shows an error dialog if false
+
+						// Shows an error dialog if false
 						if ((new StringCheck().abbreviationCheck(input)) == false) {
 							JOptionPane.showMessageDialog(new JFrame(), message
 									+ labelAbbreviation.getText(), title,
@@ -512,7 +561,28 @@ public class Window extends JFrame {
 							window.setWindow();
 						}
 					}
+					for (int i = 0; i < Run.rows; i++) {
+						dateFromFieldString.add(textFieldName.get(i).getText());
+						dateFromFieldString.add(fieldAbbreviation.get(i)
+								.getText());
+						dateFromFieldString.add(textFieldM.get(i).getText());
+						dateFromFieldString.add(textFieldK.get(i).getText());
+						dateFromFieldString.add(textFieldS.get(i).getText());
+						dateFromFieldString.add(textFieldKel.get(i).getText());
+						dateFromFieldString.add(textFieldMol.get(i).getText());
+						dateFromFieldString.add(textFieldAmp.get(i).getText());
+						dateFromFieldString.add(textFieldCand.get(i).getText());
+						dateFromFieldString.add(textFieldLow.get(i).getText());
+						dateFromFieldString.add(textFieldHigh.get(i).getText());
+						dateFromFieldString.add(textFieldResultSILow.get(i)
+								.getText());
+						dateFromFieldString.add(textFieldResultSIHigh.get(i)
+								.getText());
+
+					}
+
 				}
+
 			}
 		});
 		p2.add(buttonOptimize);
@@ -523,9 +593,21 @@ public class Window extends JFrame {
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}
 
-	public static void setSelectionItem(String newSelectionItem,
-			JTextField field) {
-		// selectionItem =newSelectionItem;
-		field.setText(newSelectionItem);
+	public static void setSelectionItem(String newSelectionItemParent,
+			String newSelectionItem, JTextField fieldDimension,
+			JTextField fieldUnit) {
+
+		fieldDimension.setText(newSelectionItemParent);
+		fieldUnit.setText(newSelectionItem);
+	}
+
+	public ArrayList getDateFromFields() {
+		return dateFromFieldString;
+
+	}
+
+	public void mouseClick() {
+		TreeWindow windowTree = new TreeWindow(textPointer, textPointerUnit);
+		
 	}
 }
