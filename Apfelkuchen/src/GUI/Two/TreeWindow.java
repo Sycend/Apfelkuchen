@@ -16,11 +16,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 /**
- * JTree Window for selection of dimensions
- * 
- * @author Yuri Kalinin
+ * JTree Window for selection of dimensions and units
+ * @author Yuri Kalinin, Dominik Hofmann
+ * @version 1.0.2
  */
-
 public class TreeWindow extends JFrame {
 	private JTree tree;
 	private String selectedItem;
@@ -166,6 +165,4 @@ public class TreeWindow extends JFrame {
 			}
 		});
 	}
-	
-	
 }

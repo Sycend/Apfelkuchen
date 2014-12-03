@@ -24,6 +24,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+/**
+ * Main Window
+ * @author Yuri Kalinin, Florian Then, Dominik Hofmann
+ * @version 1.0.3
+ */
 public class Window extends JFrame {
 
 	JScrollPane scrollpane;

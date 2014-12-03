@@ -3,20 +3,16 @@ package GUI.Two;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.JTextField;
-
 /**
+ * Start of window with 1194, 550 size
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.5 Start of window with 1194, 550 size
+ * @version 2.0.6
  */
 public class Run {
 	private static String[] rolle = new String[] { "controlled", "constant",
 			"scale-up", "dependent" };
-	//private static Vector dimensinsValue = new Vector();
-	private static Vector<JTextField> dimensionsObject = new Vector<JTextField>();
 	protected static int rows = 0;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 
@@ -97,28 +93,4 @@ public class Run {
 		String[] tmp = new String[tmp0.size()];
 		return tmp0.toArray(tmp);
 	}
-
-	public static void addNewDimensionTextObject(JTextField obj) { //String value, JTextField obj
-		//dimensinsValue.add(value);
-		dimensionsObject.add(obj);
-	}
-	
-	public static void addNewUnitTextObject(String value, JTextField obj) {
-		//dimensinsValue.add(value);
-		//dimensionsObject.add(obj);
-		
-	}
-
-	/*public static String getDimValue(int index) {
-		return dimensinsValue.get(index).toString();
-	}*/
-
-	/*public static JTextField getDimField(int index) {
-		return dimensionsObject.get(index);
-	}*/
-
-	/*public static int getSizeDimensionVec() {
-		return dimensinsValue.size();
-	}*/
-
 }
