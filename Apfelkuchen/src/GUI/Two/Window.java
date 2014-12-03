@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Main Window
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
- * @version 1.0.3
+ * @version 1.0.4
  */
 public class Window extends JFrame {
 
@@ -89,7 +89,7 @@ public class Window extends JFrame {
 
 	public void init() {
 		// setVisible(false);
-//		dispose();
+		// dispose();
 
 		JPanel contentPanel = new JPanel();
 		contentPanel.setSize(100, 100);
@@ -115,11 +115,8 @@ public class Window extends JFrame {
 
 		JMenuBar mb = new JMenuBar();
 
-		
-
 		JPanel p2 = new JPanel();
-		
-		
+
 		buttonNewField = new JButton(XMLDate.dateLabels("buttonNewField"));
 		buttonNewField.setFocusPainted(false);
 		buttonNewField.setSize(110, 20);
@@ -127,18 +124,11 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewField) {
 					Run.addRow();
-//					dispose();
-//					Window windowTwo = new Window();
-				contentPanel.removeAll();
-//				contentPanel.add(panel);
-					
-					
-					contentPanel.revalidate(); 
-			contentPanel.add(newField());
-//			contentPanel.validate();
+					contentPanel.removeAll();
+					contentPanel.revalidate();
+					contentPanel.add(newField());
 					contentPanel.repaint();
-					
-					
+
 				}
 			}
 		});
@@ -152,9 +142,12 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonRemove) {
 					Run.removeRow();
-					// setVisible(false);
-					dispose();
-					Window window = new Window();
+					contentPanel.removeAll();
+					contentPanel.revalidate();
+					contentPanel.add(newField());
+					contentPanel.repaint();
+//					dispose();
+//					Window window = new Window();
 				}
 			}
 		});
@@ -213,7 +206,7 @@ public class Window extends JFrame {
 
 		scrollpane = new JScrollPane(contentPanel);
 
-	getContentPane().add(scrollpane, BorderLayout.CENTER);
+		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}
 
 	public static void setSelectionItem(String newSelectionItemParent,
@@ -239,39 +232,38 @@ public class Window extends JFrame {
 	 */
 	public JPanel newField() {
 		JPanel panel = new JPanel();
-		
-		
+
 		panel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.setLayout(new GridBagLayout());
-		((GridBagLayout) panel.getLayout()).columnWidths = new int[] {
-				80, 80, 80, 80, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		((GridBagLayout) panel.getLayout()).rowHeights = new int[] { 0,
+		((GridBagLayout) panel.getLayout()).columnWidths = new int[] { 80, 80,
+				80, 80, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		((GridBagLayout) panel.getLayout()).rowHeights = new int[] { 0, 0, 0,
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		((GridBagLayout) panel.getLayout()).columnWeights = new double[] {
+				0, 0, 0, 0, 0, 0, 0 };
+		((GridBagLayout) panel.getLayout()).columnWeights = new double[] { 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
-		((GridBagLayout) panel.getLayout()).rowWeights = new double[] {
+				0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
+		((GridBagLayout) panel.getLayout()).rowWeights = new double[] { 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
+				0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
 		// ---- label Name ----
 		labelName = new JLabel();
 		labelName.setText(XMLDate.dateLabels("nameFeld"));
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelName.setHorizontalAlignment(SwingConstants.LEFT);
-		panel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+		panel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 5), 0, 0));
 		// ---- label Abbreviation ----
 		labelAbbreviation = new JLabel();
 		labelAbbreviation.setText(" " + "Abkuerzung");
 		labelAbbreviation.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelAbbreviation.setHorizontalAlignment(SwingConstants.LEFT);
-		panel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1,
-				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+		panel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label Rolle ----
@@ -279,45 +271,45 @@ public class Window extends JFrame {
 		labelRolle.setText(XMLDate.dateLabels("labelRolle"));
 		labelRolle.setHorizontalAlignment(SwingConstants.CENTER);
 		labelRolle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(labelRolle, new GridBagConstraints(2, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+		panel.add(labelRolle, new GridBagConstraints(2, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 5), 0, 0));
 
 		// ---- label Dimension ----
 		labelDimension = new JLabel();
 		labelDimension.setText(XMLDate.dateLabels("labelDimension"));
 		labelDimension.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelDimension.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1,
-				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
+		panel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
 
 		// ---- label Unit----
 		labelUnit = new JLabel();
 		labelUnit.setText(XMLDate.dateLabels("labelSIUnit"));
 		labelUnit.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelUnit.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
+		panel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
 
 		// ---- label Low ----
 		labelLow = new JLabel();
 		labelLow.setText(XMLDate.dateLabels("labelLow") + " ");
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+		panel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 5), 0, 0));
 
 		// ---- label High ----
 		labelHigh = new JLabel();
 		labelHigh.setText(XMLDate.dateLabels("labelHigh") + " ");
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+		panel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 5), 0, 0));
 
 		// ---- label m ----
 		labelM = new JLabel();
@@ -351,53 +343,53 @@ public class Window extends JFrame {
 		labelKel.setText("kel" + "  ");
 		labelKel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelKel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(labelKel, new GridBagConstraints(10, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
+		panel.add(labelKel, new GridBagConstraints(10, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
 
 		// ---- label mol ----
 		labelMol = new JLabel();
 		labelMol.setText("mol" + "  ");
 		labelMol.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelMol.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(labelMol, new GridBagConstraints(11, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
+		panel.add(labelMol, new GridBagConstraints(11, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
 
 		// ---- label amp ----
 		labelAmp = new JLabel();
 		labelAmp.setText("amp" + "  ");
 		labelAmp.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelAmp.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(labelAmp, new GridBagConstraints(12, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
+		panel.add(labelAmp, new GridBagConstraints(12, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
 
 		// ---- label cand ----
 		labelCand = new JLabel();
 		labelCand.setText("cand" + "  ");
 		labelCand.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelCand.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
+		panel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 0), 0, 0));
 
 		// ---- label SI Min ----
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMin") + " ");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(labelMinMaxSi, new GridBagConstraints(14, 13, 1, 1,
-				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+		panel.add(labelMinMaxSi, new GridBagConstraints(14, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 5), 0, 0));
 
 		// --- label SI Max
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMax") + " ");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(labelMinMaxSi, new GridBagConstraints(15, 13, 1, 1,
-				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
-		
+		panel.add(labelMinMaxSi, new GridBagConstraints(15, 13, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 5, 5), 0, 0));
+
 		for (int i = 0; i < Run.rows; i++) {
 
 			// ---- TextField Name ----
