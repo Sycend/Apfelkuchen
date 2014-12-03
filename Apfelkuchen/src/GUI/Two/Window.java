@@ -290,7 +290,7 @@ public class Window extends JFrame {
 			// --- TextField Unit------
 			JTextField textFieldUnitTemp = new JTextField();
 			textFieldUnitTemp.setMinimumSize(new Dimension(30, 20));
-			textPointerUnit = textFieldUnitTemp;
+//			textPointerUnit = textFieldUnitTemp;
 			textFieldUnitTemp.setPreferredSize(new Dimension(20, 20));
 			
 			textFieldUnitTemp.addMouseListener(new MouseListener() {
@@ -330,7 +330,7 @@ public class Window extends JFrame {
 
 			// --- JTextFiel Dimension with mouse event------
 			JTextField textFieldDimensionTemp = new JTextField();
-			textPointer = textFieldDimensionTemp;
+//			textPointer = textFieldDimensionTemp;
 			textFieldDimensionTemp.setMinimumSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setPreferredSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setMaximumSize(new Dimension(50, 20));
@@ -521,8 +521,8 @@ public class Window extends JFrame {
 					String message = XMLDate.dateLabels("errorTextDialog")
 							+ " für ";
 					String title = XMLDate.dateLabels("errorTitleDialog");
-					for (int i = 0; i < textFieldAbbreviation.size(); i++) {
-						String input = textFieldAbbreviation.get(i).getText();
+			for (int i = 0; i < textFieldAbbreviation.size(); i++) {
+					String input = textFieldAbbreviation.get(i).getText();
 
 						// Shows an error dialog if false
 						if ((new StringCheck().abbreviationCheck(input)) == false) {
@@ -531,11 +531,16 @@ public class Window extends JFrame {
 									JOptionPane.ERROR_MESSAGE);
 							return;
 						} else {
-							setVisible(false);
+
+							/*setVisible(false);
 							WindowOptim window = new WindowOptim();
-							window.setWindow();
+							window.setWindow();*/
 						}
+						
 					}
+			setVisible(false);
+			WindowOptim window = new WindowOptim();
+			window.setWindow();
 					for (int i = 0; i < Run.rows; i++) {
 						dateFromFieldString.add(textFieldName.get(i).getText());
 						dateFromFieldString.add(textFieldAbbreviation.get(i).getText());
