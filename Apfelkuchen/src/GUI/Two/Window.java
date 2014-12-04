@@ -73,7 +73,7 @@ public class Window extends JFrame {
 	private ArrayList<String> dateFromFieldString = new ArrayList<String>();
 	private ArrayList<int[]> dateFromFieldInteger = new ArrayList<int[]>();
 	private JComboBox<String> comboBoxRolle;
-private JPanel contentPanel = new JPanel();
+	private JPanel contentPanel = new JPanel();
 
 	public Window() {
 		super(XMLDate.dateLabels("title"));
@@ -86,9 +86,8 @@ private JPanel contentPanel = new JPanel();
 
 	public void init() {
 
-//		JPanel contentPanel = new JPanel();
+		// JPanel contentPanel = new JPanel();
 		contentPanel.setSize(100, 100);
-		
 
 		// ======== contentPanel ========
 
@@ -120,7 +119,7 @@ private JPanel contentPanel = new JPanel();
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewField) {
 					Run.addRow();
-//					contentPanel.removeAll();
+					// contentPanel.removeAll();
 					contentPanel.revalidate();
 					newField();
 					contentPanel.repaint();
@@ -138,6 +137,7 @@ private JPanel contentPanel = new JPanel();
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonRemove) {
 					Run.removeRow();
+					contentPanel.removeAll();
 					contentPanel.revalidate();
 					newField();
 					contentPanel.repaint();
@@ -202,7 +202,9 @@ private JPanel contentPanel = new JPanel();
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}
 
-	public static void setSelectionItem(String newSelectionItemParent, String newSelectionItem, JTextField fieldDimension, JTextField fieldUnit) {
+	public static void setSelectionItem(String newSelectionItemParent,
+			String newSelectionItem, JTextField fieldDimension,
+			JTextField fieldUnit) {
 		fieldDimension.setText(newSelectionItemParent);
 		fieldUnit.setText(newSelectionItem);
 	}
@@ -212,24 +214,23 @@ private JPanel contentPanel = new JPanel();
 	}
 
 	public void newField() {
-		
-		
+
 		// ---- label Name ----
 		labelName = new JLabel();
 		labelName.setText(XMLDate.dateLabels("nameFeld"));
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelName.setHorizontalAlignment(SwingConstants.LEFT);
-		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 5), 0, 0));
-		
+		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
+
 		// ---- label Abbreviation ----
 		labelAbbreviation = new JLabel();
 		labelAbbreviation.setText(" " + "Abkuerzung");
 		labelAbbreviation.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelAbbreviation.setHorizontalAlignment(SwingConstants.LEFT);
-		contentPanel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+		contentPanel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1,
+				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label Rolle ----
@@ -237,45 +238,45 @@ private JPanel contentPanel = new JPanel();
 		labelRolle.setText(XMLDate.dateLabels("labelRolle"));
 		labelRolle.setHorizontalAlignment(SwingConstants.CENTER);
 		labelRolle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelRolle, new GridBagConstraints(2, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 5), 0, 0));
+		contentPanel.add(labelRolle, new GridBagConstraints(2, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label Dimension ----
 		labelDimension = new JLabel();
 		labelDimension.setText(XMLDate.dateLabels("labelDimension"));
 		labelDimension.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelDimension.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 0), 0, 0));
+		contentPanel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1,
+				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label Unit----
 		labelUnit = new JLabel();
 		labelUnit.setText(XMLDate.dateLabels("labelSIUnit"));
 		labelUnit.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelUnit.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 0), 0, 0));
+		contentPanel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label Low ----
 		labelLow = new JLabel();
 		labelLow.setText(XMLDate.dateLabels("labelLow") + " ");
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 5), 0, 0));
+		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label High ----
 		labelHigh = new JLabel();
 		labelHigh.setText(XMLDate.dateLabels("labelHigh") + " ");
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 5), 0, 0));
+		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label m ----
 		labelM = new JLabel();
@@ -309,52 +310,52 @@ private JPanel contentPanel = new JPanel();
 		labelKel.setText("kel" + "  ");
 		labelKel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelKel.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelKel, new GridBagConstraints(10, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 0), 0, 0));
+		contentPanel.add(labelKel, new GridBagConstraints(10, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label mol ----
 		labelMol = new JLabel();
 		labelMol.setText("mol" + "  ");
 		labelMol.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelMol.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelMol, new GridBagConstraints(11, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 0), 0, 0));
+		contentPanel.add(labelMol, new GridBagConstraints(11, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label amp ----
 		labelAmp = new JLabel();
 		labelAmp.setText("amp" + "  ");
 		labelAmp.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelAmp.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelAmp, new GridBagConstraints(12, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 0), 0, 0));
+		contentPanel.add(labelAmp, new GridBagConstraints(12, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label cand ----
 		labelCand = new JLabel();
 		labelCand.setText("cand" + "  ");
 		labelCand.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelCand.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 0), 0, 0));
+		contentPanel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label SI Min ----
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMin") + " ");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelMinMaxSi, new GridBagConstraints(14, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 5), 0, 0));
+		contentPanel.add(labelMinMaxSi, new GridBagConstraints(14, 13, 1, 1,
+				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
 
 		// --- label SI Max
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMax") + " ");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelMinMaxSi, new GridBagConstraints(15, 13, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 5, 5), 0, 0));
+		contentPanel.add(labelMinMaxSi, new GridBagConstraints(15, 13, 1, 1,
+				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 5, 5), 0, 0));
 
 		for (int i = 0; i < Run.rows; i++) {
 
@@ -362,8 +363,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldNameTemp = new JTextField();
 			textFieldNameTemp.setMinimumSize(new Dimension(80, 20));
 			textFieldNameTemp.setMaximumSize(new Dimension(80, 20));
-			contentPanel.add(textFieldNameTemp, new GridBagConstraints(0, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldNameTemp, new GridBagConstraints(0,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldName.add(textFieldNameTemp);
 
@@ -371,8 +372,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField fieldAbbreviationTemp = new JTextField();
 			fieldAbbreviationTemp.setMinimumSize(new Dimension(80, 20));
 			fieldAbbreviationTemp.setMaximumSize(new Dimension(80, 20));
-			contentPanel.add(fieldAbbreviationTemp, new GridBagConstraints(1, 14 + i,
-					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(fieldAbbreviationTemp, new GridBagConstraints(1,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldAbbreviation.add(fieldAbbreviationTemp);
 
@@ -384,20 +385,22 @@ private JPanel contentPanel = new JPanel();
 					Object selectedItem = comboBoxRolle.getSelectedItem();
 				}
 			});
-			contentPanel.add(comboBoxRolle, new GridBagConstraints(2, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(comboBoxRolle, new GridBagConstraints(2, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-			
+
 			// --- JTextField Dimension ------
 			JTextField textFieldDimensionTemp = new JTextField();
-			/*textFieldUnitTemp needs to be declared here or we can't use it
-			in the mouseclicked event of textFieldDimension */
+			/*
+			 * textFieldUnitTemp needs to be declared here or we can't use it in
+			 * the mouseclicked event of textFieldDimension
+			 */
 			JTextField textFieldUnitTemp = new JTextField();
 			textFieldDimensionTemp.setMinimumSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setPreferredSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setMaximumSize(new Dimension(50, 20));
 			textFieldDimensionTemp.setEnabled(true);
-			
+
 			textFieldDimensionTemp.addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -405,30 +408,32 @@ private JPanel contentPanel = new JPanel();
 					repaint();
 					setVisible(true);
 				}
-				
+
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 				@Override
 				public void mouseExited(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 				@Override
 				public void mousePressed(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 			});
-			
-			contentPanel.add(textFieldDimensionTemp, new GridBagConstraints(3, 14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
+
+			contentPanel.add(textFieldDimensionTemp, new GridBagConstraints(3,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 			textFieldDimension.add(textFieldDimensionTemp);
 
 			// --- JTextField Unit------
@@ -437,35 +442,38 @@ private JPanel contentPanel = new JPanel();
 			textFieldUnitTemp.addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("textFieldUnit.size: "+textFieldUnit.size());
+					System.out.println("textFieldUnit.size: "
+							+ textFieldUnit.size());
 					new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
 					repaint();
 					setVisible(true);
 				}
-				
+
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 				@Override
 				public void mouseExited(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 				@Override
 				public void mousePressed(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-				
+
 			});
-			
-			contentPanel.add(textFieldUnitTemp, new GridBagConstraints(4, 14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
+
+			contentPanel.add(textFieldUnitTemp, new GridBagConstraints(4,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 			textFieldUnit.add(textFieldUnitTemp);
 
 			// ---- JTextField Low- ----
@@ -473,8 +481,8 @@ private JPanel contentPanel = new JPanel();
 			textFieldLowTemp.setMinimumSize(new Dimension(40, 20));
 			textFieldLowTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldLowTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldLowTemp, new GridBagConstraints(5, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldLowTemp, new GridBagConstraints(5,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 			textFieldLow.add(textFieldLowTemp);
 
@@ -482,8 +490,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldHighTemp = new JTextField();
 			textFieldHighTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldHighTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldHighTemp, new GridBagConstraints(6, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldHighTemp, new GridBagConstraints(6,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 			textFieldHigh.add(textFieldHighTemp);
 
@@ -491,8 +499,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldMTemp = new JTextField();
 			textFieldMTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldMTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldMTemp, new GridBagConstraints(7, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldMTemp, new GridBagConstraints(7, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldM.add(textFieldMTemp);
 
@@ -500,8 +508,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldKTemp = new JTextField();
 			textFieldKTemp.setMaximumSize(new Dimension(20, 20));
 			textFieldKTemp.setPreferredSize(new Dimension(20, 20));
-			contentPanel.add(textFieldKTemp, new GridBagConstraints(8, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldKTemp, new GridBagConstraints(8, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldK.add(textFieldKTemp);
 
@@ -509,8 +517,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldSTemp = new JTextField();
 			textFieldSTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldSTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldSTemp, new GridBagConstraints(9, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldSTemp, new GridBagConstraints(9, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldS.add(textFieldSTemp);
 
@@ -518,8 +526,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldKelTemp = new JTextField();
 			textFieldKelTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldKelTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldKelTemp, new GridBagConstraints(10, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldKelTemp, new GridBagConstraints(10,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldKel.add(textFieldKelTemp);
 
@@ -527,8 +535,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldMolTemp = new JTextField();
 			textFieldMolTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldMolTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldMolTemp, new GridBagConstraints(11, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldMolTemp, new GridBagConstraints(11,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldMol.add(textFieldMolTemp);
 
@@ -536,8 +544,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldAmpTemp = new JTextField();
 			textFieldAmpTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldAmpTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldAmpTemp, new GridBagConstraints(12, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldAmpTemp, new GridBagConstraints(12,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldAmp.add(textFieldAmpTemp);
 
@@ -545,8 +553,8 @@ private JPanel contentPanel = new JPanel();
 			JTextField textFieldCandTemp = new JTextField();
 			textFieldCandTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldCandTemp.setPreferredSize(new Dimension(40, 20));
-			contentPanel.add(textFieldCandTemp, new GridBagConstraints(13, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(textFieldCandTemp, new GridBagConstraints(13,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldCand.add(textFieldCandTemp);
 
@@ -556,8 +564,8 @@ private JPanel contentPanel = new JPanel();
 
 			textFieldResultSILow.add(fieldSILowTemp);
 
-			contentPanel.add(fieldSILowTemp, new GridBagConstraints(14, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(fieldSILowTemp, new GridBagConstraints(14, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
 			JTextField fieldSIHighTemp = new JTextField();
@@ -566,12 +574,11 @@ private JPanel contentPanel = new JPanel();
 
 			textFieldResultSIHigh.add(fieldSIHighTemp);
 
-			contentPanel.add(fieldSIHighTemp, new GridBagConstraints(15, 14 + i, 1, 1,
-					0.0, 0.0, GridBagConstraints.CENTER,
+			contentPanel.add(fieldSIHighTemp, new GridBagConstraints(15,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
 		}
 
-		
 	}
 }
