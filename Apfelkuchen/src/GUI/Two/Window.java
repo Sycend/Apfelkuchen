@@ -169,9 +169,24 @@ public class Window extends JFrame {
 						}
 
 					}
+
 					setVisible(false);
-					WindowOptim window = new WindowOptim();
-					window.setWindow();
+//					WindowOptim window = new WindowOptim();
+//					window.setWindow();
+					
+					// test window 2. just for testing 
+					
+					Window2 test = new Window2(
+							new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 },
+									{ 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } },// ,{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0}},
+							new String[] { "Höhe", "Breite", "Dichte",
+									"Temperatur", "Verhältnis" },// ,"Test 1","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3"},
+							new String[] { "Alpha", "Beta" }, new String[][] {
+									{ "-5", "0" }, { "5", "10" } },
+							new String[][] { { "0", "0" }, { "0", "0" },
+									{ "0", "0" }, { "0", "0" }, { "0", "0" },
+									{ "0", "0" }, { "0", "0" } });
+					
 					for (int i = 0; i < Run.rows; i++) {
 						dateFromFieldString.add(textFieldName.get(i).getText());
 						dateFromFieldString.add(textFieldAbbreviation.get(i)
