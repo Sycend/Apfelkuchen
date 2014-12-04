@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Main Window
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
- * @version 1.0.4
+ * @version 1.0.5
  */
 public class Window extends JFrame {
 
@@ -496,6 +496,54 @@ public class Window extends JFrame {
 			textFieldLowTemp.setMinimumSize(new Dimension(40, 20));
 			textFieldLowTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldLowTemp.setPreferredSize(new Dimension(40, 20));
+			
+			textFieldLowTemp.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					if (Run.unitsArray.size() > 0) {
+						for (int i = 0; i < Window.textFieldDimension.size(); i++) {
+							for (int n = 0; n < Run.unitsArray.size(); n++) {
+								if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
+									if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
+										if (Window.textFieldLow.get(i).getText() != "") {
+											try {
+												//FIXME Low could be a double value
+												Run.unitsArray.get(n).setLow(Integer.parseInt(Window.textFieldLow.get(i).getText()));
+												Window.textFieldResultSILow.get(i).setText(""+Run.unitsArray.get(n).getResultSILow());
+											} catch (NumberFormatException e) {
+												//we don't do anything with the Exception
+											}
+										}
+									}
+								}
+							}
+						}
+					} else {
+						System.out.println("Run.unitsArray is empty");
+					}
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+			});			
+			
 			contentPanel.add(textFieldLowTemp, new GridBagConstraints(5,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
@@ -505,6 +553,53 @@ public class Window extends JFrame {
 			JTextField textFieldHighTemp = new JTextField();
 			textFieldHighTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldHighTemp.setPreferredSize(new Dimension(40, 20));
+			textFieldHighTemp.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					if (Run.unitsArray.size() > 0) {
+						for (int i = 0; i < Window.textFieldDimension.size(); i++) {
+							for (int n = 0; n < Run.unitsArray.size(); n++) {
+								if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
+									if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
+										if (Window.textFieldHigh.get(i).getText() != "") {
+											try {
+												//FIXME High could be a double value
+												Run.unitsArray.get(n).setHigh(Integer.parseInt(Window.textFieldHigh.get(i).getText()));
+												Window.textFieldResultSIHigh.get(i).setText(""+Run.unitsArray.get(n).getResultSIHigh());
+											} catch (NumberFormatException e) {
+												//we don't do anything with the Exception
+											}
+										}
+									}
+								}
+							}
+						}
+					} else {
+						System.out.println("Run.unitsArray is empty");
+					}
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+
+			});
+			
 			contentPanel.add(textFieldHighTemp, new GridBagConstraints(6,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));

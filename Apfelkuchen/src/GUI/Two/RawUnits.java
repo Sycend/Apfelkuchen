@@ -4,15 +4,15 @@ package GUI.Two;
  * description here Soon TM
  * 
  * @author Dominik Hofmann, Mark Leibmann
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 public class RawUnits {
 	
 	/** TODO **/
 	
-	private String typeName = null; //""
-	private String unitName = null; //""
+	private String typeName = null;
+	private String unitName = null;
 	int valuesSI[] = new int [7];
 	private double offset = 0.0;
 	private double gradient = 0.0;
@@ -48,6 +48,14 @@ public class RawUnits {
 		return this.getHigh() * this.getGradient() + this.getOffset();
 	}
 	
+	public void setLow(double low) {
+		this.low = low;
+	}
+
+	public void setHigh(double high) {
+		this.high = high;
+	}
+
 	public String getTypeName() {
 		return typeName;
 	}
