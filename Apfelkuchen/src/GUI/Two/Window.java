@@ -219,10 +219,10 @@ public class Window extends JFrame {
 		labelName = new JLabel();
 		labelName.setText(XMLDate.dateLabels("nameFeld"));
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelName.setHorizontalAlignment(SwingConstants.LEFT);
+		labelName.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+				new Insets(0, 5, 5, 5), 0, 0));
 
 		// ---- label Abbreviation ----
 		labelAbbreviation = new JLabel();
@@ -339,17 +339,17 @@ public class Window extends JFrame {
 		labelCand.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
+				new Insets(0, 0, 5, 5), 0, 0));
 
-		// ---- label SI Min ----
+		// ---- label SI Max -----------
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMin") + " ");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanel.add(labelMinMaxSi, new GridBagConstraints(14, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+				new Insets(0, 20, 5, 5), 0, 0));
 
-		// --- label SI Max
+		// --- label SI Min-------
 		labelMinMaxSi = new JLabel();
 		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMax") + " ");
 		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -365,7 +365,7 @@ public class Window extends JFrame {
 			textFieldNameTemp.setMaximumSize(new Dimension(80, 20));
 			contentPanel.add(textFieldNameTemp, new GridBagConstraints(0,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 			textFieldName.add(textFieldNameTemp);
 
 			// ---- JTextField Abbreviation ----
@@ -492,7 +492,7 @@ public class Window extends JFrame {
 			textFieldHighTemp.setPreferredSize(new Dimension(40, 20));
 			contentPanel.add(textFieldHighTemp, new GridBagConstraints(6,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldHigh.add(textFieldHighTemp);
 
 			// ---- JTextField m----
@@ -557,26 +557,23 @@ public class Window extends JFrame {
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldCand.add(textFieldCandTemp);
-
+			//---- JTextField SI Max-------------
+			JTextField fieldSIHighTemp  = new JTextField();
+			fieldSIHighTemp.setMaximumSize(new Dimension(40, 20));
+			fieldSIHighTemp.setPreferredSize(new Dimension(40, 20));
+			textFieldResultSILow.add(fieldSIHighTemp);
+			contentPanel.add(fieldSIHighTemp, new GridBagConstraints(14, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 20, 5, 5), 0, 0));
+			//---- JTextField SI Min-------------
 			JTextField fieldSILowTemp = new JTextField();
 			fieldSILowTemp.setMaximumSize(new Dimension(40, 20));
 			fieldSILowTemp.setPreferredSize(new Dimension(40, 20));
-
-			textFieldResultSILow.add(fieldSILowTemp);
-
-			contentPanel.add(fieldSILowTemp, new GridBagConstraints(14, 14 + i,
-					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
-			JTextField fieldSIHighTemp = new JTextField();
-			fieldSIHighTemp.setMaximumSize(new Dimension(40, 20));
-			textFieldKelTemp.setPreferredSize(new Dimension(40, 20));
-
-			textFieldResultSIHigh.add(fieldSIHighTemp);
-
-			contentPanel.add(fieldSIHighTemp, new GridBagConstraints(15,
+			textFieldResultSIHigh.add(fieldSILowTemp);
+			contentPanel.add(fieldSILowTemp, new GridBagConstraints(15,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
+		
 
 		}
 
