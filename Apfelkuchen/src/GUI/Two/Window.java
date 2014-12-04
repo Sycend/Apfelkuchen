@@ -34,8 +34,6 @@ import java.util.ArrayList;
 public class Window extends JFrame {
 
 	JScrollPane scrollpane;
-	private JTextField textPointer;
-	private JTextField textPointerUnit;
 	private JButton buttonRemove;
 	private JButton buttonOptimize;
 	private JButton buttonNewField;
@@ -51,32 +49,31 @@ public class Window extends JFrame {
 	private JLabel labelMol;
 	private JLabel labelAmp;
 	private JLabel labelCand;
-	private JLabel expTitle;
 	private JLabel labelAbbreviation;
 	private JLabel labelMinMaxSi;
 	private JLabel labelDimension;
 
-	private ArrayList<JTextField> textFieldName = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldM = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldK = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldS = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldKel = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldMol = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldAmp = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldCand = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldLow = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldHigh = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldResultSILow = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldResultSIHigh = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldAbbreviation = new ArrayList<JTextField>();
-	private ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldDimension = new ArrayList<JTextField>();
-	private ArrayList<JTextField> textFieldUnit = new ArrayList<JTextField>();
-	// save information from Name and Abr fields
+	protected static ArrayList<JTextField> textFieldName = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldM = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldK = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldS = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldKel = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldMol = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldAmp = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldCand = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldLow = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldHigh = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldResultSILow = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldResultSIHigh = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldAbbreviation = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldDimension = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldUnit = new ArrayList<JTextField>();
+	// Save information from Name and Abbr fields
 	private ArrayList<String> dateFromFieldString = new ArrayList<String>();
 	private ArrayList<int[]> dateFromFieldInteger = new ArrayList<int[]>();
 	private JComboBox<String> comboBoxRolle;
-	private JPanel contentPanel = new JPanel();
+	//private JPanel contentPanel = new JPanel();
 
 	public Window() {
 		super(XMLDate.dateLabels("title"));
@@ -88,8 +85,6 @@ public class Window extends JFrame {
 	}
 
 	public void init() {
-		// setVisible(false);
-		// dispose();
 
 		JPanel contentPanel = new JPanel();
 		contentPanel.setSize(100, 100);
@@ -146,8 +141,6 @@ public class Window extends JFrame {
 					contentPanel.revalidate();
 					contentPanel.add(newField());
 					contentPanel.repaint();
-//					dispose();
-//					Window window = new Window();
 				}
 			}
 		});
@@ -209,16 +202,8 @@ public class Window extends JFrame {
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}
 
-	public static void setSelectionItem(String newSelectionItemParent,
-			String newSelectionItem, JTextField fieldDimension,
-			JTextField fieldUnit) {
+	public static void setSelectionItem(String newSelectionItemParent, String newSelectionItem, JTextField fieldDimension, JTextField fieldUnit) {
 		fieldDimension.setText(newSelectionItemParent);
-		fieldUnit.setText(newSelectionItem);
-	}
-
-	public static void setSelectionItem(String newSelectionItem,
-			JTextField fieldUnit) {
-		// fieldDimension.setText(newSelectionItemParent);
 		fieldUnit.setText(newSelectionItem);
 	}
 
@@ -226,10 +211,6 @@ public class Window extends JFrame {
 		return dateFromFieldString;
 	}
 
-	/*
-	 * public void mouseClick() { TreeWindow windowTree = new
-	 * TreeWindow(textPointer, textPointerUnit); }
-	 */
 	public JPanel newField() {
 		JPanel panel = new JPanel();
 
@@ -249,6 +230,7 @@ public class Window extends JFrame {
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
+		
 		// ---- label Name ----
 		labelName = new JLabel();
 		labelName.setText(XMLDate.dateLabels("nameFeld"));
@@ -257,6 +239,7 @@ public class Window extends JFrame {
 		panel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
 						0, 0, 5, 5), 0, 0));
+		
 		// ---- label Abbreviation ----
 		labelAbbreviation = new JLabel();
 		labelAbbreviation.setText(" " + "Abkuerzung");
@@ -411,7 +394,7 @@ public class Window extends JFrame {
 			textFieldAbbreviation.add(fieldAbbreviationTemp);
 
 			// --- JComboBox Rolle------
-			comboBoxRolle = new JComboBox(Run.getRolle());
+			comboBoxRolle = new JComboBox<String>(Run.getRolle());
 			comboBoxRolle.setEnabled(true);
 			comboBoxRolle.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -421,95 +404,86 @@ public class Window extends JFrame {
 			panel.add(comboBoxRolle, new GridBagConstraints(2, 14 + i, 1, 1,
 					0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
-			// --- TextField Unit------
-			JTextField textFieldUnitTemp = new JTextField();
-			textFieldUnitTemp.setMinimumSize(new Dimension(30, 20));
-			// textPointerUnit = textFieldUnitTemp;
-			textFieldUnitTemp.setPreferredSize(new Dimension(20, 20));
-
-			textFieldUnitTemp.addMouseListener(new MouseListener() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-
-					TreeWindow windowTree = new TreeWindow(textFieldUnitTemp);
-					// mouseClick();
-					repaint();
-					setVisible(true);
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-				}
-
-				@Override
-				public void mouseExited(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-				}
-
-				@Override
-				public void mousePressed(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-				}
-
-			});
-
-			panel.add(textFieldUnitTemp, new GridBagConstraints(4, 14 + i, 1,
-					1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
-			textFieldUnit.add(textFieldUnitTemp);
-
+			
 			// --- JTextFiel Dimension with mouse event------
 			JTextField textFieldDimensionTemp = new JTextField();
-			// textPointer = textFieldDimensionTemp;
+			/*textFieldUnitTemp needs to be declared here or we can't use it
+			in the mouseclicked event of textFieldDimension */
+			JTextField textFieldUnitTemp = new JTextField();
 			textFieldDimensionTemp.setMinimumSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setPreferredSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setMaximumSize(new Dimension(50, 20));
 			textFieldDimensionTemp.setEnabled(true);
-
+			
 			textFieldDimensionTemp.addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					TreeWindow windowTree = new TreeWindow(
-							textFieldDimensionTemp, textFieldUnitTemp); // textPointer,
-																		// textPointerUnit
-					// mouseClick();
+					new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
 					repaint();
 					setVisible(true);
 				}
-
+				
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-
+				
 				@Override
 				public void mouseExited(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-
+				
 				@Override
 				public void mousePressed(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-
+				
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 				}
-
+				
 			});
-
-			panel.add(textFieldDimensionTemp, new GridBagConstraints(3, 14 + i,
-					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
+			
+			panel.add(textFieldDimensionTemp, new GridBagConstraints(3, 14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 			textFieldDimension.add(textFieldDimensionTemp);
+
+			// --- TextField Unit------
+			textFieldUnitTemp.setMinimumSize(new Dimension(30, 20));
+			textFieldUnitTemp.setPreferredSize(new Dimension(20, 20));
+			textFieldUnitTemp.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("textFieldUnit.size: "+textFieldUnit.size());
+					new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
+					repaint();
+					setVisible(true);
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+				
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+				
+			});
+			
+			panel.add(textFieldUnitTemp, new GridBagConstraints(4, 14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
+			textFieldUnit.add(textFieldUnitTemp);
 
 			// ---- TextField Low- ----
 			JTextField textFieldLowTemp = new JTextField();
