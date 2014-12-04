@@ -18,18 +18,17 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 /**
  * JTree Window for selection of dimensions and units
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 1.0.3
+ * @version 1.0.4
  */
 public class TreeWindow extends JFrame {
 	private JTree tree;
 	private String selectedItem;
 	private String selectedItemParent;
 	private JButton buttonOk;
-	private String[] dimensions;
+	private String[] dimensions = Run.getDimensions();
 	private boolean checkNode = false;
 	
 	public TreeWindow(JTextField textFieldDimensionPointer, JTextField textFieldUnitPointer) {
-		dimensions = Run.getDimensions();
 		
 		// create the root node
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,6 +74,27 @@ public class TreeWindow extends JFrame {
 						setVisible(false);
 						Window.setSelectionItem(selectedItemParent, selectedItem, textFieldDimensionPointer, textFieldUnitPointer);
 						dispose();
+						
+						if (Run.unitsArray.size() > 0) {
+							for (int i = 0; i < Window.textFieldDimension.size(); i++) {
+								for (int n = 0; n < Run.unitsArray.size(); n++) {
+									if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
+										if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
+											Window.textFieldM.get(i).setText("" + Run.unitsArray.get(n).getM());
+											Window.textFieldK.get(i).setText("" + Run.unitsArray.get(n).getK());
+											Window.textFieldS.get(i).setText("" + Run.unitsArray.get(n).getS());
+											Window.textFieldKel.get(i).setText("" + Run.unitsArray.get(n).getKel());
+											Window.textFieldMol.get(i).setText("" + Run.unitsArray.get(n).getMol());
+											Window.textFieldAmp.get(i).setText("" + Run.unitsArray.get(n).getAmp());
+											Window.textFieldCand.get(i).setText("" + Run.unitsArray.get(n).getCand());
+										}
+									}
+								}
+							}
+						} else {
+							System.out.println("Run.unitsArray is empty");
+						}
+						
 					}
 				}
 			}
