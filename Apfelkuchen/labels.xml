@@ -42,8 +42,8 @@
 		<labelSIUnit>Einheit</labelSIUnit>
 		<labelLow>Min</labelLow>
 		<labelHigh>Max</labelHigh>
-		<labelSIMin>Si-Max</labelSIMin>
-		<labelSIMax>Si-Min</labelSIMax>
+		<labelSIMin>Si-Min</labelSIMin>
+		<labelSIMax>Si-Max</labelSIMax>
 
 
 

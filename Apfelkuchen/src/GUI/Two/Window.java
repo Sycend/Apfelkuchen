@@ -50,7 +50,8 @@ public class Window extends JFrame {
 	private JLabel labelAmp;
 	private JLabel labelCand;
 	private JLabel labelAbbreviation;
-	private JLabel labelMinMaxSi;
+	private JLabel labelResultSIMax;
+	private JLabel labelResultSIMin;
 	private JLabel labelDimension;
 
 	protected static ArrayList<JTextField> textFieldName = new ArrayList<JTextField>();
@@ -356,19 +357,19 @@ public class Window extends JFrame {
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
-		// ---- label SI Max -----------
-		labelMinMaxSi = new JLabel();
-		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMin") + " ");
-		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelMinMaxSi, new GridBagConstraints(14, 13, 1, 1,
+		// --- label SI Min-------
+		labelResultSIMin = new JLabel();
+		labelResultSIMin.setText(XMLDate.dateLabels("labelSIMin") + " ");
+		labelResultSIMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(labelResultSIMin, new GridBagConstraints(14, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 20, 5, 5), 0, 0));
-
-		// --- label SI Min-------
-		labelMinMaxSi = new JLabel();
-		labelMinMaxSi.setText(XMLDate.dateLabels("labelSIMax") + " ");
-		labelMinMaxSi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(labelMinMaxSi, new GridBagConstraints(15, 13, 1, 1,
+		
+		// ---- label SI Max -----------
+		labelResultSIMax = new JLabel();
+		labelResultSIMax.setText(XMLDate.dateLabels("labelSIMax") + " ");
+		labelResultSIMax.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(labelResultSIMax, new GridBagConstraints(15, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
@@ -667,22 +668,24 @@ public class Window extends JFrame {
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldCand.add(textFieldCandTemp);
-			//---- JTextField SI Max-------------
-			JTextField fieldSIHighTemp  = new JTextField();
-			fieldSIHighTemp.setMaximumSize(new Dimension(40, 20));
-			fieldSIHighTemp.setPreferredSize(new Dimension(40, 20));
-			textFieldResultSILow.add(fieldSIHighTemp);
-			contentPanel.add(fieldSIHighTemp, new GridBagConstraints(14, 14 + i,
+			
+			//---- JTextField SI High-------------
+			JTextField textFieldResultSIHighTemp  = new JTextField();
+			textFieldResultSIHighTemp.setMaximumSize(new Dimension(60, 20));
+			textFieldResultSIHighTemp.setPreferredSize(new Dimension(60, 20));
+			contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15, 14 + i,
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 20, 5, 5), 0, 0));
-			//---- JTextField SI Min-------------
-			JTextField fieldSILowTemp = new JTextField();
-			fieldSILowTemp.setMaximumSize(new Dimension(40, 20));
-			fieldSILowTemp.setPreferredSize(new Dimension(40, 20));
-			textFieldResultSIHigh.add(fieldSILowTemp);
-			contentPanel.add(fieldSILowTemp, new GridBagConstraints(15,
-					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
+			textFieldResultSIHigh.add(textFieldResultSIHighTemp);
+			
+			//---- JTextField SI Low-------------
+			JTextField textFieldResultSILowTemp = new JTextField();
+			textFieldResultSILowTemp.setMaximumSize(new Dimension(60, 20));
+			textFieldResultSILowTemp.setPreferredSize(new Dimension(60, 20));
+			contentPanel.add(textFieldResultSILowTemp, new GridBagConstraints(14,
+					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 20, 5, 5), 0, 0));
+			textFieldResultSILow.add(textFieldResultSILowTemp);
 		
 
 		}
