@@ -18,7 +18,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 /**
  * JTree Window for selection of dimensions and units
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 1.0.4
+ * @version 1.0.5
  */
 public class TreeWindow extends JFrame {
 	private JTree tree;
@@ -31,7 +31,7 @@ public class TreeWindow extends JFrame {
 	public TreeWindow(JTextField textFieldDimensionPointer, JTextField textFieldUnitPointer) {
 		
 		// create the root node
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle(XMLDate.dateLabels("title"));
 		this.setAlwaysOnTop(true);
 		this.setSize(400, 400);
@@ -112,5 +112,5 @@ public class TreeWindow extends JFrame {
 				}
 			}
 		});
-	}	
+	}
 }

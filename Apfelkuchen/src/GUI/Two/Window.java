@@ -38,10 +38,12 @@ public class Window extends JFrame {
 	private JButton buttonOptimize;
 	private JButton buttonNewField;
 	private JLabel labelName;
+	private JLabel labelAbbreviation;
+	private JLabel labelRolle;
+	private JLabel labelDimension;
+	private JLabel labelUnit;
 	private JLabel labelLow;
 	private JLabel labelHigh;
-	private JLabel labelRolle;
-	private JLabel labelUnit;
 	private JLabel labelM;
 	private JLabel labelK;
 	private JLabel labelS;
@@ -49,12 +51,15 @@ public class Window extends JFrame {
 	private JLabel labelMol;
 	private JLabel labelAmp;
 	private JLabel labelCand;
-	private JLabel labelAbbreviation;
-	private JLabel labelResultSIMax;
 	private JLabel labelResultSIMin;
-	private JLabel labelDimension;
+	private JLabel labelResultSIMax;
 
 	protected static ArrayList<JTextField> textFieldName = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldAbbreviation = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldDimension = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldUnit = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldLow = new ArrayList<JTextField>();
+	protected static ArrayList<JTextField> textFieldHigh = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldM = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldK = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldS = new ArrayList<JTextField>();
@@ -62,14 +67,10 @@ public class Window extends JFrame {
 	protected static ArrayList<JTextField> textFieldMol = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldAmp = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldCand = new ArrayList<JTextField>();
-	protected static ArrayList<JTextField> textFieldLow = new ArrayList<JTextField>();
-	protected static ArrayList<JTextField> textFieldHigh = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldResultSILow = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldResultSIHigh = new ArrayList<JTextField>();
-	protected static ArrayList<JTextField> textFieldAbbreviation = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
-	protected static ArrayList<JTextField> textFieldDimension = new ArrayList<JTextField>();
-	protected static ArrayList<JTextField> textFieldUnit = new ArrayList<JTextField>();
+
 	// Save information from Name and Abbr fields
 	private ArrayList<String> dateFromFieldString = new ArrayList<String>();
 	private ArrayList<int[]> dateFromFieldInteger = new ArrayList<int[]>();
@@ -109,7 +110,7 @@ public class Window extends JFrame {
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
 
-		JMenuBar mb = new JMenuBar();
+		//JMenuBar mb = new JMenuBar();
 
 		JPanel p2 = new JPanel();
 
@@ -218,11 +219,10 @@ public class Window extends JFrame {
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}
 
-	public static void setSelectionItem(String newSelectionItemParent,
-			String newSelectionItem, JTextField fieldDimension,
-			JTextField fieldUnit) {
-		fieldDimension.setText(newSelectionItemParent);
-		fieldUnit.setText(newSelectionItem);
+	public static void setSelectionItem(String newSelectionItemParent, String newSelectionItem,
+	JTextField textFieldDimension, JTextField textFieldUnit) {
+		textFieldDimension.setText(newSelectionItemParent);
+		textFieldUnit.setText(newSelectionItem);
 	}
 
 	public ArrayList<String> getDateFromFields() {
@@ -267,7 +267,7 @@ public class Window extends JFrame {
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 0), 0, 0));
 
-		// ---- label Unit----
+		// ---- label Unit ----
 		labelUnit = new JLabel();
 		labelUnit.setText(XMLDate.dateLabels("labelSIUnit"));
 		labelUnit.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -357,7 +357,7 @@ public class Window extends JFrame {
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 
-		// --- label SI Min-------
+		// ---- label SI Min ----
 		labelResultSIMin = new JLabel();
 		labelResultSIMin.setText(XMLDate.dateLabels("labelSIMin") + " ");
 		labelResultSIMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -365,7 +365,7 @@ public class Window extends JFrame {
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 20, 5, 5), 0, 0));
 		
-		// ---- label SI Max -----------
+		// ---- label SI Max ----
 		labelResultSIMax = new JLabel();
 		labelResultSIMax.setText(XMLDate.dateLabels("labelSIMax") + " ");
 		labelResultSIMax.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -393,7 +393,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldAbbreviation.add(fieldAbbreviationTemp);
 
-			// --- JComboBox Rolle------
+			// ---- JComboBox Rolle ----
 			comboBoxRolle = new JComboBox<String>(Run.getRolle());
 			comboBoxRolle.setEnabled(true);
 			comboBoxRolle.addActionListener(new ActionListener() {
@@ -405,7 +405,7 @@ public class Window extends JFrame {
 					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 
-			// --- JTextField Dimension ------
+			// ---- JTextField Dimension ----
 			JTextField textFieldDimensionTemp = new JTextField();
 			/*
 			 * textFieldUnitTemp needs to be declared here or we can't use it in
@@ -416,7 +416,6 @@ public class Window extends JFrame {
 			textFieldDimensionTemp.setPreferredSize(new Dimension(40, 20));
 			textFieldDimensionTemp.setMaximumSize(new Dimension(50, 20));
 			textFieldDimensionTemp.setEnabled(true);
-
 			textFieldDimensionTemp.addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -452,7 +451,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 			textFieldDimension.add(textFieldDimensionTemp);
 
-			// --- JTextField Unit------
+			// ---- JTextField Unit ----
 			textFieldUnitTemp.setMinimumSize(new Dimension(30, 20));
 			textFieldUnitTemp.setPreferredSize(new Dimension(20, 20));
 			textFieldUnitTemp.addMouseListener(new MouseListener() {
@@ -492,8 +491,9 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 			textFieldUnit.add(textFieldUnitTemp);
 
-			// ---- JTextField Low- ----
+			// ---- JTextField Low ----
 			JTextField textFieldLowTemp = new JTextField();
+			//textFieldLowTemp.setColumns(4);
 			textFieldLowTemp.setMinimumSize(new Dimension(40, 20));
 			textFieldLowTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldLowTemp.setPreferredSize(new Dimension(40, 20));
@@ -543,15 +543,16 @@ public class Window extends JFrame {
 					// TODO Auto-generated method stub
 				}
 
-			});			
+			});
 			
 			contentPanel.add(textFieldLowTemp, new GridBagConstraints(5,
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 			textFieldLow.add(textFieldLowTemp);
 
-			// ---- JTextField High----
+			// ---- JTextField High ----
 			JTextField textFieldHighTemp = new JTextField();
+			//textFieldHighTemp.setColumns(4);
 			textFieldHighTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldHighTemp.setPreferredSize(new Dimension(40, 20));
 			textFieldHighTemp.addMouseListener(new MouseListener() {
@@ -606,7 +607,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldHigh.add(textFieldHighTemp);
 
-			// ---- JTextField m----
+			// ---- JTextField m ----
 			JTextField textFieldMTemp = new JTextField();
 			textFieldMTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldMTemp.setPreferredSize(new Dimension(40, 20));
@@ -615,7 +616,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldM.add(textFieldMTemp);
 
-			// ---- JTextField k----
+			// ---- JTextField k ----
 			JTextField textFieldKTemp = new JTextField();
 			textFieldKTemp.setMaximumSize(new Dimension(20, 20));
 			textFieldKTemp.setPreferredSize(new Dimension(20, 20));
@@ -624,7 +625,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldK.add(textFieldKTemp);
 
-			// ---- JTextField s----
+			// ---- JTextField s ----
 			JTextField textFieldSTemp = new JTextField();
 			textFieldSTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldSTemp.setPreferredSize(new Dimension(40, 20));
@@ -633,7 +634,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldS.add(textFieldSTemp);
 
-			// ---- JTextField kel----
+			// ---- JTextField kel ----
 			JTextField textFieldKelTemp = new JTextField();
 			textFieldKelTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldKelTemp.setPreferredSize(new Dimension(40, 20));
@@ -642,7 +643,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldKel.add(textFieldKelTemp);
 
-			// ---- JTextField mol----
+			// ---- JTextField mol ----
 			JTextField textFieldMolTemp = new JTextField();
 			textFieldMolTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldMolTemp.setPreferredSize(new Dimension(40, 20));
@@ -651,7 +652,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldMol.add(textFieldMolTemp);
 
-			// ---- JTextField amp----
+			// ---- JTextField amp ----
 			JTextField textFieldAmpTemp = new JTextField();
 			textFieldAmpTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldAmpTemp.setPreferredSize(new Dimension(40, 20));
@@ -660,7 +661,7 @@ public class Window extends JFrame {
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldAmp.add(textFieldAmpTemp);
 
-			// ---- JTextField cand----
+			// ---- JTextField cand ----
 			JTextField textFieldCandTemp = new JTextField();
 			textFieldCandTemp.setMaximumSize(new Dimension(40, 20));
 			textFieldCandTemp.setPreferredSize(new Dimension(40, 20));
@@ -668,17 +669,8 @@ public class Window extends JFrame {
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 			textFieldCand.add(textFieldCandTemp);
-			
-			//---- JTextField SI High-------------
-			JTextField textFieldResultSIHighTemp  = new JTextField();
-			textFieldResultSIHighTemp.setMaximumSize(new Dimension(60, 20));
-			textFieldResultSIHighTemp.setPreferredSize(new Dimension(60, 20));
-			contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15, 14 + i,
-					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-					GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
-			textFieldResultSIHigh.add(textFieldResultSIHighTemp);
-			
-			//---- JTextField SI Low-------------
+
+			// ---- JTextField SI Low ----
 			JTextField textFieldResultSILowTemp = new JTextField();
 			textFieldResultSILowTemp.setMaximumSize(new Dimension(60, 20));
 			textFieldResultSILowTemp.setPreferredSize(new Dimension(60, 20));
@@ -686,9 +678,15 @@ public class Window extends JFrame {
 					14 + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 					GridBagConstraints.BOTH, new Insets(0, 20, 5, 5), 0, 0));
 			textFieldResultSILow.add(textFieldResultSILowTemp);
-		
-
+			
+			// ---- JTextField SI High ----
+			JTextField textFieldResultSIHighTemp  = new JTextField();
+			textFieldResultSIHighTemp.setMaximumSize(new Dimension(60, 20));
+			textFieldResultSIHighTemp.setPreferredSize(new Dimension(60, 20));
+			contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15, 14 + i,
+					1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
+			textFieldResultSIHigh.add(textFieldResultSIHighTemp);
 		}
-
 	}
 }
