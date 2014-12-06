@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Main Window
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
- * @version 1.1.0
+ * @version 1.1.1
  */
 public class Window extends JFrame {
 
@@ -71,11 +71,12 @@ public class Window extends JFrame {
 	protected static ArrayList<JTextField> textFieldResultSIHigh = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
 	protected static ArrayList<JComboBox<String>> comboBoxRolle = new ArrayList<JComboBox<String>>();
+	protected static ArrayList<JButton> buttonUpdateCSV = new ArrayList<JButton>();
 
 	// Save information from Name and Abbr fields
 	protected static ArrayList<String> dateFromFieldString = new ArrayList<String>();
-	// private JComboBox<String> comboBoxRolle;
 	private JPanel contentPanel = new JPanel();
+	boolean[] valuesSI = new boolean[7];
 
 	public Window() {
 		super(XMLDate.dateLabels("title"));
@@ -258,16 +259,13 @@ public class Window extends JFrame {
 
 		buttonNewField = new JButton(XMLDate.dateLabels("buttonNewField"));
 		buttonNewField.setFocusPainted(false);
-		buttonNewField.setSize(110, 20);
 		buttonNewField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewField) {
 					Run.addRow();
-					// contentPanel.removeAll();
-					contentPanel.revalidate();
 					newField();
+					contentPanel.revalidate();
 					contentPanel.repaint();
-
 				}
 			}
 		});
@@ -276,17 +274,14 @@ public class Window extends JFrame {
 
 		buttonRemove = new JButton(XMLDate.dateLabels("buttonRemove"));
 		buttonRemove.setFocusPainted(false);
-		buttonRemove.setSize(110, 20);
 		buttonRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonRemove) {
 					if (textFieldName.size() > 0) {
 						contentPanel.remove(textFieldName.get(Run.rows - 1));
-						contentPanel.remove(textFieldAbbreviation
-								.get(Run.rows - 1));
+						contentPanel.remove(textFieldAbbreviation.get(Run.rows - 1));
 						contentPanel.remove(comboBoxRolle.get(Run.rows - 1));
-						contentPanel.remove(textFieldDimension
-								.get(Run.rows - 1));
+						contentPanel.remove(textFieldDimension.get(Run.rows - 1));
 						contentPanel.remove(textFieldUnit.get(Run.rows - 1));
 						contentPanel.remove(textFieldLow.get(Run.rows - 1));
 						contentPanel.remove(textFieldHigh.get(Run.rows - 1));
@@ -297,10 +292,9 @@ public class Window extends JFrame {
 						contentPanel.remove(textFieldMol.get(Run.rows - 1));
 						contentPanel.remove(textFieldAmp.get(Run.rows - 1));
 						contentPanel.remove(textFieldCand.get(Run.rows - 1));
-						contentPanel.remove(textFieldResultSILow
-								.get(Run.rows - 1));
-						contentPanel.remove(textFieldResultSIHigh
-								.get(Run.rows - 1));
+						contentPanel.remove(textFieldResultSILow.get(Run.rows - 1));
+						contentPanel.remove(textFieldResultSIHigh.get(Run.rows - 1));
+						contentPanel.remove(buttonUpdateCSV.get(Run.rows - 1));
 						textFieldName.remove(Run.rows - 1);
 						textFieldAbbreviation.remove(Run.rows - 1);
 						comboBoxRolle.remove(Run.rows - 1);
@@ -317,6 +311,7 @@ public class Window extends JFrame {
 						textFieldCand.remove(Run.rows - 1);
 						textFieldResultSILow.remove(Run.rows - 1);
 						textFieldResultSIHigh.remove(Run.rows - 1);
+						buttonUpdateCSV.remove(Run.rows - 1);
 						Run.removeRow();
 						contentPanel.revalidate();
 						contentPanel.repaint();
@@ -328,8 +323,6 @@ public class Window extends JFrame {
 
 		buttonOptimize = new JButton(XMLDate.dateLabels("buttonNext"));
 		buttonOptimize.setFocusPainted(false);
-		buttonOptimize.setSize(110, 20);
-		buttonOptimize.setLocation(16, 16);
 		buttonOptimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonOptimize) {
@@ -376,7 +369,6 @@ public class Window extends JFrame {
 						dateFromFieldString.add(textFieldDimension.get(i)
 								.getText());
 						dateFromFieldString.add(textFieldUnit.get(i).getText());
-
 						dateFromFieldString.add(textFieldM.get(i).getText());
 						dateFromFieldString.add(textFieldK.get(i).getText());
 						dateFromFieldString.add(textFieldS.get(i).getText());
@@ -418,7 +410,8 @@ public class Window extends JFrame {
 	}
 
 	public void newField() {
-		System.out.println(Run.rows);
+		System.out.println("Run.rows: "+Run.rows);
+		
 		// ---- JTextField Name ----
 		JTextField textFieldNameTemp = new JTextField();
 		textFieldNameTemp.setMinimumSize(new Dimension(80, 20));
@@ -559,34 +552,15 @@ public class Window extends JFrame {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension
-									.get(i)
-									.getText()
-									.equals(Run.unitsArray.get(n).getTypeName())) {
-								if (Window.textFieldUnit
-										.get(i)
-										.getText()
-										.equals(Run.unitsArray.get(n)
-												.getUnitName())) {
+							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
+								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
 									if (Window.textFieldLow.get(i).getText() != "") {
 										try {
 											// FIXME Low could be a double value
-											Run.unitsArray
-													.get(n)
-													.setLow(Integer
-															.parseInt(Window.textFieldLow
-																	.get(i)
-																	.getText()));
-											Window.textFieldResultSILow
-													.get(i)
-													.setText(
-															""
-																	+ Run.unitsArray
-																			.get(n)
-																			.getResultSILow());
+											Run.unitsArray.get(n).setLow(Integer.parseInt(Window.textFieldLow.get(i).getText()));
+											Window.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
 										} catch (NumberFormatException e) {
-											// we don't do anything with the
-											// Exception
+											// we don't do anything with the Exception
 										}
 									}
 								}
@@ -635,35 +609,15 @@ public class Window extends JFrame {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension
-									.get(i)
-									.getText()
-									.equals(Run.unitsArray.get(n).getTypeName())) {
-								if (Window.textFieldUnit
-										.get(i)
-										.getText()
-										.equals(Run.unitsArray.get(n)
-												.getUnitName())) {
+							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
+								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
 									if (Window.textFieldHigh.get(i).getText() != "") {
 										try {
-											// FIXME High could be a double
-											// value
-											Run.unitsArray
-													.get(n)
-													.setHigh(
-															Integer.parseInt(Window.textFieldHigh
-																	.get(i)
-																	.getText()));
-											Window.textFieldResultSIHigh
-													.get(i)
-													.setText(
-															""
-																	+ Run.unitsArray
-																			.get(n)
-																			.getResultSIHigh());
+											// FIXME High could be a double value
+											Run.unitsArray.get(n).setHigh(Integer.parseInt(Window.textFieldHigh.get(i).getText()));
+											Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
 										} catch (NumberFormatException e) {
-											// we don't do anything with the
-											// Exception
+											// we don't do anything with the Exception
 										}
 									}
 								}
@@ -772,6 +726,55 @@ public class Window extends JFrame {
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
 		textFieldResultSIHigh.add(textFieldResultSIHighTemp);
-	}
+		
+		// ---- buttonUpdateCSV ----
+		JButton buttonUpdateCSVTemp = new JButton("UpdateCSV");
+		buttonUpdateCSVTemp.setFocusPainted(false);
+		buttonUpdateCSVTemp.setEnabled(false);
+		buttonUpdateCSVTemp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonUpdateCSVTemp) {
+					System.out.println("UpdateCSV");
+					
+					
+					
+					buttonUpdateCSVTemp.setEnabled(false);
+				}
+			}
+		});
+		buttonUpdateCSVTemp.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (!buttonUpdateCSVTemp.isEnabled()){
+					buttonUpdateCSVTemp.setEnabled(true);
+				}
+			}
 
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				//buttonUpdateCSVTemp.setEnabled(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				if (buttonUpdateCSVTemp.isEnabled()){
+					buttonUpdateCSVTemp.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+
+		});
+		
+		contentPanel.add(buttonUpdateCSVTemp, new GridBagConstraints(16,
+		14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+		GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
+		buttonUpdateCSV.add(buttonUpdateCSVTemp);
+	}
 }
