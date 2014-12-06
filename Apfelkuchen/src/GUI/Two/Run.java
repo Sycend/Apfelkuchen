@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Start of window with 1194, 550 size
+ * 
  * @author Yuri Kalinin, Dominik Hofmann
  * @version 2.0.6
  */
@@ -15,6 +16,7 @@ public class Run {
 			"scale-up", "dependent" };
 	protected static int rows = 0;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
+	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
 
 	public static void main(String args[]) {
 		long startTime = System.nanoTime();
@@ -39,11 +41,11 @@ public class Run {
 		System.out.println("Execution Time: " + durationMilliSec + " MilliSec");
 	}
 
-	public static void addRow(){
+	public static void addRow() {
 		rows++;
 	}
-	
-	public static void removeRow(){
+
+	public static void removeRow() {
 		rows--;
 	}
 
@@ -92,5 +94,20 @@ public class Run {
 		}
 		String[] tmp = new String[tmp0.size()];
 		return tmp0.toArray(tmp);
+	}
+
+	// Save date from Window one for using in R functions. All elements of array
+	// are string
+	public static void savaDateFromFields() {
+		// copy array with date from field of window one into array in the run
+		// funk.
+		dateFromWindowOne = Window.dateFromFieldString;
+		// print out the array for testing
+		for (int i = 0; i < 16 * Run.rows; i++) {
+			System.out
+					.println(dateFromWindowOne.get(i).toString() + " Ausgabe");
+			System.out.println(dateFromWindowOne.size() + " size");
+		}
+
 	}
 }
