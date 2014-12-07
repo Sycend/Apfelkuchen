@@ -732,21 +732,16 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonUpdateCSVTemp) {
 					System.out.println("UpdateCSV: Start");
-					
-					for (int i = 0; i < Window.textFieldName.size(); i++) {
-						if (buttonUpdateCSV.get(i).isEnabled()) {
-							try {								
-								double gradient = Double.parseDouble(textFieldResultSILow.get(i).getText()) / Double.parseDouble(textFieldLow.get(i).getText());
-								System.out.println("gradient: "+gradient);
-								RawUnits tempRaw = new RawUnits(textFieldDimension.get(i).getText(), textFieldUnit.get(i).getText(), Double.parseDouble(textFieldLow.get(i).getText()), Double.parseDouble(textFieldHigh.get(i).getText()), Integer.parseInt(textFieldM.get(i).getText()), Integer.parseInt(textFieldK.get(i).getText()), Integer.parseInt(textFieldS.get(i).getText()), Integer.parseInt(textFieldKel.get(i).getText()), Integer.parseInt(textFieldMol.get(i).getText()), Integer.parseInt(textFieldAmp.get(i).getText()), Integer.parseInt(textFieldCand.get(i).getText()), 0, gradient);
-								Run.unitsArray.add(tempRaw);
-								CSV.writeCSV(Run.csvName);
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
-						}
+					try {
+						double gradient = Double.parseDouble(textFieldResultSILowTemp.getText()) / Double.parseDouble(textFieldLowTemp.getText());
+						System.out.println("gradient: " + gradient);
+						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Double.parseDouble(textFieldLowTemp.getText()), Double.parseDouble(textFieldHighTemp.getText()), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp
+						.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()), Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), 0, gradient);
+						Run.unitsArray.add(tempRaw);
+						CSV.writeCSV(Run.csvName);
+					} catch (Exception ex) {
+						ex.printStackTrace();
 					}
-					
 					System.out.println("UpdateCSV: done.");
 					textFieldDimensionTemp.setText("");
 					textFieldUnitTemp.setText("");
