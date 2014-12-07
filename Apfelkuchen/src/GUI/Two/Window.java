@@ -748,6 +748,19 @@ public class Window extends JFrame {
 					}
 					
 					System.out.println("UpdateCSV: done.");
+					textFieldDimensionTemp.setText("");
+					textFieldUnitTemp.setText("");
+					textFieldLowTemp.setText("");
+					textFieldHighTemp.setText("");
+					textFieldMTemp.setText("");
+					textFieldKTemp.setText("");
+					textFieldSTemp.setText("");
+					textFieldKelTemp.setText("");
+					textFieldMolTemp.setText("");
+					textFieldAmpTemp.setText("");
+					textFieldCandTemp.setText("");
+					textFieldResultSILowTemp.setText("");
+					textFieldResultSIHighTemp.setText("");
 					buttonUpdateCSVTemp.setEnabled(false);
 				}
 			}
@@ -755,14 +768,15 @@ public class Window extends JFrame {
 		buttonUpdateCSVTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/*if (!buttonUpdateCSVTemp.isEnabled()) {
-					buttonUpdateCSVTemp.setEnabled(true);
-				}*/
+				if (!textFieldDimensionTemp.getText().isEmpty() && !textFieldUnitTemp.getText().isEmpty() && !textFieldResultSILowTemp.getText().isEmpty() && !textFieldResultSIHighTemp.getText().isEmpty()){
+					if (!buttonUpdateCSVTemp.isEnabled()) {
+						buttonUpdateCSVTemp.setEnabled(true); 
+					}
+				}
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				buttonUpdateCSVTemp.setEnabled(true);
 			}
 			
 			@Override
@@ -771,12 +785,10 @@ public class Window extends JFrame {
 			
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				//buttonUpdateCSVTemp.setEnabled(false);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				//buttonUpdateCSVTemp.setEnabled(false);
 			}
 			
 		});
