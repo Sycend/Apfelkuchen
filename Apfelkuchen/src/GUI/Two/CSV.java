@@ -4,16 +4,16 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.NumberFormat;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * @author Dominik Hofmann, Mark Leibmann
- * @version 1.2.1
+ * @version 1.2.2
  */
 public class CSV {
 	
@@ -33,19 +33,25 @@ public class CSV {
 		//FIXME currently we only append values we might
 		// want to delete the file we write to first
 		BufferedWriter fw = null;
+		Writer writer = null;
 		try {
-			fw = new BufferedWriter(new FileWriter(new File(Inputfile), true));
+			writer = new OutputStreamWriter(new FileOutputStream(new File(Inputfile)), "UTF-8");
+			fw = new BufferedWriter(writer);
 		} catch (IOException e) {
 			System.out.println("Can't access the file.");
 			e.printStackTrace();
 		}
 		try {
-			fw.append("typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient");
+			fw.append("dimension;unit;low;high;m;k;s;kel;mol;amp;cand;offset;gradient");
 			fw.newLine();
 			for (int i = 0; i < Run.unitsArray.size(); i++) {
-				fw.append(Run.unitsArray.get(i).getTypeName());
+				fw.append(Run.unitsArray.get(i).getDimension());
 				fw.append(";");
-				fw.append(Run.unitsArray.get(i).getUnitName());
+				fw.append(Run.unitsArray.get(i).getUnit());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getLow());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getHigh());
 				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getM());
 				fw.append(";");
@@ -65,14 +71,14 @@ public class CSV {
 				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getGradient());
 				fw.newLine();
-			}
-			
+			}			
 		} catch (IOException e) {
 			System.out.println("Can't write to file.");
 			e.printStackTrace();
 		}
 		try {
 			fw.close();
+			writer.close();
 		} catch (IOException e) {
 			System.out.println("Can't close the FileWriter.");
 			e.printStackTrace();
@@ -93,19 +99,25 @@ public class CSV {
 	 */
 	public static void writeCSV(File Inputfile) {
 		BufferedWriter fw = null;
+		Writer writer = null;
 		try {
-			fw = new BufferedWriter(new FileWriter(Inputfile, true));
+			writer = new OutputStreamWriter(new FileOutputStream(Inputfile), "UTF-8");
+			fw = new BufferedWriter(writer);
 		} catch (IOException e) {
 			System.out.println("Can't access the file.");
 			e.printStackTrace();
 		}
 		try {
-			fw.append("typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient");
+			fw.append("dimension;unit;low;high;m;k;s;kel;mol;amp;cand;offset;gradient");
 			fw.newLine();
 			for (int i = 0; i < Run.unitsArray.size(); i++) {
-				fw.append(Run.unitsArray.get(i).getTypeName());
+				fw.append(Run.unitsArray.get(i).getDimension());
 				fw.append(";");
-				fw.append(Run.unitsArray.get(i).getUnitName());
+				fw.append(Run.unitsArray.get(i).getUnit());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getLow());
+				fw.append(";");
+				fw.append("" + Run.unitsArray.get(i).getHigh());
 				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getM());
 				fw.append(";");
@@ -125,14 +137,14 @@ public class CSV {
 				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getGradient());
 				fw.newLine();
-			}
-			
+			}			
 		} catch (IOException e) {
 			System.out.println("Can't write to file.");
 			e.printStackTrace();
 		}
 		try {
 			fw.close();
+			writer.close();
 		} catch (IOException e) {
 			System.out.println("Can't close the FileWriter.");
 			e.printStackTrace();
@@ -161,36 +173,23 @@ public class CSV {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//typeName;unitName;m;k;s;kel;mol;amp;cand;offset;gradient
+				//dimension;unit;low;high;m;k;s;kel;mol;amp;cand;offset;gradient
 				String[] parts = content.get(i).split(";");
-				NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
-				Number number = format.parse(parts[9]);
-				NumberFormat format1 = NumberFormat.getInstance(Locale.GERMANY);
-				Number number1 = format1.parse(parts[10]);
-				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), number.doubleValue(), number1.doubleValue());
+				/*NumberFormat format0 = NumberFormat.getInstance();
+				Number number0 = format0.parse(parts[2].replace(".", ","));
+				NumberFormat format1 = NumberFormat.getInstance();
+				Number number1 = format1.parse(parts[3].replace(".", ","));
+				NumberFormat format2 = NumberFormat.getInstance();
+				Number number2 = format2.parse(parts[11].replace(".", ","));
+				NumberFormat format3 = NumberFormat.getInstance();
+				Number number3 = format3.parse(parts[12].replace(".", ","));*/
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		/*for (int i = 0; i < Run.unitTable.size(); i++) {
-			System.out.println("typeName: " + Run.unitTable.get(i).getTypeName());
-			System.out.println("unitName: " + Run.unitTable.get(i).getUnitName());
-			System.out.println("m: " + Run.unitTable.get(i).getM());
-			System.out.println("k: " + Run.unitTable.get(i).getK());
-			System.out.println("s: " + Run.unitTable.get(i).getS());
-			System.out.println("kel: " + Run.unitTable.get(i).getKel());
-			System.out.println("mol: " + Run.unitTable.get(i).getMol());
-			System.out.println("amp: " + Run.unitTable.get(i).getAmp());
-			System.out.println("cand: " + Run.unitTable.get(i).getCand());
-			System.out.println("offset: " + Run.unitTable.get(i).getOffset());
-			System.out.println("gradient: " + Run.unitTable.get(i).getGradient());
-			System.out.println("resultSILow: " + Run.unitTable.get(i).getResultSILow());
-			System.out.println("resultSIHigh: " + Run.unitTable.get(i).getResultSIHigh());
-		}*/
 		System.out.println("Done reading: " + Inputfile);
-		
 	}
 	
 	/**
@@ -212,12 +211,17 @@ public class CSV {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
+				//dimension;unit;low;high;m;k;s;kel;mol;amp;cand;offset;gradient
 				String[] parts = content.get(i).split(";");
-				NumberFormat format = NumberFormat.getInstance(Locale.GERMANY);
-				Number number = format.parse(parts[9]);
-				NumberFormat format1 = NumberFormat.getInstance(Locale.GERMANY);
-				Number number1 = format1.parse(parts[10]);
-				RawUnits tempRawUnits = new RawUnits(parts[0],parts[1], Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),Integer.parseInt(parts[4]),Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),Integer.parseInt(parts[8]),number.doubleValue(),number1.doubleValue());
+				/*NumberFormat format0 = NumberFormat.getInstance();
+				Number number0 = format0.parse(parts[2].replace(".", ","));
+				NumberFormat format1 = NumberFormat.getInstance();
+				Number number1 = format1.parse(parts[3].replace(".", ","));
+				NumberFormat format2 = NumberFormat.getInstance();
+				Number number2 = format2.parse(parts[11].replace(".", ","));
+				NumberFormat format3 = NumberFormat.getInstance();
+				Number number3 = format3.parse(parts[12].replace(".", ","));*/
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();

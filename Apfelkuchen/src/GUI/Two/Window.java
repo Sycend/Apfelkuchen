@@ -23,7 +23,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 /**
  * Main Window
@@ -76,7 +78,6 @@ public class Window extends JFrame {
 	// Save information from Name and Abbr fields
 	protected static ArrayList<String> dateFromFieldString = new ArrayList<String>();
 	private JPanel contentPanel = new JPanel();
-	boolean[] valuesSI = new boolean[7];
 
 	public Window() {
 		super(XMLDate.dateLabels("title"));
@@ -432,7 +433,7 @@ public class Window extends JFrame {
 
 		// ---- JComboBox Rolle ----
 		JComboBox<String> comboBoxRolleTemp = new JComboBox<String>(
-				Run.getRolle());
+				Run.getRole());
 		comboBoxRolleTemp.setEnabled(true);
 		comboBoxRolleTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -552,8 +553,8 @@ public class Window extends JFrame {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
-								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
+							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
+								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
 									if (Window.textFieldLow.get(i).getText() != "") {
 										try {
 											// FIXME Low could be a double value
@@ -609,8 +610,8 @@ public class Window extends JFrame {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
-								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
+							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
+								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
 									if (Window.textFieldHigh.get(i).getText() != "") {
 										try {
 											// FIXME High could be a double value
@@ -734,10 +735,23 @@ public class Window extends JFrame {
 		buttonUpdateCSVTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonUpdateCSVTemp) {
-					System.out.println("UpdateCSV");
+					System.out.println("UpdateCSV: Start");
 					
+					for (int i = 0; i < Window.textFieldName.size(); i++) {
+						if (buttonUpdateCSV.get(i).isEnabled()) {
+							try {								
+								double gradient = Double.parseDouble(textFieldResultSILow.get(i).getText()) / Double.parseDouble(textFieldLow.get(i).getText());
+								System.out.println("gradient: "+gradient);
+								RawUnits tempRaw = new RawUnits(textFieldDimension.get(i).getText(), textFieldUnit.get(i).getText(), Double.parseDouble(textFieldLow.get(i).getText()), Double.parseDouble(textFieldHigh.get(i).getText()), Integer.parseInt(textFieldM.get(i).getText()), Integer.parseInt(textFieldK.get(i).getText()), Integer.parseInt(textFieldS.get(i).getText()), Integer.parseInt(textFieldKel.get(i).getText()), Integer.parseInt(textFieldMol.get(i).getText()), Integer.parseInt(textFieldAmp.get(i).getText()), Integer.parseInt(textFieldCand.get(i).getText()), 0, gradient);
+								Run.unitsArray.add(tempRaw);
+								CSV.writeCSV(Run.csvName);
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						}
+					}
 					
-					
+					System.out.println("UpdateCSV: done.");
 					buttonUpdateCSVTemp.setEnabled(false);
 				}
 			}
@@ -745,31 +759,30 @@ public class Window extends JFrame {
 		buttonUpdateCSVTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!buttonUpdateCSVTemp.isEnabled()){
+				/*if (!buttonUpdateCSVTemp.isEnabled()) {
 					buttonUpdateCSVTemp.setEnabled(true);
-				}
+				}*/
 			}
-
+			
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				//buttonUpdateCSVTemp.setEnabled(true);
+				buttonUpdateCSVTemp.setEnabled(true);
 			}
-
+			
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				if (buttonUpdateCSVTemp.isEnabled()){
-					buttonUpdateCSVTemp.setEnabled(false);
-				}
 			}
-
+			
 			@Override
 			public void mousePressed(MouseEvent arg0) {
+				//buttonUpdateCSVTemp.setEnabled(false);
 			}
-
+			
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
+				//buttonUpdateCSVTemp.setEnabled(false);
 			}
-
+			
 		});
 		
 		contentPanel.add(buttonUpdateCSVTemp, new GridBagConstraints(16,

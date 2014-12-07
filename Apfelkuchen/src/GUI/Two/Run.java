@@ -3,42 +3,23 @@ package GUI.Two;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
- * Start of window with 1194, 550 size
- * 
+ * Main used to Start MainWindow + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.6
+ * @version 2.0.7
  */
 public class Run {
-	private static String[] rolle = new String[] { "controlled", "constant",
+	private static String[] role = new String[] { "controlled", "constant",
 			"scale-up", "dependent" };
 	protected static int rows = 0;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
+	protected static String csvName = "spezifikation.csv";
 
 	public static void main(String args[]) {
-		long startTime = System.nanoTime();
-		Thread readCSVThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				CSV.readCSV("spezifikation.csv");
-				// writeCSV Test
-				/*
-				 * RawUnits tempRaw = new RawUnits("Durchmesser", "cm", 1, 0, 0,
-				 * 0, 0, 0, 0, 0.84, 0.9999); unitsArray.add(tempRaw);
-				 * CSV.writeCSV("test.csv");
-				 */
-			}
-		});
 		new Window();
-		readCSVThread.start();
-		long endTime = System.nanoTime();
-		long durationExecution = endTime - startTime;
-		long durationMilliSec = TimeUnit.MILLISECONDS.convert(
-				durationExecution, TimeUnit.NANOSECONDS);
-		System.out.println("Execution Time: " + durationMilliSec + " MilliSec");
+		new Thread(new ReadCSVRunnable()).start();
 	}
 
 	public static void addRow() {
@@ -49,28 +30,28 @@ public class Run {
 		rows--;
 	}
 
-	public static String[] getRolle() {
-		return rolle;
+	public static String[] getRole() {
+		return role;
 	}
 
 	public static String[] getUnits() {
 		String[] tmp = new String[Run.unitsArray.size()];
 		for (int i = 0; i < Run.unitsArray.size(); i++) {
-			tmp[i] = Run.unitsArray.get(i).getUnitName();
+			tmp[i] = Run.unitsArray.get(i).getUnit();
 		}
 		tmp = removeDuplicates(tmp);
 		return tmp;
 	}
-
+	
 	public static String[] getDimensions() {
 		String[] tmp = new String[Run.unitsArray.size()];
 		for (int i = 0; i < Run.unitsArray.size(); i++) {
-			tmp[i] = Run.unitsArray.get(i).getTypeName();
+			tmp[i] = Run.unitsArray.get(i).getDimension();
 		}
 		tmp = removeDuplicates(tmp);
 		return tmp;
 	}
-
+	
 	public static String[] removeDuplicates(String[] containsDuplicates) {
 		List<String> containsDuplicatesTmp = Arrays.asList(containsDuplicates);
 		List<String> tmp0 = new ArrayList<String>();
@@ -108,6 +89,13 @@ public class Run {
 					.println(dateFromWindowOne.get(i).toString() + " Ausgabe");
 			System.out.println(dateFromWindowOne.size() + " size");
 		}
-
 	}
+	
+	public static class ReadCSVRunnable implements Runnable {		
+		@Override
+		public void run() {
+			CSV.readCSV(csvName);
+		}
+	}
+	
 }

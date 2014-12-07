@@ -11,8 +11,8 @@ public class RawUnits {
 	
 	/** TODO **/
 	
-	private String typeName = null;
-	private String unitName = null;
+	private String dimension = null;
+	private String unit = null;
 	int valuesSI[] = new int [7];
 	private double offset = 0.0;
 	private double gradient = 0.0;
@@ -23,10 +23,12 @@ public class RawUnits {
 		
 	}
 	
-	RawUnits(String typeName, String unitName, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) {
+	RawUnits(String dimension, String unit, double low, double high, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) {
 		//ZuweisungsKonstruktor
-		this.typeName = typeName;
-		this.unitName = unitName;
+		this.dimension = dimension;
+		this.unit = unit;
+		this.low = low;
+		this.high = high;
 		this.valuesSI[0] = m;
 		this.valuesSI[1] = k;
 		this.valuesSI[2] = s;
@@ -56,12 +58,12 @@ public class RawUnits {
 		this.high = high;
 	}
 
-	public String getTypeName() {
-		return typeName;
+	public String getDimension() {
+		return dimension;
 	}
 	
-	public String getUnitName() {
-		return unitName;
+	public String getUnit() {
+		return unit;
 	}
 	
 	public double getLow() {

@@ -47,8 +47,8 @@ public class TreeWindow extends JFrame {
 			// create the child nodes of SI Unitname (Time->min, sec)
 			
 			for (int j = 0; j < Run.unitsArray.size(); j++) {
-				if (dimensions[i].equals(Run.unitsArray.get(j).getTypeName()))
-					node.add(new DefaultMutableTreeNode((Run.unitsArray.get(j).getUnitName())));
+				if (dimensions[i].equals(Run.unitsArray.get(j).getDimension()))
+					node.add(new DefaultMutableTreeNode((Run.unitsArray.get(j).getUnit())));
 				
 				root.add(node);
 			}
@@ -78,8 +78,8 @@ public class TreeWindow extends JFrame {
 						if (Run.unitsArray.size() > 0) {
 							for (int i = 0; i < Window.textFieldDimension.size(); i++) {
 								for (int n = 0; n < Run.unitsArray.size(); n++) {
-									if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getTypeName())) {
-										if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnitName())) {
+									if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
+										if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
 											Window.textFieldM.get(i).setText("" + Run.unitsArray.get(n).getM());
 											Window.textFieldK.get(i).setText("" + Run.unitsArray.get(n).getK());
 											Window.textFieldS.get(i).setText("" + Run.unitsArray.get(n).getS());
