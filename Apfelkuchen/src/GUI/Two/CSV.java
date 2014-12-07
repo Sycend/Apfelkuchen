@@ -175,14 +175,6 @@ public class CSV {
 			try {
 				//dimension;unit;low;high;m;k;s;kel;mol;amp;cand;offset;gradient
 				String[] parts = content.get(i).split(";");
-				/*NumberFormat format0 = NumberFormat.getInstance();
-				Number number0 = format0.parse(parts[2].replace(".", ","));
-				NumberFormat format1 = NumberFormat.getInstance();
-				Number number1 = format1.parse(parts[3].replace(".", ","));
-				NumberFormat format2 = NumberFormat.getInstance();
-				Number number2 = format2.parse(parts[11].replace(".", ","));
-				NumberFormat format3 = NumberFormat.getInstance();
-				Number number3 = format3.parse(parts[12].replace(".", ","));*/
 				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
@@ -213,14 +205,6 @@ public class CSV {
 			try {
 				//dimension;unit;low;high;m;k;s;kel;mol;amp;cand;offset;gradient
 				String[] parts = content.get(i).split(";");
-				/*NumberFormat format0 = NumberFormat.getInstance();
-				Number number0 = format0.parse(parts[2].replace(".", ","));
-				NumberFormat format1 = NumberFormat.getInstance();
-				Number number1 = format1.parse(parts[3].replace(".", ","));
-				NumberFormat format2 = NumberFormat.getInstance();
-				Number number2 = format2.parse(parts[11].replace(".", ","));
-				NumberFormat format3 = NumberFormat.getInstance();
-				Number number3 = format3.parse(parts[12].replace(".", ","));*/
 				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
