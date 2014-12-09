@@ -25,10 +25,10 @@
 		</nameFeld>
 
 		<buttonNewField>
-			Neue Instanz
+			Neuer Faktor
 		</buttonNewField>
 		<buttonRemove>
-			Löschen
+			Faktor Löschen
 		</buttonRemove>
 		<buttonNewStart>
 			Neu Starten
