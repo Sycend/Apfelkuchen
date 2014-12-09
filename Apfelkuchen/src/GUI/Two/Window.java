@@ -408,8 +408,18 @@ public class Window extends JFrame {
 	public void newField() {
 		System.out.println("Run.rows: "+Run.rows);
 		
-		// ---- JTextField Name ----
+		// ---- Declaration of Temp Objects ----
+		//we do this to have access to these Temp objects
+		//in action / mouselisteners
 		JTextField textFieldNameTemp = new JTextField();
+		JTextField textFieldAbbreviationTemp = new JTextField();
+		JTextField textFieldDimensionTemp = new JTextField();
+		JTextField textFieldUnitTemp = new JTextField();
+		JTextField textFieldLowTemp = new JTextField();
+		JTextField textFieldHighTemp = new JTextField();
+		JComboBox<String> comboBoxRolleTemp = new JComboBox<String>(Run.getRole());
+		
+		// ---- JTextField Name ----
 		textFieldNameTemp.setMinimumSize(new Dimension(80, 20));
 		textFieldNameTemp.setMaximumSize(new Dimension(80, 20));
 		contentPanel.add(textFieldNameTemp, new GridBagConstraints(0,
@@ -418,21 +428,23 @@ public class Window extends JFrame {
 		textFieldName.add(textFieldNameTemp);
 
 		// ---- JTextField Abbreviation ----
-		JTextField fieldAbbreviationTemp = new JTextField();
-		fieldAbbreviationTemp.setMinimumSize(new Dimension(80, 20));
-		fieldAbbreviationTemp.setMaximumSize(new Dimension(80, 20));
-		contentPanel.add(fieldAbbreviationTemp, new GridBagConstraints(1,
+		textFieldAbbreviationTemp.setMinimumSize(new Dimension(80, 20));
+		textFieldAbbreviationTemp.setMaximumSize(new Dimension(80, 20));
+		contentPanel.add(textFieldAbbreviationTemp, new GridBagConstraints(1,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-		textFieldAbbreviation.add(fieldAbbreviationTemp);
-
+		textFieldAbbreviation.add(textFieldAbbreviationTemp);
+		
 		// ---- JComboBox Rolle ----
-		JComboBox<String> comboBoxRolleTemp = new JComboBox<String>(
-				Run.getRole());
 		comboBoxRolleTemp.setEnabled(true);
 		comboBoxRolleTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object selectedItem = comboBoxRolleTemp.getSelectedItem();
+				if (comboBoxRolleTemp.getSelectedItem() == "constant"){
+					textFieldHighTemp.setEnabled(false);
+					textFieldHighTemp.setText(textFieldLowTemp.getText());
+				} else {
+					textFieldHighTemp.setEnabled(true);
+				}
 			}
 		});
 		contentPanel.add(comboBoxRolleTemp, new GridBagConstraints(2,
@@ -441,12 +453,6 @@ public class Window extends JFrame {
 		comboBoxRolle.add(comboBoxRolleTemp);
 
 		// ---- JTextField Dimension ----
-		JTextField textFieldDimensionTemp = new JTextField();
-		/*
-		 * textFieldUnitTemp needs to be declared here or we can't use it in the
-		 * mouseclicked event of textFieldDimension
-		 */
-		JTextField textFieldUnitTemp = new JTextField();
 		textFieldDimensionTemp.setMinimumSize(new Dimension(40, 20));
 		textFieldDimensionTemp.setPreferredSize(new Dimension(40, 20));
 		textFieldDimensionTemp.setMaximumSize(new Dimension(50, 20));
@@ -501,22 +507,18 @@ public class Window extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 		});
@@ -527,7 +529,6 @@ public class Window extends JFrame {
 		textFieldUnit.add(textFieldUnitTemp);
 
 		// ---- JTextField Low ----
-		JTextField textFieldLowTemp = new JTextField();
 		// textFieldLowTemp.setColumns(4);
 		textFieldLowTemp.setMinimumSize(new Dimension(40, 20));
 		textFieldLowTemp.setMaximumSize(new Dimension(40, 20));
@@ -540,7 +541,6 @@ public class Window extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
@@ -566,27 +566,26 @@ public class Window extends JFrame {
 				} else {
 					System.out.println("Run.unitsArray is empty");
 				}
+				if (comboBoxRolleTemp.getSelectedItem() == "constant"){
+					textFieldHighTemp.setText(textFieldLowTemp.getText());
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 		});
-
 		contentPanel.add(textFieldLowTemp, new GridBagConstraints(5,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 		textFieldLow.add(textFieldLowTemp);
 
 		// ---- JTextField High ----
-		JTextField textFieldHighTemp = new JTextField();
 		// textFieldHighTemp.setColumns(4);
 		textFieldHighTemp.setMaximumSize(new Dimension(40, 20));
 		textFieldHighTemp.setPreferredSize(new Dimension(40, 20));
@@ -597,7 +596,6 @@ public class Window extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
@@ -627,21 +625,18 @@ public class Window extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 			}
 
 		});
-
 		contentPanel.add(textFieldHighTemp, new GridBagConstraints(6,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldHigh.add(textFieldHighTemp);
-
+		
 		// ---- JTextField m ----
 		JTextField textFieldMTemp = new JTextField();
 		textFieldMTemp.setMaximumSize(new Dimension(40, 20));
