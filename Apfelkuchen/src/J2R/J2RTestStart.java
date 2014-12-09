@@ -1,4 +1,4 @@
-package test;
+package J2R;
 
 public class J2RTestStart {
 	public static void main(String[] args) {
