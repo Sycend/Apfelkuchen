@@ -14,10 +14,12 @@ public class J2RTestStart {
 	static private String rowNamesResultName = "rowNames";
 	static private String colNamesResultName = "colNames";
 	private static boolean suggestVmatrixResults;
+	@SuppressWarnings("unused")
 	static private boolean resultsAvailable;
 
 	public static void main(String[] args) {
 
+		// Dieser Abachnitt muss nach der Verknüpfung mit dem Kontroller wieder erweitert werden 
 		startRCallerWithSuggestVmatrix(setCodeToSuggestVmatrix(new String[] {
 				"Test1", "Test2", "Test3", "Test4", "Test5" },
 
@@ -41,6 +43,8 @@ public class J2RTestStart {
 			System.out.println(cn[i]);
 			System.out.print('\n');
 		}
+		
+		//-------------------------------------------------------------------------------------------
 	}
 
 	public static RCode setCodeToSuggestVmatrix(String[] abkuerzungen,

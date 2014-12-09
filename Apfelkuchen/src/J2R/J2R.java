@@ -6,11 +6,8 @@ import rcaller.RCode;
 public class J2R {
 	private RCaller caller;
 	private RCode code;
-	// private String rSkriptExePfad;
 	private String rExePfad;
 	private String skriptPath;
-
-	// private String RskriptSuggestVmatrix;
 
 	public J2R(String skript) {
 		initRCaller("C://Program Files/R/R-3.1.1/bin/x64");// ersetzten wenn
