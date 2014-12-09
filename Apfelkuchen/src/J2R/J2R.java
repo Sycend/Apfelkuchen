@@ -1,4 +1,4 @@
-package test;
+package J2R;
 
 import rcaller.RCaller;
 import rcaller.RCode;
