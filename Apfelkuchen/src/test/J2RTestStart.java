@@ -19,9 +19,10 @@ public class J2RTestStart {
 		System.out.print(results[i][j]);// Spalte /Zeilen
 		System.out.print(" ");
 	}
-
+	System.out.println("das ist ein test Push");
 	System.out.println(cn[i]);
 	System.out.print('\n');
 	}
 	}
+	//TestTestTest
 }
