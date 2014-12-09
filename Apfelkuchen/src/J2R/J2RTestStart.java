@@ -18,14 +18,13 @@ public class J2RTestStart {
 
 	public static void main(String[] args) {
 
-		System.out.println("-------------- 1test --------");
 		startRCallerWithSuggestVmatrix(setCodeToSuggestVmatrix(new String[] {
 				"Test1", "Test2", "Test3", "Test4", "Test5" },
 
 		new double[][] { { 1, 2, 3, 4, 5, 6, 7 }, { 1, 2, 3, 4, 5, 6, 7 },
 				{ 1, 2, 3, 4, 5, 6, 7 }, { 1, 2, 3, 4, 5, 6, 7 },
 				{ 1, 2, 3, 4, 5, 6, 7 } }, true));
-		System.out.println("-------------- 2test --------");
+
 		double results[][] = vMatrix;
 		String[] n = rowNames;
 		String[] cn = colNames;
@@ -75,14 +74,14 @@ public class J2RTestStart {
 
 				caller.setRCode(code);
 				code.addRCode(vMatrixResultName.concat("<-t(vMatrix)"));
-				System.out.println("-------------- 3test --------");
+				
 				caller.runAndReturnResultOnline(vMatrixResultName);
-				System.out.println("-------------- 4test --------");
+				
 				mydim = caller.getParser().getDimensions(vMatrixResultName);
-				System.out.println("-------------- 5test --------");
+	
 				vMatrix = caller.getParser().getAsDoubleMatrix(
 						vMatrixResultName, mydim[1], mydim[0]);
-				System.out.println("-------------- 6test --------");
+	
 				code.clear();
 				code.addRCode(rowNamesResultName.concat("<-rownames(vMatrix)"));
 				caller.runAndReturnResultOnline(rowNamesResultName);
