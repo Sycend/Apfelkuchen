@@ -405,9 +405,7 @@ public class Window extends JFrame {
 		return dateFromFieldString;
 	}
 
-	public void newField() {
-		System.out.println("Run.rows: "+Run.rows);
-		
+	public void newField() {		
 		// ---- Declaration of Temp Objects ----
 		//we do this to have access to these Temp objects
 		//in action / mouselisteners
@@ -552,11 +550,10 @@ public class Window extends JFrame {
 								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
 									if (Window.textFieldLow.get(i).getText() != "") {
 										try {
-											// FIXME Low could be a double value
-											Run.unitsArray.get(n).setLow(Integer.parseInt(Window.textFieldLow.get(i).getText()));
+											Run.unitsArray.get(n).setLow(Double.parseDouble(Window.textFieldLow.get(i).getText()));
 											Window.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
 										} catch (NumberFormatException e) {
-											// we don't do anything with the Exception
+											// we discard the Exception
 										}
 									}
 								}
@@ -607,11 +604,10 @@ public class Window extends JFrame {
 								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
 									if (Window.textFieldHigh.get(i).getText() != "") {
 										try {
-											// FIXME High could be a double value
-											Run.unitsArray.get(n).setHigh(Integer.parseInt(Window.textFieldHigh.get(i).getText()));
+											Run.unitsArray.get(n).setHigh(Double.parseDouble(Window.textFieldHigh.get(i).getText()));
 											Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
 										} catch (NumberFormatException e) {
-											// we don't do anything with the Exception
+											// we discard the Exception
 										}
 									}
 								}
@@ -727,10 +723,12 @@ public class Window extends JFrame {
 				if (e.getSource() == buttonUpdateCSVTemp) {
 					System.out.println("UpdateCSV: Start");
 					try {
-						double gradient = Double.parseDouble(textFieldResultSILowTemp.getText()) / Double.parseDouble(textFieldLowTemp.getText());
+						double gradient = (Double.parseDouble(textFieldResultSIHighTemp.getText()) - Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldHighTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText()));
 						System.out.println("gradient: " + gradient);
+						double offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
+						System.out.println("offset: " + offset);
 						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Double.parseDouble(textFieldLowTemp.getText()), Double.parseDouble(textFieldHighTemp.getText()), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp
-						.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()), Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), 0, gradient);
+						.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()), Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
 						Run.unitsArray.add(tempRaw);
 						CSV.writeCSV(Run.csvName);
 					} catch (Exception ex) {
