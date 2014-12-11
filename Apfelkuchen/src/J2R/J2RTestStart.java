@@ -11,8 +11,8 @@ public class J2RTestStart {
 	static private String[] rowNames;
 	private static int[] mydim;
 	static private String vMatrixResultName = "vMatrix";
-	static private String rowNamesResultName = "rowNames";
-	static private String colNamesResultName = "colNames";
+	static private String rowNamesResultName = "rownames";
+	static private String colNamesResultName = "colnames";
 	private static boolean suggestVmatrixResults;
 	@SuppressWarnings("unused")
 	static private boolean resultsAvailable;
