@@ -60,22 +60,21 @@ public class J2RTestStart {
 											// nach Run ist es vorhanden
 		
 		
-		String[] colNames_sub = new String[]{"PI1","PI2","PI3","PI4"}; //Colnames from R
+		String[] colNames_sub = new String[]{"PI1","PI2","PI3","PI4","PI5","PI6","PI7"}; //Colnames from R
 		String[] rowNames_sub = new String[]{"test1","test2","test3","test4","test5"}; //Rownames from R
 		
 		
 		code.addStringArray("DColNames", colNames_sub);
 		code.addStringArray("DRowNames", rowNames_sub);
 		
-		code.addStringArray("DRownames",colNames_sub);
-		code.addStringArray("DColNames", rowNames_sub);
-		
 		
 		code.addDoubleMatrix("D_Inhalt", dMatrix);
 		code.addStringArray("u_roles", u_roles);
 		code.addStringArray("role", role);
 		
-
+		code.addRCode("rownames(D_Inhalt)<-DRownames");
+		code.addRCode("colnames(D_Inhalt)<-DColNames");
+		code.addRCode("D<-D_Inhalt");
 		
 		if (debug)
 		{
