@@ -2,6 +2,7 @@ package J2R;
 
 import rcaller.RCaller;
 import rcaller.RCode;
+import rcaller.ROutputParser;
 
 public class J2R {
 	private RCaller caller;
@@ -44,6 +45,21 @@ public class J2R {
 
 	}
 
+	public void runRCaller(String s) {
+		caller.runAndReturnResultOnline(s);
+		
+	}
+
+	public ROutputParser getParser()
+	{
+		return caller.getParser();
+	}
+	
+	public void runAndReturnResultOnline(String s)
+	{
+		caller.runAndReturnResultOnline(s);
+	}
+	
 	public void stopRCaller() {
 
 		caller.stopStreamConsumers();

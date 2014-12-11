@@ -19,13 +19,16 @@ public class J2RTestStart {
 
 	public static void main(String[] args) {
 
-		// Dieser Abachnitt muss nach der Verknüpfung mit dem Kontroller wieder erweitert werden 
+		// Dieser Abachnitt muss nach der Verknüpfung mit dem Kontroller wieder
+		// erweitert werden
+		
+		String[] role = {"Controled"};
 		startRCallerWithSuggestVmatrix(setCodeToSuggestVmatrix(new String[] {
 				"Test1", "Test2", "Test3", "Test4", "Test5" },
 
-		new double[][] { { 1, 2, 3, 4, 5, 6, 7 }, { 1, 2, 3, 4, 5, 6, 7 },
-				{ 1, 2, 3, 4, 5, 6, 7 }, { 1, 2, 3, 4, 5, 6, 7 },
-				{ 1, 2, 3, 4, 5, 6, 7 } }, true));
+		new double[][] { { 1, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0 },
+				{ 3, 0, -3, -1, 0, 0, 0 } }, role, true));
 
 		double results[][] = vMatrix;
 		String[] n = rowNames;
@@ -43,12 +46,12 @@ public class J2RTestStart {
 			System.out.println(cn[i]);
 			System.out.print('\n');
 		}
-		
-		//-------------------------------------------------------------------------------------------
+
+		// -------------------------------------------------------------------------------------------
 	}
 
 	public static RCode setCodeToSuggestVmatrix(String[] abkuerzungen,
-			double[][] dMatrix, boolean debug) {
+			double[][] dMatrix, String[] role, boolean debug) {
 		RCode code = testJ2R.getRCode(); // wenn mehrere Skripte benutzt
 											// werden ebenfalls anpassen//
 											// bei einem Startpunkt
@@ -57,13 +60,16 @@ public class J2RTestStart {
 											// nach Run ist es vorhanden
 		code.addDoubleMatrix("D", dMatrix);
 		code.addStringArray("u_abbr", abkuerzungen);
-
+		code.addStringArray("role", role);
+		
 		if (debug)
+		{
+			
 			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_abbr,D,TRUE)"));
+					.concat("<-suggestVmatrix(u_abbr,D,role[1],TRUE)"));}
 		else
 			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_abbr,D,FALSE)"));
+					.concat("<-suggestVmatrix(u_abbr,D,role[1],FALSE)"));
 
 		suggestVmatrixResults = true;
 		return code;
@@ -71,32 +77,36 @@ public class J2RTestStart {
 
 	public static void startRCallerWithSuggestVmatrix(RCode c) {
 
-		RCaller caller = testJ2R.getRCaller();
+		// RCaller caller = testJ2R.getRCaller();
 		RCode code = c;
 		try {
 			if (suggestVmatrixResults) {
 
-				caller.setRCode(code);
+				testJ2R.setCode(code);
 				code.addRCode(vMatrixResultName.concat("<-t(vMatrix)"));
-				
-				caller.runAndReturnResultOnline(vMatrixResultName);
-				
-				mydim = caller.getParser().getDimensions(vMatrixResultName);
-	
-				vMatrix = caller.getParser().getAsDoubleMatrix(
+
+				testJ2R.runAndReturnResultOnline(vMatrixResultName);
+
+				mydim = testJ2R.getParser().getDimensions(vMatrixResultName);
+				System.out.println("----------------------------------------");
+				vMatrix = testJ2R.getParser().getAsDoubleMatrix(
 						vMatrixResultName, mydim[1], mydim[0]);
-	
+
 				code.clear();
 				code.addRCode(rowNamesResultName.concat("<-rownames(vMatrix)"));
-				caller.runAndReturnResultOnline(rowNamesResultName);
-				rowNames = caller.getParser().getAsStringArray(
+				testJ2R.runAndReturnResultOnline(rowNamesResultName);
+				rowNames = testJ2R.getParser().getAsStringArray(
 						rowNamesResultName);
 				code.clear();
 				code.addRCode(colNamesResultName.concat("<-colnames(vMatrix)"));
-				caller.runAndReturnResultOnline(colNamesResultName);
-				colNames = caller.getParser().getAsStringArray(
+				testJ2R.runAndReturnResultOnline(colNamesResultName);
+				colNames = testJ2R.getParser().getAsStringArray(
 						colNamesResultName);
+				
+				System.out.println(colNames[0]);
 				code.clear();
+				
+				System.out.println("----------------------------------------");
 				resultsAvailable = true;
 			} else {
 				System.out.println("Don`t forget setCodeToSuggestVmatrix");
