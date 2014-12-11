@@ -71,7 +71,4 @@ public class J2R {
 		return this.code;
 	}
 
-	public RCaller getRCaller() {
-		return this.caller;
-	}
 }

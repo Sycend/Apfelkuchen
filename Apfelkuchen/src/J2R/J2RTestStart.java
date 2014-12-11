@@ -59,17 +59,17 @@ public class J2RTestStart {
 											// starten und dann weglassen //
 											// nach Run ist es vorhanden
 		code.addDoubleMatrix("D", dMatrix);
-		code.addStringArray("u_abbr", abkuerzungen);
+		code.addStringArray("u_roles", abkuerzungen);
 		code.addStringArray("role", role);
 		
 		if (debug)
 		{
 			
 			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_abbr,D,role[1],TRUE)"));}
+					.concat("<-suggestVmatrix(u_roles,D,role[1],TRUE)"));}
 		else
 			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_abbr,D,role[1],FALSE)"));
+					.concat("<-suggestVmatrix(u_roles,D,role[1],FALSE)"));
 
 		suggestVmatrixResults = true;
 		return code;
