@@ -24,7 +24,6 @@ public class Run {
 	public static void main(String args[]) {
 		new Window();
 		new Thread(new ReadCSVRunnable()).start();
-		//new Window3();
 	}
 
 	public static void addRow() {
