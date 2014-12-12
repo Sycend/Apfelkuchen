@@ -72,9 +72,11 @@ public class J2RTestStart {
 		code.addStringArray("u_roles", u_roles);
 		code.addStringArray("role", role);
 		
-		code.addRCode("rownames(D_Inhalt)<-DRownames");
-		code.addRCode("colnames(D_Inhalt)<-DColNames");
-		code.addRCode("D<-D_Inhalt");
+		code.addRCode("D<-data.frame(D_Inhalt)");
+		code.addRCode("rownames(D)<-DRownames");
+		code.addRCode("colnames(D)<-DColNames");
+		
+//		code.addRCode("D<-D_Inhalt");
 		
 		if (debug)
 		{
