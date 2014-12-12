@@ -1,5 +1,6 @@
 package GUI.Two;
 
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,19 +8,23 @@ import java.util.List;
 /**
  * Main used to Start MainWindow + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.7
+ * @version 2.0.8
  */
 public class Run {
-	private static String[] role = new String[] { "controlled", "constant",
-			"scale-up", "dependent" };
-	protected static int rows = 0;
-	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
+	private static String[] role = new String[] { "controlled", "constant", "scale-up", "dependent" };
 	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
+	protected static int rows = 0;
 	protected static String csvName = "spezifikation.csv";
+	protected static final int DEFAULT_WIDTH = 1194;
+	protected static final int DEFAULT_HEIGHT = 550;
+	protected static final int CURRENT_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	protected static final int CURRENT_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 
 	public static void main(String args[]) {
 		new Window();
 		new Thread(new ReadCSVRunnable()).start();
+		//new Window3();
 	}
 
 	public static void addRow() {
