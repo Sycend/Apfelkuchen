@@ -50,7 +50,7 @@ public class J2RTestStart {
 		// -------------------------------------------------------------------------------------------
 	}
 
-	public static RCode setCodeToSuggestVmatrix(String[] abkuerzungen,
+	public static RCode setCodeToSuggestVmatrix(String[] u_roles,
 			double[][] dMatrix, String[] role, boolean debug) {
 		RCode code = testJ2R.getRCode(); // wenn mehrere Skripte benutzt
 											// werden ebenfalls anpassen//
@@ -58,18 +58,32 @@ public class J2RTestStart {
 											// festlegen
 											// starten und dann weglassen //
 											// nach Run ist es vorhanden
-		code.addDoubleMatrix("D", dMatrix);
-		code.addStringArray("u_abbr", abkuerzungen);
+		
+		
+		String[] colNames_sub = new String[]{"PI1","PI2","PI3","PI4","PI5","PI6","PI7"}; //Colnames from R
+		String[] rowNames_sub = new String[]{"test1","test2","test3","test4","test5"}; //Rownames from R
+		
+		
+		code.addStringArray("DColNames", colNames_sub);
+		code.addStringArray("DRowNames", rowNames_sub);
+		
+		
+		code.addDoubleMatrix("D_Inhalt", dMatrix);
+		code.addStringArray("u_roles", u_roles);
 		code.addStringArray("role", role);
+		
+		code.addRCode("rownames(D_Inhalt)<-DRownames");
+		code.addRCode("colnames(D_Inhalt)<-DColNames");
+		code.addRCode("D<-D_Inhalt");
 		
 		if (debug)
 		{
 			
 			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_abbr,D,role[1],TRUE)"));}
+					.concat("<-suggestVmatrix(u_roles,D,role[1],TRUE)"));}
 		else
 			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_abbr,D,role[1],FALSE)"));
+					.concat("<-suggestVmatrix(u_roles,D,role[1],FALSE)"));
 
 		suggestVmatrixResults = true;
 		return code;
