@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @author Florian Then
- * @version 1.0.1
+ * @version 1.0.2
  * Start of window2 with 1194, 550 size
  */
 public class Window2 extends JFrame{
@@ -57,6 +57,7 @@ public class Window2 extends JFrame{
 	private JButton buttonReset;
 	private JButton buttonRMin;
 	private JButton buttonRMax;
+	private JButton buttonNext;
 	private JToggleButton toggle= new JToggleButton();
 	
 	public Window2(double[][] v_Matrix,String[] row_Names,String[] col_Names, String[][] minMax, String[][] siDimensionslosKontrolle) {
@@ -132,7 +133,8 @@ public class Window2 extends JFrame{
 	    };
 	    toggle.addActionListener(actionListener);
 		menuePanel.add(toggle);
-		
+		buttonNext=new JButton("Weiter");
+		menuePanel.add(buttonNext);
 		getContentPane().add(menuePanel, BorderLayout.NORTH);
 		
 		JPanel contentPanel=new JPanel();
