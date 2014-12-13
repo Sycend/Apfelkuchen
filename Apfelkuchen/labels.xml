@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root>
 
-
-
 	<de>
 		<title>Apfelkuchen</title>
 
@@ -13,17 +11,20 @@
 		<buttonOk>
 			OK
 		</buttonOk>
-		
+
 		<buttonOkStart>
 			Start
 		</buttonOkStart>
 		<nameLabel>
 			Name für das Feld
 		</nameLabel>
-		<nameFeld>
+		<labelName>
 			Name
-		</nameFeld>
-
+		</labelName>
+		<labelAbbr>
+			Abkürzung
+		</labelAbbr>
+		
 		<buttonNewField>
 			Neuer Faktor
 		</buttonNewField>
@@ -37,21 +38,17 @@
 		<buttonOKTipText>Hovered Over ME Test</buttonOKTipText>
 		<buttonNextTipText>Bestätigen die Eingaben</buttonNextTipText>
 		<errorSelection>Bitte wählen Sie eine Variante aus</errorSelection>
-		<labelRolle>Rolle</labelRolle>
+		<labelRole>Rolle</labelRole>
 		<labelDimension> Dimension</labelDimension>
-		<labelSIUnit>Einheit</labelSIUnit>
+		<labelUnit>Einheit</labelUnit>
 		<labelLow>Min</labelLow>
 		<labelHigh>Max</labelHigh>
 		<labelSIMin>Si-Min</labelSIMin>
 		<labelSIMax>Si-Max</labelSIMax>
 
 
-
-
-
 		<errorTitleDialog>Fehler</errorTitleDialog>
-		<errorTextDialog>Bitte prüfen Sie eingaben</errorTextDialog></de>
-
-
+		<errorTextDialog>Bitte prüfen Sie eingaben</errorTextDialog>
+	</de>
 
 </root>

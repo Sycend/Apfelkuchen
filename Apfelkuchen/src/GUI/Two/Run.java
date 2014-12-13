@@ -8,17 +8,25 @@ import java.util.List;
 /**
  * Main used to Start MainWindow + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.8
+ * @version 2.0.9
  */
 public class Run {
 	private static String[] role = new String[] { "controlled", "constant", "scale-up", "dependent" };
 	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
 	protected static int rows = 0;
 	protected static String csvName = "spezifikation.csv";
-	protected static final int DEFAULT_WIDTH = 1194;
-	protected static final int DEFAULT_HEIGHT = 550;
+	protected static final int DEFAULT_WIDTH = 1100; //1194
+	protected static final int DEFAULT_HEIGHT = 500; //550
 	protected static final int CURRENT_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	protected static final int CURRENT_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	protected static final int HIGHRES_FONT_SIZE = 18;
+	protected static final int DEFAULT_FONT_SIZE = 16;
+	protected static final int LOWRES_FONT_SIZE = 15;
+	protected static int currentFontSize = DEFAULT_FONT_SIZE;
+	protected static final int DEFAULT_GRID_SIZE_HIGH = 80;
+	protected static final int DEFAULT_GRID_SIZE_LOW = 40;
+	protected static int currentGridSizeHigh = DEFAULT_GRID_SIZE_HIGH;
+	protected static int currentGridSizeLow = DEFAULT_GRID_SIZE_LOW;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 
 	public static void main(String args[]) {
@@ -89,8 +97,7 @@ public class Run {
 		dateFromWindowOne = Window.dateFromFieldString;
 		// print out the array for testing
 		for (int i = 0; i < 16 * Run.rows; i++) {
-			System.out
-					.println(dateFromWindowOne.get(i).toString() + " Ausgabe");
+			System.out.println(dateFromWindowOne.get(i).toString() + " Ausgabe");
 			System.out.println(dateFromWindowOne.size() + " size");
 		}
 	}
