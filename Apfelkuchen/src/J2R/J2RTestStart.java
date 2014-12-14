@@ -68,7 +68,7 @@ public class J2RTestStart {
 		code.addStringArray("DRowNames", rowNames_sub);
 		
 		
-		code.addDoubleMatrix("D_Inhalt", dMatrix);
+		code.addDoubleMatrix("D", dMatrix);
 		code.addStringArray("u_roles", u_roles);
 		code.addStringArray("role", role);
 		
