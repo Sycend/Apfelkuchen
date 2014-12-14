@@ -27,7 +27,7 @@ public class J2RTestStart {
 				"Test1", "Test2", "Test3", "Test4", "Test5" },
 
 		new double[][] { { 1, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0 },
 				{ 3, 0, -3, -1, 0, 0, 0 } }, role, true));
 
 		double results[][] = vMatrix;
