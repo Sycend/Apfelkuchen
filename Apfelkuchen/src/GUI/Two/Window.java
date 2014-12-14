@@ -175,7 +175,7 @@ public class Window extends JFrame {
 		
 		// ---- label Low ----
 		labelLow = new JLabel();
-		labelLow.setText(XMLDate.dateLabels("labelLow") + " ");
+		labelLow.setText(XMLDate.dateLabels("labelLow"));
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0,
@@ -184,7 +184,7 @@ public class Window extends JFrame {
 		
 		// ---- label High ----
 		labelHigh = new JLabel();
-		labelHigh.setText(XMLDate.dateLabels("labelHigh") + " ");
+		labelHigh.setText(XMLDate.dateLabels("labelHigh"));
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0,
@@ -256,7 +256,8 @@ public class Window extends JFrame {
 		
 		// ---- label SI Min ----
 		labelResultSIMin = new JLabel();
-		labelResultSIMin.setText(XMLDate.dateLabels("labelSIMin") + " ");
+		labelResultSIMin.setText(XMLDate.dateLabels("labelSIMin"));
+		labelResultSIMin.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMin.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelResultSIMin, new GridBagConstraints(14, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -264,7 +265,8 @@ public class Window extends JFrame {
 		
 		// ---- label SI Max ----
 		labelResultSIMax = new JLabel();
-		labelResultSIMax.setText(XMLDate.dateLabels("labelSIMax") + " ");
+		labelResultSIMax.setText(XMLDate.dateLabels("labelSIMax"));
+		labelResultSIMax.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMax.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelResultSIMax, new GridBagConstraints(15, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -701,14 +703,14 @@ public class Window extends JFrame {
 		// ---- JTextField SI High ----
 		JTextField textFieldResultSIHighTemp = new JTextField();
 		textFieldResultSIHighTemp.setMinimumSize(getPreferredSize());
-		textFieldResultSIHighTemp.setPreferredSize(new Dimension(60, 20));
 		contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0)); //0, 0, 5, 10
 		textFieldResultSIHigh.add(textFieldResultSIHighTemp);
 		
 		// ---- buttonUpdateCSV ----
-		JButton buttonUpdateCSVTemp = new JButton("UpdateCSV");
+		JButton buttonUpdateCSVTemp = new JButton(XMLDate.dateLabels("buttonUpdateCSV"));
+		buttonUpdateCSVTemp.setToolTipText(XMLDate.dateLabels("textOverUpdateCSV"));
 		buttonUpdateCSVTemp.setFocusPainted(false);
 		buttonUpdateCSVTemp.setEnabled(false);
 		buttonUpdateCSVTemp.setMinimumSize(getPreferredSize());

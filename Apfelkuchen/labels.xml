@@ -49,6 +49,8 @@
 
 		<errorTitleDialog>Fehler</errorTitleDialog>
 		<errorTextDialog>Bitte prüfen Sie eingaben</errorTextDialog>
-	</de>
+		<buttonUpdateCSV>U</buttonUpdateCSV>
+		
+			<textOverUpdateCSV>Update CSV</textOverUpdateCSV></de>
 
 </root>
