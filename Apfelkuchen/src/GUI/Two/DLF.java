@@ -119,6 +119,8 @@ public class DLF extends JFrame{
 		JPanel menuePanel=new JPanel();
 		buttonReset=new JButton("Reset");
 		menuePanel.add(buttonReset);
+		
+		//add Controler
 		toggle.setText("Natursicht");
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -133,6 +135,7 @@ public class DLF extends JFrame{
 	    };
 	    toggle.addActionListener(actionListener);
 		menuePanel.add(toggle);
+		
 		buttonNext=new JButton("Weiter");
 		menuePanel.add(buttonNext);
 		getContentPane().add(menuePanel, BorderLayout.NORTH);
