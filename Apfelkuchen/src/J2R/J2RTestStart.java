@@ -64,8 +64,8 @@ public class J2RTestStart {
 		String[] rowNames_sub = new String[]{"test1","test2","test3","test4","test5"}; //Rownames from R
 		
 		
-		code.addStringArray("DColNames", colNames_sub);
-		code.addStringArray("DRowNames", rowNames_sub);
+		code.addStringArray(colNamesResultName, colNames_sub);
+		code.addStringArray(rowNamesResultName, rowNames_sub);
 		
 		
 		code.addDoubleMatrix("D", dMatrix);
@@ -73,8 +73,8 @@ public class J2RTestStart {
 		code.addStringArray("role", role);
 		
 //		code.addRCode("D<-data.frame(D_Inhalt)");
-		code.addRCode("rownames(D)<-DRownames");
-		code.addRCode("colnames(D)<-DColNames");
+		code.addRCode("rownames(D)<-".concat(rowNamesResultName));
+		code.addRCode("colnames(D)<-".concat(colNamesResultName));
 		
 //		code.addRCode("D<-D_Inhalt");
 		

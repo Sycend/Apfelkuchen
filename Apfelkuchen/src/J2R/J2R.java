@@ -4,12 +4,27 @@ import rcaller.RCaller;
 import rcaller.RCode;
 import rcaller.ROutputParser;
 
+/**
+ * Class for operating the RCaller.
+ * 
+ * @author Christoph Wütschner, Clemens Kretzer, Florian Then
+ *
+ */
 public class J2R {
 	private RCaller caller;
 	private RCode code;
 	private String rExePfad;
 	private String skriptPath;
 
+	/**
+	 * Creates a new object of J2R.
+	 * 
+	 * -> Inits RCaller with initRCaller() -> Inits RScript with Rskript(skript)
+	 * -> Inits RCode with initRCode()
+	 * 
+	 * @param skript
+	 *            The path of the script with your R code.
+	 */
 	public J2R(String skript) {
 		initRCaller("C://Program Files/R/R-3.1.1/bin/x64");// ersetzten wenn
 															// bekannt wo das
@@ -18,16 +33,36 @@ public class J2R {
 		initRCode();
 	};
 
+	/**
+	 * This method initializes the RCaller. A new RCaller object is created.
+	 * After that the pathprefix is is appendet with the location of the R.exe.
+	 * The caller executable is set to this path.
+	 * 
+	 * @param PathPrefix
+	 *            this is the path of the bin folder in the R program folder
+	 */
 	private void initRCaller(String PathPrefix) {
 		caller = new RCaller();
 		rExePfad = PathPrefix.concat("/R.exe");
 		caller.setRExecutable(rExePfad);
 	}
 
+	/**
+	 * Sets the skriptPath parameter with the skript string
+	 * 
+	 * @param skript
+	 *            The path of the R script you want to use
+	 *
+	 */
 	private void initRskript(String skript) {
 		skriptPath = skript;
 	}
 
+	/**
+	 * This method initializes the RCode. The source of the code is set to the
+	 * Path of the script you want to use. This path is provided with the
+	 * Construktor
+	 */
 	private void initRCode() {
 		code = null;
 		code = new RCode();
@@ -47,19 +82,17 @@ public class J2R {
 
 	public void runRCaller(String s) {
 		caller.runAndReturnResultOnline(s);
-		
+
 	}
 
-	public ROutputParser getParser()
-	{
+	public ROutputParser getParser() {
 		return caller.getParser();
 	}
-	
-	public void runAndReturnResultOnline(String s)
-	{
+
+	public void runAndReturnResultOnline(String s) {
 		caller.runAndReturnResultOnline(s);
 	}
-	
+
 	public void stopRCaller() {
 
 		caller.stopStreamConsumers();
