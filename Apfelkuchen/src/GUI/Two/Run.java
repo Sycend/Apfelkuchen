@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Main used to Start MainWindow + ReadCSV
+ * Main used to Start Window1 + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.9
+ * @version 2.0.10
  */
 public class Run {
 	private static String[] role = new String[] { "controlled", "constant", "scale-up", "dependent" };
@@ -28,24 +28,29 @@ public class Run {
 	protected static int currentGridSizeHigh = DEFAULT_GRID_SIZE_HIGH;
 	protected static int currentGridSizeLow = DEFAULT_GRID_SIZE_LOW;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
-
+	
 	public static void main(String args[]) {
+		//FIXME FONT size will not get changed yet
+		Run.currentGridSizeHigh *= (double)Run.CURRENT_WIDTH / (double)1366;
+		Run.currentGridSizeLow *= (double)Run.CURRENT_WIDTH / (double)1366;
+		//Run.currentGridSizeLow += 10;
+		
 		new Window();
 		new Thread(new ReadCSVRunnable()).start();
 	}
-
+	
 	public static void addRow() {
 		rows++;
 	}
-
+	
 	public static void removeRow() {
 		rows--;
 	}
-
+	
 	public static String[] getRole() {
 		return role;
 	}
-
+	
 	public static String[] getUnits() {
 		String[] tmp = new String[Run.unitsArray.size()];
 		for (int i = 0; i < Run.unitsArray.size(); i++) {
@@ -88,7 +93,7 @@ public class Run {
 		String[] tmp = new String[tmp0.size()];
 		return tmp0.toArray(tmp);
 	}
-
+	
 	// Save date from Window one for using in R functions. All elements of array
 	// are string
 	public static void savaDateFromFields() {

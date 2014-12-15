@@ -23,10 +23,9 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
- * Main Window
- * 
+ * Window1
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
- * @version 1.2.0
+ * @version 1.2.1
  */
 public class Window extends JFrame {
 	
@@ -79,11 +78,8 @@ public class Window extends JFrame {
 		super(XMLDate.dateLabels("title"));
 		
 		System.out.println("width: "+Run.CURRENT_WIDTH+" height: "+Run.CURRENT_HEIGHT);
-		if (Run.CURRENT_WIDTH < Run.DEFAULT_WIDTH){ //low res < 1100
+		if (Run.CURRENT_WIDTH < Run.DEFAULT_WIDTH){ 
 			setSize(Run.CURRENT_WIDTH-50, Run.DEFAULT_HEIGHT);
-		} else if (Run.CURRENT_WIDTH > 1600){
-			//FIXME fix setSize for > 1600
-			setSize(Run.DEFAULT_WIDTH, Run.DEFAULT_HEIGHT);
 		} else { //Default
 			setSize(Run.DEFAULT_WIDTH, Run.DEFAULT_HEIGHT);
 		}
@@ -94,25 +90,14 @@ public class Window extends JFrame {
 		setVisible(true);
 	}
 	
-	public void init() {
-		//TODO add something for 800*600
-		if (Run.CURRENT_WIDTH < Run.DEFAULT_WIDTH){ //low res < 1100
-			Run.currentFontSize = 15;
-			Run.currentGridSizeHigh /= 1.5;
-			Run.currentGridSizeLow /= 1.5;
-			Run.currentGridSizeLow += 10;
-		} else if (Run.CURRENT_WIDTH > 1600){ // high res > 1600
-			Run.currentFontSize = Run.HIGHRES_FONT_SIZE;
-			Run.currentGridSizeHigh *= 1.5;
-			Run.currentGridSizeLow *= 1.5;
-		}
-		
+	public void init() {		
 		// ======== contentPanel ========
 		contentPanel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanel.setLayout(new GridBagLayout());
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] {
 		//80, 80, 80, 80, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,
-		Run.currentGridSizeHigh+20, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+10, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
+		//Run.currentGridSizeHigh+20, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+10, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow,
+		Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+10, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		((GridBagLayout) contentPanel.getLayout()).rowHeights = new int[] { 0,
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -496,12 +481,10 @@ public class Window extends JFrame {
 		textFieldDimension.add(textFieldDimensionTemp);
 		
 		// ---- JTextField Unit ----
-		textFieldUnitTemp.setMinimumSize(getPreferredSize()); //30, 20
+		textFieldUnitTemp.setMinimumSize(getPreferredSize());
 		textFieldUnitTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("textFieldUnit.size: "
-						+ textFieldUnit.size());
 				new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
 				repaint();
 				setVisible(true);
@@ -547,19 +530,17 @@ public class Window extends JFrame {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
-								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
-									if (Window.textFieldLow.get(i).getText() != "") {
-										try {
-											Run.unitsArray.get(n).setLow(Double.parseDouble(Window.textFieldLow.get(i).getText()));
-											Window.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
-											if (comboBoxRoleTemp.getSelectedItem() == "constant"){
-												Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
-											}
-										} catch (NumberFormatException e) {
-											// we discard the Exception
-										}
+							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
+							&& Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
+							&& Window.textFieldLow.get(i).getText() != "") {
+								try {
+									Run.unitsArray.get(n).setLow(Double.parseDouble(Window.textFieldLow.get(i).getText()));
+									Window.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
+									if (comboBoxRoleTemp.getSelectedItem() == "constant") {
+										Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
 									}
+								} catch (NumberFormatException e) {
+									// we discard the Exception
 								}
 							}
 						}
@@ -603,16 +584,14 @@ public class Window extends JFrame {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
-								if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
-									if (Window.textFieldHigh.get(i).getText() != "") {
-										try {
-											Run.unitsArray.get(n).setHigh(Double.parseDouble(Window.textFieldHigh.get(i).getText()));
-											Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
-										} catch (NumberFormatException e) {
-											// we discard the Exception
-										}
-									}
+							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
+							&& Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
+							&& Window.textFieldHigh.get(i).getText() != "") {
+								try {
+									Run.unitsArray.get(n).setHigh(Double.parseDouble(Window.textFieldHigh.get(i).getText()));
+									Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
+								} catch (NumberFormatException e) {
+									// we discard the Exception
 								}
 							}
 						}
@@ -751,7 +730,10 @@ public class Window extends JFrame {
 		buttonUpdateCSVTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!textFieldDimensionTemp.getText().isEmpty() && !textFieldUnitTemp.getText().isEmpty() && !textFieldResultSILowTemp.getText().isEmpty() && !textFieldResultSIHighTemp.getText().isEmpty()){
+				if (!textFieldDimensionTemp.getText().isEmpty()
+				&& !textFieldUnitTemp.getText().isEmpty()
+				&& !textFieldResultSILowTemp.getText().isEmpty()
+				&& !textFieldResultSIHighTemp.getText().isEmpty()){
 					if (!buttonUpdateCSVTemp.isEnabled()) {
 						buttonUpdateCSVTemp.setEnabled(true); 
 					}
