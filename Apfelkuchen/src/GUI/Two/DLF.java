@@ -120,7 +120,7 @@ public class DLF extends JFrame{
 		buttonReset=new JButton("Reset");
 		menuePanel.add(buttonReset);
 		
-		//add Controler
+		//add Controller
 		toggle.setText("Natursicht");
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
