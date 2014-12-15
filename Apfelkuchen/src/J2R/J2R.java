@@ -35,7 +35,7 @@ public class J2R {
 
 	/**
 	 * This method initializes the RCaller. A new RCaller object is created.
-	 * After that the pathprefix is is appendet with the location of the R.exe.
+	 * After that the pathprefix is appended with the location of the R.exe.
 	 * The caller executable is set to this path.
 	 * 
 	 * @param PathPrefix
@@ -70,6 +70,12 @@ public class J2R {
 		code.R_source(skriptPath);
 	}
 
+	/**
+	 * This method sets the code of the caller instance to the parameter Code
+	 * 
+	 * @param Code
+	 *            the Code with the R commands
+	 */
 	public void setCode(RCode Code) {
 		// code.clear();
 		// code.R_source(skriptPath); //wenn mehrere Skripte benutzt werden
@@ -80,19 +86,33 @@ public class J2R {
 
 	}
 
-	public void runRCaller(String s) {
+	/**
+	 * The caller runs the R command which is send over in the Parameter s
+	 * 
+	 * @param s
+	 *            The R command to be executed
+	 */
+	public void runAndReturnResultOnline(String s) {
 		caller.runAndReturnResultOnline(s);
 
 	}
 
+	/**
+	 * This method returns the parser of the RCaller from this class (currently
+	 * running)
+	 * 
+	 * @return caller.getParser() the type is ROutputParser
+	 */
 	public ROutputParser getParser() {
 		return caller.getParser();
 	}
 
-	public void runAndReturnResultOnline(String s) {
-		caller.runAndReturnResultOnline(s);
-	}
 
+	/**
+	 * !!!CAUTION!!!
+	 * The running RCaller instance is STOPPED. 
+	 * ALL TEMPFILES will be DELETED.
+	 */
 	public void stopRCaller() {
 
 		caller.stopStreamConsumers();
@@ -100,6 +120,12 @@ public class J2R {
 		caller.deleteTempFiles();
 	}
 
+	/**
+	 * Returns the RCode of the instance of this class. This code is used in the
+	 * RCaller instance.
+	 * 
+	 * @return this.code
+	 */
 	public RCode getRCode() {
 		return this.code;
 	}

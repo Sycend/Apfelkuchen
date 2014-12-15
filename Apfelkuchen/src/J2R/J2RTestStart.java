@@ -19,7 +19,7 @@ public class J2RTestStart {
 
 	public static void main(String[] args) {
 
-		// Dieser Abachnitt muss nach der Verknüpfung mit dem Kontroller wieder
+		// Dieser Abschnitt muss nach der Verknüpfung mit dem Kontroller wieder
 		// erweitert werden
 		
 		String[] role = {"Controled"};
