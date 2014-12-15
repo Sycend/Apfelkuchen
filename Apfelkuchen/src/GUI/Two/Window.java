@@ -360,7 +360,7 @@ public class Window extends JFrame {
 					setVisible(false);
 					
 					// test window 2. just for testing
-					new Window2(
+					new DLF(
 							new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 },
 									{ 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } },// ,{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0}},
 							new String[] { "Höhe", "Breite", "Dichte",

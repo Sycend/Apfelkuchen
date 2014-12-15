@@ -25,7 +25,7 @@ import java.awt.event.ActionListener;
  * @version 1.0.2
  * Start of window2 with 1194, 550 size
  */
-public class Window2 extends JFrame{
+public class DLF extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private double[][] vMatrix;
 	private String[] rowNames;
@@ -60,7 +60,7 @@ public class Window2 extends JFrame{
 	private JButton buttonNext;
 	private JToggleButton toggle= new JToggleButton();
 	
-	public Window2(double[][] v_Matrix,String[] row_Names,String[] col_Names, String[][] minMax, String[][] siDimensionslosKontrolle) {
+	public DLF(double[][] v_Matrix,String[] row_Names,String[] col_Names, String[][] minMax, String[][] siDimensionslosKontrolle) {
 
 		vMatrix=v_Matrix;
 		rowNames=row_Names;
