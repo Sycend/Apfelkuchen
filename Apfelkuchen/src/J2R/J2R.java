@@ -35,7 +35,7 @@ public class J2R {
 
 	/**
 	 * This method initializes the RCaller. A new RCaller object is created.
-	 * After that the pathprefix is appendet with the location of the R.exe.
+	 * After that the pathprefix is appended with the location of the R.exe.
 	 * The caller executable is set to this path.
 	 * 
 	 * @param PathPrefix
