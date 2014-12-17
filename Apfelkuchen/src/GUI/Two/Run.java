@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Main used to Start Window1 + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.10
+ * @version 2.0.11
  */
 public class Run {
 	private static String[] role = new String[] { "controlled", "constant", "scale-up", "dependent" };
@@ -17,24 +17,24 @@ public class Run {
 	protected static String csvName = "spezifikation.csv";
 	protected static final int DEFAULT_WIDTH = 1100; //1194
 	protected static final int DEFAULT_HEIGHT = 500; //550
-	protected static final int CURRENT_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	protected static final int CURRENT_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-	protected static final int HIGHRES_FONT_SIZE = 18;
 	protected static final int DEFAULT_FONT_SIZE = 16;
-	protected static final int LOWRES_FONT_SIZE = 15;
-	protected static int currentFontSize = DEFAULT_FONT_SIZE;
-	protected static final int DEFAULT_GRID_SIZE_HIGH = 80;
-	protected static final int DEFAULT_GRID_SIZE_LOW = 40;
-	protected static int currentGridSizeHigh = DEFAULT_GRID_SIZE_HIGH;
-	protected static int currentGridSizeLow = DEFAULT_GRID_SIZE_LOW;
+	protected static int currentWidth = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	protected static int currentHeight = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	//this needs testing on resolutions that are > 1366*x
+	protected static int currentFontSize = (int)((double)DEFAULT_FONT_SIZE * (double)Run.currentWidth / (double)1366);
+	protected static int currentGridSizeHigh = (int)((double)80 * ((double)Run.currentWidth / (double)1366));
+	protected static int currentGridSizeLow = (int)((double)40 * ((double)Run.currentWidth / (double)1366));
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 	
 	public static void main(String args[]) {
-		//FIXME FONT size will not get changed yet
-		Run.currentGridSizeHigh *= (double)Run.CURRENT_WIDTH / (double)1366;
-		Run.currentGridSizeLow *= (double)Run.CURRENT_WIDTH / (double)1366;
-		//Run.currentGridSizeLow += 10;
-		
+		System.out.println("width: "+Run.currentWidth+" height: "+Run.currentHeight);
+		if (Run.currentWidth < Run.DEFAULT_WIDTH){
+			currentWidth -= 50;
+			currentHeight = DEFAULT_HEIGHT;
+		} else { //Default
+			currentWidth = DEFAULT_WIDTH;
+			currentHeight = DEFAULT_HEIGHT;
+		}
 		new Window();
 		new Thread(new ReadCSVRunnable()).start();
 	}

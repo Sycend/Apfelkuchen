@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Window1
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
- * @version 1.2.1
+ * @version 1.2.2
  */
 public class Window extends JFrame {
 	
@@ -76,15 +76,8 @@ public class Window extends JFrame {
 	
 	public Window() {
 		super(XMLDate.dateLabels("title"));
-		
-		System.out.println("width: "+Run.CURRENT_WIDTH+" height: "+Run.CURRENT_HEIGHT);
-		if (Run.CURRENT_WIDTH < Run.DEFAULT_WIDTH){ 
-			setSize(Run.CURRENT_WIDTH-50, Run.DEFAULT_HEIGHT);
-		} else { //Default
-			setSize(Run.DEFAULT_WIDTH, Run.DEFAULT_HEIGHT);
-		}
-		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(Run.currentWidth, Run.currentHeight);
 		
 		init();
 		setVisible(true);
@@ -414,6 +407,8 @@ public class Window extends JFrame {
 		JTextField textFieldLowTemp = new JTextField();
 		JTextField textFieldHighTemp = new JTextField();
 		JComboBox<String> comboBoxRoleTemp = new JComboBox<String>(Run.getRole());
+		JTextField textFieldResultSILowTemp = new JTextField();
+		JTextField textFieldResultSIHighTemp = new JTextField();
 		
 		// ---- JTextField Name ----
 		contentPanel.add(textFieldNameTemp, new GridBagConstraints(0,
@@ -433,9 +428,10 @@ public class Window extends JFrame {
 		comboBoxRoleTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBoxRoleTemp.getSelectedItem() == "constant"){
-					//FIXME disable textFieldResultSIHigh as well
 					textFieldHighTemp.setEnabled(false);
+					textFieldResultSIHighTemp.setEnabled(false);
 					textFieldHighTemp.setText(textFieldLowTemp.getText());
+					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
 				} else {
 					textFieldHighTemp.setEnabled(true);
 				}
@@ -474,7 +470,6 @@ public class Window extends JFrame {
 			}
 			
 		});
-		
 		contentPanel.add(textFieldDimensionTemp, new GridBagConstraints(3,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
@@ -507,7 +502,6 @@ public class Window extends JFrame {
 			}
 			
 		});
-		
 		contentPanel.add(textFieldUnitTemp, new GridBagConstraints(4,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
@@ -515,16 +509,16 @@ public class Window extends JFrame {
 		
 		// ---- JTextField Low ----
 		// textFieldLowTemp.setColumns(4);
-		textFieldLowTemp.setMinimumSize(getPreferredSize());		
+		textFieldLowTemp.setMinimumSize(getPreferredSize());
 		textFieldLowTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
-
+			
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 			}
-
+			
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				if (Run.unitsArray.size() > 0) {
@@ -672,7 +666,6 @@ public class Window extends JFrame {
 		textFieldCand.add(textFieldCandTemp);
 		
 		// ---- JTextField SI Low ----
-		JTextField textFieldResultSILowTemp = new JTextField();
 		textFieldResultSILowTemp.setMinimumSize(getPreferredSize());
 		contentPanel.add(textFieldResultSILowTemp, new GridBagConstraints(14,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
@@ -680,7 +673,6 @@ public class Window extends JFrame {
 		textFieldResultSILow.add(textFieldResultSILowTemp);
 		
 		// ---- JTextField SI High ----
-		JTextField textFieldResultSIHighTemp = new JTextField();
 		textFieldResultSIHighTemp.setMinimumSize(getPreferredSize());
 		contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
