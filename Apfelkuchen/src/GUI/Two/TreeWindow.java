@@ -72,21 +72,21 @@ public class TreeWindow extends JFrame {
 				if (e.getSource() == buttonOk) {
 					if (checkNode == true) {
 						setVisible(false);
-						Window.setSelectionItem(selectedItemParent, selectedItem, textFieldDimensionPointer, textFieldUnitPointer);
+						WindowRelevantFactors.setSelectionItem(selectedItemParent, selectedItem, textFieldDimensionPointer, textFieldUnitPointer);
 						dispose();
 						
 						if (Run.unitsArray.size() > 0) {
-							for (int i = 0; i < Window.textFieldDimension.size(); i++) {
+							for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 								for (int n = 0; n < Run.unitsArray.size(); n++) {
-									if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
-										if (Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
-											Window.textFieldM.get(i).setText("" + Run.unitsArray.get(n).getM());
-											Window.textFieldK.get(i).setText("" + Run.unitsArray.get(n).getK());
-											Window.textFieldS.get(i).setText("" + Run.unitsArray.get(n).getS());
-											Window.textFieldKel.get(i).setText("" + Run.unitsArray.get(n).getKel());
-											Window.textFieldMol.get(i).setText("" + Run.unitsArray.get(n).getMol());
-											Window.textFieldAmp.get(i).setText("" + Run.unitsArray.get(n).getAmp());
-											Window.textFieldCand.get(i).setText("" + Run.unitsArray.get(n).getCand());
+									if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
+										if (WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
+											WindowRelevantFactors.textFieldM.get(i).setText("" + Run.unitsArray.get(n).getM());
+											WindowRelevantFactors.textFieldK.get(i).setText("" + Run.unitsArray.get(n).getK());
+											WindowRelevantFactors.textFieldS.get(i).setText("" + Run.unitsArray.get(n).getS());
+											WindowRelevantFactors.textFieldKel.get(i).setText("" + Run.unitsArray.get(n).getKel());
+											WindowRelevantFactors.textFieldMol.get(i).setText("" + Run.unitsArray.get(n).getMol());
+											WindowRelevantFactors.textFieldAmp.get(i).setText("" + Run.unitsArray.get(n).getAmp());
+											WindowRelevantFactors.textFieldCand.get(i).setText("" + Run.unitsArray.get(n).getCand());
 										}
 									}
 								}

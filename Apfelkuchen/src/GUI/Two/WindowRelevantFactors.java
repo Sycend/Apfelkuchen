@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
  * @version 1.2.2
  */
-public class Window extends JFrame {
+public class WindowRelevantFactors extends JFrame {
 	
 	private static final long serialVersionUID = 2194838597172270413L;
 	private JScrollPane scrollpane;
@@ -74,7 +74,7 @@ public class Window extends JFrame {
 	protected static ArrayList<String> dateFromFieldString = new ArrayList<String>();
 	private JPanel contentPanel = new JPanel();
 	
-	public Window() {
+	public WindowRelevantFactors() {
 		super(XMLDate.dateLabels("title"));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Run.currentWidth, Run.currentHeight);
@@ -338,7 +338,7 @@ public class Window extends JFrame {
 					setVisible(false);
 					
 					// test window 2. just for testing
-					new DLF(
+					new WindowDimensionlessFactors(
 							new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 },
 									{ 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } },// ,{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0}},
 							new String[] { "Höhe", "Breite", "Dichte",
@@ -522,16 +522,16 @@ public class Window extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				if (Run.unitsArray.size() > 0) {
-					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
+					for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
-							&& Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
-							&& Window.textFieldLow.get(i).getText() != "") {
+							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
+							&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
+							&& WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
 								try {
-									Run.unitsArray.get(n).setLow(Double.parseDouble(Window.textFieldLow.get(i).getText()));
-									Window.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
+									Run.unitsArray.get(n).setLow(Double.parseDouble(WindowRelevantFactors.textFieldLow.get(i).getText()));
+									WindowRelevantFactors.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
 									if (comboBoxRoleTemp.getSelectedItem() == "constant") {
-										Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
+										WindowRelevantFactors.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
 									}
 								} catch (NumberFormatException e) {
 									// we discard the Exception
@@ -576,14 +576,14 @@ public class Window extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				if (Run.unitsArray.size() > 0) {
-					for (int i = 0; i < Window.textFieldDimension.size(); i++) {
+					for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (Window.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
-							&& Window.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
-							&& Window.textFieldHigh.get(i).getText() != "") {
+							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
+							&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
+							&& WindowRelevantFactors.textFieldHigh.get(i).getText() != "") {
 								try {
-									Run.unitsArray.get(n).setHigh(Double.parseDouble(Window.textFieldHigh.get(i).getText()));
-									Window.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
+									Run.unitsArray.get(n).setHigh(Double.parseDouble(WindowRelevantFactors.textFieldHigh.get(i).getText()));
+									WindowRelevantFactors.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
 								} catch (NumberFormatException e) {
 									// we discard the Exception
 								}

@@ -35,7 +35,7 @@ public class Run {
 			currentWidth = DEFAULT_WIDTH;
 			currentHeight = DEFAULT_HEIGHT;
 		}
-		new Window();
+		new WindowRelevantFactors();
 		new Thread(new ReadCSVRunnable()).start();
 	}
 	
@@ -99,7 +99,7 @@ public class Run {
 	public static void savaDateFromFields() {
 		// copy array with date from field of window one into array in the run
 		// funk.
-		dateFromWindowOne = Window.dateFromFieldString;
+		dateFromWindowOne = WindowRelevantFactors.dateFromFieldString;
 		// print out the array for testing
 		for (int i = 0; i < 16 * Run.rows; i++) {
 			System.out.println(dateFromWindowOne.get(i).toString() + " Ausgabe");
