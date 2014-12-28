@@ -30,8 +30,7 @@ public class CSV {
 	 *             if it can't close the FileWriter
 	 */
 	public static void writeCSV(String Inputfile) {
-		//FIXME currently we only append values we might
-		// want to delete the file we write to first
+		//note: we overwrite the Inputfile
 		BufferedWriter fw = null;
 		Writer writer = null;
 		try {
@@ -98,6 +97,7 @@ public class CSV {
 	 *             if it can't close the FileWriter
 	 */
 	public static void writeCSV(File Inputfile) {
+		//note: we overwrite the Inputfile
 		BufferedWriter fw = null;
 		Writer writer = null;
 		try {
@@ -160,8 +160,6 @@ public class CSV {
 	 * @param Inputfile A String that will be turned into a File and read
 	 */
 	public static void readCSV(String Inputfile) {
-		//FIXME make method hanlde comma and point spearated double values
-		//currently we handle only comma separated double values
 		System.out.println("Reading: " + Inputfile);
 		ArrayList<String> content = new ArrayList<String>();
 		try {
@@ -267,7 +265,5 @@ public class CSV {
 			System.out.println("Could not find: " + Inputfile.getAbsolutePath());
 		}
 		return tmp;
-	}
-	
+	}	
 }
-

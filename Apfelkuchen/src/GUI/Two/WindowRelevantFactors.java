@@ -1,6 +1,5 @@
 package GUI.Two;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -28,11 +27,11 @@ import java.util.ArrayList;
  * @version 1.2.2
  */
 public class WindowRelevantFactors extends JFrame {
-	
+	//serialVersionUID is generated
 	private static final long serialVersionUID = 2194838597172270413L;
 	private JScrollPane scrollpane;
 	private JButton buttonRemove;
-	private JButton buttonOptimize;
+	private JButton buttonNext;
 	private JButton buttonNewField;
 	private JLabel labelName;
 	private JLabel labelAbbreviation;
@@ -66,13 +65,12 @@ public class WindowRelevantFactors extends JFrame {
 	protected static ArrayList<JTextField> textFieldCand = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldResultSILow = new ArrayList<JTextField>();
 	protected static ArrayList<JTextField> textFieldResultSIHigh = new ArrayList<JTextField>();
-	protected static ArrayList<JTextField> fieldExpon = new ArrayList<JTextField>();
 	protected static ArrayList<JComboBox<String>> comboBoxRole = new ArrayList<JComboBox<String>>();
 	protected static ArrayList<JButton> buttonUpdateCSV = new ArrayList<JButton>();
 	
 	// Save information from Name and Abbr fields
 	protected static ArrayList<String> dateFromFieldString = new ArrayList<String>();
-	private JPanel contentPanel = new JPanel();
+	protected JPanel contentPanel = new JPanel();
 	
 	public WindowRelevantFactors() {
 		super(XMLDate.dateLabels("title"));
@@ -83,14 +81,14 @@ public class WindowRelevantFactors extends JFrame {
 		setVisible(true);
 	}
 	
-	public void init() {		
+	public void init() {
 		// ======== contentPanel ========
 		contentPanel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanel.setLayout(new GridBagLayout());
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] {
 		//80, 80, 80, 80, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,
 		//Run.currentGridSizeHigh+20, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+10, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow,
-		Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+6, Run.currentGridSizeLow+10, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
+		Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+6, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		((GridBagLayout) contentPanel.getLayout()).rowHeights = new int[] { 0,
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -158,7 +156,7 @@ public class WindowRelevantFactors extends JFrame {
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 5, 5, 5), 0, 0));
+				new Insets(0, 0, 5, 5), 0, 0));
 		
 		// ---- label High ----
 		labelHigh = new JLabel();
@@ -167,7 +165,7 @@ public class WindowRelevantFactors extends JFrame {
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 5, 5, 5), 0, 0));
+				new Insets(0, 0, 5, 5), 0, 0));
 		
 		// ---- label m ----
 		labelM = new JLabel();
@@ -255,8 +253,9 @@ public class WindowRelevantFactors extends JFrame {
 		buttonNewField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewField) {
-					Run.addRow();
-					newField();
+					//Run.addRow();
+					Run.rows++;
+					newFactor();
 					contentPanel.revalidate();
 					contentPanel.repaint();
 				}
@@ -305,7 +304,8 @@ public class WindowRelevantFactors extends JFrame {
 						textFieldResultSILow.remove(Run.rows - 1);
 						textFieldResultSIHigh.remove(Run.rows - 1);
 						buttonUpdateCSV.remove(Run.rows - 1);
-						Run.removeRow();
+						//Run.removeRow();
+						Run.rows--;
 						contentPanel.revalidate();
 						contentPanel.repaint();
 					}
@@ -314,18 +314,17 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		p2.add(buttonRemove);
 		
-		buttonOptimize = new JButton(XMLDate.dateLabels("buttonNext"));
-		buttonOptimize.setFocusPainted(false);
-		buttonOptimize.addActionListener(new ActionListener() {
+		buttonNext = new JButton(XMLDate.dateLabels("buttonNext"));
+		buttonNext.setFocusPainted(false);
+		buttonNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonOptimize) {
-					// --- check field Abbreviation---
+				if (e.getSource() == buttonNext) {
+					// --- check field Abbreviation ---
 					String message = XMLDate.dateLabels("errorTextDialog")
 							+ " für ";
 					String title = XMLDate.dateLabels("errorTitleDialog");
 					for (int i = 0; i < textFieldAbbreviation.size(); i++) {
 						String input = textFieldAbbreviation.get(i).getText();
-
 						// Shows an error dialog if false
 						if ((new StringCheck().abbreviationCheck(input)) == false) {
 							JOptionPane.showMessageDialog(new JFrame(), message
@@ -335,6 +334,7 @@ public class WindowRelevantFactors extends JFrame {
 						}
 
 					}
+					Run.saveWRF();
 					setVisible(false);
 					
 					// test window 2. just for testing
@@ -348,8 +348,8 @@ public class WindowRelevantFactors extends JFrame {
 							new String[][] { { "0", "0" }, { "0", "0" },
 									{ "0", "0" }, { "0", "0" }, { "0", "0" },
 									{ "0", "0" }, { "0", "0" } });
-
-					for (int i = 0; i < Run.rows; i++) {
+					
+					/*for (int i = 0; i < Run.rows; i++) {
 						dateFromFieldString.add(textFieldName.get(i).getText());
 						dateFromFieldString.add(textFieldAbbreviation.get(i)
 								.getText());
@@ -372,12 +372,13 @@ public class WindowRelevantFactors extends JFrame {
 						dateFromFieldString.add(textFieldResultSIHigh.get(i)
 								.getText());
 					}
-					Run.savaDateFromFields();
+					Run.savaDateFromFields();*/
+					
 					dispose();
 				}
 			}
 		});
-		p2.add(buttonOptimize);
+		p2.add(buttonNext);
 		getContentPane().add(p2, BorderLayout.NORTH);
 		
 		scrollpane = new JScrollPane(contentPanel);
@@ -396,7 +397,7 @@ public class WindowRelevantFactors extends JFrame {
 		return dateFromFieldString;
 	}
 	
-	public void newField() {		
+	public void newFactor() {
 		// ---- Declaration of Temp Objects ----
 		//we do this to have access to these Temp objects
 		//in action / mouselisteners
@@ -406,7 +407,7 @@ public class WindowRelevantFactors extends JFrame {
 		JTextField textFieldUnitTemp = new JTextField();
 		JTextField textFieldLowTemp = new JTextField();
 		JTextField textFieldHighTemp = new JTextField();
-		JComboBox<String> comboBoxRoleTemp = new JComboBox<String>(Run.getRole());
+		JComboBox<String> comboBoxRoleTemp = new JComboBox<String>(new String[] {"controlled", "constant", "scale-up", "dependent"});
 		JTextField textFieldResultSILowTemp = new JTextField();
 		JTextField textFieldResultSIHighTemp = new JTextField();
 		
@@ -434,6 +435,7 @@ public class WindowRelevantFactors extends JFrame {
 					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
 				} else {
 					textFieldHighTemp.setEnabled(true);
+					textFieldResultSIHighTemp.setEnabled(true);
 				}
 			}
 		});
@@ -530,9 +532,6 @@ public class WindowRelevantFactors extends JFrame {
 								try {
 									Run.unitsArray.get(n).setLow(Double.parseDouble(WindowRelevantFactors.textFieldLow.get(i).getText()));
 									WindowRelevantFactors.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
-									if (comboBoxRoleTemp.getSelectedItem() == "constant") {
-										WindowRelevantFactors.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
-									}
 								} catch (NumberFormatException e) {
 									// we discard the Exception
 								}
@@ -544,6 +543,7 @@ public class WindowRelevantFactors extends JFrame {
 				}
 				if (comboBoxRoleTemp.getSelectedItem() == "constant"){
 					textFieldHighTemp.setText(textFieldLowTemp.getText());
+					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
 				}
 			}
 			
@@ -558,7 +558,7 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		contentPanel.add(textFieldLowTemp, new GridBagConstraints(5,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
+				GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 		textFieldLow.add(textFieldLowTemp);
 		
 		// ---- JTextField High ----
@@ -606,7 +606,7 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		contentPanel.add(textFieldHighTemp, new GridBagConstraints(6,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
+				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldHigh.add(textFieldHighTemp);
 		
 		// ---- JTextField m ----
@@ -630,7 +630,7 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldSTemp.setMinimumSize(getPreferredSize());
 		contentPanel.add(textFieldSTemp, new GridBagConstraints(9,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
+				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldS.add(textFieldSTemp);
 		
 		// ---- JTextField kel ----
@@ -669,14 +669,14 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSILowTemp.setMinimumSize(getPreferredSize());
 		contentPanel.add(textFieldResultSILowTemp, new GridBagConstraints(14,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0)); //0, 20, 5, 5
+				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldResultSILow.add(textFieldResultSILowTemp);
 		
 		// ---- JTextField SI High ----
 		textFieldResultSIHighTemp.setMinimumSize(getPreferredSize());
 		contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0)); //0, 0, 5, 10
+				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldResultSIHigh.add(textFieldResultSIHighTemp);
 		
 		// ---- buttonUpdateCSV ----
@@ -749,10 +749,9 @@ public class WindowRelevantFactors extends JFrame {
 			}
 			
 		});
-		
 		contentPanel.add(buttonUpdateCSVTemp, new GridBagConstraints(16,
 		14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 		GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
 		buttonUpdateCSV.add(buttonUpdateCSVTemp);
-	}
+	} //end newFactor
 }

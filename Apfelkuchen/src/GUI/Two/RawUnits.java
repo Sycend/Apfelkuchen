@@ -1,16 +1,13 @@
 package GUI.Two;
 
 /**
- * description here Soon TM
- * 
+ * This is the base Class that works
+ * as a container for relevant factors
  * @author Dominik Hofmann, Mark Leibmann
  * @version 1.1.2
  */
 
 public class RawUnits {
-	
-	/** TODO **/
-	
 	private String dimension = null;
 	private String unit = null;
 	int valuesSI[] = new int [7];
@@ -19,12 +16,11 @@ public class RawUnits {
 	private double low = 0;
 	private double high = 0;
 	
-	RawUnits(){  //StandardKonstruktor
+	RawUnits(){
 		
 	}
 	
 	RawUnits(String dimension, String unit, double low, double high, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) {
-		//ZuweisungsKonstruktor
 		this.dimension = dimension;
 		this.unit = unit;
 		this.low = low;

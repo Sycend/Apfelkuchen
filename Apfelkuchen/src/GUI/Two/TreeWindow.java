@@ -21,6 +21,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  * @version 1.0.5
  */
 public class TreeWindow extends JFrame {
+	//serialVersionUID is generated
+	private static final long serialVersionUID = -6399135783516007764L;
 	private JTree tree;
 	private String selectedItem;
 	private String selectedItemParent;
