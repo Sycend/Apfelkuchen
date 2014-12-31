@@ -9,12 +9,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.swing.JTextField;
 
 /**
  * Main used to Start Window1 + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.15
+ * @version 2.0.16
  */
 public class Run {
 	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
@@ -190,6 +191,13 @@ public class Run {
 			e.printStackTrace();
 		}
 		return tmp;
+	}
+	
+	protected static boolean abbreviationCheck(String input) {
+		if (!input.matches("[a-zA-Z0-9]{1,8}")) {
+			return false;
+		}
+		return true;
 	}
 	
 }

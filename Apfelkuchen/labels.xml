@@ -7,7 +7,7 @@
 		<mnuHelp>Help</mnuHelp>
 		<mnuItemAbout>About</mnuItemAbout>
 
-		<buttonNext>Optimieren</buttonNext>
+		<buttonNext>Next</buttonNext>
 		<buttonOk>
 			OK
 		</buttonOk>
@@ -24,7 +24,7 @@
 		<labelAbbr>
 			Abkürzung
 		</labelAbbr>
-		
+
 		<buttonNewField>
 			Neuer Faktor
 		</buttonNewField>
@@ -50,7 +50,8 @@
 		<errorTitleDialog>Fehler</errorTitleDialog>
 		<errorTextDialog>Bitte prüfen Sie eingaben</errorTextDialog>
 		<buttonUpdateCSV>U</buttonUpdateCSV>
-		
-			<textOverUpdateCSV>Update CSV</textOverUpdateCSV></de>
+
+		<textOverUpdateCSV>Update CSV</textOverUpdateCSV>
+	</de>
 
 </root>

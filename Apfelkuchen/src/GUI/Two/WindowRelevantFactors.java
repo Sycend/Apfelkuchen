@@ -319,44 +319,28 @@ public class WindowRelevantFactors extends JFrame {
 		buttonNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNext) {
-					// --- check field Abbreviation ---
-					String message = XMLDate.dateLabels("errorTextDialog")
-							+ " für ";
+					// --- check textField Abbreviation ---
+					String message = XMLDate.dateLabels("errorTextDialog") + " für ";
 					String title = XMLDate.dateLabels("errorTitleDialog");
 					for (int i = 0; i < textFieldAbbreviation.size(); i++) {
-						String input = textFieldAbbreviation.get(i).getText();
-						// Shows an error dialog if false
-						if ((new StringCheck().abbreviationCheck(input)) == false) {
-							JOptionPane.showMessageDialog(new JFrame(), message
-									+ labelAbbreviation.getText(), title,
-									JOptionPane.ERROR_MESSAGE);
+						if (Run.abbreviationCheck(textFieldAbbreviation.get(i).getText()) == false) {
+							JOptionPane.showMessageDialog(new JFrame(), message + labelAbbreviation.getText(), title, JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-
 					}
+					
 					Run.saveWRF();
 					setVisible(false);
 					
 					// test window 2. just for testing
-					new WindowDimensionlessFactors(
-							new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 },
-									{ 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } },// ,{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0}},
-							new String[] { "Höhe", "Breite", "Dichte",
-									"Temperatur", "Verhältnis" },// ,"Test 1","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3","Test 2","Test 3"},
-							new String[] { "Alpha", "Beta" }, new String[][] {
-									{ "-5", "0" }, { "5", "10" } },
-							new String[][] { { "0", "0" }, { "0", "0" },
-									{ "0", "0" }, { "0", "0" }, { "0", "0" },
-									{ "0", "0" }, { "0", "0" } });
+					new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" }, { "5", "10" } },
+					new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					
 					/*for (int i = 0; i < Run.rows; i++) {
 						dateFromFieldString.add(textFieldName.get(i).getText());
-						dateFromFieldString.add(textFieldAbbreviation.get(i)
-								.getText());
-						dateFromFieldString.add(comboBoxRole.get(i)
-								.getSelectedItem().toString());
-						dateFromFieldString.add(textFieldDimension.get(i)
-								.getText());
+						dateFromFieldString.add(textFieldAbbreviation.get(i).getText());
+						dateFromFieldString.add(comboBoxRole.get(i).getSelectedItem().toString());
+						dateFromFieldString.add(textFieldDimension.get(i).getText());
 						dateFromFieldString.add(textFieldUnit.get(i).getText());
 						dateFromFieldString.add(textFieldM.get(i).getText());
 						dateFromFieldString.add(textFieldK.get(i).getText());
@@ -367,10 +351,8 @@ public class WindowRelevantFactors extends JFrame {
 						dateFromFieldString.add(textFieldCand.get(i).getText());
 						dateFromFieldString.add(textFieldLow.get(i).getText());
 						dateFromFieldString.add(textFieldHigh.get(i).getText());
-						dateFromFieldString.add(textFieldResultSILow.get(i)
-								.getText());
-						dateFromFieldString.add(textFieldResultSIHigh.get(i)
-								.getText());
+						dateFromFieldString.add(textFieldResultSILow.get(i).getText());
+						dateFromFieldString.add(textFieldResultSIHigh.get(i).getText());
 					}
 					Run.savaDateFromFields();*/
 					
