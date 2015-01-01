@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +33,7 @@ public class WindowRelevantFactors extends JFrame {
 	private JScrollPane scrollpane;
 	private JButton buttonRemove;
 	private JButton buttonNext;
-	private JButton buttonNewField;
+	private JButton buttonNewFactor;
 	private JLabel labelName;
 	private JLabel labelAbbreviation;
 	private JLabel labelRole;
@@ -87,7 +88,6 @@ public class WindowRelevantFactors extends JFrame {
 		contentPanel.setLayout(new GridBagLayout());
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] {
 		//80, 80, 80, 80, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,
-		//Run.currentGridSizeHigh+20, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+10, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow,
 		Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+6, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		((GridBagLayout) contentPanel.getLayout()).rowHeights = new int[] { 0,
@@ -248,12 +248,11 @@ public class WindowRelevantFactors extends JFrame {
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 		
-		buttonNewField = new JButton(XMLDate.dateLabels("buttonNewField"));
-		buttonNewField.setFocusPainted(false);
-		buttonNewField.addActionListener(new ActionListener() {
+		buttonNewFactor = new JButton(XMLDate.dateLabels("buttonNewFactor"));
+		buttonNewFactor.setFocusPainted(false);
+		buttonNewFactor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonNewField) {
-					//Run.addRow();
+				if (e.getSource() == buttonNewFactor) {
 					Run.rows++;
 					newFactor();
 					contentPanel.revalidate();
@@ -262,7 +261,7 @@ public class WindowRelevantFactors extends JFrame {
 			}
 		});
 		
-		p2.add(buttonNewField);
+		p2.add(buttonNewFactor);
 		
 		buttonRemove = new JButton(XMLDate.dateLabels("buttonRemove"));
 		buttonRemove.setFocusPainted(false);
@@ -304,7 +303,6 @@ public class WindowRelevantFactors extends JFrame {
 						textFieldResultSILow.remove(Run.rows - 1);
 						textFieldResultSIHigh.remove(Run.rows - 1);
 						buttonUpdateCSV.remove(Run.rows - 1);
-						//Run.removeRow();
 						Run.rows--;
 						contentPanel.revalidate();
 						contentPanel.repaint();
@@ -319,22 +317,23 @@ public class WindowRelevantFactors extends JFrame {
 		buttonNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNext) {
-					// --- check textField Abbreviation ---
-					String message = XMLDate.dateLabels("errorTextDialog") + " für ";
-					String title = XMLDate.dateLabels("errorTitleDialog");
-					for (int i = 0; i < textFieldAbbreviation.size(); i++) {
-						if (Run.abbreviationCheck(textFieldAbbreviation.get(i).getText()) == false) {
-							JOptionPane.showMessageDialog(new JFrame(), message + labelAbbreviation.getText(), title, JOptionPane.ERROR_MESSAGE);
-							return;
-						}
+					if(Run.abbreviationStringCheck() != true){
+						return;
 					}
 					
-					Run.saveWRF();
-					setVisible(false);
+					Run.persistentSaveRelevantFactors();
+					Run.WRF.setVisible(false);
 					
-					// test window 2. just for testing
-					new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" }, { "5", "10" } },
-					new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
+					// Test Window2
+					if (!new File(Run.saveFileNameDimensionlessFactors).exists()){
+						System.out.println("new WindowDimensionlessFactors(Testvalues)");
+						Run.WDF = new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" }, { "5", "10" } },
+						new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
+					} else {
+						System.out.println("restoreDimensionlessFactors()");
+						Run.restorePersistentDimensionlessFactors();
+						Run.WDF = new WindowDimensionlessFactors();
+					}
 					
 					/*for (int i = 0; i < Run.rows; i++) {
 						dateFromFieldString.add(textFieldName.get(i).getText());
@@ -356,7 +355,7 @@ public class WindowRelevantFactors extends JFrame {
 					}
 					Run.savaDateFromFields();*/
 					
-					dispose();
+					//dispose();
 				}
 			}
 		});

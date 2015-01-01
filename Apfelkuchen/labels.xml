@@ -3,41 +3,17 @@
 
 	<de>
 		<title>Apfelkuchen</title>
-
-		<mnuHelp>Help</mnuHelp>
-		<mnuItemAbout>About</mnuItemAbout>
-
 		<buttonNext>Next</buttonNext>
-		<buttonOk>
-			OK
-		</buttonOk>
-
-		<buttonOkStart>
-			Start
-		</buttonOkStart>
-		<nameLabel>
-			Name für das Feld
-		</nameLabel>
-		<labelName>
-			Name
-		</labelName>
-		<labelAbbr>
-			Abkürzung
-		</labelAbbr>
-
-		<buttonNewField>
-			Neuer Faktor
-		</buttonNewField>
-		<buttonRemove>
-			Faktor Löschen
-		</buttonRemove>
-		<buttonNewStart>
-			Neu Starten
-		</buttonNewStart>
-		<experimentLabel>Versuch </experimentLabel>
-		<buttonOKTipText>Hovered Over ME Test</buttonOKTipText>
-		<buttonNextTipText>Bestätigen die Eingaben</buttonNextTipText>
+		<buttonBack>Back</buttonBack>
+		<buttonNewFactor>Neuer Faktor</buttonNewFactor>
+		<buttonRemove>Faktor Löschen</buttonRemove>
+		<buttonNextTipText>Bestätigen Sie die Eingaben</buttonNextTipText>
+		<buttonUpdateCSV>Update</buttonUpdateCSV>
+		<textOverUpdateCSV>Update CSV</textOverUpdateCSV>
 		<errorSelection>Bitte wählen Sie eine Variante aus</errorSelection>
+		
+		<labelName>Name</labelName>
+		<labelAbbr>Abkürzung</labelAbbr>
 		<labelRole>Rolle</labelRole>
 		<labelDimension> Dimension</labelDimension>
 		<labelUnit>Einheit</labelUnit>
@@ -45,13 +21,9 @@
 		<labelHigh>Max</labelHigh>
 		<labelSIMin>Si-Min</labelSIMin>
 		<labelSIMax>Si-Max</labelSIMax>
-
-
-		<errorTitleDialog>Fehler</errorTitleDialog>
-		<errorTextDialog>Bitte prüfen Sie eingaben</errorTextDialog>
-		<buttonUpdateCSV>U</buttonUpdateCSV>
-
-		<textOverUpdateCSV>Update CSV</textOverUpdateCSV>
+		
+		<errorTitleDialog0>Fehler</errorTitleDialog0>
+		<errorTextDialog0>Bitte Überprüfen Sie die Eingaben von</errorTextDialog0>
 	</de>
 
 </root>

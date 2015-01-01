@@ -1,5 +1,6 @@
 package GUI.Two;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,20 +11,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
  * Main used to Start Window1 + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.0.16
+ * @version 2.1.0
  */
 public class Run {
 	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
 	protected static int rows = 0;
 	protected static String csvName = "spezifikation.csv";
-	protected static String saveFileName = "RelevantFactors.tmp";
-	protected static final int DEFAULT_WIDTH = 1100; //1194
-	protected static final int DEFAULT_HEIGHT = 500; //550
+	protected static String saveFileNameRelevantFactors = "RelevantFactors.tmp";
+	protected static String saveFileNameDimensionlessFactors = "DimensionlessFactors.tmp";
+	protected static final int DEFAULT_WIDTH = 1200; //1100
+	protected static final int DEFAULT_HEIGHT = 550; //500
 	protected static final int DEFAULT_FONT_SIZE = 16;
 	//this needs testing on resolutions that are > 1366*x
 	protected static int currentWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() * ((double)DEFAULT_WIDTH / (double)1366));
@@ -31,71 +36,125 @@ public class Run {
 	protected static int currentFontSize = (int)((double)DEFAULT_FONT_SIZE * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double)1366);
 	protected static int currentGridSizeHigh = (int)((double)80 * (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double)1366));
 	protected static int currentGridSizeLow = (int)((double)40 * (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double)1366));
+	protected static WindowRelevantFactors WRF;
+	protected static WindowDimensionlessFactors WDF;
 	public static List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 	
 	public static void main(String args[]) {
-		if (!new File(saveFileName).exists()){
+		if (!new File(saveFileNameRelevantFactors).exists()){
 			System.out.println("new WindowRelevantFactors()");
-			new WindowRelevantFactors();
+			WRF = new WindowRelevantFactors();
 		} else {
-			System.out.println("restoreWRF()");
-			WindowRelevantFactors WRF = new WindowRelevantFactors();
-			restoreWRF(WRF);
+			System.out.println("restoreRelevantFactors()");
+			WRF = new WindowRelevantFactors();
+			restorePersistentRelevantFactors(WRF);
 		}
 		
 		new Thread(new ReadCSVRunnable()).start();
 	}
 	
-	protected static void saveWRF(){
-		if (new File(saveFileName).exists()){
-			new File(saveFileName).delete();
+	protected static void persistentSaveRelevantFactors(){
+		if (new File(saveFileNameRelevantFactors).exists()){
+			new File(saveFileNameRelevantFactors).delete();
 		}
-		//FIXME JCombobox role is still missing
-		ArrayList<ArrayList<JTextField>> tmp = new ArrayList<ArrayList<JTextField>>();
-		tmp.add(WindowRelevantFactors.textFieldName);
-		tmp.add(WindowRelevantFactors.textFieldAbbreviation);
-		tmp.add(WindowRelevantFactors.textFieldDimension);
-		tmp.add(WindowRelevantFactors.textFieldUnit);
-		tmp.add(WindowRelevantFactors.textFieldLow);
-		tmp.add(WindowRelevantFactors.textFieldHigh);
-		tmp.add(WindowRelevantFactors.textFieldM);
-		tmp.add(WindowRelevantFactors.textFieldK);
-		tmp.add(WindowRelevantFactors.textFieldS);
-		tmp.add(WindowRelevantFactors.textFieldKel);
-		tmp.add(WindowRelevantFactors.textFieldMol);
-		tmp.add(WindowRelevantFactors.textFieldAmp);
-		tmp.add(WindowRelevantFactors.textFieldCand);
-		tmp.add(WindowRelevantFactors.textFieldResultSILow);
-		tmp.add(WindowRelevantFactors.textFieldResultSIHigh);
-		Run.writeArrayList(saveFileName, tmp);
+		ArrayList<ArrayList<JTextField>> textFieldsContainer = new ArrayList<ArrayList<JTextField>>();
+		textFieldsContainer.add(WindowRelevantFactors.textFieldName);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldAbbreviation);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldDimension);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldUnit);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldLow);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldHigh);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldM);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldK);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldS);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldKel);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldMol);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldAmp);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldCand);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldResultSILow);
+		textFieldsContainer.add(WindowRelevantFactors.textFieldResultSIHigh);
+		try {
+			FileOutputStream fileoutput = new FileOutputStream(saveFileNameRelevantFactors);
+			ObjectOutputStream outputstream = new ObjectOutputStream(fileoutput);
+			outputstream.writeObject(textFieldsContainer);
+			outputstream.writeObject(WindowRelevantFactors.comboBoxRole);
+			outputstream.flush();
+			outputstream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	protected static void restoreWRF(WindowRelevantFactors WRF){
-		ArrayList<ArrayList<JTextField>> tmp = new ArrayList<ArrayList<JTextField>>();
-		tmp = Run.readObject(saveFileName);
-		if (tmp.size() > 0){
-			int x = tmp.get(0).size(); //Number of Rows
-			for (int i = 0; i < x; i++){
+	protected static void restorePersistentRelevantFactors(WindowRelevantFactors WRF){
+		ArrayList<ArrayList<JTextField>> textFieldsContainer = new ArrayList<ArrayList<JTextField>>();
+		ArrayList<JComboBox<String>> comboBoxRoleTmp = new ArrayList<JComboBox<String>>();
+		try{
+			ObjectInputStream input = new ObjectInputStream(new FileInputStream(saveFileNameRelevantFactors));
+			textFieldsContainer = (ArrayList<ArrayList<JTextField>>) input.readObject();
+			comboBoxRoleTmp = (ArrayList<JComboBox<String>>) input.readObject();
+			input.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		if (textFieldsContainer.size() > 0){
+			//textFieldsContainer.get(0).size() == Number of Rows
+			for (int i = 0; i < textFieldsContainer.get(0).size(); i++){
 				Run.rows++;
 				WRF.newFactor();
-				WindowRelevantFactors.textFieldName.get(i).setText(tmp.get(0).get(i).getText());
-				WindowRelevantFactors.textFieldAbbreviation.get(i).setText(tmp.get(1).get(i).getText());
-				WindowRelevantFactors.textFieldDimension.get(i).setText(tmp.get(2).get(i).getText());
-				WindowRelevantFactors.textFieldUnit.get(i).setText(tmp.get(3).get(i).getText());
-				WindowRelevantFactors.textFieldLow.get(i).setText(tmp.get(4).get(i).getText());
-				WindowRelevantFactors.textFieldHigh.get(i).setText(tmp.get(5).get(i).getText());
-				WindowRelevantFactors.textFieldM.get(i).setText(tmp.get(6).get(i).getText());
-				WindowRelevantFactors.textFieldK.get(i).setText(tmp.get(7).get(i).getText());
-				WindowRelevantFactors.textFieldS.get(i).setText(tmp.get(8).get(i).getText());
-				WindowRelevantFactors.textFieldKel.get(i).setText(tmp.get(9).get(i).getText());
-				WindowRelevantFactors.textFieldMol.get(i).setText(tmp.get(10).get(i).getText());
-				WindowRelevantFactors.textFieldAmp.get(i).setText(tmp.get(11).get(i).getText());
-				WindowRelevantFactors.textFieldCand.get(i).setText(tmp.get(12).get(i).getText());
-				WindowRelevantFactors.textFieldResultSILow.get(i).setText(tmp.get(13).get(i).getText());
-				WindowRelevantFactors.textFieldResultSIHigh.get(i).setText(tmp.get(14).get(i).getText());
+				WindowRelevantFactors.textFieldName.get(i).setText(textFieldsContainer.get(0).get(i).getText());
+				WindowRelevantFactors.textFieldAbbreviation.get(i).setText(textFieldsContainer.get(1).get(i).getText());
+				WindowRelevantFactors.comboBoxRole.get(i).setSelectedIndex(comboBoxRoleTmp.get(i).getSelectedIndex());
+				WindowRelevantFactors.textFieldDimension.get(i).setText(textFieldsContainer.get(2).get(i).getText());
+				WindowRelevantFactors.textFieldUnit.get(i).setText(textFieldsContainer.get(3).get(i).getText());
+				WindowRelevantFactors.textFieldLow.get(i).setText(textFieldsContainer.get(4).get(i).getText());
+				WindowRelevantFactors.textFieldHigh.get(i).setText(textFieldsContainer.get(5).get(i).getText());
+				WindowRelevantFactors.textFieldM.get(i).setText(textFieldsContainer.get(6).get(i).getText());
+				WindowRelevantFactors.textFieldK.get(i).setText(textFieldsContainer.get(7).get(i).getText());
+				WindowRelevantFactors.textFieldS.get(i).setText(textFieldsContainer.get(8).get(i).getText());
+				WindowRelevantFactors.textFieldKel.get(i).setText(textFieldsContainer.get(9).get(i).getText());
+				WindowRelevantFactors.textFieldMol.get(i).setText(textFieldsContainer.get(10).get(i).getText());
+				WindowRelevantFactors.textFieldAmp.get(i).setText(textFieldsContainer.get(11).get(i).getText());
+				WindowRelevantFactors.textFieldCand.get(i).setText(textFieldsContainer.get(12).get(i).getText());
+				WindowRelevantFactors.textFieldResultSILow.get(i).setText(textFieldsContainer.get(13).get(i).getText());
+				WindowRelevantFactors.textFieldResultSIHigh.get(i).setText(textFieldsContainer.get(14).get(i).getText());
 				WRF.contentPanel.revalidate();
 				WRF.contentPanel.repaint();
 			}
+		}
+	}
+	
+	protected static void persistentSaveDimensionlessFactors() {
+		if (new File(saveFileNameDimensionlessFactors).exists()) {
+			new File(saveFileNameDimensionlessFactors).delete();
+		}
+		try {
+			FileOutputStream fileoutput = new FileOutputStream(saveFileNameDimensionlessFactors);
+			ObjectOutputStream outputstream = new ObjectOutputStream(fileoutput);
+			outputstream.writeObject(WindowDimensionlessFactors.vMatrix);
+			outputstream.writeObject(WindowDimensionlessFactors.rowNames);
+			outputstream.writeObject(WindowDimensionlessFactors.colNames);
+			outputstream.writeObject(WindowDimensionlessFactors.minV);
+			outputstream.writeObject(WindowDimensionlessFactors.maxV);
+			outputstream.writeObject(WindowDimensionlessFactors.dimensionlessControlSI);
+			outputstream.flush();
+			outputstream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	protected static void restorePersistentDimensionlessFactors() {
+		try {
+			ObjectInputStream input = new ObjectInputStream(new FileInputStream(saveFileNameDimensionlessFactors));
+			WindowDimensionlessFactors.vMatrix = (double[][]) input.readObject();
+			WindowDimensionlessFactors.rowNames = (String[]) input.readObject();
+			WindowDimensionlessFactors.colNames = (String[]) input.readObject();
+			WindowDimensionlessFactors.minV = (String[]) input.readObject();
+			WindowDimensionlessFactors.maxV = (String[]) input.readObject();
+			WindowDimensionlessFactors.dimensionlessControlSI = (String[][]) input.readObject();
+			input.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -160,42 +219,16 @@ public class Run {
 		}
 	}
 	
-	/**
-	 * @param filename
-	 * @param data
-	 * @throws Exception 
-	 */
-	public static void writeArrayList(String filename, ArrayList<?> data) {
-		try {
-			FileOutputStream fileoutput = new FileOutputStream(filename);
-			ObjectOutputStream outputstream = new ObjectOutputStream(fileoutput);
-			outputstream.writeObject(data);
-			outputstream.flush();
-			outputstream.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * @param Inputfile
-	 * @return description here soon TM
-	 */
-	public static ArrayList<ArrayList<JTextField>> readObject(String Inputfile){
-		ArrayList<ArrayList<JTextField>> tmp = new ArrayList<ArrayList<JTextField>>();
-		try{
-			ObjectInputStream input = new ObjectInputStream(new FileInputStream(Inputfile));			
-			tmp = (ArrayList<ArrayList<JTextField>>) input.readObject();
-			input.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return tmp;
-	}
-	
-	protected static boolean abbreviationCheck(String input) {
-		if (!input.matches("[a-zA-Z0-9]{1,8}")) {
-			return false;
+	protected static boolean abbreviationStringCheck() {
+		String message = XMLDate.dateLabels("errorTextDialog0");
+		String title = XMLDate.dateLabels("errorTitleDialog0");
+		for (int i = 0; i < WindowRelevantFactors.textFieldAbbreviation.size(); i++) {
+			if (WindowRelevantFactors.textFieldAbbreviation.get(i).getText().matches("[a-zA-Z0-9]{1,8}") != true) {
+				WindowRelevantFactors.textFieldAbbreviation.get(i).setBackground(Color.RED);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + XMLDate.dateLabels("labelAbbr"), title, JOptionPane.ERROR_MESSAGE);
+				WindowRelevantFactors.textFieldAbbreviation.get(i).setBackground(Color.WHITE);
+				return false;
+			}
 		}
 		return true;
 	}
