@@ -82,7 +82,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		setSize(Run.currentWidth, Run.currentHeight);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Apfelkuchen Window2");
+		setTitle(Run.dataLabels("title"));
 		init();
 		setVisible(true);
 	}
@@ -93,7 +93,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		setSize(Run.currentWidth, Run.currentHeight);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Apfelkuchen Window2");
+		setTitle(Run.dataLabels("title"));
 		init();
 		setVisible(true);
 	}
@@ -134,7 +134,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		toggle.addActionListener(actionListener);
 		menuePanel.add(toggle);
 		
-		buttonBack = new JButton(XMLDate.dateLabels("buttonBack"));
+		buttonBack = new JButton(Run.dataLabels("buttonBack"));
 		buttonBack.setFocusPainted(false);
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

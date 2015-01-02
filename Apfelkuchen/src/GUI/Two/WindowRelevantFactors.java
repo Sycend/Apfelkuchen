@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -74,7 +73,7 @@ public class WindowRelevantFactors extends JFrame {
 	protected JPanel contentPanel = new JPanel();
 	
 	public WindowRelevantFactors() {
-		super(XMLDate.dateLabels("title"));
+		super(Run.dataLabels("title"));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Run.currentWidth, Run.currentHeight);
 		
@@ -106,7 +105,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label Name ----
 		labelName = new JLabel();
-		labelName.setText(XMLDate.dateLabels("labelName"));
+		labelName.setText(Run.dataLabels("labelName"));
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		labelName.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0,
@@ -115,7 +114,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label Abbreviation ----
 		labelAbbreviation = new JLabel();
-		labelAbbreviation.setText(XMLDate.dateLabels("labelAbbr"));
+		labelAbbreviation.setText(Run.dataLabels("labelAbbr"));
 		labelAbbreviation.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		labelAbbreviation.setHorizontalAlignment(SwingConstants.LEFT);
 		contentPanel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1,
@@ -124,7 +123,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label Role ----
 		labelRole = new JLabel();
-		labelRole.setText(XMLDate.dateLabels("labelRole"));
+		labelRole.setText(Run.dataLabels("labelRole"));
 		labelRole.setHorizontalAlignment(SwingConstants.CENTER);
 		labelRole.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelRole, new GridBagConstraints(2, 13, 1, 1, 0.0,
@@ -133,7 +132,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label Dimension ----
 		labelDimension = new JLabel();
-		labelDimension.setText(XMLDate.dateLabels("labelDimension"));
+		labelDimension.setText(Run.dataLabels("labelDimension"));
 		labelDimension.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		labelDimension.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1,
@@ -142,7 +141,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label Unit ----
 		labelUnit = new JLabel();
-		labelUnit.setText(XMLDate.dateLabels("labelUnit"));
+		labelUnit.setText(Run.dataLabels("labelUnit"));
 		labelUnit.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		labelUnit.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0,
@@ -151,7 +150,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label Low ----
 		labelLow = new JLabel();
-		labelLow.setText(XMLDate.dateLabels("labelLow"));
+		labelLow.setText(Run.dataLabels("labelLow"));
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0,
@@ -160,7 +159,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label High ----
 		labelHigh = new JLabel();
-		labelHigh.setText(XMLDate.dateLabels("labelHigh"));
+		labelHigh.setText(Run.dataLabels("labelHigh"));
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0,
@@ -232,7 +231,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label SI Min ----
 		labelResultSIMin = new JLabel();
-		labelResultSIMin.setText(XMLDate.dateLabels("labelSIMin"));
+		labelResultSIMin.setText(Run.dataLabels("labelSIMin"));
 		labelResultSIMin.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMin.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelResultSIMin, new GridBagConstraints(14, 13, 1, 1,
@@ -241,14 +240,14 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label SI Max ----
 		labelResultSIMax = new JLabel();
-		labelResultSIMax.setText(XMLDate.dateLabels("labelSIMax"));
+		labelResultSIMax.setText(Run.dataLabels("labelSIMax"));
 		labelResultSIMax.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMax.setFont(new Font("Tahoma", Font.PLAIN, Run.currentFontSize));
 		contentPanel.add(labelResultSIMax, new GridBagConstraints(15, 13, 1, 1,
 				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 5, 5), 0, 0));
 		
-		buttonNewFactor = new JButton(XMLDate.dateLabels("buttonNewFactor"));
+		buttonNewFactor = new JButton(Run.dataLabels("buttonNewFactor"));
 		buttonNewFactor.setFocusPainted(false);
 		buttonNewFactor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -263,7 +262,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		p2.add(buttonNewFactor);
 		
-		buttonRemove = new JButton(XMLDate.dateLabels("buttonRemove"));
+		buttonRemove = new JButton(Run.dataLabels("buttonRemove"));
 		buttonRemove.setFocusPainted(false);
 		buttonRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -312,7 +311,7 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		p2.add(buttonRemove);
 		
-		buttonNext = new JButton(XMLDate.dateLabels("buttonNext"));
+		buttonNext = new JButton(Run.dataLabels("buttonNext"));
 		buttonNext.setFocusPainted(false);
 		buttonNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -661,8 +660,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSIHigh.add(textFieldResultSIHighTemp);
 		
 		// ---- buttonUpdateCSV ----
-		JButton buttonUpdateCSVTemp = new JButton(XMLDate.dateLabels("buttonUpdateCSV"));
-		buttonUpdateCSVTemp.setToolTipText(XMLDate.dateLabels("textOverUpdateCSV"));
+		JButton buttonUpdateCSVTemp = new JButton(Run.dataLabels("buttonUpdateCSV"));
+		buttonUpdateCSVTemp.setToolTipText(Run.dataLabels("textOverUpdateCSV"));
 		buttonUpdateCSVTemp.setFocusPainted(false);
 		buttonUpdateCSVTemp.setEnabled(false);
 		buttonUpdateCSVTemp.setMinimumSize(getPreferredSize());

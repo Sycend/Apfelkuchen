@@ -34,7 +34,7 @@ public class TreeWindow extends JFrame {
 		
 		// create the root node
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setTitle(XMLDate.dateLabels("title"));
+		this.setTitle(Run.dataLabels("title"));
 		this.setAlwaysOnTop(true);
 		this.setSize(400, 400);
 		this.setVisible(true);

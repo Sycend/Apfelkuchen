@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -15,11 +16,18 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * Main used to Start Window1 + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.1.0
+ * @version 2.1.1
  */
 public class Run {
 	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
@@ -220,17 +228,35 @@ public class Run {
 	}
 	
 	protected static boolean abbreviationStringCheck() {
-		String message = XMLDate.dateLabels("errorTextDialog0");
-		String title = XMLDate.dateLabels("errorTitleDialog0");
+		String message = Run.dataLabels("errorTextDialog0");
+		String title = Run.dataLabels("errorTitleDialog0");
 		for (int i = 0; i < WindowRelevantFactors.textFieldAbbreviation.size(); i++) {
 			if (WindowRelevantFactors.textFieldAbbreviation.get(i).getText().matches("[a-zA-Z0-9]{1,8}") != true) {
 				WindowRelevantFactors.textFieldAbbreviation.get(i).setBackground(Color.RED);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + XMLDate.dateLabels("labelAbbr"), title, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + Run.dataLabels("labelAbbr"), title, JOptionPane.ERROR_MESSAGE);
 				WindowRelevantFactors.textFieldAbbreviation.get(i).setBackground(Color.WHITE);
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	public static String dataLabels(String nodeName) {
+		final String fileName = "labels.xml";
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(fileName);
+			NodeList tableNameNodeList = document.getElementsByTagName(nodeName);
+			nodeName = tableNameNodeList.item(0).getChildNodes().item(0).getTextContent();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return nodeName;
 	}
 	
 }
