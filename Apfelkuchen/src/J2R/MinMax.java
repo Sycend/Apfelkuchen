@@ -8,6 +8,9 @@ import rcaller.RCode;
  * @author Christoph Wütschner, Clemens Kretzer, Florian Then
  *
  *Return Value in R = MinMaxListe => runAndReturnResultOnline("MinMaxListe");
+ *MinMax returned: Liste aus x_low[DoubleArray], colnames(x_low)[StringArray],
+ *							 rownames(x_low)[StringArray], x_high[DoubleArray],
+ *							 rownames(x_high)[StringArray], colnames(x_high)[StringArray]
  */
 public class MinMax {
 	
@@ -49,27 +52,27 @@ public class MinMax {
 		
 	};
 	
-	public String getU_low_DoubleArray(){	
+	public String getX_lowDoubleArray(){	
 		return "r1";
 	}
 	
-	public String getU_low_colnames(){	
+	public String getX_lowColnamesStringArray(){	
 		return "r2";
 	}
 	
-	public String getU_low_rownamesy(){	
+	public String getX_lowRownamesStringArray(){	
 		return "r3";
 	}
 	
-	public String getU_high_DoubleArray(){	
+	public String getX_highDoubleArray(){	
 		return "r4";
 	}
 	
-	public String getU_high_colnames(){	
+	public String getX_highColnamesStringArray(){	
 		return "r5";
 	}
 	
-	public String getU_high_rownames(){	
+	public String getX_highRownamesStringArray(){	
 		return "r6";
 	}
 	
