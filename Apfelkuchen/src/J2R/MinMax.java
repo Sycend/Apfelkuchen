@@ -46,7 +46,7 @@ public class MinMax {
 		code.addRCode("rownames(V)<-VrowNames");
 		code.addRCode("colnames(V)<-VcolNames");
 		
-		code.addRCode("MinMaxListe<-berchneMinMax(V,u_low,u_high)");
+		code.addRCode("MinMaxListe<-berechneMinMax(V,u_low,u_high)");
 		
 		return code;
 		

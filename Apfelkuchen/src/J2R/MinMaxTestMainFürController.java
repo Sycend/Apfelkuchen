@@ -7,7 +7,7 @@ public class MinMaxTestMainFürController {
 	public static void main(String[] args) {
 		J2R test = new J2R("RScripts/RSkript.R");
 		System.out.println("Test1");
-		//Bei Controllerübnahme ersetzten
+		//Bei Controllerübernahme ersetzten
 		
 		double [][] VMatrix = new double [][] {{-3,-1},{0,1},{1,0},{3,0},{1,0}}; 
 		String [] rowNamesArray = new String [] {"d", "h", "Te", "ti", "alp"};
@@ -43,13 +43,20 @@ public class MinMaxTestMainFürController {
 		// Test Ausgabe (Bei übernahme nicht nötig)
 		
 		for(int i = 0; i < x_low.length; i++){
-			System.out.println(x_low[i]);
+			System.out.print(x_lowRowNames[i]);
+			System.out.print(" ");
+			System.out.print(x_low[i]);
+		//	System.out.print(x_lowColNames[i]);
 			System.out.println("");
-			System.out.println(x_high[i]);
-			
+			System.out.print(x_highRowNames[i]);
+			System.out.print(" ");
+			System.out.print(x_high[i]);
+		//	System.out.print(x_highColNames[i]);
+			System.out.println("");
 			
 		}
-		
+			System.out.println(x_lowColNames[0]);
+			System.out.println(x_highColNames[0]);
 		// 
 	}
 
