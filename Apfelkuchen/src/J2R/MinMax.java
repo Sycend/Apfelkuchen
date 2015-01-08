@@ -28,10 +28,10 @@ public class MinMax {
 		u_low = u_lowArray;
 		u_high = u_highArray;
 		code = codeStart;
-		MinMaxCode();
+		
 	}
 
-	private RCode MinMaxCode() {
+	public RCode MinMaxCode() {
 		
 	
 		code.addStringArray("VcolNames", colnames);
