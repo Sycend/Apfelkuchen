@@ -2,6 +2,13 @@ package J2R;
 
 import rcaller.RCode;
 
+/**
+ * Class for MinMax-Code.
+ * 
+ * @author Christoph Wütschner, Clemens Kretzer, Florian Then
+ *
+ *Return Value in R = MinMaxListe => runAndReturnResultOnline("MinMaxListe");
+ */
 public class MinMax {
 	
 	private RCode code;
@@ -11,18 +18,17 @@ public class MinMax {
 	private double [] u_low; 
 	private double [] u_high;
 	
-	public MinMax(double [][] VMatrix, String [] rownamesArray, String [] colnamesArray, double [] u_lowArray, double [] u_highArray) {
+	public MinMax(double [][] VMatrix, String [] rownamesArray, String [] colnamesArray, double [] u_lowArray, double [] u_highArray, RCode codeStart) {
 		V = VMatrix;
 		rownames = rownamesArray;
 		colnames = colnamesArray;
 		u_low = u_lowArray;
 		u_high = u_highArray;
-		berechneMinMax();
+		code = codeStart;
+		MinMaxCode();
 	}
 
-	private void berechneMinMax() {
-		
-		RCode code = new RCode();
+	private RCode MinMaxCode() {
 		
 	
 		code.addStringArray("VcolNames", colnames);
@@ -37,8 +43,36 @@ public class MinMax {
 		code.addRCode("rownames(V)<-VrowNames");
 		code.addRCode("colnames(V)<-VcolNames");
 		
+		code.addRCode("MinMaxListe<-berchneMinMax(V,u_low,u_high)");
 		
+		return code;
 		
 	};
+	
+	public String getU_low_DoubleArray(){	
+		return "r1";
+	}
+	
+	public String getU_low_colnames(){	
+		return "r2";
+	}
+	
+	public String getU_low_rownamesy(){	
+		return "r3";
+	}
+	
+	public String getU_high_DoubleArray(){	
+		return "r4";
+	}
+	
+	public String getU_high_colnames(){	
+		return "r5";
+	}
+	
+	public String getU_high_rownames(){	
+		return "r6";
+	}
+	
+	
 	
 }

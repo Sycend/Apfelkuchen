@@ -74,5 +74,6 @@ berechneMinMax<-function(V,u_low,u_high){
   	rownames(x_high)<-colnames(V)
   	colnames(x_high)<-"l.high"
 	#return (x_low)
-	return (c(x_low,colnames(x_low),rownames(x_low),x_high,colnames(x_high),rownames(x_high)))
+	returnlist<-list(r1=x_low, r2=colnames(x_low), r3=rownames(x_low),r4=x_high, r5=colnames(x_high), 	r6=rownames(x_high))
+	return (returnlist)
 }
