@@ -1,59 +1,67 @@
 package J2R;
 
-import rcaller.*;
+import rcaller.RCode;
 
+/**
+ * Class for SuggestVMatrix-Code.
+ * 
+ * @author Christoph Wütschner, Clemens Kretzer, Florian Then
+ *
+ *Return Value in R = vMatrix => runAndReturnResultOnline("vMatrix");
+ *MinMax returned: Liste aus V[DoubelMatrix], colnames(V)[StringArray],
+ *							 rownames(V)[StringArray]
+ */
 public class SuggestVMatrix {
 
-	private static String skriptPath = "RScripts/RSkript.R";
-	private static J2R testJ2R = new J2R(skriptPath);
+	private String[] u_roles;
+	private String[] dColNames;
+	private String[] dRowNames;
+	private String[] role;
+	private double[][] dMatrix;
+	private boolean debug;
+	private RCode code;
 	
-	static private String vMatrixResultName = "vMatrix";
-	static private String rowNamesResultName = "rownames";
-	static private String colNamesResultName = "colnames";
+	public SuggestVMatrix(String[] u_Roles,
+			double[][] d_Matrix,String[] d_ColNames,String[] d_Rownames, String[] roleArray, boolean debugBool,RCode codeStart){
+		u_roles=u_Roles;
+		dColNames=d_ColNames;
+		dRowNames=d_Rownames;
+		role=roleArray;
+		dMatrix=d_Matrix;
+		debug=debugBool;
+		code=codeStart;		
+	}
 	
-	@SuppressWarnings("unused")
-	static private boolean resultsAvailable;
-
-	
-	public static RCode setCodeToSuggestVmatrix(String[] u_roles,
-			double[][] dMatrix, String[] role, boolean debug) {
-		RCode code = testJ2R.getRCode(); // wenn mehrere Skripte benutzt
-											// werden ebenfalls anpassen//
-											// bei einem Startpunkt
-											// festlegen
-											// starten und dann weglassen //
-											// nach Run ist es vorhanden
+	public RCode SuggestVMatrixCode() {
+				
 		
-		
-		String[] colNames_sub = new String[]{"PI1","PI2","PI3","PI4","PI5","PI6","PI7"}; //Colnames from R
-		String[] rowNames_sub = new String[]{"test1","test2","test3","test4","test5"}; //Rownames from R
-		
-		
-		code.addStringArray(colNamesResultName, colNames_sub);
-		code.addStringArray(rowNamesResultName, rowNames_sub);
-		
-		
+		code.addStringArray("DcolNames", dColNames);
+		code.addStringArray("DrowNames", dRowNames);
 		code.addDoubleMatrix("D", dMatrix);
+		
 		code.addStringArray("u_roles", u_roles);
 		code.addStringArray("role", role);
 		
-//		code.addRCode("D<-data.frame(D_Inhalt)");
-		code.addRCode("rownames(D)<-".concat(rowNamesResultName));
-		code.addRCode("colnames(D)<-".concat(colNamesResultName));
-		
-//		code.addRCode("D<-D_Inhalt");
+		code.addRCode("rownames(D)<-DrowNames");
+		code.addRCode("colnames(D)<-DcolNames");
 		
 		if (debug)
-		{
-			
-			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_roles,D,role[1],TRUE)"));}
+			code.addRCode("vMatrix<-suggestVmatrix(u_roles,D,role[1],TRUE)");
 		else
-			code.addRCode(vMatrixResultName
-					.concat("<-suggestVmatrix(u_roles,D,role[1],FALSE)"));
+			code.addRCode("vMatrix<-suggestVmatrix(u_roles,D,role[1],FALSE)");
 
 		return code;
 	}
-
+	public String getVDoubleMatrix(){	
+		return "r1";
+	}
+	
+	public String getVColnamesStringArray(){	
+		return "r2";
+	}
+	
+	public String getVRownamesStringArray(){	
+		return "r3";
+	}
 	
 }

@@ -53,7 +53,9 @@ suggestVmatrix<-function(u_roles,D,role,debug)
 #  G<-qr.solve(D_eff[(1:r),],D_eff[(r+1):n,])
     V[1:r,]<--G[,(r+1):n]
   }
-  return(solve(E)%*%V)
+  r<-t(solve(E)%*%V)
+  returnlist<-list(r1=r, r2=colnames(r), r3=rownames(r))
+  return(returnlist)
 } 
 
 
@@ -73,7 +75,6 @@ berechneMinMax<-function(V,u_low,u_high){
   	colnames(x_low)<-"l.low"
   	rownames(x_high)<-colnames(V)
   	colnames(x_high)<-"l.high"
-	#return (x_low)
 	returnlist<-list(r1=x_low, r2=colnames(x_low), r3=rownames(x_low),r4=x_high, r5=colnames(x_high), 	r6=rownames(x_high))
 	return (returnlist)
 }
