@@ -7,9 +7,9 @@ import rcaller.RCode;
  * 
  * @author Christoph Wütschner, Clemens Kretzer, Florian Then
  *
- *Return Value in R = vMatrix => runAndReturnResultOnline("vMatrix");
- *MinMax returned: Liste aus V[DoubelMatrix], colnames(V)[StringArray],
- *							 rownames(V)[StringArray]
+ *Return Value in R = vMatrixListe => runAndReturnResultOnline("vMatrixListe");
+ *SuggestVMatrix returned: vMatrixListe => Liste aus VMatrix[DoubelMatrix], colnames(VMatrix)[StringArray],
+ *							 rownames(VMatrix)[StringArray]
  */
 public class SuggestVMatrix {
 
@@ -46,12 +46,17 @@ public class SuggestVMatrix {
 		code.addRCode("colnames(D)<-DcolNames");
 		
 		if (debug)
-			code.addRCode("vMatrix<-suggestVmatrix(u_roles,D,role[1],TRUE)");
+			code.addRCode("vMatrixListe<-suggestVmatrix(u_roles,D,role[1],TRUE)");
 		else
-			code.addRCode("vMatrix<-suggestVmatrix(u_roles,D,role[1],FALSE)");
+			code.addRCode("vMatrixListe<-suggestVmatrix(u_roles,D,role[1],FALSE)");
 
 		return code;
 	}
+	
+	public String getRunandReturnOnlineString(){	
+		return "vMatrixListe";
+	}
+	
 	public String getVDoubleMatrix(){	
 		return "r1";
 	}

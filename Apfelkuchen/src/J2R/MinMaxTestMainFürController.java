@@ -6,7 +6,7 @@ public class MinMaxTestMainFürController {
 
 	public static void main(String[] args) {
 		J2R test = new J2R("RScripts/RSkript.R");
-		System.out.println("Test1");
+		
 		//Bei Controllerübernahme ersetzten
 		
 		double [][] VMatrix = new double [][] {{-3,-1},{0,1},{1,0},{3,0},{1,0}}; 
@@ -19,14 +19,14 @@ public class MinMaxTestMainFürController {
 		
 		MinMax minMax = new MinMax(VMatrix, rowNamesArray, colNamesArray,u_lowArray, u_highArray, test.getRCode());
 		
-		System.out.println("Test2");
+		
 		
 		RCode code = new RCode();
 		code = minMax.MinMaxCode();
 		test.setCode(code);
-		test.runAndReturnResultOnline("MinMaxListe");
+		test.runAndReturnResultOnline(minMax.getRunandReturnOnlineString());
 		
-		System.out.println("Test3");
+		
 		
 		double [] x_low = test.getParser().getAsDoubleArray(minMax.getX_lowDoubleArray());
 		double [] x_high = test.getParser().getAsDoubleArray(minMax.getX_highDoubleArray());

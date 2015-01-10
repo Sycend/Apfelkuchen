@@ -23,7 +23,7 @@ public class VMatrixControllerMain {
 		RCode code = new RCode();
 		code = sVM.SuggestVMatrixCode();
 		test.setCode(code);
-		test.runAndReturnResultOnline("vMatrix");
+		test.runAndReturnResultOnline(sVM.getRunandReturnOnlineString());
 		
 		int mydim[] = test.getParser().getDimensions(sVM.getVDoubleMatrix());
 		
