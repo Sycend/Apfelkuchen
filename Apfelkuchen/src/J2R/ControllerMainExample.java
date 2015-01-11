@@ -10,7 +10,7 @@ public class ControllerMainExample {
 
 		String[] u_roles = { "contr", "contr", "contr", "contr", "contr",
 				"contr" };
-		String[] role = { "Controled" };
+		String[] role = { "controlled" };
 		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
 		String[] rowNames = { "d", "h", "Te", "ti", "alp" };
 		double[][] dMatrix = { { 1, 0, 0, 0, 0, 0, 0 },
@@ -70,7 +70,7 @@ public class ControllerMainExample {
 		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
 		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
 
-		// entwerder row und colnames sind so vertauscht wie jetzt oder das
+		// entweder row und colnames sind so vertauscht wie jetzt oder das
 		// beispiel was auskommentiert ist verwenden sonst geht es nicht
 		MinMax minMax = new MinMax(vMatrix, vMatrixColNames, vMatrixRowNames,
 				u_lowArray, u_highArray, callerInstance.getRCode());
