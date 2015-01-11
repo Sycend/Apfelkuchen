@@ -62,11 +62,11 @@ public class SuggestVMatrix {
 	}
 	
 	public String getVColnamesStringArray(){	
-		return "r2";
+		return "r3";
 	}
 	
 	public String getVRownamesStringArray(){	
-		return "r3";
+		return "r2";
 	}
 	
 }

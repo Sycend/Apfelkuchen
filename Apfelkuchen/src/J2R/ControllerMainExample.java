@@ -10,7 +10,7 @@ public class ControllerMainExample {
 
 		String[] u_roles = { "contr", "contr", "contr", "contr", "contr",
 				"contr" };
-		String[] role = { "controlled" };
+		String[] role = { "Controlled" };
 		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
 		String[] rowNames = { "d", "h", "Te", "ti", "alp" };
 		double[][] dMatrix = { { 1, 0, 0, 0, 0, 0, 0 },
@@ -32,53 +32,45 @@ public class ControllerMainExample {
 
 		double[][] vMatrix = callerInstance.getParser().getAsDoubleMatrix(
 				sVM.getVDoubleMatrix(), mydim[1], mydim[0]);
-		String[] vMatrixColNames = callerInstance.getParser().getAsStringArray(
-				sVM.getVColnamesStringArray());
-		String[] vMatrixRowNames = callerInstance.getParser().getAsStringArray(
-				sVM.getVRownamesStringArray());
+		String [] vMatrixRowNames = callerInstance.getParser().getAsStringArray(sVM.getVRownamesStringArray());
+		String [] vMatrixColNames = callerInstance.getParser().getAsStringArray(sVM.getVColnamesStringArray());
 
 		// Test Ausgabe (Bei übernahme nicht nötig)
 
 		// Test Ausgabe bei Übernahme unnötig
 		double results[][] = vMatrix;
-		String[] n = vMatrixRowNames;
 		String[] cn = vMatrixColNames;
+		String[] rn = vMatrixRowNames;
 
 		// -------------------------Ausgabe-------------------------------
-
-		System.out.println("----vMatrix----");
-
+		System.out.println("-----VMatrix----");
 		for (int i = 0; i < mydim[1]; i++) {
-			if (i < n.length)
-				System.out.print(n[i] + " ");
+			if (i < rn.length)
+				System.out.print("  "+rn[i] + " ");
 			for (int j = 0; j < mydim[0]; j++) {
 				System.out.print(results[i][j]);// Spalte /Zeilen
 				System.out.print(" ");
 			}
-
-			System.out.println(cn[i]);
+			if(i<cn.length){
+				System.out.print(cn[i]);
+			}
 			System.out.print('\n');
 		}
 
 		// -------------------------------------------------------------------------------------------
+		//
 
-		// vMatrix = new double[][] { { -3, -1 }, { 0, 1 }, { 1, 0 }, { 3, 0 },
-		// { 1, 0 } };
-		// vMatrixRowNames = new String[] { "d", "h", "Te", "ti", "alp" };
-		// vMatrixColNames = new String[] { "PI1", "PI2" };
+		// -------------------------------------------------------------------------------------------
 
 		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
 		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
 
-		// entweder row und colnames sind so vertauscht wie jetzt oder das
-		// beispiel was auskommentiert ist verwenden sonst geht es nicht
-		MinMax minMax = new MinMax(vMatrix, vMatrixColNames, vMatrixRowNames,
+		MinMax minMax = new MinMax(vMatrix, vMatrixRowNames, vMatrixColNames,
 				u_lowArray, u_highArray, callerInstance.getRCode());
 
 		// code = new RCode();
 		code = minMax.MinMaxCode();
 		callerInstance.setCode(code);
-		System.out.println("-------DEBUG1---------");
 		callerInstance.runAndReturnResultOnline(minMax
 				.getRunandReturnOnlineString());
 

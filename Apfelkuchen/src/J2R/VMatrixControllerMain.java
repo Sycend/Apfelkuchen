@@ -29,28 +29,29 @@ public class VMatrixControllerMain {
 		
 		double [][] vMatrix = test.getParser().getAsDoubleMatrix(sVM.getVDoubleMatrix(),
 				mydim[1], mydim[0]);
-		String [] vMatrixColNames = test.getParser().getAsStringArray(sVM.getVColnamesStringArray());
 		String [] vMatrixRowNames = test.getParser().getAsStringArray(sVM.getVRownamesStringArray());
+		String [] vMatrixColNames = test.getParser().getAsStringArray(sVM.getVColnamesStringArray());
 		
 		test.stopRCaller();
 		
 		
 		// Test Ausgabe bei Übernahme unnötig
 		double results[][] = vMatrix;
-		String[] n = vMatrixRowNames;
 		String[] cn = vMatrixColNames;
+		String[] rn = vMatrixRowNames;
 
 		// -------------------------Ausgabe-------------------------------
 
 		for (int i = 0; i < mydim[1]; i++) {
-			if (i < n.length)
-				System.out.print(n[i] + " ");
+			if (i < rn.length)
+				System.out.print("  "+rn[i] + " ");
 			for (int j = 0; j < mydim[0]; j++) {
 				System.out.print(results[i][j]);// Spalte /Zeilen
 				System.out.print(" ");
 			}
-
-			System.out.println(cn[i]);
+			if(i<cn.length){
+				System.out.print(cn[i]);
+			}
 			System.out.print('\n');
 		}
 
