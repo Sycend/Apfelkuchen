@@ -94,7 +94,7 @@ public class J2R {
 	 */
 	public void runAndReturnResultOnline(String s) {
 		caller.runAndReturnResultOnline(s);
-		code.clear();
+//		code.clear();
 
 	}
 
@@ -132,4 +132,3 @@ public class J2R {
 	}
 
 }
-//Test

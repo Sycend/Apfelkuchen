@@ -5,7 +5,7 @@ import rcaller.RCode;
 public class MinMaxTestMainFürController {
 
 	public static void main(String[] args) {
-		J2R test = new J2R("RScripts/RSkript.R");
+		J2R vMatrix = new J2R("RScripts/RSkript.R");
 		
 		//Bei Controllerübernahme ersetzten
 		
@@ -17,28 +17,28 @@ public class MinMaxTestMainFürController {
 		
 		//
 		
-		MinMax minMax = new MinMax(VMatrix, rowNamesArray, colNamesArray,u_lowArray, u_highArray, test.getRCode());
+		MinMax minMax = new MinMax(VMatrix, rowNamesArray, colNamesArray,u_lowArray, u_highArray, vMatrix.getRCode());
 		
 		
 		
 		RCode code = new RCode();
 		code = minMax.MinMaxCode();
-		test.setCode(code);
-		test.runAndReturnResultOnline(minMax.getRunandReturnOnlineString());
+		vMatrix.setCode(code);
+		vMatrix.runAndReturnResultOnline(minMax.getRunandReturnOnlineString());
 		
 		
 		
-		double [] x_low = test.getParser().getAsDoubleArray(minMax.getX_lowDoubleArray());
-		double [] x_high = test.getParser().getAsDoubleArray(minMax.getX_highDoubleArray());
+		double [] x_low = vMatrix.getParser().getAsDoubleArray(minMax.getX_lowDoubleArray());
+		double [] x_high = vMatrix.getParser().getAsDoubleArray(minMax.getX_highDoubleArray());
 		
-		String [] x_lowColNames = test.getParser().getAsStringArray(minMax.getX_lowColnamesStringArray());
-		String [] x_lowRowNames =test.getParser().getAsStringArray(minMax.getX_lowRownamesStringArray());
+		String [] x_lowColNames = vMatrix.getParser().getAsStringArray(minMax.getX_lowColnamesStringArray());
+		String [] x_lowRowNames =vMatrix.getParser().getAsStringArray(minMax.getX_lowRownamesStringArray());
 		
-		String [] x_highColNames = test.getParser().getAsStringArray(minMax.getX_highColnamesStringArray());
-		String [] x_highRowNames = test.getParser().getAsStringArray(minMax.getX_highRownamesStringArray());
+		String [] x_highColNames = vMatrix.getParser().getAsStringArray(minMax.getX_highColnamesStringArray());
+		String [] x_highRowNames = vMatrix.getParser().getAsStringArray(minMax.getX_highRownamesStringArray());
 		
 		
-		test.stopRCaller();
+		vMatrix.stopRCaller();
 		
 		// Test Ausgabe (Bei übernahme nicht nötig)
 		
