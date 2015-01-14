@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Window1
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
- * @version 1.2.2
+ * @version 1.2.3
  */
 public class WindowRelevantFactors extends JFrame {
 	//serialVersionUID is generated
@@ -68,8 +70,6 @@ public class WindowRelevantFactors extends JFrame {
 	protected static ArrayList<JComboBox<String>> comboBoxRole = new ArrayList<JComboBox<String>>();
 	protected static ArrayList<JButton> buttonUpdateCSV = new ArrayList<JButton>();
 	
-	// Save information from Name and Abbr fields
-	protected static ArrayList<String> dateFromFieldString = new ArrayList<String>();
 	protected JPanel contentPanel = new JPanel();
 	
 	public WindowRelevantFactors() {
@@ -86,8 +86,10 @@ public class WindowRelevantFactors extends JFrame {
 		contentPanel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanel.setLayout(new GridBagLayout());
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] {
-		//80, 80, 80, 80, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,
-		Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+6, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
+		Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh, Run.currentGridSizeHigh,
+		Run.currentGridSizeHigh, Run.currentGridSizeLow+10, Run.currentGridSizeLow+6, Run.currentGridSizeLow,
+		Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow,
+		Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		((GridBagLayout) contentPanel.getLayout()).rowHeights = new int[] { 0,
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -333,28 +335,6 @@ public class WindowRelevantFactors extends JFrame {
 						Run.restorePersistentDimensionlessFactors();
 						Run.WDF = new WindowDimensionlessFactors();
 					}
-					
-					/*for (int i = 0; i < Run.rows; i++) {
-						dateFromFieldString.add(textFieldName.get(i).getText());
-						dateFromFieldString.add(textFieldAbbreviation.get(i).getText());
-						dateFromFieldString.add(comboBoxRole.get(i).getSelectedItem().toString());
-						dateFromFieldString.add(textFieldDimension.get(i).getText());
-						dateFromFieldString.add(textFieldUnit.get(i).getText());
-						dateFromFieldString.add(textFieldM.get(i).getText());
-						dateFromFieldString.add(textFieldK.get(i).getText());
-						dateFromFieldString.add(textFieldS.get(i).getText());
-						dateFromFieldString.add(textFieldKel.get(i).getText());
-						dateFromFieldString.add(textFieldMol.get(i).getText());
-						dateFromFieldString.add(textFieldAmp.get(i).getText());
-						dateFromFieldString.add(textFieldCand.get(i).getText());
-						dateFromFieldString.add(textFieldLow.get(i).getText());
-						dateFromFieldString.add(textFieldHigh.get(i).getText());
-						dateFromFieldString.add(textFieldResultSILow.get(i).getText());
-						dateFromFieldString.add(textFieldResultSIHigh.get(i).getText());
-					}
-					Run.savaDateFromFields();*/
-					
-					//dispose();
 				}
 			}
 		});
@@ -371,10 +351,6 @@ public class WindowRelevantFactors extends JFrame {
 			JTextField textFieldUnit) {
 		textFieldDimension.setText(newSelectionItemParent);
 		textFieldUnit.setText(newSelectionItem);
-	}
-	
-	public ArrayList<String> getDateFromFields() {
-		return dateFromFieldString;
 	}
 	
 	public void newFactor() {
@@ -490,25 +466,30 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldUnit.add(textFieldUnitTemp);
 		
 		// ---- JTextField Low ----
-		// textFieldLowTemp.setColumns(4);
-		textFieldLowTemp.setMinimumSize(getPreferredSize());
-		textFieldLowTemp.addMouseListener(new MouseListener() {
+		textFieldLowTemp.setMinimumSize(getPreferredSize());		
+		textFieldLowTemp.getDocument().addDocumentListener(new DocumentListener() {
+			//note: statechanged is triggered on persistentRestore
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void insertUpdate(DocumentEvent e) {
+				System.out.println("stateChanged");
+				doSICalculation();
 			}
 			
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
+			public void removeUpdate(DocumentEvent e) {
+				System.out.println("stateChanged");
+				doSICalculation();
 			}
 			
 			@Override
-			public void mouseExited(MouseEvent arg0) {
+			public void changedUpdate(DocumentEvent e) {
+			}
+			
+			public void doSICalculation() {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
-							&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
-							&& WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
+							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension()) && WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit()) && WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
 								try {
 									Run.unitsArray.get(n).setLow(Double.parseDouble(WindowRelevantFactors.textFieldLow.get(i).getText()));
 									WindowRelevantFactors.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
@@ -521,20 +502,11 @@ public class WindowRelevantFactors extends JFrame {
 				} else {
 					System.out.println("Run.unitsArray is empty");
 				}
-				if (comboBoxRoleTemp.getSelectedItem() == "constant"){
+				if (comboBoxRoleTemp.getSelectedItem() == "constant") {
 					textFieldHighTemp.setText(textFieldLowTemp.getText());
 					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
 				}
 			}
-			
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
-			
 		});
 		contentPanel.add(textFieldLowTemp, new GridBagConstraints(5,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
@@ -542,47 +514,43 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldLow.add(textFieldLowTemp);
 		
 		// ---- JTextField High ----
-		// textFieldHighTemp.setColumns(4);
 		textFieldHighTemp.setMinimumSize(getPreferredSize());
-		textFieldHighTemp.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				if (Run.unitsArray.size() > 0) {
-					for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
-						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
-							&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
-							&& WindowRelevantFactors.textFieldHigh.get(i).getText() != "") {
-								try {
-									Run.unitsArray.get(n).setHigh(Double.parseDouble(WindowRelevantFactors.textFieldHigh.get(i).getText()));
-									WindowRelevantFactors.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
-								} catch (NumberFormatException e) {
-									// we discard the Exception
+		textFieldHighTemp.getDocument().addDocumentListener(new DocumentListener() {
+				//note: statechanged is triggered on persistentRestore
+				@Override
+				public void insertUpdate(DocumentEvent e) {
+					System.out.println("stateChanged");
+					doSICalculation();
+				}
+				@Override
+				public void removeUpdate(DocumentEvent e) {
+					System.out.println("stateChanged");
+					doSICalculation();
+				}
+				@Override
+				public void changedUpdate(DocumentEvent e) {
+				}
+				
+				public void doSICalculation(){
+					if (Run.unitsArray.size() > 0) {
+						for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
+							for (int n = 0; n < Run.unitsArray.size(); n++) {
+								if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
+								&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
+								&& WindowRelevantFactors.textFieldHigh.get(i).getText() != "") {
+									try {
+										Run.unitsArray.get(n).setHigh(Double.parseDouble(WindowRelevantFactors.textFieldHigh.get(i).getText()));
+										WindowRelevantFactors.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
+									} catch (NumberFormatException e) {
+										// we discard the Exception
+									}
 								}
 							}
 						}
+					} else {
+						System.out.println("Run.unitsArray is empty");
 					}
-				} else {
-					System.out.println("Run.unitsArray is empty");
 				}
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
-			
 		});
 		contentPanel.add(textFieldHighTemp, new GridBagConstraints(6,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,

@@ -27,10 +27,9 @@ import org.xml.sax.SAXException;
 /**
  * Main used to Start Window1 + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.1.1
+ * @version 2.1.2
  */
 public class Run {
-	private static ArrayList<String> dateFromWindowOne = new ArrayList<String>();
 	protected static int rows = 0;
 	protected static String csvName = "spezifikation.csv";
 	protected static String saveFileNameRelevantFactors = "RelevantFactors.tmp";
@@ -58,7 +57,7 @@ public class Run {
 			restorePersistentRelevantFactors(WRF);
 		}
 		
-		new Thread(new ReadCSVRunnable()).start();
+		new Thread(() -> CSV.readCSV(csvName)).start();
 	}
 	
 	protected static void persistentSaveRelevantFactors(){
@@ -205,26 +204,6 @@ public class Run {
 		}
 		String[] tmp = new String[tmp0.size()];
 		return tmp0.toArray(tmp);
-	}
-	
-	// Save date from Window one for using in R functions. All elements of array
-	// are string
-	public static void savaDateFromFields() {
-		// copy array with date from field of window one into array in the run
-		// funk.
-		dateFromWindowOne = WindowRelevantFactors.dateFromFieldString;
-		// print out the array for testing
-		for (int i = 0; i < 16 * Run.rows; i++) {
-			System.out.println(dateFromWindowOne.get(i).toString() + " Ausgabe");
-			System.out.println(dateFromWindowOne.size() + " size");
-		}
-	}
-	
-	public static class ReadCSVRunnable implements Runnable {		
-		@Override
-		public void run() {
-			CSV.readCSV(csvName);
-		}
 	}
 	
 	protected static boolean abbreviationStringCheck() {

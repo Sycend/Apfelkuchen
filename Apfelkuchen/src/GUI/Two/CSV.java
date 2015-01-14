@@ -171,10 +171,32 @@ public class CSV {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
+				//FIXME fix csv read in
 				//dimension;unit;low;high;m;k;s;kel;mol;amp;cand;offset;gradient
-				String[] parts = content.get(i).split(";");
-				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
-				Run.unitsArray.add(tempRawUnits);
+				String test = content.get(i);
+				int count = test.length() - test.replace(";", "").length();
+				//String[] parts = content.get(i).split(";");
+				if ((count+1) != 13){
+					System.out.println("Zeile: "+(i+1));
+					System.out.println("count: "+(count+1));
+					System.out.println("----");
+				}
+				/*System.out.println("Asd: "+"i:"+"0 "+parts[0]);
+				System.out.println("Asd: "+"i:"+"1 "+parts[1]);
+				System.out.println("Asd: "+"i:"+"2 "+parts[2]);
+				System.out.println("Asd: "+"i:"+"3 "+parts[3]);
+				System.out.println("Asd: "+"i:"+"4 "+parts[4]);
+				System.out.println("Asd: "+"i:"+"5 "+parts[5]);
+				System.out.println("Asd: "+"i:"+"6 "+parts[6]);
+				System.out.println("Asd: "+"i:"+"7 "+parts[7]);
+				System.out.println("Asd: "+"i:"+"8 "+parts[8]);
+				System.out.println("Asd: "+"i:"+"9 "+parts[9]);
+				System.out.println("Asd: "+"i:"+"10 "+parts[10]);
+				System.out.println("Asd: "+"i:"+"11 "+parts[11]);
+				System.out.println("Asd: "+"i:"+"12 "+parts[12]);*/
+				
+				//RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
+				//Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
