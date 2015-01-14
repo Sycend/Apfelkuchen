@@ -489,7 +489,9 @@ public class WindowRelevantFactors extends JFrame {
 				if (Run.unitsArray.size() > 0) {
 					for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension()) && WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit()) && WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
+							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension()) 
+							&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit()) 
+							&& WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
 								try {
 									Run.unitsArray.get(n).setLow(Double.parseDouble(WindowRelevantFactors.textFieldLow.get(i).getText()));
 									WindowRelevantFactors.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
