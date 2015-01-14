@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -102,6 +103,21 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		JPanel menuePanel = new JPanel();
 		buttonReset = new JButton("Reset");
+		buttonReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkLinearMatrix()){
+					for(int i=0;i<widthVMatrix;i++){
+						for(int j=0;j<widthVMatrix;j++){
+							
+																				
+						}
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		menuePanel.add(buttonReset);
 		
 		ArrayList<JLabel> labelM = new ArrayList<JLabel>();
@@ -297,7 +313,10 @@ public class WindowDimensionlessFactors extends JFrame {
 				linearDependenceTextFieldsTemp.setMaximumSize(new Dimension(50, 25));
 				linearDependenceTextFieldsTemp.setPreferredSize(new Dimension(50, 25));
 				linearDependenceTextFieldsTemp.setColumns(10);
-				linearDependenceTextFieldsTemp.setText(String.valueOf(1));
+				if(i==j)
+					linearDependenceTextFieldsTemp.setText(String.valueOf(1));
+				else
+					linearDependenceTextFieldsTemp.setText(String.valueOf(0));
 				linearDependenceTextFieldsTemp.setHorizontalAlignment(SwingConstants.CENTER);
 				
 				if (i == 0) {
@@ -431,6 +450,18 @@ public class WindowDimensionlessFactors extends JFrame {
 		JScrollPane scrollpane = new JScrollPane(contentPanel);
 		
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
+	}
+	private boolean checkLinearMatrix()
+	{
+		for(int i=0;i<widthVMatrix;i++){
+			for(int j=0;j<widthVMatrix;j++){
+//				if(i==j && !linearDependenceTextFields.get(i).get(j).getText().equals("1"))
+//					return true;
+				if(i!=j && !linearDependenceTextFields.get(i).get(j).getText().equals("0"))
+					return true;					
+			}
+		}		
+		return false;
 	}
 	
 }
