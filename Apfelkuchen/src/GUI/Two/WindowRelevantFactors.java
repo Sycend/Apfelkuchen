@@ -368,12 +368,14 @@ public class WindowRelevantFactors extends JFrame {
 		JTextField textFieldResultSIHighTemp = new JTextField();
 		
 		// ---- JTextField Name ----
+		textFieldNameTemp.setColumns(3);
 		contentPanel.add(textFieldNameTemp, new GridBagConstraints(0,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 		textFieldName.add(textFieldNameTemp);
 		
 		// ---- JTextField Abbreviation ----
+		textFieldAbbreviationTemp.setColumns(3);
 		contentPanel.add(textFieldAbbreviationTemp, new GridBagConstraints(1,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -402,6 +404,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- JTextField Dimension ----
 		textFieldDimensionTemp.setMinimumSize(getPreferredSize());
+		textFieldDimensionTemp.setColumns(3);
 		textFieldDimensionTemp.setEnabled(true);
 		textFieldDimensionTemp.addMouseListener(new MouseListener() {
 			@Override
@@ -435,6 +438,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- JTextField Unit ----
 		textFieldUnitTemp.setMinimumSize(getPreferredSize());
+		textFieldUnitTemp.setColumns(3);
 		textFieldUnitTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -466,7 +470,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldUnit.add(textFieldUnitTemp);
 		
 		// ---- JTextField Low ----
-		textFieldLowTemp.setMinimumSize(getPreferredSize());		
+		textFieldLowTemp.setMinimumSize(getPreferredSize());	
+		textFieldLowTemp.setColumns(5);
 		textFieldLowTemp.getDocument().addDocumentListener(new DocumentListener() {
 			//note: statechanged is triggered on persistentRestore
 			@Override
@@ -517,6 +522,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- JTextField High ----
 		textFieldHighTemp.setMinimumSize(getPreferredSize());
+		textFieldHighTemp.setColumns(5);
 		textFieldHighTemp.getDocument().addDocumentListener(new DocumentListener() {
 				//note: statechanged is triggered on persistentRestore
 				@Override
@@ -562,6 +568,7 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField m ----
 		JTextField textFieldMTemp = new JTextField();
 		textFieldMTemp.setMinimumSize(getPreferredSize());
+		textFieldMTemp.setColumns(2);
 		contentPanel.add(textFieldMTemp, new GridBagConstraints(7,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -570,6 +577,7 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField k ----
 		JTextField textFieldKTemp = new JTextField();
 		textFieldKTemp.setMinimumSize(getPreferredSize());
+		textFieldKTemp.setColumns(2);
 		contentPanel.add(textFieldKTemp, new GridBagConstraints(8,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -578,6 +586,7 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField s ----
 		JTextField textFieldSTemp = new JTextField();
 		textFieldSTemp.setMinimumSize(getPreferredSize());
+		textFieldSTemp.setColumns(2);
 		contentPanel.add(textFieldSTemp, new GridBagConstraints(9,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -586,6 +595,7 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField kel ----
 		JTextField textFieldKelTemp = new JTextField();
 		textFieldKelTemp.setMinimumSize(getPreferredSize());
+		textFieldKelTemp.setColumns(2);
 		contentPanel.add(textFieldKelTemp, new GridBagConstraints(10,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -594,6 +604,7 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField mol ----
 		JTextField textFieldMolTemp = new JTextField();
 		textFieldMolTemp.setMinimumSize(getPreferredSize());
+		textFieldMolTemp.setColumns(2);
 		contentPanel.add(textFieldMolTemp, new GridBagConstraints(11,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -602,6 +613,7 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField amp ----
 		JTextField textFieldAmpTemp = new JTextField();
 		textFieldAmpTemp.setMinimumSize(getPreferredSize());
+		textFieldAmpTemp.setColumns(2);
 		contentPanel.add(textFieldAmpTemp, new GridBagConstraints(12,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -610,6 +622,7 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField cand ----
 		JTextField textFieldCandTemp = new JTextField();
 		textFieldCandTemp.setMinimumSize(getPreferredSize());
+		textFieldCandTemp.setColumns(2);
 		contentPanel.add(textFieldCandTemp, new GridBagConstraints(13,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -617,6 +630,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- JTextField SI Low ----
 		textFieldResultSILowTemp.setMinimumSize(getPreferredSize());
+		textFieldResultSILowTemp.setColumns(8);
 		contentPanel.add(textFieldResultSILowTemp, new GridBagConstraints(14,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -624,6 +638,7 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- JTextField SI High ----
 		textFieldResultSIHighTemp.setMinimumSize(getPreferredSize());
+		textFieldResultSIHighTemp.setColumns(8);
 		contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15,
 				14 + Run.rows, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));

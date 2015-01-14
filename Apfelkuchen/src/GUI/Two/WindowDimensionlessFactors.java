@@ -168,6 +168,7 @@ public class WindowDimensionlessFactors extends JFrame {
 			JTextField textFieldColNamesTemp = new JTextField();
 			textFieldColNamesTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldColNamesTemp.setPreferredSize(new Dimension(50, 25));
+			textFieldColNamesTemp.setColumns(10);
 			textFieldColNamesTemp.setText(colNames[i]);
 			textFieldColNamesTemp.setHorizontalAlignment(SwingConstants.CENTER);
 			
@@ -185,6 +186,7 @@ public class WindowDimensionlessFactors extends JFrame {
 			JTextField textFieldMinVTemp = new JTextField();
 			textFieldMinVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMinVTemp.setPreferredSize(new Dimension(50, 25));
+			textFieldMinVTemp.setColumns(10);
 			textFieldMinVTemp.setText(minV[i]);
 			contentPanel.add(textFieldMinVTemp, new GridBagConstraints(1 + 3 * i, 1, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
@@ -203,6 +205,7 @@ public class WindowDimensionlessFactors extends JFrame {
 			JTextField textFieldMaxVTemp = new JTextField();
 			textFieldMaxVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMaxVTemp.setPreferredSize(new Dimension(50, 25));
+			textFieldMaxVTemp.setColumns(10);
 			textFieldMaxVTemp.setText(maxV[i]);
 			
 			contentPanel.add(textFieldMaxVTemp, new GridBagConstraints(1 + 3 * i, 2, 3, 1, 0.0, 0.0,
@@ -250,6 +253,7 @@ public class WindowDimensionlessFactors extends JFrame {
 				JTextField vMatrixTextfieldsTemp = new JTextField();
 				vMatrixTextfieldsTemp.setMaximumSize(new Dimension(50, 25));
 				vMatrixTextfieldsTemp.setPreferredSize(new Dimension(50, 25));
+				vMatrixTextfieldsTemp.setColumns(10);
 				vMatrixTextfieldsTemp.setText(String.valueOf(vMatrix[i][j]));
 				vMatrixTextfieldsTemp.setHorizontalAlignment(SwingConstants.CENTER);
 				
@@ -292,6 +296,7 @@ public class WindowDimensionlessFactors extends JFrame {
 				JTextField linearDependenceTextFieldsTemp = new JTextField();
 				linearDependenceTextFieldsTemp.setMaximumSize(new Dimension(50, 25));
 				linearDependenceTextFieldsTemp.setPreferredSize(new Dimension(50, 25));
+				linearDependenceTextFieldsTemp.setColumns(10);
 				linearDependenceTextFieldsTemp.setText(String.valueOf(1));
 				linearDependenceTextFieldsTemp.setHorizontalAlignment(SwingConstants.CENTER);
 				
