@@ -113,8 +113,10 @@ public class WindowDimensionlessFactors extends JFrame {
 							for(int j=0;j<widthVMatrix;j++){
 								System.out.println("i="+i);
 								System.out.println("j="+j);
-								temp[i]=temp[i]+Double.parseDouble((linearDependenceTextFields.get(l).get(j).getText()))*
-										Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());					
+								System.out.println("l="+l);
+								temp[j]=temp[j]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
+										Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());
+								System.out.println("123456789-----"+temp[j]);
 							}
 							System.out.println("TempArrayList");
 							ArrayList<JTextField> tempArrayList=new ArrayList<JTextField>();
@@ -132,7 +134,12 @@ public class WindowDimensionlessFactors extends JFrame {
 						}	
 					}
 					System.out.println("TestRepaint");
+					revalidate();
 					repaint();
+					System.out.println(vMatrixTextFields.get(0).get(0).getText());
+					System.out.println(vMatrixTextFields.get(0).get(1).getText());
+					System.out.println(vMatrixTextFields.get(1).get(0).getText());
+					System.out.println(vMatrixTextFields.get(1).get(1).getText());
 				}
 				else{
 					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.ERROR_MESSAGE);
