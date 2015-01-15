@@ -106,16 +106,37 @@ public class WindowDimensionlessFactors extends JFrame {
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(checkLinearMatrix()){
-					for(int i=0;i<widthVMatrix;i++){
-						for(int j=0;j<widthVMatrix;j++){
-							
-																				
-						}
+					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
+					for(int l=0;l<widthVMatrix;l++){
+						for(int i=0;i<lengthVMatrix;i++){
+							double temp[]= new double[widthVMatrix];
+							for(int j=0;j<widthVMatrix;j++){
+								System.out.println("i="+i);
+								System.out.println("j="+j);
+								temp[i]=temp[i]+Double.parseDouble((linearDependenceTextFields.get(l).get(j).getText()))*
+										Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());					
+							}
+							System.out.println("TempArrayList");
+							ArrayList<JTextField> tempArrayList=new ArrayList<JTextField>();
+							for(int k=0;k<widthVMatrix;k++)
+							{
+								System.out.println(k);
+								JTextField tempTextField = new JTextField();
+								System.out.println("Test1");
+								tempTextField.setText(String.valueOf(temp[k]));
+								System.out.println("Test2");
+								tempArrayList.add(tempTextField);
+							}
+							System.out.println("setTempArrayList");
+							vMatrixTextFields.set(i,tempArrayList);
+						}	
 					}
+					System.out.println("TestRepaint");
+					repaint();
 				}
 				else{
 					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.ERROR_MESSAGE);
-				}
+				}				
 			}
 		});
 		menuePanel.add(buttonReset);
