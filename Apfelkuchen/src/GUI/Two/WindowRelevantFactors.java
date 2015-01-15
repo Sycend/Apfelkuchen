@@ -659,9 +659,10 @@ public class WindowRelevantFactors extends JFrame {
 						System.out.println("gradient: " + gradient);
 						double offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
 						System.out.println("offset: " + offset);
-						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Double.parseDouble(textFieldLowTemp.getText()), Double.parseDouble(textFieldHighTemp.getText()), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp
+						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp
 						.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()), Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
 						Run.unitsArray.add(tempRaw);
+						//FIXME fix bugs
 						CSV.writeCSV(Run.csvName);
 					} catch (Exception ex) {
 						ex.printStackTrace();
