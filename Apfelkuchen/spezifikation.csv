@@ -1,4 +1,4 @@
-dimension,unit,low,high,m,k,s,kel,mol,amp,cand,offset,gradient
+dimension,unit,m,k,s,kel,mol,amp,cand,offset,gradient
 Masse,mg,0,1,0,0,0,0,0,0,0.000001
 Masse,g,0,1,0,0,0,0,0,0,0.001
 Masse,kg,0,1,0,0,0,0,0,0,1
