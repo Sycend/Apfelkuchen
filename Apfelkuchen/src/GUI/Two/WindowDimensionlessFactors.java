@@ -17,9 +17,13 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import com.sun.org.apache.xml.internal.security.Init;
+
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 
 /**
  * @author Florian Then, Dominik Hofmann
@@ -47,6 +51,7 @@ public class WindowDimensionlessFactors extends JFrame {
 	private JButton buttonRMin;
 	private JButton buttonRMax;
 	private JButton buttonBack;
+	private JPanel contentPanel;
 	private JToggleButton toggle = new JToggleButton();
 	
 	public WindowDimensionlessFactors(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax,
@@ -100,98 +105,11 @@ public class WindowDimensionlessFactors extends JFrame {
 	
 	public void init() {
 		setLayout(new BorderLayout());
-		
-		JPanel menuePanel = new JPanel();
-		buttonReset = new JButton("Reset");
-		buttonReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(checkLinearMatrix()){
-					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
-					for(int l=0;l<widthVMatrix;l++){
-						for(int i=0;i<lengthVMatrix;i++){
-							double temp[]= new double[widthVMatrix];
-							for(int j=0;j<widthVMatrix;j++){
-								System.out.println("i="+i);
-								System.out.println("j="+j);
-								System.out.println("l="+l);
-								temp[j]=temp[j]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
-										Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());
-								System.out.println("123456789-----"+temp[j]);
-							}
-							System.out.println("TempArrayList");
-							ArrayList<JTextField> tempArrayList=new ArrayList<JTextField>();
-							for(int k=0;k<widthVMatrix;k++)
-							{
-								System.out.println(k);
-								JTextField tempTextField = new JTextField();
-								System.out.println("Test1");
-								tempTextField.setText(String.valueOf(temp[k]));
-								System.out.println("Test2");
-								tempArrayList.add(tempTextField);
-							}
-							System.out.println("setTempArrayList");
-							vMatrixTextFields.set(i,tempArrayList);
-						}	
-					}
-					System.out.println("TestRepaint");
-					revalidate();
-					repaint();
-					System.out.println(vMatrixTextFields.get(0).get(0).getText());
-					System.out.println(vMatrixTextFields.get(0).get(1).getText());
-					System.out.println(vMatrixTextFields.get(1).get(0).getText());
-					System.out.println(vMatrixTextFields.get(1).get(1).getText());
-				}
-				else{
-					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.ERROR_MESSAGE);
-				}				
-			}
-		});
-		menuePanel.add(buttonReset);
-		
-		ArrayList<JLabel> labelM = new ArrayList<JLabel>();
-		ArrayList<JLabel> labelK = new ArrayList<JLabel>();
-		ArrayList<JLabel> labelS = new ArrayList<JLabel>();
-		ArrayList<JLabel> labelKel = new ArrayList<JLabel>();
-		ArrayList<JLabel> labelMol = new ArrayList<JLabel>();
-		ArrayList<JLabel> labelAmp = new ArrayList<JLabel>();
-		ArrayList<JLabel> labelCand = new ArrayList<JLabel>();
-		labelSI.add(labelM);
-		labelSI.add(labelK);
-		labelSI.add(labelS);
-		labelSI.add(labelMol);
-		labelSI.add(labelKel);
-		labelSI.add(labelAmp);
-		labelSI.add(labelCand);
-		
-		//add Controller
-		toggle.setText("Natursicht");
-		ActionListener actionListener = new ActionListener() {
-			public void actionPerformed(ActionEvent actionEvent) {
-				if (toggle.getText() == "Natursicht") {
-					toggle.setText("log-Sicht");
-				} else {
-					toggle.setText("Natursicht");
-				}
-			}
-		};
-		toggle.addActionListener(actionListener);
-		menuePanel.add(toggle);
-		
-		buttonBack = new JButton(Run.dataLabels("buttonBack"));
-		buttonBack.setFocusPainted(false);
-		buttonBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonBack) {
-					Run.WDF.setVisible(false);
-					Run.persistentSaveDimensionlessFactors();
-					Run.WRF.setVisible(true);
-				}
-			}
-		});
-		menuePanel.add(buttonBack);
-		getContentPane().add(menuePanel, BorderLayout.NORTH);
-		
-		JPanel contentPanel = new JPanel();
+		initMenuePanel();
+		initContentPanel();
+	}
+	private void initContentPanel() {
+		contentPanel = new JPanel();
 		
 		contentPanel.setLayout(new GridBagLayout());
 		//40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40
@@ -477,7 +395,102 @@ public class WindowDimensionlessFactors extends JFrame {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		JScrollPane scrollpane = new JScrollPane(contentPanel);
 		
-		getContentPane().add(scrollpane, BorderLayout.CENTER);
+		getContentPane().add(scrollpane, BorderLayout.CENTER);		
+	}
+
+	private void initMenuePanel() {
+		JPanel menuePanel = new JPanel();
+		buttonReset = new JButton("Reset");
+		buttonReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkLinearMatrix()){
+					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
+					double temp[][]= new double[lengthVMatrix][widthVMatrix];
+					for(int l=0;l<widthVMatrix;l++){
+						for(int i=0;i<lengthVMatrix;i++){							
+							for(int j=0;j<widthVMatrix;j++){
+								temp[i][l]=temp[i][l]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
+										Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());
+							}
+						}
+					}
+					System.out.println("TempArrayList");
+					for(int i=0;i<lengthVMatrix;i++){
+						ArrayList<JTextField> tempArrayList=new ArrayList<JTextField>();
+						for(int j=0;j<widthVMatrix;j++){
+							JTextField tempTextField = new JTextField();
+							tempTextField.setText(String.valueOf(temp[i][j]));
+							tempArrayList.add(tempTextField);
+						}
+						vMatrixTextFields.set(i,tempArrayList);
+					}					
+					getContentPane().removeAll();
+					
+					vMatrixTextFieldsTempToVMatrix();
+					
+					initMenuePanel();
+					initContentPanel();
+					
+					getContentPane().revalidate();
+					getContentPane().repaint();
+				}
+				else{
+					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.ERROR_MESSAGE);
+				}				
+			}
+		});
+		menuePanel.add(buttonReset);
+		
+		ArrayList<JLabel> labelM = new ArrayList<JLabel>();
+		ArrayList<JLabel> labelK = new ArrayList<JLabel>();
+		ArrayList<JLabel> labelS = new ArrayList<JLabel>();
+		ArrayList<JLabel> labelKel = new ArrayList<JLabel>();
+		ArrayList<JLabel> labelMol = new ArrayList<JLabel>();
+		ArrayList<JLabel> labelAmp = new ArrayList<JLabel>();
+		ArrayList<JLabel> labelCand = new ArrayList<JLabel>();
+		labelSI.add(labelM);
+		labelSI.add(labelK);
+		labelSI.add(labelS);
+		labelSI.add(labelMol);
+		labelSI.add(labelKel);
+		labelSI.add(labelAmp);
+		labelSI.add(labelCand);
+		
+		//add Controller
+		toggle.setText("Natursicht");
+		ActionListener actionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				if (toggle.getText() == "Natursicht") {
+					toggle.setText("log-Sicht");
+				} else {
+					toggle.setText("Natursicht");
+				}
+			}
+		};
+		toggle.addActionListener(actionListener);
+		menuePanel.add(toggle);
+		
+		buttonBack = new JButton(Run.dataLabels("buttonBack"));
+		buttonBack.setFocusPainted(false);
+		buttonBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonBack) {
+					Run.WDF.setVisible(false);
+					Run.persistentSaveDimensionlessFactors();
+					Run.WRF.setVisible(true);
+				}
+			}
+		});
+		menuePanel.add(buttonBack);
+		getContentPane().add(menuePanel, BorderLayout.NORTH);		
+	}
+	private void vMatrixTextFieldsTempToVMatrix() {
+		for(int i=0;i<lengthVMatrix;i++){
+			for(int j=0;j<widthVMatrix;j++){
+				vMatrix[i][j]=Double.parseDouble(vMatrixTextFields.get(i).get(j).getText());				
+			}
+		}
+		
 	}
 	private boolean checkLinearMatrix()
 	{
