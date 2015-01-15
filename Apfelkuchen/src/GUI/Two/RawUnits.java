@@ -20,11 +20,11 @@ public class RawUnits {
 		
 	}
 	
-	RawUnits(String dimension, String unit, double low, double high, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) {
+	RawUnits(String dimension, String unit, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) { //double low, double high
 		this.dimension = dimension;
 		this.unit = unit;
-		this.low = low;
-		this.high = high;
+		//this.low = low;
+		//this.high = high;
 		this.valuesSI[0] = m;
 		this.valuesSI[1] = k;
 		this.valuesSI[2] = s;

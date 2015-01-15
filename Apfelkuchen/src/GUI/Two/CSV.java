@@ -47,10 +47,10 @@ public class CSV {
 				fw.append(Run.unitsArray.get(i).getDimension());
 				fw.append(",");
 				fw.append(Run.unitsArray.get(i).getUnit());
-				fw.append(",");
-				fw.append("" + Run.unitsArray.get(i).getLow());
-				fw.append(",");
-				fw.append("" + Run.unitsArray.get(i).getHigh());
+				//fw.append(",");
+				//fw.append("" + Run.unitsArray.get(i).getLow());
+				//fw.append(",");
+				//fw.append("" + Run.unitsArray.get(i).getHigh());
 				fw.append(",");
 				fw.append("" + Run.unitsArray.get(i).getM());
 				fw.append(",");
@@ -108,17 +108,17 @@ public class CSV {
 			e.printStackTrace();
 		}
 		try {
-			fw.append("dimension,unit,low,high,m,k,s,kel,mol,amp,cand,offset,gradient");
+			fw.append("dimension,unit,(low,high),m,k,s,kel,mol,amp,cand,offset,gradient");
 			fw.newLine();
 			for (int i = 0; i < Run.unitsArray.size(); i++) {
 				fw.append(Run.unitsArray.get(i).getDimension());
 				fw.append(",");
 				fw.append(Run.unitsArray.get(i).getUnit());
 				fw.append(",");
-				fw.append("" + Run.unitsArray.get(i).getLow());
-				fw.append(",");
-				fw.append("" + Run.unitsArray.get(i).getHigh());
-				fw.append(",");
+				//fw.append("" + Run.unitsArray.get(i).getLow());
+				//fw.append(",");
+				//fw.append("" + Run.unitsArray.get(i).getHigh());
+				//fw.append(",");
 				fw.append("" + Run.unitsArray.get(i).getM());
 				fw.append(",");
 				fw.append("" + Run.unitsArray.get(i).getK());
@@ -172,11 +172,11 @@ public class CSV {
 		for (int i = 1; i < content.size(); i++) {
 			try {
 				//FIXME fix csv read in
-				//dimension,unit,low,high,m,k,s,kel,mol,amp,cand,offset,gradient
+				//dimension,unit,(low,high),m,k,s,kel,mol,amp,cand,offset,gradient
 				String test = content.get(i);
 				int count = test.length() - test.replace(",", "").length();
-				//String[] parts = content.get(i).split(",");
-				if ((count+1) != 13){
+				String[] parts = content.get(i).split(",");
+				if ((count+1) != 11){ //13
 					System.out.println("Zeile: "+(i+1));
 					System.out.println("count: "+(count+1));
 					System.out.println("----");
@@ -195,8 +195,8 @@ public class CSV {
 				System.out.println("Asd: "+"i:"+"11 "+parts[11]);
 				System.out.println("Asd: "+"i:"+"12 "+parts[12]);*/
 				
-				//RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
-				//Run.unitsArray.add(tempRawUnits);
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9]), Double.parseDouble(parts[10]));
+				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -225,7 +225,8 @@ public class CSV {
 			try {
 				//dimension,unit,low,high,m,k,s,kel,mol,amp,cand,offset,gradient
 				String[] parts = content.get(i).split(",");
-				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Double.parseDouble(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
+				//FIXME fix bugs
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Integer.parseInt(parts[9]), Integer.parseInt(parts[10]), Double.parseDouble(parts[11]), Double.parseDouble(parts[12]));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
