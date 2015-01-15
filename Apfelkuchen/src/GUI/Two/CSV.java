@@ -45,29 +45,29 @@ public class CSV {
 			fw.newLine();
 			for (int i = 0; i < Run.unitsArray.size(); i++) {
 				fw.append(Run.unitsArray.get(i).getDimension());
-				fw.append(",");
+				fw.append(";");
 				fw.append(Run.unitsArray.get(i).getUnit());
-				//fw.append(",");
+				//fw.append(";");
 				//fw.append("" + Run.unitsArray.get(i).getLow());
-				//fw.append(",");
+				//fw.append(";");
 				//fw.append("" + Run.unitsArray.get(i).getHigh());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getM());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getK());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getS());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getKel());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getMol());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getAmp());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getCand());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getOffset());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getGradient());
 				fw.newLine();
 			}			
@@ -108,33 +108,33 @@ public class CSV {
 			e.printStackTrace();
 		}
 		try {
-			fw.append("dimension,unit,(low,high),m,k,s,kel,mol,amp,cand,offset,gradient");
+			fw.append("dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient");
 			fw.newLine();
 			for (int i = 0; i < Run.unitsArray.size(); i++) {
 				fw.append(Run.unitsArray.get(i).getDimension());
-				fw.append(",");
+				fw.append(";");
 				fw.append(Run.unitsArray.get(i).getUnit());
-				fw.append(",");
+				fw.append(";");
 				//fw.append("" + Run.unitsArray.get(i).getLow());
-				//fw.append(",");
+				//fw.append(";");
 				//fw.append("" + Run.unitsArray.get(i).getHigh());
-				//fw.append(",");
+				//fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getM());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getK());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getS());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getKel());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getMol());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getAmp());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getCand());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getOffset());
-				fw.append(",");
+				fw.append(";");
 				fw.append("" + Run.unitsArray.get(i).getGradient());
 				fw.newLine();
 			}			
@@ -172,12 +172,13 @@ public class CSV {
 		for (int i = 1; i < content.size(); i++) {
 			try {
 				//FIXME fix csv read in
-				//dimension,unit,(low,high),m,k,s,kel,mol,amp,cand,offset,gradient
+				//dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
 				String test = content.get(i);
-				int count = test.length() - test.replace(",", "").length();
-				String[] parts = content.get(i).split(",");
+				int count = test.length() - test.replace(";", "").length();
+				String test2 = content.get(i);
+				String[] parts = test2.split(";");//content.get(i).split(";");
 				if ((count+1) != 11){ //13
-					System.out.println("Zeile: "+(i+1));
+					System.out.println("Error in line: "+(i+1));
 					System.out.println("count: "+(count+1));
 					System.out.println("----");
 				}
@@ -191,12 +192,9 @@ public class CSV {
 				System.out.println("Asd: "+"i:"+"7 "+parts[7]);
 				System.out.println("Asd: "+"i:"+"8 "+parts[8]);
 				System.out.println("Asd: "+"i:"+"9 "+parts[9]);
-				System.out.println("Asd: "+"i:"+"10 "+parts[10]);
-				System.out.println("Asd: "+"i:"+"11 "+parts[11]);
-				System.out.println("Asd: "+"i:"+"12 "+parts[12]);*/
-				//
-				//
-				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9]), Double.parseDouble(parts[10]));
+				System.out.println("Asd: "+"i:"+"10 "+parts[10]);*/
+				
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
