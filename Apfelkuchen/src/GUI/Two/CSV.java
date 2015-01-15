@@ -171,7 +171,7 @@ public class CSV {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//FIXME fix csv read in
+				//FIXME make read in more robust
 				//dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();
@@ -193,7 +193,7 @@ public class CSV {
 				System.out.println("Asd: "+"i:"+"8 "+parts[8]);
 				System.out.println("Asd: "+"i:"+"9 "+parts[9]);
 				System.out.println("Asd: "+"i:"+"10 "+parts[10]);*/
-				//
+				
 				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
