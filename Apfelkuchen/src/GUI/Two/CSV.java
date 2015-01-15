@@ -193,7 +193,7 @@ public class CSV {
 				System.out.println("Asd: "+"i:"+"8 "+parts[8]);
 				System.out.println("Asd: "+"i:"+"9 "+parts[9]);
 				System.out.println("Asd: "+"i:"+"10 "+parts[10]);*/
-				
+				//
 				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
 				Run.unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
