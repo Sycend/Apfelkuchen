@@ -8,7 +8,7 @@ public class VMatrixControllerMain {
 
 		J2R test = new J2R("RScript/RSkript.R");
 
-		String[] u_roles={"contr","contr","contr","contr","contr","contr"};
+		String[] u_roles={"contr","contr","contr","contr","contr"};
 		String[] role = { "Controled" };
 		String[] colNames= {"m","k","s","kel","mol","amp","cand"};
 		String[] rowNames= {"d", "h", "Te", "ti", "alp"};

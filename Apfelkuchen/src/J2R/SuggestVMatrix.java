@@ -44,6 +44,7 @@ public class SuggestVMatrix {
 		
 		code.addRCode("rownames(D)<-DrowNames");
 		code.addRCode("colnames(D)<-DcolNames");
+		code.addRCode("u_roles<-as.data.frame(u_roles)");
 		
 		if (debug)
 			code.addRCode("vMatrixListe<-suggestVmatrix(u_roles,D,role[1],TRUE)");
