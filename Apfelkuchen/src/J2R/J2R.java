@@ -77,11 +77,6 @@ public class J2R {
 	 *            the Code with the R commands
 	 */
 	public void setCode(RCode Code) {
-		// code.clear();
-		// code.R_source(skriptPath); //wenn mehrere Skripte benutzt werden
-		// ebenfalls anpassen// bei einem Startpunkt festlegen
-		// starten und dann weglassen // nach Run ist es vorhanden
-
 		caller.setRCode(code);
 
 	}
@@ -94,7 +89,7 @@ public class J2R {
 	 */
 	public void runAndReturnResultOnline(String s) {
 		caller.runAndReturnResultOnline(s);
-//		code.clear();
+		code.clear();
 
 	}
 

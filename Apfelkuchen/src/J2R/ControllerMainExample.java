@@ -6,7 +6,7 @@ public class ControllerMainExample {
 
 	public static void main(String[] args) {
 
-		J2R callerInstance = new J2R("RScripts/RSkript.R");
+		J2R callerInstance = new J2R("RScript/RSkript.R");
 
 		String[] u_roles = { "contr", "contr", "contr", "contr", "contr",
 				"contr" };
@@ -32,10 +32,10 @@ public class ControllerMainExample {
 
 		double[][] vMatrix = callerInstance.getParser().getAsDoubleMatrix(
 				sVM.getVDoubleMatrix(), mydim[1], mydim[0]);
-		String [] vMatrixRowNames = callerInstance.getParser().getAsStringArray(sVM.getVRownamesStringArray());
-		String [] vMatrixColNames = callerInstance.getParser().getAsStringArray(sVM.getVColnamesStringArray());
-
-		// Test Ausgabe (Bei übernahme nicht nötig)
+		String[] vMatrixRowNames = callerInstance.getParser().getAsStringArray(
+				sVM.getVRownamesStringArray());
+		String[] vMatrixColNames = callerInstance.getParser().getAsStringArray(
+				sVM.getVColnamesStringArray());
 
 		// Test Ausgabe bei Übernahme unnötig
 		double results[][] = vMatrix;
@@ -46,19 +46,16 @@ public class ControllerMainExample {
 		System.out.println("-----VMatrix----");
 		for (int i = 0; i < mydim[1]; i++) {
 			if (i < rn.length)
-				System.out.print("  "+rn[i] + " ");
+				System.out.print("  " + rn[i] + " ");
 			for (int j = 0; j < mydim[0]; j++) {
 				System.out.print(results[i][j]);// Spalte /Zeilen
 				System.out.print(" ");
 			}
-			if(i<cn.length){
+			if (i < cn.length) {
 				System.out.print(cn[i]);
 			}
 			System.out.print('\n');
 		}
-
-		// -------------------------------------------------------------------------------------------
-		//
 
 		// -------------------------------------------------------------------------------------------
 
@@ -68,7 +65,7 @@ public class ControllerMainExample {
 		MinMax minMax = new MinMax(vMatrix, vMatrixRowNames, vMatrixColNames,
 				u_lowArray, u_highArray, callerInstance.getRCode());
 
-		// code = new RCode();
+
 		code = minMax.MinMaxCode();
 		callerInstance.setCode(code);
 		callerInstance.runAndReturnResultOnline(minMax
@@ -91,24 +88,21 @@ public class ControllerMainExample {
 
 		callerInstance.stopRCaller();
 
-		//
 		System.out.println("-----MinMax----");
 		for (int i = 0; i < x_low.length; i++) {
 			System.out.print(x_lowRowNames[i]);
 			System.out.print(" ");
 			System.out.print(x_low[i]);
-			// System.out.print(x_lowColNames[i]);
 			System.out.println("");
 			System.out.print(x_highRowNames[i]);
 			System.out.print(" ");
 			System.out.print(x_high[i]);
-			// System.out.print(x_highColNames[i]);
 			System.out.println("");
 
 		}
 		System.out.println(x_lowColNames[0]);
 		System.out.println(x_highColNames[0]);
-		//
+
 	}
 
 }
