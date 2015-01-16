@@ -15,6 +15,7 @@ public class J2R {
 	private RCode code;
 	private String rExePfad;
 	private String skriptPath;
+	private J2R instance = null;
 
 	/**
 	 * Creates a new object of J2R.
@@ -31,12 +32,14 @@ public class J2R {
 															// her kommen wird
 		initRskript(skript);
 		initRCode();
+		
+		instance = this;
 	};
 
 	/**
 	 * This method initializes the RCaller. A new RCaller object is created.
-	 * After that the pathprefix is appended with the location of the R.exe.
-	 * The caller executable is set to this path.
+	 * After that the pathprefix is appended with the location of the R.exe. The
+	 * caller executable is set to this path.
 	 * 
 	 * @param PathPrefix
 	 *            this is the path of the bin folder in the R program folder
@@ -103,11 +106,9 @@ public class J2R {
 		return caller.getParser();
 	}
 
-
 	/**
-	 * !!!CAUTION!!!
-	 * The running RCaller instance is STOPPED. 
-	 * ALL TEMPFILES will be DELETED.
+	 * !!!CAUTION!!! The running RCaller instance is STOPPED. ALL TEMPFILES will
+	 * be DELETED.
 	 */
 	public void stopRCaller() {
 
@@ -126,4 +127,12 @@ public class J2R {
 		return this.code;
 	}
 
+	public J2R getInstance() {
+
+		
+		if (instance == null) {
+			instance = new J2R("RScript/RSkript.R");
+		}
+		return instance;
+	}
 }
