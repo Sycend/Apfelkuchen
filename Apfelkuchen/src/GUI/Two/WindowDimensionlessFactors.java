@@ -411,11 +411,11 @@ public class WindowDimensionlessFactors extends JFrame {
 				if(checkLinearMatrix()){
 					System.out.println(linearDependenceTextFields.get(1).get(0).getText());
 					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
-					double temp[][]= new double[lengthVMatrix][widthVMatrix];
+					vMatrix= new double[lengthVMatrix][widthVMatrix];
 					for(int l=0;l<widthVMatrix;l++){
 						for(int i=0;i<lengthVMatrix;i++){							
 							for(int j=0;j<widthVMatrix;j++){
-								temp[i][l]=temp[i][l]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
+								vMatrix[i][l]=vMatrix[i][l]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
 										Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());
 							}
 						}
@@ -425,14 +425,13 @@ public class WindowDimensionlessFactors extends JFrame {
 						ArrayList<JTextField> tempArrayList=new ArrayList<JTextField>();
 						for(int j=0;j<widthVMatrix;j++){
 							JTextField tempTextField = new JTextField();
-							tempTextField.setText(String.valueOf(temp[i][j]));
+							tempTextField.setText(String.valueOf(vMatrix[i][j]));
 							tempArrayList.add(tempTextField);
 						}
 						vMatrixTextFields.set(i,tempArrayList);
 					}					
 					getContentPane().removeAll();
 					
-					vMatrixTextFieldsToVMatrix();
 					colNamesTextFieldsToColNames();
 					
 					initMenuePanel();
@@ -491,13 +490,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		menuePanel.add(buttonBack);
 		getContentPane().add(menuePanel, BorderLayout.NORTH);		
 	}
-	private void vMatrixTextFieldsToVMatrix() {
-		for(int i=0;i<lengthVMatrix;i++){
-			for(int j=0;j<widthVMatrix;j++){
-				vMatrix[i][j]=Double.parseDouble(vMatrixTextFields.get(i).get(j).getText());				
-			}
-		}		
-	}
+
 	private void colNamesTextFieldsToColNames()
 	{
 		for(int i=0;i<colNames.length;i++){
