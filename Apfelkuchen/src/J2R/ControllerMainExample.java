@@ -4,9 +4,19 @@ import rcaller.RCode;
 
 public class ControllerMainExample {
 
-	public static void main(String[] args) {
+	
+	private static J2R callerInstance = null;
+	
+	public ControllerMainExample(J2R caller)
+	{
+	 	callerInstance = caller;
+	 	
+	 	controllR();
+	}
+	
+	private static void controllR() {
 
-		J2R callerInstance = new J2R("RScript/RSkript.R");
+		
 		
 
 		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
@@ -86,7 +96,6 @@ public class ControllerMainExample {
 		String[] x_highRowNames = callerInstance.getParser().getAsStringArray(
 				minMax.getX_highRownamesStringArray());
 
-		callerInstance.stopRCaller();
 
 		System.out.println("-----MinMax----");
 		for (int i = 0; i < x_low.length; i++) {
