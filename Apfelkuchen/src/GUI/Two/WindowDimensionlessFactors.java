@@ -52,6 +52,7 @@ public class WindowDimensionlessFactors extends JFrame {
 	private JButton buttonRMax;
 	private JButton buttonBack;
 	private JPanel contentPanel;
+	private boolean isInit;
 	private JToggleButton toggle = new JToggleButton();
 	
 	public WindowDimensionlessFactors(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax,
@@ -107,6 +108,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		setLayout(new BorderLayout());
 		initMenuePanel();
 		initContentPanel();
+		isInit=true;
 	}
 	private void initContentPanel() {
 		contentPanel = new JPanel();
@@ -284,7 +286,10 @@ public class WindowDimensionlessFactors extends JFrame {
 				
 				row.add(linearDependenceTextFieldsTemp);
 			}
-			linearDependenceTextFields.add(row);
+			if(!isInit)
+				linearDependenceTextFields.add(row);
+			else
+				linearDependenceTextFields.set(i,row);
 		}
 		
 		//MWerte
@@ -404,6 +409,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(checkLinearMatrix()){
+					System.out.println(linearDependenceTextFields.get(1).get(0).getText());
 					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
 					double temp[][]= new double[lengthVMatrix][widthVMatrix];
 					for(int l=0;l<widthVMatrix;l++){
@@ -426,7 +432,8 @@ public class WindowDimensionlessFactors extends JFrame {
 					}					
 					getContentPane().removeAll();
 					
-					vMatrixTextFieldsTempToVMatrix();
+					vMatrixTextFieldsToVMatrix();
+					colNamesTextFieldsToColNames();
 					
 					initMenuePanel();
 					initContentPanel();
@@ -484,24 +491,33 @@ public class WindowDimensionlessFactors extends JFrame {
 		menuePanel.add(buttonBack);
 		getContentPane().add(menuePanel, BorderLayout.NORTH);		
 	}
-	private void vMatrixTextFieldsTempToVMatrix() {
+	private void vMatrixTextFieldsToVMatrix() {
 		for(int i=0;i<lengthVMatrix;i++){
 			for(int j=0;j<widthVMatrix;j++){
 				vMatrix[i][j]=Double.parseDouble(vMatrixTextFields.get(i).get(j).getText());				
 			}
+		}		
+	}
+	private void colNamesTextFieldsToColNames()
+	{
+		for(int i=0;i<colNames.length;i++){
+			colNames[i]=textFieldColNames.get(i).getText();			
 		}
-		
 	}
 	private boolean checkLinearMatrix()
 	{
+		boolean isDiagonalOK=true;
+		boolean isRestOK=false;		
 		for(int i=0;i<widthVMatrix;i++){
 			for(int j=0;j<widthVMatrix;j++){
-//				if(i==j && !linearDependenceTextFields.get(i).get(j).getText().equals("1"))
-//					return true;
-				if(i!=j && !linearDependenceTextFields.get(i).get(j).getText().equals("0"))
-					return true;					
+				if(i==j && !linearDependenceTextFields.get(i).get(j).getText().equals("1") && isDiagonalOK==true)
+					isDiagonalOK=false;
+				if(i!=j && !linearDependenceTextFields.get(i).get(j).getText().equals("0") && isRestOK==false)
+					isRestOK=true;					
 			}
-		}		
+		}	
+		if(isDiagonalOK==true&&isRestOK==true)
+			return true;
 		return false;
 	}
 	
