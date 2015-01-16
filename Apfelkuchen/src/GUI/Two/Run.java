@@ -57,7 +57,7 @@ public class Run {
 			restorePersistentRelevantFactors(WRF);
 		}
 		
-		new Thread(() -> CSV.readCSV(csvName)).start();		
+		new Thread(() -> CSV.readCSV(csvName)).start();
 	}
 	
 	protected static void persistentSaveRelevantFactors(){
