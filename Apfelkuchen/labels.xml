@@ -6,7 +6,9 @@
 		<buttonNext>Next</buttonNext>
 		<buttonBack>Back</buttonBack>
 		<buttonNewFactor>Neuer Faktor</buttonNewFactor>
-		<buttonRemove>Faktor Löschen</buttonRemove>
+		<buttonRemoveFactor>Faktor Löschen</buttonRemoveFactor>
+		<buttonNewCommandVariable>Neue Zielgröße</buttonNewCommandVariable>
+		<buttonRemoveCommandVariable>Zielgröße Löschen</buttonRemoveCommandVariable>
 		<buttonNextTipText>Bestätigen Sie die Eingaben</buttonNextTipText>
 		<buttonUpdateCSV>Update</buttonUpdateCSV>
 		<textOverUpdateCSV>Update CSV</textOverUpdateCSV>

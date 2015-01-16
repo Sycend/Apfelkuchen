@@ -32,9 +32,11 @@ public class WindowRelevantFactors extends JFrame {
 	//serialVersionUID is generated
 	private static final long serialVersionUID = 2194838597172270413L;
 	private JScrollPane scrollpane;
-	private JButton buttonRemove;
+	private JButton buttonRemoveFactor;
 	private JButton buttonNext;
 	private JButton buttonNewFactor;
+	private JButton buttonNewCommandVariable;
+	private JButton buttonRemoveCommandVariable;
 	private JLabel labelName;
 	private JLabel labelAbbreviation;
 	private JLabel labelRole;
@@ -261,14 +263,13 @@ public class WindowRelevantFactors extends JFrame {
 				}
 			}
 		});
-		
 		p2.add(buttonNewFactor);
 		
-		buttonRemove = new JButton(Run.dataLabels("buttonRemove"));
-		buttonRemove.setFocusPainted(false);
-		buttonRemove.addActionListener(new ActionListener() {
+		buttonRemoveFactor = new JButton(Run.dataLabels("buttonRemoveFactor"));
+		buttonRemoveFactor.setFocusPainted(false);
+		buttonRemoveFactor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonRemove) {
+				if (e.getSource() == buttonRemoveFactor) {
 					if (textFieldName.size() > 0) {
 						contentPanel.remove(textFieldName.get(Run.rows - 1));
 						contentPanel.remove(textFieldAbbreviation.get(Run.rows - 1));
@@ -311,7 +312,72 @@ public class WindowRelevantFactors extends JFrame {
 				}
 			}
 		});
-		p2.add(buttonRemove);
+		p2.add(buttonRemoveFactor);
+		
+		buttonNewCommandVariable = new JButton(Run.dataLabels("buttonNewCommandVariable"));
+		buttonNewCommandVariable.setFocusPainted(false);
+		buttonNewCommandVariable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonNewCommandVariable) {
+					//FIXME not yet working currently mirrors buttonNewFactor
+					Run.rows++;
+					newFactor();
+					contentPanel.revalidate();
+					contentPanel.repaint();
+				}
+			}
+		});
+		p2.add(buttonNewCommandVariable);
+		
+		buttonRemoveCommandVariable = new JButton(Run.dataLabels("buttonRemoveCommandVariable"));
+		buttonRemoveCommandVariable.setFocusPainted(false);
+		buttonRemoveCommandVariable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonRemoveCommandVariable) {
+					//FIXME not yet working currently mirrors buttonRemoveFactor
+					if (textFieldName.size() > 0) {
+						contentPanel.remove(textFieldName.get(Run.rows - 1));
+						contentPanel.remove(textFieldAbbreviation.get(Run.rows - 1));
+						contentPanel.remove(comboBoxRole.get(Run.rows - 1));
+						contentPanel.remove(textFieldDimension.get(Run.rows - 1));
+						contentPanel.remove(textFieldUnit.get(Run.rows - 1));
+						contentPanel.remove(textFieldLow.get(Run.rows - 1));
+						contentPanel.remove(textFieldHigh.get(Run.rows - 1));
+						contentPanel.remove(textFieldM.get(Run.rows - 1));
+						contentPanel.remove(textFieldK.get(Run.rows - 1));
+						contentPanel.remove(textFieldS.get(Run.rows - 1));
+						contentPanel.remove(textFieldKel.get(Run.rows - 1));
+						contentPanel.remove(textFieldMol.get(Run.rows - 1));
+						contentPanel.remove(textFieldAmp.get(Run.rows - 1));
+						contentPanel.remove(textFieldCand.get(Run.rows - 1));
+						contentPanel.remove(textFieldResultSILow.get(Run.rows - 1));
+						contentPanel.remove(textFieldResultSIHigh.get(Run.rows - 1));
+						contentPanel.remove(buttonUpdateCSV.get(Run.rows - 1));
+						textFieldName.remove(Run.rows - 1);
+						textFieldAbbreviation.remove(Run.rows - 1);
+						comboBoxRole.remove(Run.rows - 1);
+						textFieldDimension.remove(Run.rows - 1);
+						textFieldUnit.remove(Run.rows - 1);
+						textFieldLow.remove(Run.rows - 1);
+						textFieldHigh.remove(Run.rows - 1);
+						textFieldM.remove(Run.rows - 1);
+						textFieldK.remove(Run.rows - 1);
+						textFieldS.remove(Run.rows - 1);
+						textFieldKel.remove(Run.rows - 1);
+						textFieldMol.remove(Run.rows - 1);
+						textFieldAmp.remove(Run.rows - 1);
+						textFieldCand.remove(Run.rows - 1);
+						textFieldResultSILow.remove(Run.rows - 1);
+						textFieldResultSIHigh.remove(Run.rows - 1);
+						buttonUpdateCSV.remove(Run.rows - 1);
+						Run.rows--;
+						contentPanel.revalidate();
+						contentPanel.repaint();
+					}
+				}
+			}
+		});
+		p2.add(buttonRemoveCommandVariable);
 		
 		buttonNext = new JButton(Run.dataLabels("buttonNext"));
 		buttonNext.setFocusPainted(false);
