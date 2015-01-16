@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Window1
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann
- * @version 1.2.3
+ * @version 1.2.4
  */
 public class WindowRelevantFactors extends JFrame {
 	//serialVersionUID is generated
@@ -353,6 +353,48 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldUnit.setText(newSelectionItem);
 	}
 	
+	public static void doSICalculationLow() {
+		if (Run.unitsArray.size() > 0) {
+			for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
+				for (int n = 0; n < Run.unitsArray.size(); n++) {
+					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension()) 
+					&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit()) 
+					&& WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
+						try {
+							Run.unitsArray.get(n).setLow(Double.parseDouble(WindowRelevantFactors.textFieldLow.get(i).getText()));
+							WindowRelevantFactors.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
+						} catch (NumberFormatException e) {
+							// we discard the Exception
+						}
+					}
+				}
+			}
+		} else {
+			System.out.println("Run.unitsArray is empty");
+		}
+	}
+	
+	public static void doSICalculationHigh(){
+		if (Run.unitsArray.size() > 0) {
+			for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
+				for (int n = 0; n < Run.unitsArray.size(); n++) {
+					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
+					&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
+					&& WindowRelevantFactors.textFieldHigh.get(i).getText() != "") {
+						try {
+							Run.unitsArray.get(n).setHigh(Double.parseDouble(WindowRelevantFactors.textFieldHigh.get(i).getText()));
+							WindowRelevantFactors.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
+						} catch (NumberFormatException e) {
+							// we discard the Exception
+						}
+					}
+				}
+			}
+		} else {
+			System.out.println("Run.unitsArray is empty");
+		}
+	}
+	
 	public void newFactor() {
 		// ---- Declaration of Temp Objects ----
 		//we do this to have access to these Temp objects
@@ -476,39 +518,26 @@ public class WindowRelevantFactors extends JFrame {
 			//note: statechanged is triggered on persistentRestore
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				System.out.println("stateChanged");
-				doSICalculation();
+				System.out.println("insertUpdate");
+				doSICalculationLow();
+				doComboboxCheck();
 			}
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				System.out.println("stateChanged");
-				doSICalculation();
+				System.out.println("removeUpdate");
+				doSICalculationLow();
+				doComboboxCheck();
 			}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
+				System.out.println("changedUpdate");
+				doSICalculationLow();
+				doComboboxCheck();
 			}
 			
-			public void doSICalculation() {
-				if (Run.unitsArray.size() > 0) {
-					for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
-						for (int n = 0; n < Run.unitsArray.size(); n++) {
-							if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension()) 
-							&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit()) 
-							&& WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
-								try {
-									Run.unitsArray.get(n).setLow(Double.parseDouble(WindowRelevantFactors.textFieldLow.get(i).getText()));
-									WindowRelevantFactors.textFieldResultSILow.get(i).setText("" + Run.unitsArray.get(n).getResultSILow());
-								} catch (NumberFormatException e) {
-									// we discard the Exception
-								}
-							}
-						}
-					}
-				} else {
-					System.out.println("Run.unitsArray is empty");
-				}
+			public void doComboboxCheck(){
 				if (comboBoxRoleTemp.getSelectedItem() == "constant") {
 					textFieldHighTemp.setText(textFieldLowTemp.getText());
 					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
@@ -527,37 +556,18 @@ public class WindowRelevantFactors extends JFrame {
 				//note: statechanged is triggered on persistentRestore
 				@Override
 				public void insertUpdate(DocumentEvent e) {
-					System.out.println("stateChanged");
-					doSICalculation();
+					System.out.println("insertUpdate");
+					doSICalculationHigh();
 				}
 				@Override
 				public void removeUpdate(DocumentEvent e) {
-					System.out.println("stateChanged");
-					doSICalculation();
+					System.out.println("removeUpdate");
+					doSICalculationHigh();
 				}
 				@Override
 				public void changedUpdate(DocumentEvent e) {
-				}
-				
-				public void doSICalculation(){
-					if (Run.unitsArray.size() > 0) {
-						for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
-							for (int n = 0; n < Run.unitsArray.size(); n++) {
-								if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())
-								&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())
-								&& WindowRelevantFactors.textFieldHigh.get(i).getText() != "") {
-									try {
-										Run.unitsArray.get(n).setHigh(Double.parseDouble(WindowRelevantFactors.textFieldHigh.get(i).getText()));
-										WindowRelevantFactors.textFieldResultSIHigh.get(i).setText("" + Run.unitsArray.get(n).getResultSIHigh());
-									} catch (NumberFormatException e) {
-										// we discard the Exception
-									}
-								}
-							}
-						}
-					} else {
-						System.out.println("Run.unitsArray is empty");
-					}
+					System.out.println("changedUpdate");
+					doSICalculationHigh();
 				}
 		});
 		contentPanel.add(textFieldHighTemp, new GridBagConstraints(6,
@@ -662,7 +672,6 @@ public class WindowRelevantFactors extends JFrame {
 						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp
 						.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()), Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
 						Run.unitsArray.add(tempRaw);
-						//FIXME fix bugs
 						CSV.writeCSV(Run.csvName);
 					} catch (Exception ex) {
 						ex.printStackTrace();

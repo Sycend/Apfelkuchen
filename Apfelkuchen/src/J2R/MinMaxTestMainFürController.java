@@ -5,7 +5,7 @@ import rcaller.RCode;
 public class MinMaxTestMainFürController {
 
 	public static void main(String[] args) {
-		J2R vMatrix = new J2R("RScripts/RSkript.R");
+		J2R vMatrix = new J2R("RScript/RSkript.R");
 		
 		//Bei Controllerübernahme ersetzten
 		
@@ -14,9 +14,7 @@ public class MinMaxTestMainFürController {
 		String [] colNamesArray = new String [] {"PI1", "PI2"};
 		double [] u_lowArray = new double [] {-1,-2,-3,-4,-5};
 		double [] u_highArray = new double [] {1,2,3,4,5};
-		
-		//
-		
+				
 		MinMax minMax = new MinMax(VMatrix, rowNamesArray, colNamesArray,u_lowArray, u_highArray, vMatrix.getRCode());
 		
 		
@@ -46,18 +44,16 @@ public class MinMaxTestMainFürController {
 			System.out.print(x_lowRowNames[i]);
 			System.out.print(" ");
 			System.out.print(x_low[i]);
-		//	System.out.print(x_lowColNames[i]);
 			System.out.println("");
 			System.out.print(x_highRowNames[i]);
 			System.out.print(" ");
 			System.out.print(x_high[i]);
-		//	System.out.print(x_highColNames[i]);
 			System.out.println("");
 			
 		}
 			System.out.println(x_lowColNames[0]);
 			System.out.println(x_highColNames[0]);
-		// 
+
 	}
 
 }
