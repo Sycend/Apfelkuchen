@@ -31,11 +31,11 @@ import org.xml.sax.SAXException;
  */
 public class Run {
 	protected static int rows = 0;
-	protected static String csvName = "spezifikation.csv";
-	protected static String saveFileNameRelevantFactors = "RelevantFactors.tmp";
-	protected static String saveFileNameDimensionlessFactors = "DimensionlessFactors.tmp";
-	protected static final int DEFAULT_WIDTH = 1200; //1100
-	protected static final int DEFAULT_HEIGHT = 550; //500
+	protected static final String csvName = "spezifikation.csv";
+	protected static final String saveFileNameRelevantFactors = "RelevantFactors.tmp";
+	protected static final String saveFileNameDimensionlessFactors = "DimensionlessFactors.tmp";
+	protected static final int DEFAULT_WIDTH = 1200;
+	protected static final int DEFAULT_HEIGHT = 550;
 	protected static final int DEFAULT_FONT_SIZE = 16;
 	//this needs testing on resolutions that are > 1366*x
 	protected static int currentWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() * ((double)DEFAULT_WIDTH / (double)1366));
@@ -57,7 +57,7 @@ public class Run {
 			restorePersistentRelevantFactors(WRF);
 		}
 		
-		new Thread(() -> CSV.readCSV(csvName)).start();
+		new Thread(() -> CSV.readCSV(csvName)).start();		
 	}
 	
 	protected static void persistentSaveRelevantFactors(){

@@ -30,7 +30,7 @@ public class TreeWindow extends JFrame {
 	private String[] dimensions = Run.getDimensions();
 	private boolean checkNode = false;
 	
-	public TreeWindow(JTextField textFieldDimensionPointer, JTextField textFieldUnitPointer) {
+	public TreeWindow(JTextField textFieldDimension, JTextField textFieldUnit) {
 		
 		// create the root node
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -74,7 +74,7 @@ public class TreeWindow extends JFrame {
 				if (e.getSource() == buttonOk) {
 					if (checkNode == true) {
 						setVisible(false);
-						WindowRelevantFactors.setSelectionItem(selectedItemParent, selectedItem, textFieldDimensionPointer, textFieldUnitPointer);
+						WindowRelevantFactors.setSelectionItem(selectedItemParent, selectedItem, textFieldDimension, textFieldUnit);
 						dispose();
 						
 						if (Run.unitsArray.size() > 0) {
@@ -93,6 +93,10 @@ public class TreeWindow extends JFrame {
 									}
 								}
 							}
+							
+							WindowRelevantFactors.doSICalculationLow();
+							WindowRelevantFactors.doSICalculationHigh();
+							
 						} else {
 							System.out.println("Run.unitsArray is empty");
 						}
