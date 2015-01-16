@@ -15,7 +15,7 @@ public class J2R {
 	private RCode code;
 	private String rExePfad;
 	private String skriptPath;
-	private J2R instance = null;
+	private static J2R instance = null;
 
 	/**
 	 * Creates a new object of J2R.
@@ -26,7 +26,7 @@ public class J2R {
 	 * @param skript
 	 *            The path of the script with your R code.
 	 */
-	public J2R(String skript) {
+	private J2R(String skript) {
 		initRCaller("C://Program Files/R/R-3.1.1/bin/x64");// ersetzten wenn
 															// bekannt wo das
 															// her kommen wird
@@ -127,12 +127,12 @@ public class J2R {
 		return this.code;
 	}
 
-	public J2R getInstance() {
+	public static J2R getInstance() {
 
 		
-		if (instance == null) {
-			instance = new J2R("RScript/RSkript.R");
+		if (J2R.instance == null) {
+			J2R.instance = new J2R("RScript/RSkript.R");
 		}
-		return instance;
+		return J2R.instance;
 	}
 }

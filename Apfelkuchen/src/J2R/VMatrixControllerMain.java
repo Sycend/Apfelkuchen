@@ -6,7 +6,7 @@ public class VMatrixControllerMain {
 
 	public static void main(String[] args) {
 
-		J2R test = new J2R("RScript/RSkript.R");
+		J2R test = J2R.getInstance();
 
 		String[] u_roles={"contr","contr","contr","contr","contr"};
 		String[] role = { "Controled" };

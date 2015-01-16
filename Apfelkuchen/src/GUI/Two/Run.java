@@ -58,7 +58,8 @@ public class Run {
 		}
 		
 		new Thread(() -> CSV.readCSV(csvName)).start();
-	}
+		
+		}
 	
 	protected static void persistentSaveRelevantFactors(){
 		if (new File(saveFileNameRelevantFactors).exists()){
