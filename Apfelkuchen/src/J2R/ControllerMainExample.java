@@ -4,29 +4,30 @@ import rcaller.RCode;
 
 public class ControllerMainExample {
 
-	
 	private static J2R callerInstance = null;
-	
-	public ControllerMainExample(J2R caller)
-	{
-	 	callerInstance = caller;
-	 	
-	 	controllR();
+
+	private String[] u_roles;
+	private String[] role;
+	private String[] colNames;
+	private String[] rowNames;
+	private double[][] dMatrix;
+	private boolean debug;
+
+	public ControllerMainExample(J2R caller, String[] u_Roles,
+			double[][] d_Matrix, String[] d_ColNames, String[] d_Rownames,
+			String[] roleArray, boolean debugBool) {
+		callerInstance = caller;
+		u_roles = u_Roles;
+		dMatrix = d_Matrix;
+		colNames = d_ColNames;
+		rowNames = d_Rownames;
+		role = roleArray;
+		debug = debugBool;
+
+		controllVMatrix();
 	}
-	
-	private static void controllR() {
 
-		
-		
-
-		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
-		String[] role = { "Controlled" };
-		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
-		String[] rowNames = { "d", "h", "Te", "ti", "alp" };
-		double[][] dMatrix = { { 1, 0, 0, 0, 0, 0, 0 },
-				{ 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
-				{ 0, 0, 1, 0, 0, 0, 0 }, { 3, 0, -3, -1, 0, 0, 0 } };
-		boolean debug = true;
+	public void controllVMatrix() {
 
 		SuggestVMatrix sVM = new SuggestVMatrix(u_roles, dMatrix, colNames,
 				rowNames, role, debug, callerInstance.getRCode());
@@ -75,7 +76,6 @@ public class ControllerMainExample {
 		MinMax minMax = new MinMax(vMatrix, vMatrixRowNames, vMatrixColNames,
 				u_lowArray, u_highArray, callerInstance.getRCode());
 
-
 		code = minMax.MinMaxCode();
 		callerInstance.setCode(code);
 		callerInstance.runAndReturnResultOnline(minMax
@@ -95,7 +95,6 @@ public class ControllerMainExample {
 				minMax.getX_highColnamesStringArray());
 		String[] x_highRowNames = callerInstance.getParser().getAsStringArray(
 				minMax.getX_highRownamesStringArray());
-
 
 		System.out.println("-----MinMax----");
 		for (int i = 0; i < x_low.length; i++) {

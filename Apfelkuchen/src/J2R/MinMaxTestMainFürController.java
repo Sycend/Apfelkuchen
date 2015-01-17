@@ -5,7 +5,7 @@ import rcaller.RCode;
 public class MinMaxTestMainFürController {
 
 	public static void main(String[] args) {
-		J2R vMatrix = new J2R("RScript/RSkript.R");
+		J2R vMatrix =  J2R.getInstance();
 		
 		//Bei Controllerübernahme ersetzten
 		
