@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class CSV {
 	
 	/**
-	 * This method writes the Run.unitsArray ArrayList into a File, which is
+	 * This method writes the Util.getInstance().unitsArray ArrayList into a File, which is
 	 * converted from the String Inputfile, using the csv ; delimiter separated format
 	 * 
 	 * @param Inputfile A String which will be turned into a file and then written to
@@ -43,28 +43,28 @@ public class CSV {
 		try {
 			fw.append("dimension,unit,low,high,m,k,s,kel,mol,amp,cand,offset,gradient");
 			fw.newLine();
-			for (int i = 0; i < Run.unitsArray.size(); i++) {
-				fw.append(Run.unitsArray.get(i).getDimension());
+			for (int i = 0; i < Util.getInstance().unitsArray.size(); i++) {
+				fw.append(Util.getInstance().unitsArray.get(i).getDimension());
 				fw.append(";");
-				fw.append(Run.unitsArray.get(i).getUnit());
+				fw.append(Util.getInstance().unitsArray.get(i).getUnit());
 				fw.append(";");
-				fw.append("" + Run.unitsArray.get(i).getM());
+				fw.append("" + Util.getInstance().unitsArray.get(i).getM());
 				fw.append(";");
-				fw.append("" + Run.unitsArray.get(i).getK());
+				fw.append("" + Util.getInstance().unitsArray.get(i).getK());
 				fw.append(";");
-				fw.append("" + Run.unitsArray.get(i).getS());
+				fw.append("" + Util.getInstance().unitsArray.get(i).getS());
 				fw.append(";");
-				fw.append("" + Run.unitsArray.get(i).getKel());
+				fw.append("" + Util.getInstance().unitsArray.get(i).getKel());
 				fw.append(";");
-				fw.append("" + Run.unitsArray.get(i).getMol());
+				fw.append("" + Util.getInstance().unitsArray.get(i).getMol());
 				fw.append(";");
-				fw.append("" + Run.unitsArray.get(i).getAmp());
+				fw.append("" + Util.getInstance().unitsArray.get(i).getAmp());
 				fw.append(";");
-				fw.append("" + Run.unitsArray.get(i).getCand());
+				fw.append("" + Util.getInstance().unitsArray.get(i).getCand());
 				fw.append(";");
-				fw.append("" + String.valueOf(Run.unitsArray.get(i).getOffset()).replace(".", ","));
+				fw.append("" + String.valueOf(Util.getInstance().unitsArray.get(i).getOffset()).replace(".", ","));
 				fw.append(";");
-				fw.append("" + String.valueOf(Run.unitsArray.get(i).getGradient()).replace(".", ","));
+				fw.append("" + String.valueOf(Util.getInstance().unitsArray.get(i).getGradient()).replace(".", ","));
 				fw.newLine();
 			}			
 		} catch (IOException e) {
@@ -83,7 +83,7 @@ public class CSV {
 	/**
 	 * This method reads a String Inputfile line by line via the readFile method
 	 * and proceeds to split every line at the ; delimiter and puts those
-	 * values in a temp RawUnits Class which is then put in the Run.unitsArray
+	 * values in a temp RawUnits Class which is then put in the Util.getInstance().unitsArray
 	 * ArrayList
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read
@@ -112,7 +112,7 @@ public class CSV {
 				}
 				
 				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
-				Run.unitsArray.add(tempRawUnits);
+				Util.getInstance().unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

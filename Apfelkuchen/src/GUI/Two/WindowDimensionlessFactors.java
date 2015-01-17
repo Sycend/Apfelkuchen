@@ -17,13 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
-import com.sun.org.apache.xml.internal.security.Init;
-
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 
 /**
  * @author Florian Then, Dominik Hofmann
@@ -86,9 +82,9 @@ public class WindowDimensionlessFactors extends JFrame {
 		lengthVMatrix = vMatrix.length;
 		widthVMatrix = vMatrix[0].length;
 		
-		setSize(Run.currentWidth, Run.currentHeight);
+		setSize(Util.getInstance().currentWidth, Util.getInstance().currentHeight);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle(Run.dataLabels("title"));
+		setTitle(Util.getInstance().dataLabels("title"));
 		init();
 		setVisible(true);
 	}
@@ -97,9 +93,9 @@ public class WindowDimensionlessFactors extends JFrame {
 		lengthVMatrix = vMatrix.length;
 		widthVMatrix = vMatrix[0].length;
 		
-		setSize(Run.currentWidth, Run.currentHeight);
+		setSize(Util.getInstance().currentWidth, Util.getInstance().currentHeight);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle(Run.dataLabels("title"));
+		setTitle(Util.getInstance().dataLabels("title"));
 		init();
 		setVisible(true);
 	}
@@ -115,13 +111,13 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		contentPanel.setLayout(new GridBagLayout());
 		//40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40
-		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] { Run.currentGridSizeLow, Run.currentGridSizeLow,
-		Run.currentGridSizeLow, Run.currentGridSizeLow,	Run.currentGridSizeLow,	Run.currentGridSizeLow,	Run.currentGridSizeLow,
-		Run.currentGridSizeLow, Run.currentGridSizeLow,	Run.currentGridSizeLow, Run.currentGridSizeLow,	Run.currentGridSizeLow, 
-		Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, 
-		Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow,
-		Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow,
-		Run.currentGridSizeLow, Run.currentGridSizeLow, Run.currentGridSizeLow };
+		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] { Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow, 
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, 
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow };
 		((GridBagLayout) contentPanel.getLayout()).rowHeights = new int[] { 25, 25, 25, 25, 25, };
 		
 		contentPanel.add(new JLabel("V-Matrix"), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
@@ -476,13 +472,13 @@ public class WindowDimensionlessFactors extends JFrame {
 		toggle.addActionListener(actionListener);
 		menuePanel.add(toggle);
 		
-		buttonBack = new JButton(Run.dataLabels("buttonBack"));
+		buttonBack = new JButton(Util.getInstance().dataLabels("buttonBack"));
 		buttonBack.setFocusPainted(false);
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonBack) {
 					Run.WDF.setVisible(false);
-					Run.persistentSaveDimensionlessFactors();
+					Util.getInstance().persistentSaveDimensionlessFactors();
 					Run.WRF.setVisible(true);
 				}
 			}

@@ -27,14 +27,14 @@ public class TreeWindow extends JFrame {
 	private String selectedItem;
 	private String selectedItemParent;
 	private JButton buttonOk;
-	private String[] dimensions = Run.getDimensions();
+	private String[] dimensions = Util.getInstance().getDimensions();
 	private boolean checkNode = false;
 	
 	public TreeWindow(JTextField textFieldDimension, JTextField textFieldUnit) {
 		
 		// create the root node
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setTitle(Run.dataLabels("title"));
+		this.setTitle(Util.getInstance().dataLabels("title"));
 		this.setAlwaysOnTop(true);
 		this.setSize(400, 400);
 		this.setVisible(true);
@@ -48,9 +48,9 @@ public class TreeWindow extends JFrame {
 			root.add(node);
 			// create the child nodes of SI Unitname (Time->min, sec)
 			
-			for (int j = 0; j < Run.unitsArray.size(); j++) {
-				if (dimensions[i].equals(Run.unitsArray.get(j).getDimension()))
-					node.add(new DefaultMutableTreeNode((Run.unitsArray.get(j).getUnit())));
+			for (int j = 0; j < Util.getInstance().unitsArray.size(); j++) {
+				if (dimensions[i].equals(Util.getInstance().unitsArray.get(j).getDimension()))
+					node.add(new DefaultMutableTreeNode((Util.getInstance().unitsArray.get(j).getUnit())));
 				
 				root.add(node);
 			}
@@ -77,18 +77,18 @@ public class TreeWindow extends JFrame {
 						WindowRelevantFactors.setSelectionItem(selectedItemParent, selectedItem, textFieldDimension, textFieldUnit);
 						dispose();
 						
-						if (Run.unitsArray.size() > 0) {
+						if (Util.getInstance().unitsArray.size() > 0) {
 							for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
-								for (int n = 0; n < Run.unitsArray.size(); n++) {
-									if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Run.unitsArray.get(n).getDimension())) {
-										if (WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Run.unitsArray.get(n).getUnit())) {
-											WindowRelevantFactors.textFieldM.get(i).setText("" + Run.unitsArray.get(n).getM());
-											WindowRelevantFactors.textFieldK.get(i).setText("" + Run.unitsArray.get(n).getK());
-											WindowRelevantFactors.textFieldS.get(i).setText("" + Run.unitsArray.get(n).getS());
-											WindowRelevantFactors.textFieldKel.get(i).setText("" + Run.unitsArray.get(n).getKel());
-											WindowRelevantFactors.textFieldMol.get(i).setText("" + Run.unitsArray.get(n).getMol());
-											WindowRelevantFactors.textFieldAmp.get(i).setText("" + Run.unitsArray.get(n).getAmp());
-											WindowRelevantFactors.textFieldCand.get(i).setText("" + Run.unitsArray.get(n).getCand());
+								for (int n = 0; n < Util.getInstance().unitsArray.size(); n++) {
+									if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension())) {
+										if (WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getUnit())) {
+											WindowRelevantFactors.textFieldM.get(i).setText("" + Util.getInstance().unitsArray.get(n).getM());
+											WindowRelevantFactors.textFieldK.get(i).setText("" + Util.getInstance().unitsArray.get(n).getK());
+											WindowRelevantFactors.textFieldS.get(i).setText("" + Util.getInstance().unitsArray.get(n).getS());
+											WindowRelevantFactors.textFieldKel.get(i).setText("" + Util.getInstance().unitsArray.get(n).getKel());
+											WindowRelevantFactors.textFieldMol.get(i).setText("" + Util.getInstance().unitsArray.get(n).getMol());
+											WindowRelevantFactors.textFieldAmp.get(i).setText("" + Util.getInstance().unitsArray.get(n).getAmp());
+											WindowRelevantFactors.textFieldCand.get(i).setText("" + Util.getInstance().unitsArray.get(n).getCand());
 										}
 									}
 								}
@@ -98,7 +98,7 @@ public class TreeWindow extends JFrame {
 							WindowRelevantFactors.doSICalculationHigh();
 							
 						} else {
-							System.out.println("Run.unitsArray is empty");
+							System.out.println("Util.getInstance().unitsArray is empty");
 						}
 						
 					}
