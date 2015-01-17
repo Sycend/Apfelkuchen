@@ -26,7 +26,7 @@ public class J2R {
 	 * @param skript
 	 *            The path of the script with your R code.
 	 */
-	private J2R(String skript) {
+	J2R(String skript) {
 		initRCaller("C://Program Files/R/R-3.1.1/bin/x64");// ersetzten wenn
 															// bekannt wo das
 															// her kommen wird
