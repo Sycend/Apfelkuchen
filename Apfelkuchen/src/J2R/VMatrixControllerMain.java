@@ -19,7 +19,7 @@ public class VMatrixControllerMain {
 	}
 
 	public void runVMatrix() {
-
+		System.out.println("-------------------Test--------------");
 		RCode code = new RCode();
 		code = sVM.SuggestVMatrixCode();
 		callerInstance.setCode(code);

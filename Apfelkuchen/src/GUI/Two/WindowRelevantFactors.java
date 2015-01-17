@@ -23,6 +23,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 
+import J2R.*;
 /**
  * Window1
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner, Clemens Kretzer
@@ -403,6 +404,7 @@ public class WindowRelevantFactors extends JFrame {
 						new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					} else {
 						System.out.println("restoreDimensionlessFactors()");
+						SingeltonTestMainStart.calculate();
 						Util.getInstance().restorePersistentDimensionlessFactors();
 						Run.WDF = new WindowDimensionlessFactors();
 					}

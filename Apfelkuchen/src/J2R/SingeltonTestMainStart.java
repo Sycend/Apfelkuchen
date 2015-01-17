@@ -4,18 +4,41 @@ package J2R;
 
 public class SingeltonTestMainStart{
 
-	public static void main(String[] args) {
+	public static void calculate() {
 
-		//Beispiel
-		//---------------------------------------------------------
-		String[] u_roles = PrepareForR.createRoles();
-		String[] role = { "Controlled" };
-		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
-		String[] rowNames = PrepareForR.createRowNames();
+//		//Beispiel
+//		//---------------------------------------------------------
+//		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
+////		String[] u_roles = PrepareForR.createRoles();
+//		String[] role = { "Controlled" };
+//		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
+//		String[] rowNames = PrepareForR.createRowNames();
 		double[][] dMatrix = PrepareForR.createDMatrix();
-
+//
 		boolean debug = true;
-		//--------------------------------------------------------------
+//		//--------------------------------------------------------------
+//		
+//			
+		
+		String[] u_roles={"contr","contr","contr","contr","contr"};
+		String[] role = { "Controled" };
+		String[] colNames= {"m","k","s","kel","mol","amp","cand"};
+		String[] rowNames= {"d", "h", "Te", "ti", "alp"};
+//		double[][] dMatrix= { { 1, 0, 0, 0, 0, 0, 0 },
+//				{ 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
+//				{ 0, 0, 1, 0, 0, 0, 0 }, { 3, 0, -3, -1, 0, 0, 0 } };
+//		boolean debug = true;
+//				
+//		for (int i = 0; i < 5; i++) {
+//			for (int j = 0; j < 7; j++) {
+//				System.out.print(dMatrix[i][j]+" ");
+//				
+//			}
+//			System.out.println();
+//		}
+//		
+//		System.out.println("++++++++++++++++++++++++++++++");
+//		PrepareForR.createDMatrix();
 		
 		
 		
@@ -46,13 +69,16 @@ public class SingeltonTestMainStart{
 
 		// -------------------------------------------------------------------------------------------
 		
-		//Beispiel
-		//---------------------------------------------------------
-		double[] u_lowArray = PrepareForR.createMin();
-		double[] u_highArray = PrepareForR.createMax();
+//		//Beispiel
+//		//---------------------------------------------------------
+//		double[] u_lowArray = PrepareForR.createMin();
+//		double[] u_highArray = PrepareForR.createMax();
+//		
+//		//---------------------------------------------------------
 		
-		//---------------------------------------------------------
 		
+		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
+		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
 		MinMaxTestMainFürController minMax = new MinMaxTestMainFürController(results, rn, cn, u_lowArray, u_highArray);
 		
 		double[] x_low = minMax.getX_lowDoubleArray();
