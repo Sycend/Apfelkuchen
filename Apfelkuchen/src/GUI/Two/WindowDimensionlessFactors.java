@@ -58,11 +58,11 @@ public class WindowDimensionlessFactors extends JFrame {
 		WindowDimensionlessFactors.rowNames = rowNames;
 		WindowDimensionlessFactors.colNames = colNames;
 		
-		minV = new String[minMax[0].length];
-		maxV = new String[minMax[0].length];
-		for (int i = 0; i < vMatrix[0].length; i++) {
-			minV[i] = minMax[0][i];
-			maxV[i] = minMax[1][i];
+		minV = new String[minMax.length];
+		maxV = new String[minMax.length];
+		for (int i = 0; i < minMax.length; i++) {
+			minV[i] = minMax[i][0];
+			maxV[i] = minMax[i][1];
 		}
 		
 		WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
