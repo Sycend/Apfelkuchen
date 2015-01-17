@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  * Window1
- * @author Yuri Kalinin, Florian Then, Dominik Hofmann
+ * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner, Clemens Kretzer
  * @version 1.2.4
  */
 public class WindowRelevantFactors extends JFrame {
@@ -73,6 +73,9 @@ public class WindowRelevantFactors extends JFrame {
 	protected static ArrayList<JButton> buttonUpdateCSV = new ArrayList<JButton>();
 	
 	protected JPanel contentPanel = new JPanel();
+	
+	
+	
 	
 	public WindowRelevantFactors() {
 		super(Util.getInstance().dataLabels("title"));
@@ -797,4 +800,50 @@ public class WindowRelevantFactors extends JFrame {
 		GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
 		buttonUpdateCSV.add(buttonUpdateCSVTemp);
 	} //end newFactor
+	
+	
+	// Getter Methods
+	public static ArrayList<JTextField> getTextFieldName() {
+		return textFieldName;
+	}
+
+	public static ArrayList<JTextField> getTextFieldM() {
+		return textFieldM;
+	}
+
+	public static ArrayList<JTextField> getTextFieldK() {
+		return textFieldK;
+	}
+
+	public static ArrayList<JTextField> getTextFieldS() {
+		return textFieldS;
+	}
+
+	public static ArrayList<JTextField> getTextFieldKel() {
+		return textFieldKel;
+	}
+
+	public static ArrayList<JTextField> getTextFieldMol() {
+		return textFieldMol;
+	}
+
+	public static ArrayList<JTextField> getTextFieldAmp() {
+		return textFieldAmp;
+	}
+
+	public static ArrayList<JTextField> getTextFieldCand() {
+		return textFieldCand;
+	}
+
+	public static ArrayList<JTextField> getTextFieldSILow() {
+		return textFieldResultSILow;
+	}
+
+	public static ArrayList<JTextField> getTextFieldSIHigh() {
+		return textFieldResultSIHigh;
+	}
+
+	public static ArrayList<JComboBox<String>> getComboBoxRole() {
+		return comboBoxRole;
+	}
 }

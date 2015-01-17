@@ -1,18 +1,18 @@
 package J2R;
 
-public class SingeltonTestMainStart {
+
+
+public class SingeltonTestMainStart{
 
 	public static void main(String[] args) {
 
 		//Beispiel
 		//---------------------------------------------------------
-		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
+		String[] u_roles = PrepareForR.createRoles();
 		String[] role = { "Controlled" };
 		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
-		String[] rowNames = { "d", "h", "Te", "ti", "alp" };
-		double[][] dMatrix = { { 1, 0, 0, 0, 0, 0, 0 },
-				{ 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
-				{ 0, 0, 1, 0, 0, 0, 0 }, { 3, 0, -3, -1, 0, 0, 0 } };
+		String[] rowNames = PrepareForR.createRowNames();
+		double[][] dMatrix = PrepareForR.createDMatrix();
 
 		boolean debug = true;
 		//--------------------------------------------------------------
@@ -48,8 +48,8 @@ public class SingeltonTestMainStart {
 		
 		//Beispiel
 		//---------------------------------------------------------
-		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
-		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
+		double[] u_lowArray = PrepareForR.createMin();
+		double[] u_highArray = PrepareForR.createMax();
 		
 		//---------------------------------------------------------
 		
@@ -81,7 +81,8 @@ public class SingeltonTestMainStart {
 		System.out.println(x_highColNames[0]);
 
 		callerInstance.stopRCaller();
-
+				
+		
 	}
 
 }
