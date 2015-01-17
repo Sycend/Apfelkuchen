@@ -4,59 +4,45 @@ import rcaller.RCode;
 
 public class VMatrixControllerMain {
 
-	public static void main(String[] args) {
+	private J2R callerInstance = null;
+	private SuggestVMatrix sVM;
 
-		J2R test = J2R.getInstance();
+	public VMatrixControllerMain(J2R caller, String[] u_Roles,
+			double[][] d_Matrix, String[] d_ColNames, String[] d_Rownames,
+			String[] roleArray, boolean debugBool) {
 
-		String[] u_roles={"contr","contr","contr","contr","contr"};
-		String[] role = { "Controled" };
-		String[] colNames= {"m","k","s","kel","mol","amp","cand"};
-		String[] rowNames= {"d", "h", "Te", "ti", "alp"};
-		double[][] dMatrix= { { 1, 0, 0, 0, 0, 0, 0 },
-				{ 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
-				{ 0, 0, 1, 0, 0, 0, 0 }, { 3, 0, -3, -1, 0, 0, 0 } };
-		boolean debug = true;
-				
-				
-		SuggestVMatrix sVM= new SuggestVMatrix(u_roles,dMatrix,colNames,rowNames,role,debug,test.getRCode());
-		
+		callerInstance = caller;
+
+		sVM = new SuggestVMatrix(u_Roles, d_Matrix, d_ColNames, d_Rownames,
+				roleArray, debugBool, callerInstance.getRCode());
+		runVMatrix();
+	}
+
+	public void runVMatrix() {
+
 		RCode code = new RCode();
 		code = sVM.SuggestVMatrixCode();
-		test.setCode(code);
-		test.runAndReturnResultOnline(sVM.getRunandReturnOnlineString());
-		
-		int mydim[] = test.getParser().getDimensions(sVM.getVDoubleMatrix());
-		
-		double [][] vMatrix = test.getParser().getAsDoubleMatrix(sVM.getVDoubleMatrix(),
-				mydim[1], mydim[0]);
-		String [] vMatrixRowNames = test.getParser().getAsStringArray(sVM.getVRownamesStringArray());
-		String [] vMatrixColNames = test.getParser().getAsStringArray(sVM.getVColnamesStringArray());
-		
-		test.stopRCaller();
-		
-		
-		// Test Ausgabe bei Übernahme unnötig
-		double results[][] = vMatrix;
-		String[] cn = vMatrixColNames;
-		String[] rn = vMatrixRowNames;
+		callerInstance.setCode(code);
+		callerInstance.runAndReturnResultOnline(sVM
+				.getRunandReturnOnlineString());
 
-		// -------------------------Ausgabe-------------------------------
+	}
 
-		for (int i = 0; i < mydim[1]; i++) {
-			if (i < rn.length)
-				System.out.print("  "+rn[i] + " ");
-			for (int j = 0; j < mydim[0]; j++) {
-				System.out.print(results[i][j]);// Spalte /Zeilen
-				System.out.print(" ");
-			}
-			if(i<cn.length){
-				System.out.print(cn[i]);
-			}
-			System.out.print('\n');
-		}
+	public String[] getVMatrixRowNames() {
+		return callerInstance.getParser().getAsStringArray(
+				sVM.getVRownamesStringArray());
+	}
 
-		// -------------------------------------------------------------------------------------------
-		//
+	public String[] getVMatrixColNames() {
+		return callerInstance.getParser().getAsStringArray(
+				sVM.getVColnamesStringArray());
+	}
+
+	public double[][] getVMatrix() {
+		int mydim[] = callerInstance.getParser().getDimensions(
+				sVM.getVDoubleMatrix());
+		return callerInstance.getParser().getAsDoubleMatrix(
+				sVM.getVDoubleMatrix(), mydim[1], mydim[0]);
 	}
 
 }

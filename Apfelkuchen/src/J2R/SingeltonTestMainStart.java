@@ -15,8 +15,34 @@ public class SingeltonTestMainStart {
 		boolean debug = true;
 
 		J2R callerInstance = J2R.getInstance();
-		new ControllerMainExample(callerInstance, u_roles, dMatrix, colNames,
-				rowNames, role, debug);
+		VMatrixControllerMain SuggestVMatrix = new VMatrixControllerMain(
+				callerInstance, u_roles, dMatrix, colNames, rowNames, role,
+				debug);
+
+		// Test Ausgabe bei Übernahme unnötig
+		double results[][] = SuggestVMatrix.getVMatrix();
+		String[] cn = SuggestVMatrix.getVMatrixColNames();
+		String[] rn = SuggestVMatrix.getVMatrixRowNames();
+		
+		// -------------------------Ausgabe-------------------------------
+
+		for (int i = 0; i < 5; i++) {
+			if (i < rn.length)
+				System.out.print("  " + rn[i] + " ");
+			for (int j = 0; j < 2; j++) {
+				System.out.print(results[i][j]);// Spalte /Zeilen
+				System.out.print(" ");
+			}
+			if (i < cn.length) {
+				System.out.print(cn[i]);
+			}
+			System.out.print('\n');
+		}
+
+		// -------------------------------------------------------------------------------------------
+		//
+
+		callerInstance.stopRCaller();
 
 	}
 
