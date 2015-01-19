@@ -51,6 +51,7 @@ public class Util {
 	protected List<RawUnits> unitsArray = new ArrayList<RawUnits>();
 	private String inputFieldSug;
 	private static Util utilInstance = null;
+	public Color bgColor = new Color(0xFFC1C1);
 
 	private Util() {
 	}
@@ -215,9 +216,11 @@ public class Util {
 		String title = dataLabels("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
 			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,12}") != true) {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
 				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
 				return false;
 			}
 		}
@@ -225,7 +228,7 @@ public class Util {
 	}
 
 	protected boolean fieldsCheck(JTextField fields, String label) {
-		
+
 		String message = dataLabels("errorTextDialog0");
 		String title = dataLabels("errorTitleDialog0");
 		String re1 = "([-]?\\d+)"; // Integer Number 1
@@ -245,13 +248,14 @@ public class Util {
 		if (m.find()) {
 			if (m2.find() == false) {
 				fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-
+				fields.setBackground(Color.WHITE);
 				return true;
 
 			}
 
 		}
-		fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+		fields.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+		fields.setBackground(bgColor);
 		JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
 
 		return false;
@@ -283,31 +287,34 @@ public class Util {
 		return false;
 	}
 
-	protected boolean SIMinMaxValuesCheck(ArrayList<JTextField> siMaxFields, ArrayList<JTextField> siMinFields, boolean minMax) {
+	protected boolean SIMinMaxValuesCheck(ArrayList<JTextField> siMaxFields, ArrayList<JTextField> siMinFields) {
 
 		String message = dataLabels("errorTextDialog1");
 		String title = dataLabels("errorTitleDialog0");
 		for (int i = 0; i < siMaxFields.size(); i++) {
-			if (minMax == true) {
 
-				if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
-					if (Double.parseDouble(siMaxFields.get(i).getText()) == Double.parseDouble(siMinFields.get(i).getText())) {
+			if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
+				if (Double.parseDouble(siMaxFields.get(i).getText()) == Double.parseDouble(siMinFields.get(i).getText())) {
 
-						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-						siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-						JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
+					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+					siMaxFields.get(i).setBackground(bgColor);
+					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+					siMinFields.get(i).setBackground(bgColor);
+					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
 
-						return false;
-					} else {
+					return false;
+				} else {
 
-						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-
-						siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-					}
+					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+					siMaxFields.get(i).setBackground(Color.WHITE);
+					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+					siMinFields.get(i).setBackground(Color.WHITE);
 				}
+
 				if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
 					if (Double.parseDouble(siMaxFields.get(i).getText()) < 0) {
-						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+						siMaxFields.get(i).setBackground(bgColor);
 						JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
 
 						return false;
@@ -316,20 +323,24 @@ public class Util {
 					}
 				}
 				if (Double.parseDouble(siMinFields.get(i).getText()) < 0) {
-					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+					siMinFields.get(i).setBackground(bgColor);
 					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
 					return false;
 				} else {
 					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+					siMinFields.get(i).setBackground(Color.WHITE);
 				}
-				
+
 				if (Double.parseDouble(siMaxFields.get(i).getText()) < Double.parseDouble(siMinFields.get(i).getText())) {
-					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+					siMaxFields.get(i).setBackground(bgColor);
 					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
 					return false;
 				} else {
 
 					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+					siMaxFields.get(i).setBackground(Color.WHITE);
 				}
 
 			}
