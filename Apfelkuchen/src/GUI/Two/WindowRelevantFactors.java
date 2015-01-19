@@ -31,7 +31,8 @@ import J2R.*;
 /**
  * Window1
  * 
- * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner, Clemens Kretzer
+ * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner,
+ *         Clemens Kretzer
  * @version 1.2.4
  */
 public class WindowRelevantFactors extends JFrame {
@@ -358,13 +359,10 @@ public class WindowRelevantFactors extends JFrame {
 					if (Util.getInstance().fieldsStringCheck(textFieldAbbreviation, "labelAbbr") != true) {
 						return;
 					}
-					if (Util.getInstance().fieldsStringCheck(textFieldUnit,"labelUnit") != true) {
+					if (Util.getInstance().fieldsStringCheck(textFieldUnit, "labelUnit") != true) {
 						return;
 					}
-					if (Util.getInstance().fieldsStringCheck(textFieldDimension,"labelDimension") != true) {
-						return;
-					}
-					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow, false) == false) {
+					if (Util.getInstance().fieldsStringCheck(textFieldDimension, "labelDimension") != true) {
 						return;
 					}
 
@@ -401,8 +399,11 @@ public class WindowRelevantFactors extends JFrame {
 						return;
 					}
 
-					if (Util.getInstance().SIMinMaxValuesCheck(textFieldHigh, textFieldLow, true) == false) {
-					
+					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
+
+						return;
+					}
+					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
 						return;
 					}
 					Util.getInstance().persistentSaveRelevantFactors();
@@ -629,14 +630,12 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
-				
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
-				
 
 			}
 		});
@@ -677,7 +676,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void insertUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
 					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
-					
+
 				}
 			}
 
@@ -685,7 +684,6 @@ public class WindowRelevantFactors extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
 					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
-					
 
 				}
 			}
@@ -706,13 +704,12 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().fieldsCheck(textFieldMTemp, "m");
-				
+
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				Util.getInstance().fieldsCheck(textFieldMTemp, "m");
-				
 
 			}
 		});
@@ -734,14 +731,11 @@ public class WindowRelevantFactors extends JFrame {
 			public void insertUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp, "k");
 
-			
-
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp, "k");
-			
 
 			}
 		});
@@ -762,14 +756,12 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp, "s");
-				
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp, "s");
-				
 
 			}
 		});
@@ -908,7 +900,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void insertUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
 					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp, "labelSIMax");
-					
+
 				}
 			}
 
@@ -916,7 +908,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
 					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp, "labelSIMax");
-					
+
 				}
 			}
 		});
