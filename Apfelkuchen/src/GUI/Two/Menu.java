@@ -6,6 +6,7 @@ package GUI.Two;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -78,9 +79,18 @@ public class Menu implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		String comStr = ae.getActionCommand();
-		System.out.println(comStr + " Selected");
+		String command = ae.getActionCommand();
+		System.out.println(command + " Selected");
+	 if( command.equals( "New" ))  {
+		 //mainMenuWindow.setVisible(false);
+		 Run.main(null);
+      }
+      else if( command.equals( "Help" ) )  {
+        
+      }
+      else  {
+         
+      }  
 	}
-	
 }
 
