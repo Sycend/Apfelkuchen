@@ -31,8 +31,7 @@ import J2R.*;
 /**
  * Window1
  * 
- * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner,
- *         Clemens Kretzer
+ * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner, Clemens Kretzer
  * @version 1.2.4
  */
 public class WindowRelevantFactors extends JFrame {

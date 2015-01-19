@@ -30,8 +30,8 @@ import org.xml.sax.SAXException;
 /**
  * Util Singleton
  * 
- * @author Dominik Hofmann
- * @version 1.0.3
+ * @author Dominik Hofmann, Yuri Kalinin
+ * @version 1.0.4
  */
 public class Util {
 	protected int row = 0;
@@ -223,7 +223,7 @@ public class Util {
 		return true;
 	}
 
-	protected static boolean fieldsCheck(JTextField fields, String label) {
+	protected boolean fieldsCheck(JTextField fields, String label) {
 		
 		String message = dataLabels("errorTextDialog0");
 		String title = dataLabels("errorTitleDialog0");
@@ -257,7 +257,7 @@ public class Util {
 
 	}
 
-	protected static boolean fieldsArrayCheck(ArrayList<JTextField> fields) {
+	protected boolean fieldsArrayCheck(ArrayList<JTextField> fields) {
 		String re1 = "([-]?\\d+)"; // Integer Number 1
 		String re2 = "([\\.]?)"; // Any Single Character 1
 		String re3 = "([\\d]?)"; // Integer Number 1 }
@@ -337,7 +337,7 @@ public class Util {
 		return true;
 	}
 
-	protected static String dataLabels(String nodeName) {
+	protected String dataLabels(String nodeName) {
 		final String fileName = "labels.xml";
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
