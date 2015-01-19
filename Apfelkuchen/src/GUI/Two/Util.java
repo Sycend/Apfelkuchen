@@ -11,7 +11,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,6 +29,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Util Singleton
+ * 
  * @author Dominik Hofmann
  * @version 1.0.3
  */
@@ -37,26 +41,28 @@ public class Util {
 	protected final int DEFAULT_WIDTH = 1200;
 	protected final int DEFAULT_HEIGHT = 550;
 	protected final int DEFAULT_FONT_SIZE = 16;
-	//this needs testing on resolutions that are > 1366*x
-	protected int currentWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() * ((double)DEFAULT_WIDTH / (double)1366));
-	protected int currentHeight = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * ((double)DEFAULT_HEIGHT / (double)768));
-	protected int currentFontSize = (int)((double)DEFAULT_FONT_SIZE * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double)1366);
-	protected int currentGridSizeHigh = (int)((double)80 * (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double)1366));
-	protected int currentGridSizeLow = (int)((double)40 * (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double)1366));
+	// this needs testing on resolutions that are > 1366*x
+	protected int currentWidth = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * ((double) DEFAULT_WIDTH / (double) 1366));
+	protected int currentHeight = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * ((double) DEFAULT_HEIGHT / (double) 768));
+	protected int currentFontSize = (int) ((double) DEFAULT_FONT_SIZE * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double) 1366);
+	protected int currentGridSizeHigh = (int) ((double) 80 * (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double) 1366));
+	protected int currentGridSizeLow = (int) ((double) 40 * (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (double) 1366));
 	protected List<RawUnits> unitsArray = new ArrayList<RawUnits>();
-	
+	private String inputFieldSug;
 	private static Util utilInstance = null;
-	private Util() {};
-	
+
+	private Util() {
+	};
+
 	public static Util getInstance() {
-		if(utilInstance == null) {
-	         utilInstance = new Util();
-	    }
+		if (utilInstance == null) {
+			utilInstance = new Util();
+		}
 		return utilInstance;
 	}
-	
-	protected void persistentSaveRelevantFactors(){
-		if (new File(RELEVANTFACTORS_FILENAME).exists()){
+
+	protected void persistentSaveRelevantFactors() {
+		if (new File(RELEVANTFACTORS_FILENAME).exists()) {
 			new File(RELEVANTFACTORS_FILENAME).delete();
 		}
 		ArrayList<ArrayList<JTextField>> textFieldsContainer = new ArrayList<ArrayList<JTextField>>();
@@ -86,21 +92,21 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
-	protected void restorePersistentRelevantFactors(WindowRelevantFactors WRF){
+
+	protected void restorePersistentRelevantFactors(WindowRelevantFactors WRF) {
 		ArrayList<ArrayList<JTextField>> textFieldsContainer = new ArrayList<ArrayList<JTextField>>();
 		ArrayList<JComboBox<String>> comboBoxRoleTmp = new ArrayList<JComboBox<String>>();
-		try{
+		try {
 			ObjectInputStream input = new ObjectInputStream(new FileInputStream(RELEVANTFACTORS_FILENAME));
 			textFieldsContainer = (ArrayList<ArrayList<JTextField>>) input.readObject();
 			comboBoxRoleTmp = (ArrayList<JComboBox<String>>) input.readObject();
 			input.close();
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (textFieldsContainer.size() > 0){
-			//textFieldsContainer.get(0).size() == Number of Rows
-			for (int i = 0; i < textFieldsContainer.get(0).size(); i++){
+		if (textFieldsContainer.size() > 0) {
+			// textFieldsContainer.get(0).size() == Number of Rows
+			for (int i = 0; i < textFieldsContainer.get(0).size(); i++) {
 				row++;
 				WRF.newFactor();
 				WindowRelevantFactors.textFieldName.get(i).setText(textFieldsContainer.get(0).get(i).getText());
@@ -124,7 +130,7 @@ public class Util {
 			}
 		}
 	}
-	
+
 	protected void persistentSaveDimensionlessFactors() {
 		if (new File(DIMENSIONLESSFACTORS_FILENAME).exists()) {
 			new File(DIMENSIONLESSFACTORS_FILENAME).delete();
@@ -144,7 +150,7 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected void restorePersistentDimensionlessFactors() {
 		try {
 			ObjectInputStream input = new ObjectInputStream(new FileInputStream(DIMENSIONLESSFACTORS_FILENAME));
@@ -159,9 +165,10 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * @return A duplicate free String[] Array that contains all Dimensions found in unitsArray
+	 * @return A duplicate free String[] Array that contains all Dimensions
+	 *         found in unitsArray
 	 */
 	protected String[] getDimensions() {
 		String[] tmp = new String[unitsArray.size()];
@@ -171,9 +178,10 @@ public class Util {
 		tmp = removeDuplicates(tmp);
 		return tmp;
 	}
-	
+
 	/**
-	 * @param A String[] Array that contains duplicates
+	 * @param A
+	 *            String[] Array that contains duplicates
 	 * @return A String[] Array that contains no more duplicates
 	 */
 	protected String[] removeDuplicates(String[] containsDuplicates) {
@@ -200,22 +208,136 @@ public class Util {
 		String[] tmp = new String[tmp0.size()];
 		return tmp0.toArray(tmp);
 	}
-	
-	protected boolean abbreviationStringCheck() {
+
+	protected boolean fieldsStringCheck(ArrayList<JTextField> fields, String label) {
 		String message = dataLabels("errorTextDialog0");
 		String title = dataLabels("errorTitleDialog0");
-		for (int i = 0; i < WindowRelevantFactors.textFieldAbbreviation.size(); i++) {
-			if (WindowRelevantFactors.textFieldAbbreviation.get(i).getText().matches("[a-zA-Z0-9]{1,8}") != true) {
-				WindowRelevantFactors.textFieldAbbreviation.get(i).setBackground(Color.RED);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels("labelAbbr"), title, JOptionPane.ERROR_MESSAGE);
-				WindowRelevantFactors.textFieldAbbreviation.get(i).setBackground(Color.WHITE);
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,12}") != true) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				return false;
 			}
 		}
 		return true;
 	}
-	
-	protected String dataLabels(String nodeName) {
+
+	protected static boolean fieldsCheck(JTextField fields, String label) {
+		
+		String message = dataLabels("errorTextDialog0");
+		String title = dataLabels("errorTitleDialog0");
+		String re1 = "([-]?\\d+)"; // Integer Number 1
+		String re2 = "([\\.]?)"; // Any Single Character 1
+		String re3 = "([\\d]?)"; // Integer Number 1 }
+
+		String reg4 = "((?:[a-z][a-z]*))"; // Word 1
+		if (fields.getText().equals("-")) {
+			return false;
+		}
+
+		Pattern p2 = Pattern.compile(reg4, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		Matcher m2 = p2.matcher(fields.getText());
+
+		Pattern p = Pattern.compile(re1 + re2 + re3, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		Matcher m = p.matcher(fields.getText());
+		if (m.find()) {
+			if (m2.find() == false) {
+				fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+
+				return true;
+
+			}
+
+		}
+		fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+		JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+
+		return false;
+
+	}
+
+	protected static boolean fieldsArrayCheck(ArrayList<JTextField> fields) {
+		String re1 = "([-]?\\d+)"; // Integer Number 1
+		String re2 = "([\\.]?)"; // Any Single Character 1
+		String re3 = "([\\d]?)"; // Integer Number 1 }
+
+		String reg4 = "((?:[a-z][a-z]*))"; // Word 1
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getText().equals("-")) {
+				return false;
+			}
+			Pattern p2 = Pattern.compile(reg4, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			Matcher m2 = p2.matcher(fields.get(i).getText());
+
+			Pattern p = Pattern.compile(re1 + re2 + re3, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			Matcher m = p.matcher(fields.get(i).getText());
+			if (m.find()) {
+				if (m2.find() == false) {
+					return true;
+
+				}
+			}
+		}
+		return false;
+	}
+
+	protected boolean SIMinMaxValuesCheck(ArrayList<JTextField> siMaxFields, ArrayList<JTextField> siMinFields, boolean minMax) {
+
+		String message = dataLabels("errorTextDialog1");
+		String title = dataLabels("errorTitleDialog0");
+		for (int i = 0; i < siMaxFields.size(); i++) {
+			if (minMax == true) {
+
+				if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
+					if (Double.parseDouble(siMaxFields.get(i).getText()) == Double.parseDouble(siMinFields.get(i).getText())) {
+
+						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+						siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+						JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
+
+						return false;
+					} else {
+
+						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+
+						siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+					}
+				}
+				if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
+					if (Double.parseDouble(siMaxFields.get(i).getText()) < 0) {
+						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+						JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
+
+						return false;
+					} else {
+						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+					}
+				}
+				if (Double.parseDouble(siMinFields.get(i).getText()) < 0) {
+					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
+					return false;
+				} else {
+					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				}
+				
+				if (Double.parseDouble(siMaxFields.get(i).getText()) < Double.parseDouble(siMinFields.get(i).getText())) {
+					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
+					return false;
+				} else {
+
+					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				}
+
+			}
+
+		}
+		return true;
+	}
+
+	protected static String dataLabels(String nodeName) {
 		final String fileName = "labels.xml";
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -232,5 +354,9 @@ public class Util {
 		}
 		return nodeName;
 	}
-	
-}//end Util Class
+
+	public String getSuggestionInput() {
+		return inputFieldSug;
+	}
+
+}// end Util Class
