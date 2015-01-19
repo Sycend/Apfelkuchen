@@ -1,7 +1,3 @@
-/**
- * 
- * 
- */
 package GUI.Two;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +9,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
-
+/**
+ * 
+ * @author Sycend
+ * @version 0.2
+ */
 public class Menu implements ActionListener {
 	
 	public static void main(String args[]) {
