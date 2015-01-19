@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Main used to Start Window1 + ReadCSV
  * @author Yuri Kalinin, Dominik Hofmann
- * @version 2.1.2
+ * @version 2.1.3
  */
 public class Run {
 	protected static WindowRelevantFactors WRF;
@@ -21,6 +21,9 @@ public class Run {
 			Util.getInstance().restorePersistentRelevantFactors(WRF);
 		}
 		
-		new Thread(() -> CSV.readCSV(Util.getInstance().CSV_FILENAME)).start();
+		new Thread(() -> {
+			CSV.readCSV(Util.getInstance().CSV_FILENAME);
+			CSV.readCSV(Util.getInstance().USER_CSV_FILENAME);
+		}).start();
 	}//end Main
 }

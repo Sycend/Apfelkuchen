@@ -1,0 +1,4 @@
+dimension,unit,m,k,s,kel,mol,amp,cand,offset,gradient
+UserDim0;UserUnit0;0;1;0;0;0;0;0;0,0;1,7
+UserDim1;UserUnit1;0;1;0;0;0;0;0;0,0;1,8
+UserDim2;UserUnit2;0;1;0;0;0;0;0;0,0;20

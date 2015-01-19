@@ -31,11 +31,12 @@ import org.xml.sax.SAXException;
  * Util Singleton
  * 
  * @author Dominik Hofmann, Yuri Kalinin
- * @version 1.0.4
+ * @version 1.0.5
  */
 public class Util {
 	protected int row = 0;
 	protected final String CSV_FILENAME = "spezifikation.csv";
+	protected final String USER_CSV_FILENAME = "user_spezifikation.csv";
 	protected final String RELEVANTFACTORS_FILENAME = "RelevantFactors.tmp";
 	protected final String DIMENSIONLESSFACTORS_FILENAME = "DimensionlessFactors.tmp";
 	protected final int DEFAULT_WIDTH = 1200;
@@ -52,7 +53,7 @@ public class Util {
 	private static Util utilInstance = null;
 
 	private Util() {
-	};
+	}
 
 	public static Util getInstance() {
 		if (utilInstance == null) {

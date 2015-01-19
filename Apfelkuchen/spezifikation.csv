@@ -88,10 +88,3 @@ Reaktionsrate1;1/s;0;0;-1;0;0;0;0;0,0;1,0
 Reaktionsrate2;L/smol;3;0;-1;0;-1;0;0;0,0;0,001
 Reaktionsrate3;L^2/smol^2;6;0;-1;0;-2;0;0;0,0;1,0E-6
 Oberflaechenspannung;m/s^2;1;0;-2;0;0;0;0;0,0;1,0
-test;test1;1;0;0;0;0;0;0;0,0;1,0
-test;test2;1;0;0;0;0;0;0;NaN;NaN
-test;test3;0;0;0;1;0;0;0;0,0;1,0
-test;test4;0;0;1;-1;0;0;0;0,0;1,0
-test;test5;3;0;-3;0;0;0;0;0,0;1,0
-test;test4;0;0;1;0;0;0;0;0,0;1,0
-test;test5;3;0;-3;-1;0;0;0;NaN;NaN

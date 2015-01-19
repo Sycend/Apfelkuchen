@@ -10,21 +10,18 @@ package GUI.Two;
 public class RawUnits {
 	private String dimension = null;
 	private String unit = null;
-	int valuesSI[] = new int [7];
+	int valuesSI[] = new int[7];
 	private double offset = 0.0;
 	private double gradient = 0.0;
 	private double low = 0;
 	private double high = 0;
 	
 	RawUnits(){
-		
 	}
 	
-	RawUnits(String dimension, String unit, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) { //double low, double high
+	RawUnits(String dimension, String unit, int m, int k, int s, int kel, int mol, int amp, int cand, double offset, double gradient) {
 		this.dimension = dimension;
 		this.unit = unit;
-		//this.low = low;
-		//this.high = high;
 		this.valuesSI[0] = m;
 		this.valuesSI[1] = k;
 		this.valuesSI[2] = s;
@@ -49,11 +46,11 @@ public class RawUnits {
 	public void setLow(double low) {
 		this.low = low;
 	}
-
+	
 	public void setHigh(double high) {
 		this.high = high;
 	}
-
+	
 	public String getDimension() {
 		return dimension;
 	}
@@ -80,35 +77,29 @@ public class RawUnits {
 	
 	public int getM() {
 		return this.valuesSI[0];
-		
 	}
 	
 	public int getK() {
 		return this.valuesSI[1];
-		
 	}
 	
 	public int getS() {
 		return this.valuesSI[2];
-		
 	}
 	
 	public int getKel() {
 		return this.valuesSI[3];
-		
 	}
 	
 	public int getMol() {
 		return this.valuesSI[4];
-
 	}
 	
 	public int getAmp() {
-		return 	this.valuesSI[5];
-		
+		return this.valuesSI[5];
 	}
 	
 	public int getCand() {
 		return this.valuesSI[6];
-	}	
+	}
 }
