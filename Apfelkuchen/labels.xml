@@ -23,9 +23,17 @@
 		<labelHigh>Max</labelHigh>
 		<labelSIMin>Si-Min</labelSIMin>
 		<labelSIMax>Si-Max</labelSIMax>
-		
+		<m>m</m>
+		<k>k</k>
+		<s>s</s>
+		<kel>kel</kel>
+		<mol>mol</mol>
+		<amp>amp</amp>
+		<cand>cand</cand>
 		<errorTitleDialog0>Fehler</errorTitleDialog0>
 		<errorTextDialog0>Bitte Überprüfen Sie die Eingaben von</errorTextDialog0>
+		<errorTextDialog1>Bitte Überprüfen Sie die Eingaben in den markierten Felderns</errorTextDialog1>
+		
 	</de>
 
 </root>
