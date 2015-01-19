@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JLabel;
 
 public class Menu implements ActionListener {
 	
@@ -30,6 +31,8 @@ public class Menu implements ActionListener {
 		JMenuItem jmiClose = new JMenuItem("Close");
 		JMenuItem jmiSave = new JMenuItem("Save");
 		JMenuItem jmiExit = new JMenuItem("Exit");
+		JLabel label1 = new JLabel("Wellcome");
+		mainMenuWindow.add(label1);
 		jmFile.add(jmiNew);
 		jmFile.add(jmiOpen);
 		jmFile.add(jmiClose);
