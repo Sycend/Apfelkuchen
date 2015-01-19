@@ -22,8 +22,7 @@ public class Menu implements ActionListener {
 	
 	Menu() {
 		JFrame mainMenuWindow = new JFrame("Main Menu");
-		mainMenuWindow.setSize(820, 600);
-
+		mainMenuWindow.setSize(620, 200);
 		mainMenuWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenuBar jmb = new JMenuBar();
 		JMenu jmFile = new JMenu("File");
@@ -32,7 +31,7 @@ public class Menu implements ActionListener {
 		JMenuItem jmiClose = new JMenuItem("Close");
 		JMenuItem jmiSave = new JMenuItem("Save");
 		JMenuItem jmiExit = new JMenuItem("Exit");
-		JLabel label1 = new JLabel("Wellcome");
+		JLabel label1 = new JLabel("Welcome, thanks for using our product.");
 		mainMenuWindow.add(label1);
 		jmFile.add(jmiNew);
 		jmFile.add(jmiOpen);
