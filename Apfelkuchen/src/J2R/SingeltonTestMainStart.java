@@ -19,11 +19,12 @@ public class SingeltonTestMainStart{
 //		//--------------------------------------------------------------
 //		
 //			
-		
-		String[] u_roles={"contr","contr","contr","contr","contr"};
-		String[] role = { "Controled" };
+		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
+//		String[] u_roles = { "controll", "controll", "controll", "controll", "controll" };
+//		String[] u_roles=PrepareForR.createRoles();
+		String[] role = { "Controlled" };
 		String[] colNames= {"m","k","s","kel","mol","amp","cand"};
-		String[] rowNames= {"d", "h", "Te", "ti", "alp"};
+		String[] rowNames= PrepareForR.createRowNames();
 //		double[][] dMatrix= { { 1, 0, 0, 0, 0, 0, 0 },
 //				{ 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
 //				{ 0, 0, 1, 0, 0, 0, 0 }, { 3, 0, -3, -1, 0, 0, 0 } };
@@ -106,7 +107,7 @@ public class SingeltonTestMainStart{
 		System.out.println(x_lowColNames[0]);
 		System.out.println(x_highColNames[0]);
 
-		callerInstance.stopRCaller();
+//		callerInstance.stopRCaller();
 				
 		
 	}

@@ -102,7 +102,7 @@ public class PrepareForR {
 
 		for (int i = 0; i < WindowRelevantFactors.getComboBoxRole().size(); i++) {
 			roles[i] = WindowRelevantFactors.getComboBoxRole().get(i)
-					.toString();
+					.getSelectedItem().toString();
 		}
 		
 		for (int i = 0; i < WindowRelevantFactors.getComboBoxRole().size(); i++) {
@@ -113,4 +113,3 @@ public class PrepareForR {
 	}
 
 }
-//test

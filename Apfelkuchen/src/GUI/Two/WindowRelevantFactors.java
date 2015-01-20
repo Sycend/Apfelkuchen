@@ -416,6 +416,10 @@ public class WindowRelevantFactors extends JFrame {
 								{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					} else {
 						System.out.println("restoreDimensionlessFactors()");
+						
+						
+						
+						
 						SingeltonTestMainStart.calculate();
 						Util.getInstance().restorePersistentDimensionlessFactors();
 						Run.WDF = new WindowDimensionlessFactors();
