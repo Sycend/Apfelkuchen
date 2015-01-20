@@ -70,26 +70,26 @@ public class SingeltonTestMainStart{
 
 		// -------------------------------------------------------------------------------------------
 		
-//		//Beispiel
-//		//---------------------------------------------------------
-//		double[] u_lowArray = PrepareForR.createMin();
-//		double[] u_highArray = PrepareForR.createMax();
-//		
-//		//---------------------------------------------------------
-		
-		
-		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
-		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
-		MinMaxTestMainFürController minMax = new MinMaxTestMainFürController(results, rn, cn, u_lowArray, u_highArray);
-		
-		double[] x_low = minMax.getX_lowDoubleArray();
-		double[] x_high =  minMax.getX_highDoubleArray();
 
-		String[] x_lowColNames =  minMax.getX_lowColnamesStringArray();
-		String[] x_lowRowNames =  minMax.getX_lowRownamesStringArray();
+		
+		
+//		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
+//		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
+		
+		
+		double[] u_lowArray = PrepareForR.createMin();
+		double[] u_highArray = PrepareForR.createMax();
+		
+		MinMaxTestMainFürController minMaxController = new MinMaxTestMainFürController(results, rn, cn, u_lowArray, u_highArray);
+		
+		double[] x_low = minMaxController.getX_lowDoubleArray();
+		double[] x_high =  minMaxController.getX_highDoubleArray();
 
-		String[] x_highColNames =  minMax.getX_highColnamesStringArray();
-		String[] x_highRowNames =  minMax.getX_highRownamesStringArray();
+		String[] x_lowColNames =  minMaxController.getX_lowColnamesStringArray();
+		String[] x_lowRowNames =  minMaxController.getX_lowRownamesStringArray();
+
+		String[] x_highColNames =  minMaxController.getX_highColnamesStringArray();
+		String[] x_highRowNames =  minMaxController.getX_highRownamesStringArray();
 
 		// Test Ausgabe (Bei übernahme nicht nötig)
 
