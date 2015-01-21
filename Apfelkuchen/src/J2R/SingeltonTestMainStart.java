@@ -6,40 +6,16 @@ public class SingeltonTestMainStart{
 
 	public static void calculate() {
 
-//		//Beispiel
-//		//---------------------------------------------------------
-//		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
-////		String[] u_roles = PrepareForR.createRoles();
-//		String[] role = { "Controlled" };
-//		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
-//		String[] rowNames = PrepareForR.createRowNames();
+
+		String[] u_roles = PrepareForR.createRoles();
 		double[][] dMatrix = PrepareForR.createDMatrix();
-//
+
 		boolean debug = true;
-//		//--------------------------------------------------------------
-//		
-//			
-		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
-//		String[] u_roles = { "controll", "controll", "controll", "controll", "controll" };
-//		String[] u_roles=PrepareForR.createRoles();
+
 		String[] role = { "Controlled" };
 		String[] colNames= {"m","k","s","kel","mol","amp","cand"};
 		String[] rowNames= PrepareForR.createRowNames();
-//		double[][] dMatrix= { { 1, 0, 0, 0, 0, 0, 0 },
-//				{ 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
-//				{ 0, 0, 1, 0, 0, 0, 0 }, { 3, 0, -3, -1, 0, 0, 0 } };
-//		boolean debug = true;
-//				
-//		for (int i = 0; i < 5; i++) {
-//			for (int j = 0; j < 7; j++) {
-//				System.out.print(dMatrix[i][j]+" ");
-//				
-//			}
-//			System.out.println();
-//		}
-//		
-//		System.out.println("++++++++++++++++++++++++++++++");
-//		PrepareForR.createDMatrix();
+
 		
 		
 		
