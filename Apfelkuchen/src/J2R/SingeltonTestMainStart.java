@@ -31,10 +31,10 @@ public class SingeltonTestMainStart{
 		
 		// -------------------------Ausgabe-------------------------------
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < cn.length; i++) {
 			if (i < rn.length)
 				System.out.print("  " + rn[i] + " ");
-			for (int j = 0; j < 2; j++) {
+			for (int j = 0; j < rn.length; j++) {
 				System.out.print(results[i][j]);// Spalte /Zeilen
 				System.out.print(" ");
 			}
