@@ -51,6 +51,14 @@ public class WindowDimensionlessFactors extends JFrame {
 	private boolean isInit;
 	private JToggleButton toggle = new JToggleButton();
 	
+	/**
+	 * Konstruktor für WindowDimensionlessFactors
+	 * @param vMatrix
+	 * @param rowNames
+	 * @param colNames
+	 * @param minMax
+	 * @param dimensionlessControlSI
+	 */
 	public WindowDimensionlessFactors(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax,
 	String[][] dimensionlessControlSI) {
 		
@@ -88,7 +96,9 @@ public class WindowDimensionlessFactors extends JFrame {
 		init();
 		setVisible(true);
 	}
-	
+	/**
+	 * DefaultKonstruktor für WindowDimensionlessFactors
+	 */
 	public WindowDimensionlessFactors() {
 		lengthVMatrix = vMatrix.length;
 		widthVMatrix = vMatrix[0].length;
@@ -99,13 +109,18 @@ public class WindowDimensionlessFactors extends JFrame {
 		init();
 		setVisible(true);
 	}
-	
-	public void init() {
+	/**
+	 * Init WindowDimensionlessFactors-Content
+	 */
+	private void init() {
 		setLayout(new BorderLayout());
 		initMenuePanel();
 		initContentPanel();
 		isInit=true;
 	}
+	/**
+	 * Init WindowDimensionlessFactors-Content auf Contentpanel
+	 */
 	private void initContentPanel() {
 		contentPanel = new JPanel();
 		
@@ -398,12 +413,29 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		getContentPane().add(scrollpane, BorderLayout.CENTER);		
 	}
-
+	/**
+	 * Init WindowDimensionlessFactors-Content auf MenuePanel
+	 */
 	private void initMenuePanel() {
 		JPanel menuePanel = new JPanel();
 		buttonReset = new JButton("Reset");
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for(int i=0;i<widthVMatrix;i++){
+					if(checkLinearMatrixForDeleteColumn(i))
+					{
+						int check=JOptionPane.showConfirmDialog(null, 
+                                "Do you wanna Delete this column? "+colNames[i], 
+                                "Choose", 
+                                JOptionPane.YES_NO_OPTION); 
+						if(check==JOptionPane.YES_OPTION)
+						{
+							deleteVMatrixColumn(i);
+							refreshWindowContent();
+							return;
+						}
+					}
+				}
 				if(checkLinearMatrix()){
 					System.out.println(linearDependenceTextFields.get(1).get(0).getText());
 					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
@@ -425,19 +457,12 @@ public class WindowDimensionlessFactors extends JFrame {
 							tempArrayList.add(tempTextField);
 						}
 						vMatrixTextFields.set(i,tempArrayList);
-					}					
-					getContentPane().removeAll();
+					}			
 					
-					colNamesTextFieldsToColNames();
-					
-					initMenuePanel();
-					initContentPanel();
-					
-					getContentPane().revalidate();
-					getContentPane().repaint();
+					refreshWindowContent();
 				}
 				else{
-					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.INFORMATION_MESSAGE);
 				}				
 			}
 		});
@@ -486,13 +511,20 @@ public class WindowDimensionlessFactors extends JFrame {
 		menuePanel.add(buttonBack);
 		getContentPane().add(menuePanel, BorderLayout.NORTH);		
 	}
-
+	/**
+	 * Colnames in Textfields in Colnames in ColnamesArray
+	 */
 	private void colNamesTextFieldsToColNames()
 	{
 		for(int i=0;i<colNames.length;i++){
 			colNames[i]=textFieldColNames.get(i).getText();			
 		}
 	}
+	/**
+	 * check LinearMatrix
+	 * isLinearMatrix changed?
+	 * @return boolean für Check
+	 */
 	private boolean checkLinearMatrix()
 	{
 		boolean isDiagonalOK=true;
@@ -509,5 +541,44 @@ public class WindowDimensionlessFactors extends JFrame {
 			return true;
 		return false;
 	}
-	
+	private boolean checkLinearMatrixForDeleteColumn(int column)
+	{
+		boolean isDeleteable=true;
+		for(int i=0;i<widthVMatrix;i++){
+			if(!linearDependenceTextFields.get(column).get(i).getText().equals("0")){
+				isDeleteable=false;					
+			}
+		}
+		
+		return isDeleteable;
+	}
+	private void refreshWindowContent()
+	{
+		getContentPane().removeAll();
+		
+		colNamesTextFieldsToColNames();
+		
+		initMenuePanel();
+		initContentPanel();
+		
+		getContentPane().revalidate();
+		getContentPane().repaint();
+	}
+	private void deleteVMatrixColumn(int column)
+	{
+		for(int col=column;col<widthVMatrix-1;col++)
+		{
+			for(int i=0;i<widthVMatrix;i++){
+				vMatrix[i][col]=vMatrix[i][col+1];
+			}
+			colNames[col]=colNames[col+1];
+			minV[col]=minV[col+1];
+			maxV[col]=maxV[col+1];
+			for(int j=0;j<7;j++){
+				dimensionlessControlSI[j][col]=dimensionlessControlSI[j][col];
+			}
+		}
+		widthVMatrix--;
+		refreshWindowContent();
+	}
 }
