@@ -231,34 +231,19 @@ public class Util {
 
 		String message = dataLabels("errorTextDialog0");
 		String title = dataLabels("errorTitleDialog0");
-		String re1 = "([-]?\\d+)"; // Integer Number 1
-		String re2 = "([\\.]?)"; // Any Single Character 1
-		String re3 = "([\\d]?)"; // Integer Number 1 }
 
-		String reg4 = "((?:[a-z][a-z]*))"; // Word 1
-		if (fields.getText().equals("-")) {
+		if (fields.getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?") == false) {
+			fields.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+			fields.setBackground(bgColor);
+			// JOptionPane.showMessageDialog(new JFrame(), message + " " +
+			// dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+
 			return false;
+		} else {
+			fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			fields.setBackground(Color.WHITE);
+			return true;
 		}
-
-		Pattern p2 = Pattern.compile(reg4, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		Matcher m2 = p2.matcher(fields.getText());
-
-		Pattern p = Pattern.compile(re1 + re2 + re3, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		Matcher m = p.matcher(fields.getText());
-		if (m.find()) {
-			if (m2.find() == false) {
-				fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				fields.setBackground(Color.WHITE);
-				return true;
-
-			}
-
-		}
-		fields.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-		fields.setBackground(bgColor);
-		JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
-
-		return false;
 
 	}
 
@@ -269,22 +254,25 @@ public class Util {
 
 		String reg4 = "((?:[a-z][a-z]*))"; // Word 1
 		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getText().equals("-")) {
-				return false;
-			}
+			// if (fields.get(i).getText().equals("-")) {
+			// return false;
+			// }
 			Pattern p2 = Pattern.compile(reg4, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 			Matcher m2 = p2.matcher(fields.get(i).getText());
 
 			Pattern p = Pattern.compile(re1 + re2 + re3, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 			Matcher m = p.matcher(fields.get(i).getText());
-			if (m.find()) {
-				if (m2.find() == false) {
-					return true;
+			// if (m.find()) {
+			// if (m2.find() == false) {
+			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?") == true) {
+				return true;
 
-				}
 			}
 		}
+		// }
+
 		return false;
+
 	}
 
 	protected boolean SIMinMaxValuesCheck(ArrayList<JTextField> siMaxFields, ArrayList<JTextField> siMinFields) {
