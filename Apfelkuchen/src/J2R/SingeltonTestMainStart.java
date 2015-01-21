@@ -6,39 +6,16 @@ public class SingeltonTestMainStart{
 
 	public static void calculate() {
 
-//		//Beispiel
-//		//---------------------------------------------------------
-//		String[] u_roles = { "contr", "contr", "contr", "contr", "contr" };
-////		String[] u_roles = PrepareForR.createRoles();
-//		String[] role = { "Controlled" };
-//		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
-//		String[] rowNames = PrepareForR.createRowNames();
+
+		String[] u_roles = PrepareForR.createRoles();
 		double[][] dMatrix = PrepareForR.createDMatrix();
-//
+
 		boolean debug = true;
-//		//--------------------------------------------------------------
-//		
-//			
-		
-		String[] u_roles={"contr","contr","contr","contr","contr"};
-		String[] role = { "Controled" };
+
+		String[] role = { "Controlled" };
 		String[] colNames= {"m","k","s","kel","mol","amp","cand"};
-		String[] rowNames= {"d", "h", "Te", "ti", "alp"};
-//		double[][] dMatrix= { { 1, 0, 0, 0, 0, 0, 0 },
-//				{ 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 },
-//				{ 0, 0, 1, 0, 0, 0, 0 }, { 3, 0, -3, -1, 0, 0, 0 } };
-//		boolean debug = true;
-//				
-//		for (int i = 0; i < 5; i++) {
-//			for (int j = 0; j < 7; j++) {
-//				System.out.print(dMatrix[i][j]+" ");
-//				
-//			}
-//			System.out.println();
-//		}
-//		
-//		System.out.println("++++++++++++++++++++++++++++++");
-//		PrepareForR.createDMatrix();
+		String[] rowNames= PrepareForR.createRowNames();
+
 		
 		
 		
@@ -69,26 +46,26 @@ public class SingeltonTestMainStart{
 
 		// -------------------------------------------------------------------------------------------
 		
-//		//Beispiel
-//		//---------------------------------------------------------
-//		double[] u_lowArray = PrepareForR.createMin();
-//		double[] u_highArray = PrepareForR.createMax();
-//		
-//		//---------------------------------------------------------
-		
-		
-		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
-		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
-		MinMaxTestMainFürController minMax = new MinMaxTestMainFürController(results, rn, cn, u_lowArray, u_highArray);
-		
-		double[] x_low = minMax.getX_lowDoubleArray();
-		double[] x_high =  minMax.getX_highDoubleArray();
 
-		String[] x_lowColNames =  minMax.getX_lowColnamesStringArray();
-		String[] x_lowRowNames =  minMax.getX_lowRownamesStringArray();
+		
+		
+//		double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
+//		double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
+		
+		
+		double[] u_lowArray = PrepareForR.createMin();
+		double[] u_highArray = PrepareForR.createMax();
+		
+		MinMaxTestMainFürController minMaxController = new MinMaxTestMainFürController(results, rn, cn, u_lowArray, u_highArray);
+		
+		double[] x_low = minMaxController.getX_lowDoubleArray();
+		double[] x_high =  minMaxController.getX_highDoubleArray();
 
-		String[] x_highColNames =  minMax.getX_highColnamesStringArray();
-		String[] x_highRowNames =  minMax.getX_highRownamesStringArray();
+		String[] x_lowColNames =  minMaxController.getX_lowColnamesStringArray();
+		String[] x_lowRowNames =  minMaxController.getX_lowRownamesStringArray();
+
+		String[] x_highColNames =  minMaxController.getX_highColnamesStringArray();
+		String[] x_highRowNames =  minMaxController.getX_highRownamesStringArray();
 
 		// Test Ausgabe (Bei übernahme nicht nötig)
 
@@ -106,7 +83,7 @@ public class SingeltonTestMainStart{
 		System.out.println(x_lowColNames[0]);
 		System.out.println(x_highColNames[0]);
 
-		callerInstance.stopRCaller();
+//		callerInstance.stopRCaller();
 				
 		
 	}

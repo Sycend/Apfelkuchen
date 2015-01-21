@@ -416,6 +416,10 @@ public class WindowRelevantFactors extends JFrame {
 								{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					} else {
 						System.out.println("restoreDimensionlessFactors()");
+						
+						
+						
+						
 						SingeltonTestMainStart.calculate();
 						Util.getInstance().restorePersistentDimensionlessFactors();
 						Run.WDF = new WindowDimensionlessFactors();
@@ -595,13 +599,16 @@ public class WindowRelevantFactors extends JFrame {
 			// note: statechanged is triggered on persistentRestore
 			@Override
 			public void insertUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
 				System.out.println("insertUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
+				
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
 				System.out.println("removeUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -609,6 +616,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
 				System.out.println("changedUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -621,24 +629,7 @@ public class WindowRelevantFactors extends JFrame {
 				}
 			}
 		});
-		textFieldLowTemp.getDocument().addDocumentListener(new DocumentListener() {
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
-
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
-
-			}
-		});
+	
 		contentPanel.add(textFieldLowTemp, new GridBagConstraints(5, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 		textFieldLow.add(textFieldLowTemp);
 
@@ -651,43 +642,34 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				System.out.println("insertUpdate");
+				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
+					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
+
+				}
 				doSICalculationHigh();
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				System.out.println("removeUpdate");
+				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
+					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
+
+				}
 				doSICalculationHigh();
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				System.out.println("changedUpdate");
+				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
+					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
+
+				}
 				doSICalculationHigh();
 			}
 		});
-		textFieldHighTemp.getDocument().addDocumentListener(new DocumentListener() {
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
-
-				}
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
-
-				}
-			}
-		});
+		
 		contentPanel.add(textFieldHighTemp, new GridBagConstraints(6, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldHigh.add(textFieldHighTemp);
 
@@ -698,7 +680,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldMTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		textFieldMTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldMTemp, "m");
 			}
 
 			@Override
@@ -724,7 +707,9 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldKTemp.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp, "k");
+
 			}
 
 			@Override
@@ -750,7 +735,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldSTemp.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp, "s");
 			}
 
 			@Override
@@ -775,7 +761,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldKelTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		textFieldKelTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldKelTemp, "kel");
 			}
 
 			@Override
@@ -801,7 +788,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldMol.add(textFieldMolTemp);
 		textFieldMolTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldMolTemp, "mol");
 			}
 
 			@Override
@@ -822,7 +810,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldAmpTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		textFieldAmpTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldAmpTemp, "amp");
 			}
 
 			@Override
@@ -846,7 +835,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldCandTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		textFieldCandTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp, "cand");
 			}
 
 			@Override
@@ -869,7 +859,9 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSILowTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		textFieldResultSILowTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().fieldsCheck(textFieldResultSILowTemp, "labelSIMin");
+
 			}
 
 			@Override
@@ -893,7 +885,11 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSIHighTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		textFieldResultSIHighTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {/* No Action */
+			public void removeUpdate(DocumentEvent e) {
+				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
+					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp, "labelSIMax");
+
+				}
 			}
 
 			@Override

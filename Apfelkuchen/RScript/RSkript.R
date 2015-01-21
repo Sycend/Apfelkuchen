@@ -29,7 +29,7 @@ suggestVmatrix<-function(u_roles,D,role,debug)
   #role no longer used, can be removedwird nicht mehr gebraucht, kann entfernt  werden
   #Vorsicht: es sind hart-kodierte Namen im Aufruf von prepareProjection(...)
   role<-role
-  E2<-t(prepareProjection(u_roles,c("const","contr","scup"),debug))
+  E2<-t(prepareProjection(u_roles,c("constant","controlled","scale-up","dependent"),debug))
   if(debug) if(nrow(D)!=nrow(E2)) print("number of rows in D and E2 is not the  same")
   if(debug) if(!identical(rownames(D),colnames(E2))) print("rownames in D and E2  are not the same")
 
