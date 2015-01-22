@@ -33,11 +33,11 @@ import J2R.*;
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner,
  *         Clemens Kretzer
- * @version 1.2.4
+ * @version 1.2.5
  */
 public class WindowRelevantFactors extends JFrame {
 	// serialVersionUID is generated
-	private static final long serialVersionUID = 2194838597172270413L;
+	private static final long serialVersionUID = 1970058653625662918L;
 	private JScrollPane scrollpane;
 	private JButton buttonRemoveFactor;
 	private JButton buttonNext;
@@ -923,10 +923,20 @@ public class WindowRelevantFactors extends JFrame {
 				if (e.getSource() == buttonUpdateCSVTemp) {
 					System.out.println("UpdateCSV: Start");
 					try {
-						double gradient = (Double.parseDouble(textFieldResultSIHighTemp.getText()) - Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldHighTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText()));
-						System.out.println("gradient: " + gradient);
-						double offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
-						System.out.println("offset: " + offset);
+						double gradient = 0;
+						double offset = 0;
+						if (comboBoxRoleTemp.getSelectedItem() == "constant"){
+							gradient = (Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldLowTemp.getText()));
+							System.out.println("gradient: " + gradient);
+							//offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
+							offset = 0;
+							System.out.println("offset: " + offset);
+						} else {
+							gradient = (Double.parseDouble(textFieldResultSIHighTemp.getText()) - Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldHighTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText()));
+							System.out.println("gradient: " + gradient);
+							offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
+							System.out.println("offset: " + offset);
+						}
 						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()),
 								Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
 						Util.getInstance().unitsArray.add(tempRaw);
@@ -955,7 +965,10 @@ public class WindowRelevantFactors extends JFrame {
 		buttonUpdateCSVTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!textFieldDimensionTemp.getText().isEmpty() && !textFieldUnitTemp.getText().isEmpty() && !textFieldResultSILowTemp.getText().isEmpty() && !textFieldResultSIHighTemp.getText().isEmpty()) {
+				if (!textFieldDimensionTemp.getText().isEmpty() 
+				&& !textFieldUnitTemp.getText().isEmpty() 
+				&& !textFieldResultSILowTemp.getText().isEmpty() 
+				&& !textFieldResultSIHighTemp.getText().isEmpty()) {
 					if (!buttonUpdateCSVTemp.isEnabled()) {
 						buttonUpdateCSVTemp.setEnabled(true);
 					}

@@ -23,11 +23,12 @@ import java.awt.event.ActionListener;
 
 /**
  * @author Florian Then, Dominik Hofmann
- * @version 1.0.3
+ * @version 1.0.4
  * Window2
  */
 public class WindowDimensionlessFactors extends JFrame {
-	private static final long serialVersionUID = 1L;
+	// serialVersionUID is generated
+	private static final long serialVersionUID = -1770183057440386499L;
 	protected static double[][] vMatrix;
 	protected static String[] rowNames;
 	protected static String[] colNames;
