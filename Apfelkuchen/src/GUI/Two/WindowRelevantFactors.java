@@ -33,7 +33,7 @@ import J2R.*;
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner,
  *         Clemens Kretzer
- * @version 1.2.5
+ * @version 1.2.6
  */
 public class WindowRelevantFactors extends JFrame {
 	// serialVersionUID is generated
