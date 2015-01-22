@@ -119,7 +119,70 @@ public class CSV {
 		}
 		System.out.println("Done reading: " + Inputfile);
 	}
-	
+	public static void readCSVTest(String Inputfile,WindowRelevantFactors WRF) {
+		System.out.println("Reading: " + Inputfile);
+		ArrayList<String> content = new ArrayList<String>();
+		try {
+			content = readFile(Inputfile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Starts at 1 so that the first row is ignored
+		for (int i = 1; i < content.size(); i++) {
+			try {
+				//FIXME make read in more robust
+				// dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
+				String test = content.get(i);
+				int count = test.length() - test.replace(";", "").length();
+				String[] parts = content.get(i).split(";");
+				if ((count + 1) != 11) {
+					System.out.println("Error in line: " + (i + 1));
+					System.out.println("count: " + (count + 1));
+					System.out.println("----");
+				}
+
+				Util.getInstance().row++;
+				WRF.newFactor();
+				WindowRelevantFactors.textFieldName.get(Util.getInstance().row-1).setText(parts[0]);
+				WindowRelevantFactors.textFieldAbbreviation.get(Util.getInstance().row-1).setText(parts[1]);
+				
+				if (parts[2].equals("controlled")) {
+					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(0);
+				}
+				if (parts[2].equals("constant")) {
+					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(1);
+				}			
+				if (parts[2].equals("scale-up")) {
+					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(2);
+				}
+				if (parts[2].equals("dependent")) {
+					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(3);
+				}
+				WindowRelevantFactors.textFieldDimension.get(Util.getInstance().row-1).setText(parts[3]);
+				WindowRelevantFactors.textFieldUnit.get(Util.getInstance().row-1).setText(parts[4]);
+				WindowRelevantFactors.textFieldLow.get(Util.getInstance().row-1).setText(parts[5]);
+				WindowRelevantFactors.textFieldHigh.get(Util.getInstance().row-1).setText(parts[6]);
+				WindowRelevantFactors.textFieldM.get(Util.getInstance().row-1).setText(parts[7]);
+				WindowRelevantFactors.textFieldK.get(Util.getInstance().row-1).setText(parts[8]);
+				WindowRelevantFactors.textFieldS.get(Util.getInstance().row-1).setText(parts[9]);
+				WindowRelevantFactors.textFieldKel.get(Util.getInstance().row-1).setText(parts[10]);
+				WindowRelevantFactors.textFieldMol.get(Util.getInstance().row-1).setText(parts[11]);
+				WindowRelevantFactors.textFieldAmp.get(Util.getInstance().row-1).setText(parts[12]);
+				WindowRelevantFactors.textFieldCand.get(Util.getInstance().row-1).setText(parts[13]);
+				WindowRelevantFactors.textFieldResultSILow.get(Util.getInstance().row-1).setText(parts[14]);
+				WindowRelevantFactors.textFieldResultSIHigh.get(Util.getInstance().row-1).setText(parts[15]);
+
+				WRF.contentPanel.revalidate();
+				WRF.contentPanel.repaint();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("Done reading: " + Inputfile);
+	}
 	/**
 	 * This method takes a String as Inputfile and converts it into a File and reads it
 	 * line by line and returns an Arraylist containing every line that has been read from the
