@@ -33,7 +33,7 @@ import J2R.*;
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner,
  *         Clemens Kretzer
- * @version 1.2.6
+ * @version 1.2.7
  */
 public class WindowRelevantFactors extends JFrame {
 	// serialVersionUID is generated
@@ -928,7 +928,6 @@ public class WindowRelevantFactors extends JFrame {
 						if (comboBoxRoleTemp.getSelectedItem() == "constant"){
 							gradient = (Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldLowTemp.getText()));
 							System.out.println("gradient: " + gradient);
-							//offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
 							offset = 0;
 							System.out.println("offset: " + offset);
 						} else {
@@ -940,24 +939,24 @@ public class WindowRelevantFactors extends JFrame {
 						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()),
 								Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
 						Util.getInstance().unitsArray.add(tempRaw);
-						CSV.writeCSV(Util.getInstance().CSV_FILENAME);
+						CSV.writeCSV(Util.getInstance().USER_CSV_FILENAME);
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
 					System.out.println("UpdateCSV: done.");
 					textFieldDimensionTemp.setText("");
 					textFieldUnitTemp.setText("");
-					textFieldLowTemp.setText("");
-					textFieldHighTemp.setText("");
-					textFieldMTemp.setText("");
-					textFieldKTemp.setText("");
-					textFieldSTemp.setText("");
-					textFieldKelTemp.setText("");
-					textFieldMolTemp.setText("");
-					textFieldAmpTemp.setText("");
-					textFieldCandTemp.setText("");
-					textFieldResultSILowTemp.setText("");
-					textFieldResultSIHighTemp.setText("");
+					textFieldLowTemp.setText(""+0);
+					textFieldHighTemp.setText(""+0);
+					textFieldMTemp.setText(""+0);
+					textFieldKTemp.setText(""+0);
+					textFieldSTemp.setText(""+0);
+					textFieldKelTemp.setText(""+0);
+					textFieldMolTemp.setText(""+0);
+					textFieldAmpTemp.setText(""+0);
+					textFieldCandTemp.setText(""+0);
+					textFieldResultSILowTemp.setText(""+0);
+					textFieldResultSIHighTemp.setText(""+0);
 					buttonUpdateCSVTemp.setEnabled(false);
 				}
 			}
@@ -965,10 +964,10 @@ public class WindowRelevantFactors extends JFrame {
 		buttonUpdateCSVTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!textFieldDimensionTemp.getText().isEmpty() 
-				&& !textFieldUnitTemp.getText().isEmpty() 
-				&& !textFieldResultSILowTemp.getText().isEmpty() 
-				&& !textFieldResultSIHighTemp.getText().isEmpty()) {
+				if (!textFieldLowTemp.getText().equals("0") 
+				&& !textFieldHighTemp.getText().equals("0") 
+				&& !textFieldResultSILowTemp.getText().equals("0") 
+				&& !textFieldResultSIHighTemp.getText().equals("0")) {
 					if (!buttonUpdateCSVTemp.isEnabled()) {
 						buttonUpdateCSVTemp.setEnabled(true);
 					}
