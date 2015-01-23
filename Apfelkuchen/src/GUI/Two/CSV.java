@@ -140,7 +140,7 @@ public class CSV {
 		for (int i = 1; i < content.size(); i++) {
 			try {
 				//FIXME make read in more robust
-				//name,abbr,role,dimension,unit,low,high,m,k,s,kel,mol,amp,cand,SI-Low,SI-High
+				//name;abbr;role;dimension;unit;low;high;m;k;s;kel;mol;amp;cand;SI-Low;SI-High
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();
 				String[] parts = content.get(i).split(";");
