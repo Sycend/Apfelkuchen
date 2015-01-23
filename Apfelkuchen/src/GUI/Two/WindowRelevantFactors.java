@@ -383,10 +383,8 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		p2.add(buttonRemoveCommandVariable);
 
-		buttonNext = new JButton(Util.getInstance().dataLabels("buttonNext"));// TODO
-																				// Add
-																				// fields
-																				// Checks
+		//TODO Add fields Checks
+		buttonNext = new JButton(Util.getInstance().dataLabels("buttonNext"));
 		buttonNext.setFocusPainted(false);
 		buttonNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -445,20 +443,16 @@ public class WindowRelevantFactors extends JFrame {
 					Menu.WRF.setVisible(false);
 
 					// Test Window2
-					if (!new File(Util.getInstance().DIMENSIONLESSFACTORS_FILENAME).exists()) {
+					//if (!new File(Util.getInstance().DIMENSIONLESSFACTORS_FILENAME).exists()) {
 						System.out.println("new WindowDimensionlessFactors(Testvalues)");
 						Menu.WDF = new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" },
 								{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
-					} else {
-						System.out.println("restoreDimensionlessFactors()");
-						
-						
-						
-						
-						SingeltonTestMainStart.calculate();
-						Util.getInstance().restorePersistentDimensionlessFactors();
-						Menu.WDF = new WindowDimensionlessFactors();
-					}
+					//} else {
+						//System.out.println("restoreDimensionlessFactors()");					
+						//SingeltonTestMainStart.calculate();
+						//Util.getInstance().restorePersistentDimensionlessFactors();
+						//Menu.WDF = new WindowDimensionlessFactors();
+					//}
 				}
 			}
 		});

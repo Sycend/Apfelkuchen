@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,7 +26,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @author Florian Then, Dominik Hofmann
- * @version 1.0.4
+ * @version 1.0.5
  * Window2
  */
 public class WindowDimensionlessFactors extends JFrame {
@@ -128,8 +131,8 @@ public class WindowDimensionlessFactors extends JFrame {
 		contentPanel.setLayout(new GridBagLayout());
 		//40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] { Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
-		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,
-		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow, 
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow, 
 		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, 
 		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
 		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
@@ -138,7 +141,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		contentPanel.add(new JLabel("V-Matrix"), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-
+				
 		//Spalten-Namen
 		for (int i = 0; i < vMatrix[0].length; i++) {
 			JTextField textFieldColNamesTemp = new JTextField();
@@ -419,6 +422,33 @@ public class WindowDimensionlessFactors extends JFrame {
 	 */
 	private void initMenuePanel() {
 		JPanel menuePanel = new JPanel();
+		//Menubar
+		JMenuBar jmb = new JMenuBar();
+		JMenu jmFile = new JMenu("File");
+		JMenuItem jmiLoadTMPFile = new JMenuItem("Load from tmp file");
+		JMenuItem jmiSave = new JMenuItem("Save to tmp file");
+		JMenuItem jmiExit = new JMenuItem("Exit");
+		jmFile.add(jmiLoadTMPFile);
+		jmFile.add(jmiSave);
+		jmFile.add(jmiExit);
+		jmb.add(jmFile);
+		jmiLoadTMPFile.addActionListener(ae -> {
+			System.out.println("Load from tmp file");
+			Util.getInstance().restorePersistentDimensionlessFactors();
+		});
+		jmiSave.addActionListener(ae -> {
+			System.out.println("Save to tmp file");
+			Util.getInstance().persistentSaveDimensionlessFactors();
+		});
+		jmiExit.addActionListener(ae -> {
+			System.out.println("Exit");
+			System.exit(0);
+		});
+		JMenu jmHelp = new JMenu("Help");
+		JMenuItem jmiAbout = new JMenuItem("About");
+		jmHelp.add(jmiAbout);
+		jmb.add(jmHelp);
+		setJMenuBar(jmb);
 		buttonReset = new JButton("Reset");
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -504,7 +534,7 @@ public class WindowDimensionlessFactors extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonBack) {
 					Menu.WDF.setVisible(false);
-					Util.getInstance().persistentSaveDimensionlessFactors();
+					//Util.getInstance().persistentSaveDimensionlessFactors();
 					Menu.WRF.setVisible(true);
 				}
 			}
