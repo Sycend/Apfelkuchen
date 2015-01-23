@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * @author Dominik Hofmann, Mark Leibmann
- * @version 1.2.4
+ * @version 1.2.5
  */
 public class CSV {
 	
@@ -119,7 +119,15 @@ public class CSV {
 		}
 		System.out.println("Done reading: " + Inputfile);
 	}
-	public static void readCSVTest(String Inputfile,WindowRelevantFactors WRF) {
+	
+	/**
+	 * This method reads a String Inputfile line by line via the readFile method
+	 * and proceeds to split every line at the ; delimiter 
+	 * 
+	 * @param Inputfile A String that will be turned into a File and read
+	 * @param WRF 
+	 */
+	public static void readCSVTest(String Inputfile, WindowRelevantFactors WRF) {
 		System.out.println("Reading: " + Inputfile);
 		ArrayList<String> content = new ArrayList<String>();
 		try {
@@ -132,16 +140,16 @@ public class CSV {
 		for (int i = 1; i < content.size(); i++) {
 			try {
 				//FIXME make read in more robust
-				// dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
+				//name,abbr,role,dimension,unit,low,high,m,k,s,kel,mol,amp,cand,SI-Low,SI-High
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();
 				String[] parts = content.get(i).split(";");
-				if ((count + 1) != 11) {
+				if ((count + 1) != 16) {
 					System.out.println("Error in line: " + (i + 1));
 					System.out.println("count: " + (count + 1));
 					System.out.println("----");
 				}
-
+				
 				Util.getInstance().row++;
 				WRF.newFactor();
 				WindowRelevantFactors.textFieldName.get(Util.getInstance().row-1).setText(parts[0]);
@@ -159,6 +167,7 @@ public class CSV {
 				if (parts[2].equals("dependent")) {
 					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(3);
 				}
+				
 				WindowRelevantFactors.textFieldDimension.get(Util.getInstance().row-1).setText(parts[3]);
 				WindowRelevantFactors.textFieldUnit.get(Util.getInstance().row-1).setText(parts[4]);
 				WindowRelevantFactors.textFieldLow.get(Util.getInstance().row-1).setText(parts[5]);
@@ -172,7 +181,7 @@ public class CSV {
 				WindowRelevantFactors.textFieldCand.get(Util.getInstance().row-1).setText(parts[13]);
 				WindowRelevantFactors.textFieldResultSILow.get(Util.getInstance().row-1).setText(parts[14]);
 				WindowRelevantFactors.textFieldResultSIHigh.get(Util.getInstance().row-1).setText(parts[15]);
-
+				
 				WRF.contentPanel.revalidate();
 				WRF.contentPanel.repaint();
 
@@ -180,9 +189,9 @@ public class CSV {
 				e.printStackTrace();
 			}
 		}
-		
 		System.out.println("Done reading: " + Inputfile);
 	}
+	
 	/**
 	 * This method takes a String as Inputfile and converts it into a File and reads it
 	 * line by line and returns an Arraylist containing every line that has been read from the
