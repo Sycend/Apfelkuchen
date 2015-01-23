@@ -473,7 +473,7 @@ public class WindowDimensionlessFactors extends JFrame {
 						vMatrixTextFields.set(i,tempArrayList);
 					}			
 					
-					J2R.SingeltonTestMainStart.calculate(false);
+					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
 					
 					refreshWindowContent();
 				}
@@ -579,6 +579,8 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		getContentPane().revalidate();
 		getContentPane().repaint();
+		
+		setVisible(true);
 	}
 	private void deleteVMatrixColumn(int column)
 	{

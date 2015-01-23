@@ -449,7 +449,7 @@ public class WindowRelevantFactors extends JFrame {
 							//	{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					//} else {
 						//System.out.println("restoreDimensionlessFactors()");					
-						SingeltonTestMainStart.calculate(true);
+						SingeltonTestMainStart.calculate(true, Menu.callerInstance);
 						//Util.getInstance().restorePersistentDimensionlessFactors();
 						//Menu.WDF = new WindowDimensionlessFactors();
 					//}

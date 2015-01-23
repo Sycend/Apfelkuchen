@@ -1,19 +1,16 @@
 package J2R;
 
-import com.sun.org.glassfish.external.statistics.annotations.Reset;
-
 import GUI.Two.Menu;
 import GUI.Two.WindowDimensionlessFactors;
 
 public class SingeltonTestMainStart {
 
-	public static void calculate(boolean calculateVMatrix) {
+	public static void calculate(boolean calculateVMatrix, J2R callerInstance) {
 
 		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
 		String[] rowNames = PrepareForR.createRowNames();
 		double vMatrix[][];
-		J2R callerInstance = J2R.getInstance();
-
+	
 		VMatrixControllerMain SuggestVMatrix;
 
 		String[] vMatrixColNames;

@@ -8,6 +8,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
 
+import J2R.*;
+
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann
@@ -17,6 +19,7 @@ public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
 	protected static WindowRelevantFactors WRF;
 	public static WindowDimensionlessFactors WDF; //musste für die verwendung mit J2R geändert werden
+	protected static J2R callerInstance = J2R.getInstance();
 	
 	public static void main(String args[]) {
 		new Menu();
