@@ -54,7 +54,8 @@ public class PrepareForR {
 			rowNames[i] = WindowRelevantFactors.getTextFieldName().get(i)
 					.getText();
 		}
-
+			
+			System.out.println();
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
 			System.out.println(rowNames[i]);
 		}

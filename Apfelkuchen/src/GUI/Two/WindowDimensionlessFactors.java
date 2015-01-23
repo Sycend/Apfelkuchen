@@ -66,27 +66,10 @@ public class WindowDimensionlessFactors extends JFrame {
 	public WindowDimensionlessFactors(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax,
 	String[][] dimensionlessControlSI) {
 		
-		WindowDimensionlessFactors.vMatrix = vMatrix;
-		WindowDimensionlessFactors.rowNames = rowNames;
-		WindowDimensionlessFactors.colNames = colNames;
 		
-		minV = new String[minMax.length];
-		maxV = new String[minMax.length];
-		for (int i = 0; i < minMax.length; i++) {
-			minV[i] = minMax[i][0];
-			maxV[i] = minMax[i][1];
-		}
+		 ResetValues(vMatrix, rowNames, colNames,  minMax, dimensionlessControlSI,false);
 		
-		WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
-		for (int j = 0; j < vMatrix[0].length; j++) {
-			WindowDimensionlessFactors.dimensionlessControlSI[0][j] = dimensionlessControlSI[0][j]; //M
-			WindowDimensionlessFactors.dimensionlessControlSI[1][j] = dimensionlessControlSI[1][j]; //K
-			WindowDimensionlessFactors.dimensionlessControlSI[2][j] = dimensionlessControlSI[2][j]; //S
-			WindowDimensionlessFactors.dimensionlessControlSI[3][j] = dimensionlessControlSI[3][j]; //Kel
-			WindowDimensionlessFactors.dimensionlessControlSI[4][j] = dimensionlessControlSI[4][j]; //Mol
-			WindowDimensionlessFactors.dimensionlessControlSI[5][j] = dimensionlessControlSI[5][j]; //Amp
-			WindowDimensionlessFactors.dimensionlessControlSI[6][j] = dimensionlessControlSI[6][j]; //Cand
-		}
+		
 		
 		//Testausgabe um Matrix-Ausmaße zu überprüfen
 		System.out.println("vMatrix.length: " + vMatrix.length);
@@ -490,6 +473,8 @@ public class WindowDimensionlessFactors extends JFrame {
 						vMatrixTextFields.set(i,tempArrayList);
 					}			
 					
+					J2R.SingeltonTestMainStart.calculate(false);
+					
 					refreshWindowContent();
 				}
 				else{
@@ -611,5 +596,54 @@ public class WindowDimensionlessFactors extends JFrame {
 		}
 		widthVMatrix--;
 		refreshWindowContent();
+	}
+
+
+
+
+public void ResetValues(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax,
+		String[][] dimensionlessControlSI, boolean refresh) {
+			
+			WindowDimensionlessFactors.vMatrix = vMatrix;
+			WindowDimensionlessFactors.rowNames = rowNames;
+			WindowDimensionlessFactors.colNames = colNames;
+			
+			minV = new String[minMax.length];
+			maxV = new String[minMax.length];
+			for (int i = 0; i < minMax.length; i++) {
+				minV[i] = minMax[i][0];
+				maxV[i] = minMax[i][1];
+			}
+			
+			WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
+			for (int j = 0; j < vMatrix[0].length; j++) {
+				WindowDimensionlessFactors.dimensionlessControlSI[0][j] = dimensionlessControlSI[0][j]; //M
+				WindowDimensionlessFactors.dimensionlessControlSI[1][j] = dimensionlessControlSI[1][j]; //K
+				WindowDimensionlessFactors.dimensionlessControlSI[2][j] = dimensionlessControlSI[2][j]; //S
+				WindowDimensionlessFactors.dimensionlessControlSI[3][j] = dimensionlessControlSI[3][j]; //Kel
+				WindowDimensionlessFactors.dimensionlessControlSI[4][j] = dimensionlessControlSI[4][j]; //Mol
+				WindowDimensionlessFactors.dimensionlessControlSI[5][j] = dimensionlessControlSI[5][j]; //Amp
+				WindowDimensionlessFactors.dimensionlessControlSI[6][j] = dimensionlessControlSI[6][j]; //Cand
+			}
+			
+			
+			if(refresh)
+				refreshWindowContent();
+	}
+
+	public static double[][] getVMatrix() {
+		
+		return WindowDimensionlessFactors.vMatrix;
+
+	}
+
+	public static String[] getVMatrixRowNames(){
+		
+		return WindowDimensionlessFactors.rowNames;
+	}
+	
+	public static String[] getVMatrixColNames(){
+		
+		return WindowDimensionlessFactors.colNames;
 	}
 }

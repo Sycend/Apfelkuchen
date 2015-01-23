@@ -57,27 +57,27 @@ public class MinMax {
 	}
 	
 	public String getX_lowDoubleArray(){	
-		return "r1";
+		return "mm1";
 	}
 	
 	public String getX_lowColnamesStringArray(){	
-		return "r2";
+		return "mm2";
 	}
 	
 	public String getX_lowRownamesStringArray(){	
-		return "r3";
+		return "mm3";
 	}
 	
 	public String getX_highDoubleArray(){	
-		return "r4";
+		return "mm4";
 	}
 	
 	public String getX_highColnamesStringArray(){	
-		return "r5";
+		return "mm5";
 	}
 	
 	public String getX_highRownamesStringArray(){	
-		return "r6";
+		return "mm6";
 	}
 	
 	

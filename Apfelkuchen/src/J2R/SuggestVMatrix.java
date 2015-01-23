@@ -59,15 +59,15 @@ public class SuggestVMatrix {
 	}
 	
 	public String getVDoubleMatrix(){	
-		return "r1";
+		return "svm1";
 	}
 	
 	public String getVColnamesStringArray(){	
-		return "r3";
+		return "svm3";
 	}
 	
 	public String getVRownamesStringArray(){	
-		return "r2";
+		return "svm2";
 	}
 	
 }

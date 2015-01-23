@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
 	protected static WindowRelevantFactors WRF;
-	protected static WindowDimensionlessFactors WDF;
+	public static WindowDimensionlessFactors WDF; //musste für die verwendung mit J2R geändert werden
 	
 	public static void main(String args[]) {
 		new Menu();
