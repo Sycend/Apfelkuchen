@@ -407,12 +407,12 @@ public class WindowRelevantFactors extends JFrame {
 						return;
 					}
 					Util.getInstance().persistentSaveRelevantFactors();
-					Run.WRF.setVisible(false);
+					Menu.WRF.setVisible(false);
 
 					// Test Window2
 					if (!new File(Util.getInstance().DIMENSIONLESSFACTORS_FILENAME).exists()) {
 						System.out.println("new WindowDimensionlessFactors(Testvalues)");
-						Run.WDF = new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" },
+						Menu.WDF = new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" },
 								{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					} else {
 						System.out.println("restoreDimensionlessFactors()");
@@ -422,7 +422,7 @@ public class WindowRelevantFactors extends JFrame {
 						
 						SingeltonTestMainStart.calculate();
 						Util.getInstance().restorePersistentDimensionlessFactors();
-						Run.WDF = new WindowDimensionlessFactors();
+						Menu.WDF = new WindowDimensionlessFactors();
 					}
 				}
 			}
@@ -939,7 +939,7 @@ public class WindowRelevantFactors extends JFrame {
 						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()),
 								Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
 						Util.getInstance().unitsArray.add(tempRaw);
-						CSV.writeCSV(Util.getInstance().USER_CSV_FILENAME);
+						Util.getInstance().writeCSV(Util.getInstance().USER_CSV_FILENAME);
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}

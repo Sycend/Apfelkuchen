@@ -503,9 +503,9 @@ public class WindowDimensionlessFactors extends JFrame {
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonBack) {
-					Run.WDF.setVisible(false);
+					Menu.WDF.setVisible(false);
 					Util.getInstance().persistentSaveDimensionlessFactors();
-					Run.WRF.setVisible(true);
+					Menu.WRF.setVisible(true);
 				}
 			}
 		});
