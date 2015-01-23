@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann
- * @version 2.1.4
+ * @version 2.1.5
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
@@ -30,16 +30,16 @@ public class Menu implements ActionListener {
 		JMenuBar jmb = new JMenuBar();
 		JMenu jmFile = new JMenu("File");
 		JMenuItem jmiNew = new JMenuItem("New");
-		JMenuItem jmiLoadTestCaseCSV = new JMenuItem("Load TestCase.csv"); //Open
+		//JMenuItem jmiLoadTestCaseCSV = new JMenuItem("Load");
 		//JMenuItem jmiClose = new JMenuItem("Close");
-		JMenuItem jmiSave = new JMenuItem("Save");
+		//JMenuItem jmiSave = new JMenuItem("Save");
 		JMenuItem jmiExit = new JMenuItem("Exit");
 		JLabel label1 = new JLabel("Welcome, thanks for using our product.");
 		mainMenuWindow.add(label1);
 		jmFile.add(jmiNew);
-		jmFile.add(jmiLoadTestCaseCSV);
+		//jmFile.add(jmiLoad);
 		//jmFile.add(jmiClose);
-		jmFile.add(jmiSave);
+		//jmFile.add(jmiSave);
 		//jmFile.addSeparator();
 		jmFile.add(jmiExit);
 		jmb.add(jmFile);
@@ -67,9 +67,9 @@ public class Menu implements ActionListener {
 		jmb.add(jmHelp);
 
 		jmiNew.addActionListener(this);
-		jmiLoadTestCaseCSV.addActionListener(this);
+		//jmiLoad.addActionListener(this);
 		//jmiClose.addActionListener(this);
-		jmiSave.addActionListener(this);
+		//jmiSave.addActionListener(this);
 		jmiExit.addActionListener(this);
 		b.addActionListener(this);
 		c.addActionListener(this);
@@ -86,7 +86,7 @@ public class Menu implements ActionListener {
 		if (command.equals("New")) {
 			//mainMenuWindow.setVisible(false);
 			//Run.main(null);
-			if (!new File(Util.getInstance().RELEVANTFACTORS_FILENAME).exists()) {
+			/*if (!new File(Util.getInstance().RELEVANTFACTORS_FILENAME).exists()) {
 				System.out.println("new WindowRelevantFactors()");
 				WRF = new WindowRelevantFactors();
 			} else {
@@ -94,7 +94,9 @@ public class Menu implements ActionListener {
 				WRF = new WindowRelevantFactors();
 				Util.getInstance().restorePersistentRelevantFactors(WRF);
 				//CSV.readCSVTest(Util.getInstance().TESTCASE_CSV_FILENAME, WRF);
-			}
+			}*/
+			
+			WRF = new WindowRelevantFactors();
 			
 			new Thread(() -> {
 				Util.getInstance().readCSV(Util.getInstance().CSV_FILENAME);
@@ -102,9 +104,8 @@ public class Menu implements ActionListener {
 			}).start();
 		} else if (command.equals("Help")) {
 			
-		} else if (command.equals("Load TestCase.csv")){
-			//FIXME this causes an exception if Window1 hasnt been loaded yet.
-			Util.getInstance().readTestCaseCSV(Util.getInstance().TESTCASE_CSV_FILENAME, WRF);
+		} else if (command.equals("Exit")){
+			System.exit(0);
 		}
 		else {
 			

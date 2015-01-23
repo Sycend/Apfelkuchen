@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -87,7 +90,7 @@ public class WindowRelevantFactors extends JFrame {
 		super(Util.getInstance().dataLabels("title"));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Util.getInstance().currentWidth, Util.getInstance().currentHeight);
-
+		
 		init();
 		setVisible(true);
 	}
@@ -216,14 +219,46 @@ public class WindowRelevantFactors extends JFrame {
 		labelResultSIMax.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMax.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelResultSIMax, new GridBagConstraints(15, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
+		
+		JMenuBar jmb = new JMenuBar();
+		JMenu jmFile = new JMenu("File");
+		JMenuItem jmiLoadTMPFile = new JMenuItem("Load from tmp file");
+		JMenuItem jmiLoadTestCaseCSV = new JMenuItem("Load TestCase.csv");
+		JMenuItem jmiSave = new JMenuItem("Save to tmp file");
+		JMenuItem jmiExit = new JMenuItem("Exit");
+		jmFile.add(jmiLoadTMPFile);
+		jmFile.add(jmiLoadTestCaseCSV);
+		jmFile.add(jmiSave);
+		jmFile.add(jmiExit);
+		jmb.add(jmFile);
+		jmiLoadTMPFile.addActionListener(ae -> {
+			//FIXME fix multiple blank rows bug
+			System.out.println("Load from tmp file");
+			Util.getInstance().restorePersistentRelevantFactors(Menu.WRF);
+		});
+		jmiLoadTestCaseCSV.addActionListener(ae -> {
+			System.out.println("Load TestCase.csv");
+			Util.getInstance().readTestCaseCSV(Util.getInstance().TESTCASE_CSV_FILENAME, Menu.WRF);
+		});
+		jmiSave.addActionListener(ae -> {
+			System.out.println("Save to tmp file");
+			Util.getInstance().persistentSaveRelevantFactors();
+		});
+		jmiExit.addActionListener(ae -> {
+			System.out.println("Exit");
+			System.exit(0);
+		});
+		JMenu jmHelp = new JMenu("Help");
+		JMenuItem jmiAbout = new JMenuItem("About");
+		jmHelp.add(jmiAbout);
+		jmb.add(jmHelp);
+		setJMenuBar(jmb);
+		
 		buttonNewFactor = new JButton(Util.getInstance().dataLabels("buttonNewFactor"));
 		buttonNewFactor.setFocusPainted(false);
 		buttonNewFactor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonNewFactor) {
-					// Util.getInstance().addRow();
-					// Run.row++;
 					Util.getInstance().row++;
 					newFactor();
 					contentPanel.revalidate();
@@ -406,7 +441,7 @@ public class WindowRelevantFactors extends JFrame {
 					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
 						return;
 					}
-					Util.getInstance().persistentSaveRelevantFactors();
+					//Util.getInstance().persistentSaveRelevantFactors();
 					Menu.WRF.setVisible(false);
 
 					// Test Window2
