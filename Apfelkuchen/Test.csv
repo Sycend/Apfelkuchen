@@ -1,6 +1,0 @@
-﻿Name,Ab,Rolle,dimension,unit,m,k,s,kel,mol,amp,cand,offset,gradient
-Testa;T;controlled;Masse3;mg;20;30;0;1;0;0;0;0;0;100;200
-Testb;T;constant;Masse;g;50;60;0;1;0;0;0;0;0;100;200
-Testc;T;controlled;Masse;g;50;60;0;1;0;0;0;0;0;100;300
-Testd;T;controlled;Masse;g;50;60;0;1;0;0;0;0;0;100;500
-Teste;T;dependent;Masse;g;50;60;0;1;0;0;0;0;0;100;500

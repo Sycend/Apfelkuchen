@@ -19,6 +19,7 @@ public class Run {
 			System.out.println("restoreRelevantFactors()");
 			WRF = new WindowRelevantFactors();
 			Util.getInstance().restorePersistentRelevantFactors(WRF);
+			//CSV.readCSVTest(Util.getInstance().TESTCASE_CSV_FILENAME, WRF);
 		}
 		
 		new Thread(() -> {

@@ -1,0 +1,4 @@
+﻿name,abbr,role,dimension,unit,low,high,m,k,s,kel,mol,amp,cand,SI-Low,SI-High
+Name0;AbbrA;controlled;Masse;kg;20;30;0;1;0;0;0;0;0;20;30
+Name1;AbbrB;constant;Masse;g;50;50;0;1;0;0;0;0;0;0.05;0.05
+Name2;AbbrC;dependent;Masse;g;50;60;0;1;0;0;0;0;0;0.05;0.06

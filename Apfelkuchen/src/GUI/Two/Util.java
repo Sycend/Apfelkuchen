@@ -37,10 +37,9 @@ public class Util {
 	protected int row = 0;
 	protected final String CSV_FILENAME = "spezifikation.csv";
 	protected final String USER_CSV_FILENAME = "user_spezifikation.csv";
-	protected final String CSV_FILENAME2 = "Test.csv";
+	protected final String TESTCASE_CSV_FILENAME = "Testcase.csv";
 	protected final String RELEVANTFACTORS_FILENAME = "RelevantFactors.tmp";
 	protected final String DIMENSIONLESSFACTORS_FILENAME = "DimensionlessFactors.tmp";
-	
 	protected final int DEFAULT_WIDTH = 1200;
 	protected final int DEFAULT_HEIGHT = 550;
 	protected final int DEFAULT_FONT_SIZE = 16;
