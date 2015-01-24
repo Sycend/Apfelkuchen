@@ -69,7 +69,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		 ResetValues(vMatrix, rowNames, colNames,  minMax, dimensionlessControlSI,false);
 		 
 		//Testausgabe um Matrix-Ausmaße zu überprüfen
-		System.out.println("vMatrix.length: " + vMatrix.length);
+		System.out.println("lengthVMatrix: " + lengthVMatrix);
 		System.out.println("vMatrix[0].length: " + vMatrix[0].length);
 		lengthVMatrix = vMatrix.length;
 		widthVMatrix = vMatrix[0].length;
@@ -125,7 +125,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
 		
 		//Spalten-Namen
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JTextField textFieldColNamesTemp = new JTextField();
 			textFieldColNamesTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldColNamesTemp.setPreferredSize(new Dimension(50, 25));
@@ -143,7 +143,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		contentPanel.add(new JLabel("MinV"), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 		GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 		
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JTextField textFieldMinVTemp = new JTextField();
 			textFieldMinVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMinVTemp.setPreferredSize(new Dimension(50, 25));
@@ -152,7 +152,7 @@ public class WindowDimensionlessFactors extends JFrame {
 			contentPanel.add(textFieldMinVTemp, new GridBagConstraints(1 + 3 * i, 1, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 			textFieldMinV.add(textFieldMinVTemp);
-			if (i == vMatrix[0].length - 1) {
+			if (i == widthVMatrix - 1) {
 				buttonRMin = new JButton("R");
 				contentPanel.add(buttonRMin, new GridBagConstraints(1 + 3 * i + 3, 1, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
@@ -162,7 +162,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//MaxWerte
 		contentPanel.add(new JLabel("MaxV"), new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 		GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JTextField textFieldMaxVTemp = new JTextField();
 			textFieldMaxVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMaxVTemp.setPreferredSize(new Dimension(50, 25));
@@ -172,7 +172,7 @@ public class WindowDimensionlessFactors extends JFrame {
 			contentPanel.add(textFieldMaxVTemp, new GridBagConstraints(1 + 3 * i, 2, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
 			textFieldMaxV.add(textFieldMaxVTemp);
-			if (i == vMatrix[0].length - 1) {
+			if (i == widthVMatrix - 1) {
 				buttonRMax = new JButton("R");
 				contentPanel.add(buttonRMax, new GridBagConstraints(1 + 3 * i + 3, 2, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
@@ -180,14 +180,14 @@ public class WindowDimensionlessFactors extends JFrame {
 		}
 		
 		//VMatrix
-		for (int i = 0; i < vMatrix.length; i++) {
+		for (int i = 0; i < lengthVMatrix; i++) {
 			
 			String tempName = rowNames[i];
 			if (i == 0) {
 				contentPanel.add(new JLabel(tempName), new GridBagConstraints(0, 3 + i, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 			} else {
-				if (i == vMatrix.length - 1) {
+				if (i == lengthVMatrix - 1) {
 					contentPanel.add(new JLabel(tempName), new GridBagConstraints(0, 3 + i, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
 				} else {
@@ -200,7 +200,7 @@ public class WindowDimensionlessFactors extends JFrame {
 				contentPanel.add(checkBoxVMatrixTemp, new GridBagConstraints(1, 3 + i, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 			} else {
-				if (i == vMatrix.length - 1) {
+				if (i == lengthVMatrix - 1) {
 					contentPanel.add(checkBoxVMatrixTemp, new GridBagConstraints(1, 3 + i, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
 				} else {
@@ -210,7 +210,7 @@ public class WindowDimensionlessFactors extends JFrame {
 				}
 			}
 			ArrayList<JTextField> row = new ArrayList<JTextField>();
-			for (int j = 0; j < vMatrix[0].length; j++) {
+			for (int j = 0; j < widthVMatrix; j++) {
 				JTextField vMatrixTextfieldsTemp = new JTextField();
 				vMatrixTextfieldsTemp.setMaximumSize(new Dimension(50, 25));
 				vMatrixTextfieldsTemp.setPreferredSize(new Dimension(50, 25));
@@ -222,7 +222,7 @@ public class WindowDimensionlessFactors extends JFrame {
 					contentPanel.add(vMatrixTextfieldsTemp, new GridBagConstraints(2 + 3 * j, 3 + i, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 				} else {
-					if (i == vMatrix.length - 1) {
+					if (i == lengthVMatrix - 1) {
 						contentPanel.add(vMatrixTextfieldsTemp, new GridBagConstraints(2 + 3 * j, 3 + i, 1, 1, 0.0,
 						0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
 					} else {
@@ -238,13 +238,13 @@ public class WindowDimensionlessFactors extends JFrame {
 		}
 		
 		//Lineare Abhängigkeits Matrix
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			String tempName = colNames[i];
 			if (i == 0) {
 				contentPanel.add(new JLabel(tempName), new GridBagConstraints(0, 3 + lengthVMatrix + i, 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 			} else {
-				if (i == vMatrix.length - 1) {
+				if (i == lengthVMatrix - 1) {
 					contentPanel.add(new JLabel(tempName), new GridBagConstraints(0, 3 + lengthVMatrix + i, 1, 1, 0.0,
 					0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
 				} else {
@@ -253,7 +253,7 @@ public class WindowDimensionlessFactors extends JFrame {
 				}
 			}
 			ArrayList<JTextField> row = new ArrayList<JTextField>();
-			for (int j = 0; j < vMatrix[0].length; j++) {
+			for (int j = 0; j < widthVMatrix; j++) {
 				JTextField linearDependenceTextFieldsTemp = new JTextField();
 				linearDependenceTextFieldsTemp.setMaximumSize(new Dimension(50, 25));
 				linearDependenceTextFieldsTemp.setPreferredSize(new Dimension(50, 25));
@@ -269,7 +269,7 @@ public class WindowDimensionlessFactors extends JFrame {
 					+ lengthVMatrix + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(10, 5, 1, 5), 0, 0));
 				} else {
-					if (i == vMatrix.length - 1) {
+					if (i == lengthVMatrix - 1) {
 						contentPanel.add(linearDependenceTextFieldsTemp, new GridBagConstraints(2 + 3 * j, 3
 						+ lengthVMatrix + i, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(1, 5, 10, 5), 0, 0));
@@ -292,7 +292,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//MWerte
 		contentPanel.add(new JLabel("M"), new GridBagConstraints(0, 3 + lengthVMatrix + widthVMatrix, 1, 1, 0.0, 0.0,
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JLabel labelMTemp = new JLabel();
 			labelMTemp.setMaximumSize(new Dimension(50, 25));
 			labelMTemp.setPreferredSize(new Dimension(50, 25));
@@ -307,7 +307,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//KWerte
 		contentPanel.add(new JLabel("K"), new GridBagConstraints(0, 3 + lengthVMatrix + widthVMatrix + 1, 1, 1, 0.0,
 		0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 1, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JLabel labelKTemp = new JLabel();
 			labelKTemp.setMaximumSize(new Dimension(50, 25));
 			labelKTemp.setPreferredSize(new Dimension(50, 25));
@@ -322,7 +322,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//SWerte
 		contentPanel.add(new JLabel("S"), new GridBagConstraints(0, 3 + lengthVMatrix + widthVMatrix + 2, 1, 1, 0.0,
 		0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 1, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JLabel labelSTemp = new JLabel();
 			labelSTemp.setMaximumSize(new Dimension(50, 25));
 			labelSTemp.setPreferredSize(new Dimension(50, 25));
@@ -337,7 +337,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//KelWerte
 		contentPanel.add(new JLabel("Kel"), new GridBagConstraints(0, 3 + lengthVMatrix + widthVMatrix + 3, 1, 1, 0.0,
 		0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 1, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JLabel labelKelTemp = new JLabel();
 			labelKelTemp.setMaximumSize(new Dimension(50, 25));
 			labelKelTemp.setPreferredSize(new Dimension(50, 25));
@@ -352,7 +352,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//MolWerte
 		contentPanel.add(new JLabel("Mol"), new GridBagConstraints(0, 3 + lengthVMatrix + widthVMatrix + 4, 1, 1, 0.0,
 		0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 1, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JLabel labelMolTemp = new JLabel();
 			labelMolTemp.setMaximumSize(new Dimension(50, 25));
 			labelMolTemp.setPreferredSize(new Dimension(50, 25));
@@ -367,7 +367,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//AmpWerte
 		contentPanel.add(new JLabel("Amp"), new GridBagConstraints(0, 3 + lengthVMatrix + widthVMatrix + 5, 1, 1, 0.0,
 		0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 1, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JLabel labelAmpTemp = new JLabel();
 			labelAmpTemp.setMaximumSize(new Dimension(50, 25));
 			labelAmpTemp.setPreferredSize(new Dimension(50, 25));
@@ -382,7 +382,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		//CandWerte
 		contentPanel.add(new JLabel("Cand"), new GridBagConstraints(0, 3 + lengthVMatrix + widthVMatrix + 6, 1, 1, 0.0,
 		0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
-		for (int i = 0; i < vMatrix[0].length; i++) {
+		for (int i = 0; i < widthVMatrix; i++) {
 			JLabel labelCandTemp = new JLabel();
 			labelCandTemp.setMaximumSize(new Dimension(50, 25));
 			labelCandTemp.setPreferredSize(new Dimension(50, 25));
@@ -443,6 +443,7 @@ public class WindowDimensionlessFactors extends JFrame {
                                 JOptionPane.YES_NO_OPTION); 
 						if(check==JOptionPane.YES_OPTION)
 						{
+							colNamesTextFieldsToColNames();
 							deleteVMatrixColumn(i);
 							refreshWindowContent();
 							return;
@@ -568,17 +569,15 @@ public class WindowDimensionlessFactors extends JFrame {
 		return isDeleteable;
 	}
 	
-	private void refreshWindowContent() {
+	private void refreshWindowContent()
+	{
 		getContentPane().removeAll();
-		
-		colNamesTextFieldsToColNames();
 		
 		initMenuePanel();
 		initContentPanel();
 		
 		getContentPane().revalidate();
 		getContentPane().repaint();
-		
 		setVisible(true);
 	}
 	
