@@ -474,7 +474,7 @@ public class WindowRelevantFactors extends JFrame {
 			for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 				for (int n = 0; n < Util.getInstance().unitsArray.size(); n++) {
 					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension())) {
-						System.out.println("Detected Known Dimension");
+						//System.out.println("Detected Known Dimension");
 						WindowRelevantFactors.textFieldM.get(i).setText(""+Util.getInstance().unitsArray.get(n).getM());
 						WindowRelevantFactors.textFieldK.get(i).setText(""+Util.getInstance().unitsArray.get(n).getK());
 						WindowRelevantFactors.textFieldS.get(i).setText(""+Util.getInstance().unitsArray.get(n).getS());
@@ -489,7 +489,6 @@ public class WindowRelevantFactors extends JFrame {
 			System.out.println("Util.getInstance().unitsArray is empty");
 		}
 	}
-	
 	
 	public static void doSICalculationLow() {
 		if (Util.getInstance().unitsArray.size() > 0) {
