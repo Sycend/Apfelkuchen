@@ -23,6 +23,10 @@ public class Menu implements ActionListener {
 	
 	public static void main(String args[]) {
 		new Menu();
+		new Thread(() -> {
+			Util.getInstance().readCSV(Util.getInstance().CSV_FILENAME);
+			Util.getInstance().readCSV(Util.getInstance().USER_CSV_FILENAME);
+		}).start();
 	}
 	
 	Menu() {
@@ -39,14 +43,14 @@ public class Menu implements ActionListener {
 		jmb.add(jmFile);
 		
 		JMenu jmOptions = new JMenu("Options");
-		JMenuItem a = new JMenuItem("A");
-		JMenuItem b = new JMenuItem("B");
-		JMenuItem c = new JMenuItem("C");
-		JMenuItem d = new JMenuItem("D");
+		JMenuItem a = new JMenuItem("Set Path for TestCase.csv");
+		JMenuItem b = new JMenuItem("Set Path for RelevantFactors.tmp file");
+		JMenuItem c = new JMenuItem("Set Path for DimensionlessFactors.tmp file");
+		//JMenuItem d = new JMenuItem("D");
 		jmOptions.add(a);
 		jmOptions.add(b);
 		jmOptions.add(c);
-		jmOptions.add(d);
+		//jmOptions.add(d);
 		
 		jmb.add(jmOptions);
 		
@@ -59,7 +63,7 @@ public class Menu implements ActionListener {
 		jmiExit.addActionListener(this);
 		b.addActionListener(this);
 		c.addActionListener(this);
-		d.addActionListener(this);
+		//d.addActionListener(this);
 		jmiAbout.addActionListener(this);
 		
 		mainMenuWindow.setJMenuBar(jmb);
@@ -83,11 +87,6 @@ public class Menu implements ActionListener {
 			}*/
 			
 			WRF = new WindowRelevantFactors();
-			
-			new Thread(() -> {
-				Util.getInstance().readCSV(Util.getInstance().CSV_FILENAME);
-				Util.getInstance().readCSV(Util.getInstance().USER_CSV_FILENAME);
-			}).start();
 		} else if (command.equals("About")) {
 			System.out.println("344aab9758bbd18b93739e7893fb3a");
 		} else if (command.equals("Exit")){
