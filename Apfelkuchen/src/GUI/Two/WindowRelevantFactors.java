@@ -442,11 +442,11 @@ public class WindowRelevantFactors extends JFrame {
 
 					// Test Window2
 					//if (!new File(Util.getInstance().DIMENSIONLESSFACTORS_FILENAME).exists()) {
-						System.out.println("new WindowDimensionlessFactors(Testvalues)");
+						//System.out.println("new WindowDimensionlessFactors(Testvalues)");
 						//Menu.WDF = new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" },
 							//	{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					//} else {
-						//System.out.println("restoreDimensionlessFactors()");					
+						//System.out.println("restoreDimensionlessFactors()");
 						SingeltonTestMainStart.calculate(true, Menu.callerInstance);
 						//Util.getInstance().restorePersistentDimensionlessFactors();
 						//Menu.WDF = new WindowDimensionlessFactors();
