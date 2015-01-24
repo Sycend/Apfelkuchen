@@ -230,7 +230,6 @@ public class WindowRelevantFactors extends JFrame {
 		jmFile.add(jmiExit);
 		jmb.add(jmFile);
 		jmiLoadTMPFile.addActionListener(ae -> {
-			//FIXME fix multiple blank rows bug
 			System.out.println("Load from tmp file");
 			Util.getInstance().restorePersistentRelevantFactors(Menu.WRF);
 		});

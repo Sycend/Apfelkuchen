@@ -13,7 +13,7 @@ import J2R.*;
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann, Christoph Wütschner
- * @version 2.1.7
+ * @version 2.1.8
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
@@ -43,14 +43,12 @@ public class Menu implements ActionListener {
 		jmb.add(jmFile);
 		
 		JMenu jmOptions = new JMenu("Options");
-		JMenuItem a = new JMenuItem("Set Path for TestCase.csv");
-		JMenuItem b = new JMenuItem("Set Path for RelevantFactors.tmp file");
-		JMenuItem c = new JMenuItem("Set Path for DimensionlessFactors.tmp file");
-		//JMenuItem d = new JMenuItem("D");
-		jmOptions.add(a);
-		jmOptions.add(b);
-		jmOptions.add(c);
-		//jmOptions.add(d);
+		JMenuItem settingPathTestCase = new JMenuItem("Set Path for TestCase.csv");
+		JMenuItem settingPathRelevantFactorstmp = new JMenuItem("Set Path for RelevantFactors.tmp file");
+		JMenuItem settingPathDimensionlessFactorstmp = new JMenuItem("Set Path for DimensionlessFactors.tmp file");
+		jmOptions.add(settingPathTestCase);
+		jmOptions.add(settingPathRelevantFactorstmp);
+		jmOptions.add(settingPathDimensionlessFactorstmp);
 		
 		jmb.add(jmOptions);
 		
@@ -61,9 +59,9 @@ public class Menu implements ActionListener {
 		
 		jmiNew.addActionListener(this);
 		jmiExit.addActionListener(this);
-		b.addActionListener(this);
-		c.addActionListener(this);
-		//d.addActionListener(this);
+		settingPathTestCase.addActionListener(this);
+		settingPathRelevantFactorstmp.addActionListener(this);
+		settingPathDimensionlessFactorstmp.addActionListener(this);
 		jmiAbout.addActionListener(this);
 		
 		mainMenuWindow.setJMenuBar(jmb);
@@ -87,9 +85,15 @@ public class Menu implements ActionListener {
 			}*/
 			
 			WRF = new WindowRelevantFactors();
+		} else if (command.equals("Set Path for TestCase.csv")) {
+			System.out.println("344aab9758bbd18b93739e7893fb3a");
+		} else if (command.equals("Set Path for RelevantFactors.tmp file")) {
+			System.out.println("344aab9758bbd18b93739e7893fb3a");
+		} else if (command.equals("Set Path for DimensionlessFactors.tmp file")) {
+			System.out.println("344aab9758bbd18b93739e7893fb3a");
 		} else if (command.equals("About")) {
 			System.out.println("344aab9758bbd18b93739e7893fb3a");
-		} else if (command.equals("Exit")){
+		} else if (command.equals("Exit")) {
 			System.exit(0);
 		}
 		else {

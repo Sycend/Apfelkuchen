@@ -117,22 +117,22 @@ public class Util {
 			for (int i = 0; i < textFieldsContainer.get(0).size(); i++) {
 				row++;
 				WRF.newFactor();
-				WindowRelevantFactors.textFieldName.get(i).setText(textFieldsContainer.get(0).get(i).getText());
-				WindowRelevantFactors.textFieldAbbreviation.get(i).setText(textFieldsContainer.get(1).get(i).getText());
-				WindowRelevantFactors.comboBoxRole.get(i).setSelectedIndex(comboBoxRoleTmp.get(i).getSelectedIndex());
-				WindowRelevantFactors.textFieldDimension.get(i).setText(textFieldsContainer.get(2).get(i).getText());
-				WindowRelevantFactors.textFieldUnit.get(i).setText(textFieldsContainer.get(3).get(i).getText());
-				WindowRelevantFactors.textFieldLow.get(i).setText(textFieldsContainer.get(4).get(i).getText());
-				WindowRelevantFactors.textFieldHigh.get(i).setText(textFieldsContainer.get(5).get(i).getText());
-				WindowRelevantFactors.textFieldM.get(i).setText(textFieldsContainer.get(6).get(i).getText());
-				WindowRelevantFactors.textFieldK.get(i).setText(textFieldsContainer.get(7).get(i).getText());
-				WindowRelevantFactors.textFieldS.get(i).setText(textFieldsContainer.get(8).get(i).getText());
-				WindowRelevantFactors.textFieldKel.get(i).setText(textFieldsContainer.get(9).get(i).getText());
-				WindowRelevantFactors.textFieldMol.get(i).setText(textFieldsContainer.get(10).get(i).getText());
-				WindowRelevantFactors.textFieldAmp.get(i).setText(textFieldsContainer.get(11).get(i).getText());
-				WindowRelevantFactors.textFieldCand.get(i).setText(textFieldsContainer.get(12).get(i).getText());
-				WindowRelevantFactors.textFieldResultSILow.get(i).setText(textFieldsContainer.get(13).get(i).getText());
-				WindowRelevantFactors.textFieldResultSIHigh.get(i).setText(textFieldsContainer.get(14).get(i).getText());
+				WindowRelevantFactors.textFieldName.get(row-1).setText(textFieldsContainer.get(0).get(i).getText()); //i
+				WindowRelevantFactors.textFieldAbbreviation.get(row-1).setText(textFieldsContainer.get(1).get(i).getText());
+				WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(comboBoxRoleTmp.get(i).getSelectedIndex());
+				WindowRelevantFactors.textFieldDimension.get(row-1).setText(textFieldsContainer.get(2).get(i).getText());
+				WindowRelevantFactors.textFieldUnit.get(row-1).setText(textFieldsContainer.get(3).get(i).getText());
+				WindowRelevantFactors.textFieldLow.get(row-1).setText(textFieldsContainer.get(4).get(i).getText());
+				WindowRelevantFactors.textFieldHigh.get(row-1).setText(textFieldsContainer.get(5).get(i).getText());
+				WindowRelevantFactors.textFieldM.get(row-1).setText(textFieldsContainer.get(6).get(i).getText());
+				WindowRelevantFactors.textFieldK.get(row-1).setText(textFieldsContainer.get(7).get(i).getText());
+				WindowRelevantFactors.textFieldS.get(row-1).setText(textFieldsContainer.get(8).get(i).getText());
+				WindowRelevantFactors.textFieldKel.get(row-1).setText(textFieldsContainer.get(9).get(i).getText());
+				WindowRelevantFactors.textFieldMol.get(row-1).setText(textFieldsContainer.get(10).get(i).getText());
+				WindowRelevantFactors.textFieldAmp.get(row-1).setText(textFieldsContainer.get(11).get(i).getText());
+				WindowRelevantFactors.textFieldCand.get(row-1).setText(textFieldsContainer.get(12).get(i).getText());
+				WindowRelevantFactors.textFieldResultSILow.get(row-1).setText(textFieldsContainer.get(13).get(i).getText());
+				WindowRelevantFactors.textFieldResultSIHigh.get(row-1).setText(textFieldsContainer.get(14).get(i).getText());
 				WRF.contentPanel.revalidate();
 				WRF.contentPanel.repaint();
 			}
@@ -188,8 +188,7 @@ public class Util {
 	}
 
 	/**
-	 * @param A
-	 *            String[] Array that contains duplicates
+	 * @param A String[] Array that contains duplicates
 	 * @return A String[] Array that contains no more duplicates
 	 */
 	protected String[] removeDuplicates(String[] containsDuplicates) {
@@ -366,7 +365,7 @@ public class Util {
 	}
 	
 	/**
-	 * This method writes the Util.getInstance().unitsArray ArrayList into a File, which is
+	 * This method writes the unitsArray ArrayList into a File, which is
 	 * converted from the String Inputfile, using the csv ; delimiter separated format
 	 * 
 	 * @param Inputfile A String which will be turned into a file and then written to
@@ -391,28 +390,28 @@ public class Util {
 		try {
 			fw.append("dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient");
 			fw.newLine();
-			for (int i = 0; i < Util.getInstance().unitsArray.size(); i++) {
-				fw.append(Util.getInstance().unitsArray.get(i).getDimension());
+			for (int i = 0; i < unitsArray.size(); i++) {
+				fw.append(unitsArray.get(i).getDimension());
 				fw.append(";");
-				fw.append(Util.getInstance().unitsArray.get(i).getUnit());
+				fw.append(unitsArray.get(i).getUnit());
 				fw.append(";");
-				fw.append("" + Util.getInstance().unitsArray.get(i).getM());
+				fw.append("" + unitsArray.get(i).getM());
 				fw.append(";");
-				fw.append("" + Util.getInstance().unitsArray.get(i).getK());
+				fw.append("" + unitsArray.get(i).getK());
 				fw.append(";");
-				fw.append("" + Util.getInstance().unitsArray.get(i).getS());
+				fw.append("" + unitsArray.get(i).getS());
 				fw.append(";");
-				fw.append("" + Util.getInstance().unitsArray.get(i).getKel());
+				fw.append("" + unitsArray.get(i).getKel());
 				fw.append(";");
-				fw.append("" + Util.getInstance().unitsArray.get(i).getMol());
+				fw.append("" + unitsArray.get(i).getMol());
 				fw.append(";");
-				fw.append("" + Util.getInstance().unitsArray.get(i).getAmp());
+				fw.append("" + unitsArray.get(i).getAmp());
 				fw.append(";");
-				fw.append("" + Util.getInstance().unitsArray.get(i).getCand());
+				fw.append("" + unitsArray.get(i).getCand());
 				fw.append(";");
-				fw.append("" + String.valueOf(Util.getInstance().unitsArray.get(i).getOffset()).replace(".", ","));
+				fw.append("" + String.valueOf(unitsArray.get(i).getOffset()).replace(".", ","));
 				fw.append(";");
-				fw.append("" + String.valueOf(Util.getInstance().unitsArray.get(i).getGradient()).replace(".", ","));
+				fw.append("" + String.valueOf(unitsArray.get(i).getGradient()).replace(".", ","));
 				fw.newLine();
 			}			
 		} catch (IOException e) {
@@ -431,7 +430,7 @@ public class Util {
 	/**
 	 * This method reads a String Inputfile line by line via the readFile method
 	 * and proceeds to split every line at the ; delimiter and puts those
-	 * values in a temp RawUnits Class which is then put in the Util.getInstance().unitsArray
+	 * values in a temp RawUnits Class which is then put in the unitsArray
 	 * ArrayList
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read
@@ -459,7 +458,7 @@ public class Util {
 				}
 				
 				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
-				Util.getInstance().unitsArray.add(tempRawUnits);
+				unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -496,37 +495,37 @@ public class Util {
 					System.out.println("----");
 				}
 				
-				Util.getInstance().row++;
+				row++;
 				WRF.newFactor();
-				WindowRelevantFactors.textFieldName.get(Util.getInstance().row-1).setText(parts[0]);
-				WindowRelevantFactors.textFieldAbbreviation.get(Util.getInstance().row-1).setText(parts[1]);
+				WindowRelevantFactors.textFieldName.get(row-1).setText(parts[0]);
+				WindowRelevantFactors.textFieldAbbreviation.get(row-1).setText(parts[1]);
 				
 				if (parts[2].equals("controlled")) {
-					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(0);
+					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(0);
 				}
 				if (parts[2].equals("constant")) {
-					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(1);
+					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(1);
 				}			
 				if (parts[2].equals("scale-up")) {
-					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(2);
+					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(2);
 				}
 				if (parts[2].equals("dependent")) {
-					WindowRelevantFactors.comboBoxRole.get(Util.getInstance().row-1).setSelectedIndex(3);
+					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(3);
 				}
 				
-				WindowRelevantFactors.textFieldDimension.get(Util.getInstance().row-1).setText(parts[3]);
-				WindowRelevantFactors.textFieldUnit.get(Util.getInstance().row-1).setText(parts[4]);
-				WindowRelevantFactors.textFieldLow.get(Util.getInstance().row-1).setText(parts[5]);
-				WindowRelevantFactors.textFieldHigh.get(Util.getInstance().row-1).setText(parts[6]);
-				WindowRelevantFactors.textFieldM.get(Util.getInstance().row-1).setText(parts[7]);
-				WindowRelevantFactors.textFieldK.get(Util.getInstance().row-1).setText(parts[8]);
-				WindowRelevantFactors.textFieldS.get(Util.getInstance().row-1).setText(parts[9]);
-				WindowRelevantFactors.textFieldKel.get(Util.getInstance().row-1).setText(parts[10]);
-				WindowRelevantFactors.textFieldMol.get(Util.getInstance().row-1).setText(parts[11]);
-				WindowRelevantFactors.textFieldAmp.get(Util.getInstance().row-1).setText(parts[12]);
-				WindowRelevantFactors.textFieldCand.get(Util.getInstance().row-1).setText(parts[13]);
-				WindowRelevantFactors.textFieldResultSILow.get(Util.getInstance().row-1).setText(parts[14]);
-				WindowRelevantFactors.textFieldResultSIHigh.get(Util.getInstance().row-1).setText(parts[15]);
+				WindowRelevantFactors.textFieldDimension.get(row-1).setText(parts[3]);
+				WindowRelevantFactors.textFieldUnit.get(row-1).setText(parts[4]);
+				WindowRelevantFactors.textFieldLow.get(row-1).setText(parts[5]);
+				WindowRelevantFactors.textFieldHigh.get(row-1).setText(parts[6]);
+				WindowRelevantFactors.textFieldM.get(row-1).setText(parts[7]);
+				WindowRelevantFactors.textFieldK.get(row-1).setText(parts[8]);
+				WindowRelevantFactors.textFieldS.get(row-1).setText(parts[9]);
+				WindowRelevantFactors.textFieldKel.get(row-1).setText(parts[10]);
+				WindowRelevantFactors.textFieldMol.get(row-1).setText(parts[11]);
+				WindowRelevantFactors.textFieldAmp.get(row-1).setText(parts[12]);
+				WindowRelevantFactors.textFieldCand.get(row-1).setText(parts[13]);
+				WindowRelevantFactors.textFieldResultSILow.get(row-1).setText(parts[14]);
+				WindowRelevantFactors.textFieldResultSIHigh.get(row-1).setText(parts[15]);
 				
 				WRF.contentPanel.revalidate();
 				WRF.contentPanel.repaint();
