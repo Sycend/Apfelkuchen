@@ -31,7 +31,7 @@ import java.awt.event.ActionListener;
  */
 public class WindowDimensionlessFactors extends JFrame {
 	// serialVersionUID is generated
-	private static final long serialVersionUID = -1770183057440386499L;
+	private static final long serialVersionUID = 1988266173955497269L;
 	protected static double[][] vMatrix;
 	protected static String[] rowNames;
 	protected static String[] colNames;
@@ -66,11 +66,8 @@ public class WindowDimensionlessFactors extends JFrame {
 	public WindowDimensionlessFactors(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax,
 	String[][] dimensionlessControlSI) {
 		
-		
 		 ResetValues(vMatrix, rowNames, colNames,  minMax, dimensionlessControlSI,false);
-		
-		
-		
+		 
 		//Testausgabe um Matrix-Ausmaße zu überprüfen
 		System.out.println("vMatrix.length: " + vMatrix.length);
 		System.out.println("vMatrix[0].length: " + vMatrix[0].length);
@@ -83,6 +80,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		init();
 		setVisible(true);
 	}
+	
 	/**
 	 * DefaultKonstruktor für WindowDimensionlessFactors
 	 */
@@ -96,6 +94,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		init();
 		setVisible(true);
 	}
+	
 	/**
 	 * Init WindowDimensionlessFactors-Content
 	 */
@@ -105,12 +104,12 @@ public class WindowDimensionlessFactors extends JFrame {
 		initContentPanel();
 		isInit=true;
 	}
+	
 	/**
 	 * Init WindowDimensionlessFactors-Content auf Contentpanel
 	 */
 	private void initContentPanel() {
 		contentPanel = new JPanel();
-		
 		contentPanel.setLayout(new GridBagLayout());
 		//40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] { Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
@@ -124,7 +123,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		contentPanel.add(new JLabel("V-Matrix"), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-				
+		
 		//Spalten-Namen
 		for (int i = 0; i < vMatrix[0].length; i++) {
 			JTextField textFieldColNamesTemp = new JTextField();
@@ -136,14 +135,14 @@ public class WindowDimensionlessFactors extends JFrame {
 			
 			contentPanel.add(textFieldColNamesTemp, new GridBagConstraints(1 + 3 * i, 0, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 10, 5), 0, 0));
-
+			
 			textFieldColNames.add(textFieldColNamesTemp);
 		}
 		
 		//MinWerte
 		contentPanel.add(new JLabel("MinV"), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 		GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
-
+		
 		for (int i = 0; i < vMatrix[0].length; i++) {
 			JTextField textFieldMinVTemp = new JTextField();
 			textFieldMinVTemp.setMaximumSize(new Dimension(50, 25));
@@ -400,25 +399,25 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		getContentPane().add(scrollpane, BorderLayout.CENTER);		
 	}
+	
 	/**
 	 * Init WindowDimensionlessFactors-Content auf MenuePanel
 	 */
 	private void initMenuePanel() {
 		JPanel menuePanel = new JPanel();
-		//Menubar
 		JMenuBar jmb = new JMenuBar();
 		JMenu jmFile = new JMenu("File");
-		JMenuItem jmiLoadTMPFile = new JMenuItem("Load from tmp file");
+		//JMenuItem jmiLoadTMPFile = new JMenuItem("Load from tmp file");
 		JMenuItem jmiSave = new JMenuItem("Save to tmp file");
 		JMenuItem jmiExit = new JMenuItem("Exit");
-		jmFile.add(jmiLoadTMPFile);
+		//jmFile.add(jmiLoadTMPFile);
 		jmFile.add(jmiSave);
 		jmFile.add(jmiExit);
 		jmb.add(jmFile);
-		jmiLoadTMPFile.addActionListener(ae -> {
+		/*jmiLoadTMPFile.addActionListener(ae -> {
 			System.out.println("Load from tmp file");
 			Util.getInstance().restorePersistentDimensionlessFactors();
-		});
+		});*/
 		jmiSave.addActionListener(ae -> {
 			System.out.println("Save to tmp file");
 			Util.getInstance().persistentSaveDimensionlessFactors();
@@ -525,51 +524,51 @@ public class WindowDimensionlessFactors extends JFrame {
 			}
 		});
 		menuePanel.add(buttonBack);
-		getContentPane().add(menuePanel, BorderLayout.NORTH);		
+		getContentPane().add(menuePanel, BorderLayout.NORTH);
 	}
+	
 	/**
 	 * Colnames in Textfields in Colnames in ColnamesArray
 	 */
-	private void colNamesTextFieldsToColNames()
-	{
-		for(int i=0;i<colNames.length;i++){
-			colNames[i]=textFieldColNames.get(i).getText();			
+	private void colNamesTextFieldsToColNames() {
+		for (int i = 0; i < colNames.length; i++) {
+			colNames[i] = textFieldColNames.get(i).getText();
 		}
 	}
+	
 	/**
 	 * check LinearMatrix
 	 * isLinearMatrix changed?
 	 * @return boolean für Check
 	 */
-	private boolean checkLinearMatrix()
-	{
-		boolean isDiagonalOK=true;
-		boolean isRestOK=false;		
-		for(int i=0;i<widthVMatrix;i++){
-			for(int j=0;j<widthVMatrix;j++){
-				if(i==j && !linearDependenceTextFields.get(i).get(j).getText().equals("1") && isDiagonalOK==true)
-					isDiagonalOK=false;
-				if(i!=j && !linearDependenceTextFields.get(i).get(j).getText().equals("0") && isRestOK==false)
-					isRestOK=true;					
+	private boolean checkLinearMatrix() {
+		boolean isDiagonalOK = true;
+		boolean isRestOK = false;
+		for (int i = 0; i < widthVMatrix; i++) {
+			for (int j = 0; j < widthVMatrix; j++) {
+				if (i == j && !linearDependenceTextFields.get(i).get(j).getText().equals("1") && isDiagonalOK == true)
+					isDiagonalOK = false;
+				if (i != j && !linearDependenceTextFields.get(i).get(j).getText().equals("0") && isRestOK == false)
+					isRestOK = true;
 			}
-		}	
-		if(isDiagonalOK==true&&isRestOK==true)
+		}
+		if (isDiagonalOK == true && isRestOK == true)
 			return true;
 		return false;
 	}
-	private boolean checkLinearMatrixForDeleteColumn(int column)
-	{
-		boolean isDeleteable=true;
-		for(int i=0;i<widthVMatrix;i++){
-			if(!linearDependenceTextFields.get(column).get(i).getText().equals("0")){
-				isDeleteable=false;					
+
+	private boolean checkLinearMatrixForDeleteColumn(int column) {
+		boolean isDeleteable = true;
+		for (int i = 0; i < widthVMatrix; i++) {
+			if (!linearDependenceTextFields.get(column).get(i).getText().equals("0")) {
+				isDeleteable = false;
 			}
 		}
 		
 		return isDeleteable;
 	}
-	private void refreshWindowContent()
-	{
+	
+	private void refreshWindowContent() {
 		getContentPane().removeAll();
 		
 		colNamesTextFieldsToColNames();
@@ -582,69 +581,63 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		setVisible(true);
 	}
-	private void deleteVMatrixColumn(int column)
-	{
-		for(int col=column;col<widthVMatrix-1;col++)
-		{
-			for(int i=0;i<widthVMatrix;i++){
-				vMatrix[i][col]=vMatrix[i][col+1];
+	
+	private void deleteVMatrixColumn(int column) {
+		for (int col = column; col < widthVMatrix - 1; col++) {
+			for (int i = 0; i < widthVMatrix; i++) {
+				vMatrix[i][col] = vMatrix[i][col + 1];
 			}
-			colNames[col]=colNames[col+1];
-			minV[col]=minV[col+1];
-			maxV[col]=maxV[col+1];
-			for(int j=0;j<7;j++){
-				dimensionlessControlSI[j][col]=dimensionlessControlSI[j][col];
+			colNames[col] = colNames[col + 1];
+			minV[col] = minV[col + 1];
+			maxV[col] = maxV[col + 1];
+			for (int j = 0; j < 7; j++) {
+				dimensionlessControlSI[j][col] = dimensionlessControlSI[j][col];
 			}
 		}
 		widthVMatrix--;
 		refreshWindowContent();
 	}
-
-
-
-
-public void ResetValues(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax,
-		String[][] dimensionlessControlSI, boolean refresh) {
-			
-			WindowDimensionlessFactors.vMatrix = vMatrix;
-			WindowDimensionlessFactors.rowNames = rowNames;
-			WindowDimensionlessFactors.colNames = colNames;
-			
-			minV = new String[minMax.length];
-			maxV = new String[minMax.length];
-			for (int i = 0; i < minMax.length; i++) {
-				minV[i] = minMax[i][0];
-				maxV[i] = minMax[i][1];
-			}
-			
-			WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
-			for (int j = 0; j < vMatrix[0].length; j++) {
-				WindowDimensionlessFactors.dimensionlessControlSI[0][j] = dimensionlessControlSI[0][j]; //M
-				WindowDimensionlessFactors.dimensionlessControlSI[1][j] = dimensionlessControlSI[1][j]; //K
-				WindowDimensionlessFactors.dimensionlessControlSI[2][j] = dimensionlessControlSI[2][j]; //S
-				WindowDimensionlessFactors.dimensionlessControlSI[3][j] = dimensionlessControlSI[3][j]; //Kel
-				WindowDimensionlessFactors.dimensionlessControlSI[4][j] = dimensionlessControlSI[4][j]; //Mol
-				WindowDimensionlessFactors.dimensionlessControlSI[5][j] = dimensionlessControlSI[5][j]; //Amp
-				WindowDimensionlessFactors.dimensionlessControlSI[6][j] = dimensionlessControlSI[6][j]; //Cand
-			}
-			
-			
-			if(refresh)
-				refreshWindowContent();
+	
+	public void ResetValues(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax, String[][] dimensionlessControlSI, boolean refresh) {
+		
+		WindowDimensionlessFactors.vMatrix = vMatrix;
+		WindowDimensionlessFactors.rowNames = rowNames;
+		WindowDimensionlessFactors.colNames = colNames;
+		
+		minV = new String[minMax.length];
+		maxV = new String[minMax.length];
+		for (int i = 0; i < minMax.length; i++) {
+			minV[i] = minMax[i][0];
+			maxV[i] = minMax[i][1];
+		}
+		
+		WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
+		for (int j = 0; j < vMatrix[0].length; j++) {
+			WindowDimensionlessFactors.dimensionlessControlSI[0][j] = dimensionlessControlSI[0][j]; //M
+			WindowDimensionlessFactors.dimensionlessControlSI[1][j] = dimensionlessControlSI[1][j]; //K
+			WindowDimensionlessFactors.dimensionlessControlSI[2][j] = dimensionlessControlSI[2][j]; //S
+			WindowDimensionlessFactors.dimensionlessControlSI[3][j] = dimensionlessControlSI[3][j]; //Kel
+			WindowDimensionlessFactors.dimensionlessControlSI[4][j] = dimensionlessControlSI[4][j]; //Mol
+			WindowDimensionlessFactors.dimensionlessControlSI[5][j] = dimensionlessControlSI[5][j]; //Amp
+			WindowDimensionlessFactors.dimensionlessControlSI[6][j] = dimensionlessControlSI[6][j]; //Cand
+		}
+		
+		if (refresh)
+			refreshWindowContent();
 	}
-
+	
 	public static double[][] getVMatrix() {
 		
 		return WindowDimensionlessFactors.vMatrix;
-
+		
 	}
-
-	public static String[] getVMatrixRowNames(){
+	
+	public static String[] getVMatrixRowNames() {
 		
 		return WindowDimensionlessFactors.rowNames;
 	}
 	
-	public static String[] getVMatrixColNames(){
+	public static String[] getVMatrixColNames() {
 		
 		return WindowDimensionlessFactors.colNames;
 	}

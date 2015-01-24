@@ -36,7 +36,7 @@ import org.xml.sax.SAXException;
  * Util Singleton
  * 
  * @author Dominik Hofmann, Yuri Kalinin, Mark Leibmann
- * @version 1.0.6
+ * @version 6.6.6
  */
 public class Util {
 	protected int row = 0;
@@ -389,7 +389,7 @@ public class Util {
 			e.printStackTrace();
 		}
 		try {
-			fw.append("dimension,unit,low,high,m,k,s,kel,mol,amp,cand,offset,gradient");
+			fw.append("dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient");
 			fw.newLine();
 			for (int i = 0; i < Util.getInstance().unitsArray.size(); i++) {
 				fw.append(Util.getInstance().unitsArray.get(i).getDimension());
@@ -448,7 +448,6 @@ public class Util {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//FIXME make read in more robust
 				//dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();
@@ -487,7 +486,6 @@ public class Util {
 		//Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//FIXME make read in more robust
 				//name;abbr;role;dimension;unit;low;high;m;k;s;kel;mol;amp;cand;SI-Low;SI-High
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();

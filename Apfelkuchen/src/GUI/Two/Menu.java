@@ -12,13 +12,13 @@ import J2R.*;
 
 /**
  * MainMenu
- * @author Sycend, Yuri Kalinin, Dominik Hofmann
- * @version 2.1.5
+ * @author Sycend, Yuri Kalinin, Dominik Hofmann, Christoph Wütschner
+ * @version 2.1.6
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
 	protected static WindowRelevantFactors WRF;
-	public static WindowDimensionlessFactors WDF; //musste für die verwendung mit J2R geändert werden
+	public static WindowDimensionlessFactors WDF; //public wegen J2R
 	protected static J2R callerInstance = J2R.getInstance();
 	
 	public static void main(String args[]) {
@@ -31,34 +31,22 @@ public class Menu implements ActionListener {
 		JMenuBar jmb = new JMenuBar();
 		JMenu jmFile = new JMenu("File");
 		JMenuItem jmiNew = new JMenuItem("New");
-		//JMenuItem jmiLoadTestCaseCSV = new JMenuItem("Load");
-		//JMenuItem jmiClose = new JMenuItem("Close");
-		//JMenuItem jmiSave = new JMenuItem("Save");
 		JMenuItem jmiExit = new JMenuItem("Exit");
 		JLabel label1 = new JLabel("Welcome, thanks for using our product.");
 		mainMenuWindow.add(label1);
 		jmFile.add(jmiNew);
-		//jmFile.add(jmiLoad);
-		//jmFile.add(jmiClose);
-		//jmFile.add(jmiSave);
-		//jmFile.addSeparator();
 		jmFile.add(jmiExit);
 		jmb.add(jmFile);
 		
 		JMenu jmOptions = new JMenu("Options");
-		JMenu a = new JMenu("A");
+		JMenuItem a = new JMenuItem("A");
 		JMenuItem b = new JMenuItem("B");
 		JMenuItem c = new JMenuItem("C");
 		JMenuItem d = new JMenuItem("D");
-		a.add(b);
-		a.add(c);
-		a.add(d);
 		jmOptions.add(a);
-		
-		JMenu e = new JMenu("E");
-		e.add(new JMenuItem("F"));
-		e.add(new JMenuItem("G"));
-		jmOptions.add(e);
+		jmOptions.add(b);
+		jmOptions.add(c);
+		jmOptions.add(d);
 		
 		jmb.add(jmOptions);
 		
@@ -66,11 +54,8 @@ public class Menu implements ActionListener {
 		JMenuItem jmiAbout = new JMenuItem("About");
 		jmHelp.add(jmiAbout);
 		jmb.add(jmHelp);
-
+		
 		jmiNew.addActionListener(this);
-		//jmiLoad.addActionListener(this);
-		//jmiClose.addActionListener(this);
-		//jmiSave.addActionListener(this);
 		jmiExit.addActionListener(this);
 		b.addActionListener(this);
 		c.addActionListener(this);
@@ -103,8 +88,8 @@ public class Menu implements ActionListener {
 				Util.getInstance().readCSV(Util.getInstance().CSV_FILENAME);
 				Util.getInstance().readCSV(Util.getInstance().USER_CSV_FILENAME);
 			}).start();
-		} else if (command.equals("Help")) {
-			
+		} else if (command.equals("About")) {
+			System.out.println("344aab9758bbd18b93739e7893fb3a");
 		} else if (command.equals("Exit")){
 			System.exit(0);
 		}

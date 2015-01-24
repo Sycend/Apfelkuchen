@@ -26,7 +26,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.ArrayList;
 
 import J2R.*;
@@ -34,8 +33,7 @@ import J2R.*;
 /**
  * Window1
  * 
- * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner,
- *         Clemens Kretzer
+ * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner, Clemens Kretzer
  * @version 1.2.7
  */
 public class WindowRelevantFactors extends JFrame {
@@ -94,7 +92,7 @@ public class WindowRelevantFactors extends JFrame {
 		init();
 		setVisible(true);
 	}
-
+	
 	public void init() {
 		// ======== contentPanel ========
 		contentPanel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -105,9 +103,9 @@ public class WindowRelevantFactors extends JFrame {
 		((GridBagLayout) contentPanel.getLayout()).rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		((GridBagLayout) contentPanel.getLayout()).columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
 		((GridBagLayout) contentPanel.getLayout()).rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
-
+		
 		JPanel p2 = new JPanel();
-
+		
 		// ---- label Name ----
 		labelName = new JLabel();
 		labelName.setText(Util.getInstance().dataLabels("labelName"));
@@ -317,7 +315,7 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		p2.add(buttonRemoveFactor);
 
-		buttonNewCommandVariable = new JButton(Util.getInstance().dataLabels("buttonNewCommandVariable"));
+		/*buttonNewCommandVariable = new JButton(Util.getInstance().dataLabels("buttonNewCommandVariable"));
 		buttonNewCommandVariable.setFocusPainted(false);
 		buttonNewCommandVariable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -381,7 +379,7 @@ public class WindowRelevantFactors extends JFrame {
 				}
 			}
 		});
-		p2.add(buttonRemoveCommandVariable);
+		p2.add(buttonRemoveCommandVariable);*/
 
 		//TODO Add fields Checks
 		buttonNext = new JButton(Util.getInstance().dataLabels("buttonNext"));
