@@ -13,7 +13,7 @@ import J2R.*;
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann, Christoph Wütschner
- * @version 2.1.6
+ * @version 2.1.7
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
