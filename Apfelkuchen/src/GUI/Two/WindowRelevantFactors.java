@@ -34,7 +34,7 @@ import J2R.*;
  * Window1
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner, Clemens Kretzer
- * @version 1.2.7
+ * @version 1.3.0
  */
 public class WindowRelevantFactors extends JFrame {
 	// serialVersionUID is generated
@@ -43,8 +43,8 @@ public class WindowRelevantFactors extends JFrame {
 	private JButton buttonRemoveFactor;
 	private JButton buttonNext;
 	private JButton buttonNewFactor;
-	private JButton buttonNewCommandVariable;
-	private JButton buttonRemoveCommandVariable;
+	//private JButton buttonNewCommandVariable;
+	//private JButton buttonRemoveCommandVariable;
 	private JLabel labelName;
 	private JLabel labelAbbreviation;
 	private JLabel labelRole;
@@ -248,6 +248,9 @@ public class WindowRelevantFactors extends JFrame {
 		JMenu jmHelp = new JMenu("Help");
 		JMenuItem jmiAbout = new JMenuItem("About");
 		jmHelp.add(jmiAbout);
+		jmiAbout.addActionListener(ae -> {
+			System.out.println("About");
+		});
 		jmb.add(jmHelp);
 		setJMenuBar(jmb);
 		
@@ -465,13 +468,36 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldDimension.setText(newSelectionItemParent);
 		textFieldUnit.setText(newSelectionItem);
 	}
-
+	
+	public static void doDimensionCheck() {
+		if (Util.getInstance().unitsArray.size() > 0) {
+			for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
+				for (int n = 0; n < Util.getInstance().unitsArray.size(); n++) {
+					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension())) {
+						System.out.println("Detected Known Dimension");
+						WindowRelevantFactors.textFieldM.get(i).setText(""+Util.getInstance().unitsArray.get(n).getM());
+						WindowRelevantFactors.textFieldK.get(i).setText(""+Util.getInstance().unitsArray.get(n).getK());
+						WindowRelevantFactors.textFieldS.get(i).setText(""+Util.getInstance().unitsArray.get(n).getS());
+						WindowRelevantFactors.textFieldKel.get(i).setText(""+Util.getInstance().unitsArray.get(n).getKel());
+						WindowRelevantFactors.textFieldMol.get(i).setText(""+Util.getInstance().unitsArray.get(n).getMol());
+						WindowRelevantFactors.textFieldAmp.get(i).setText(""+Util.getInstance().unitsArray.get(n).getAmp());
+						WindowRelevantFactors.textFieldCand.get(i).setText(""+Util.getInstance().unitsArray.get(n).getCand());						
+					}
+				}
+			}
+		} else {
+			System.out.println("Util.getInstance().unitsArray is empty");
+		}
+	}
+	
+	
 	public static void doSICalculationLow() {
 		if (Util.getInstance().unitsArray.size() > 0) {
 			for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 				for (int n = 0; n < Util.getInstance().unitsArray.size(); n++) {
-					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension()) && WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getUnit())
-							&& WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
+					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension())
+					&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getUnit())
+					&& WindowRelevantFactors.textFieldLow.get(i).getText() != "") {
 						try {
 							Util.getInstance().unitsArray.get(n).setLow(Double.parseDouble(WindowRelevantFactors.textFieldLow.get(i).getText()));
 							WindowRelevantFactors.textFieldResultSILow.get(i).setText(("" + Util.getInstance().unitsArray.get(n).getResultSILow()).toString());
@@ -490,8 +516,9 @@ public class WindowRelevantFactors extends JFrame {
 		if (Util.getInstance().unitsArray.size() > 0) {
 			for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 				for (int n = 0; n < Util.getInstance().unitsArray.size(); n++) {
-					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension()) && WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getUnit())
-							&& WindowRelevantFactors.textFieldHigh.get(i).getText() != "") {
+					if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension()) 
+					&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getUnit())
+					&& WindowRelevantFactors.textFieldHigh.get(i).getText() != "") {
 						try {
 							Util.getInstance().unitsArray.get(n).setHigh(Double.parseDouble(WindowRelevantFactors.textFieldHigh.get(i).getText()));
 							WindowRelevantFactors.textFieldResultSIHigh.get(i).setText(("" + Util.getInstance().unitsArray.get(n).getResultSIHigh()).toString());
@@ -581,6 +608,23 @@ public class WindowRelevantFactors extends JFrame {
 			public void mouseReleased(MouseEvent arg0) {
 			}
 
+		});
+		textFieldDimensionTemp.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				doDimensionCheck();
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				doDimensionCheck();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				doDimensionCheck();
+			}
+			
 		});
 		contentPanel.add(textFieldDimensionTemp, new GridBagConstraints(3, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
 		textFieldDimension.add(textFieldDimensionTemp);

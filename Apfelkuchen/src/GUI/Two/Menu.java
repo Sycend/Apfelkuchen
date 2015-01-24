@@ -74,7 +74,6 @@ public class Menu implements ActionListener {
 
 	public void actionPerformed(ActionEvent ae) {
 		String command = ae.getActionCommand();
-		System.out.println(command + " Selected");
 		if (command.equals("New")) {
 			//mainMenuWindow.setVisible(false);
 			//Run.main(null);
