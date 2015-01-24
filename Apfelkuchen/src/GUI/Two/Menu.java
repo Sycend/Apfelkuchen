@@ -2,23 +2,26 @@ package GUI.Two;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import J2R.*;
 
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann, Christoph Wütschner
- * @version 2.1.8
+ * @version 2.1.9
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
 	protected static WindowRelevantFactors WRF;
-	public static WindowDimensionlessFactors WDF; //public wegen J2R
+	public static WindowDimensionlessFactors WDF; //public because J2R needs to access it
 	protected static J2R callerInstance = J2R.getInstance();
 	
 	public static void main(String args[]) {
@@ -46,6 +49,7 @@ public class Menu implements ActionListener {
 		JMenuItem settingPathTestCase = new JMenuItem("Set Path for TestCase.csv");
 		JMenuItem settingPathRelevantFactorstmp = new JMenuItem("Set Path for RelevantFactors.tmp file");
 		JMenuItem settingPathDimensionlessFactorstmp = new JMenuItem("Set Path for DimensionlessFactors.tmp file");
+		//add option to autoload tmp file
 		jmOptions.add(settingPathTestCase);
 		jmOptions.add(settingPathRelevantFactorstmp);
 		jmOptions.add(settingPathDimensionlessFactorstmp);
@@ -86,18 +90,33 @@ public class Menu implements ActionListener {
 			
 			WRF = new WindowRelevantFactors();
 		} else if (command.equals("Set Path for TestCase.csv")) {
-			System.out.println("344aab9758bbd18b93739e7893fb3a");
+			try {			
+				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer TestCase.csv ein", Util.getInstance().TESTCASE_CSV_FILE.getAbsolutePath());
+				Util.getInstance().TESTCASE_CSV_FILENAME = path;
+				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: "+path+" geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("Set Path for RelevantFactors.tmp file")) {
-			System.out.println("344aab9758bbd18b93739e7893fb3a");
+			try {			
+				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer RelevantFactors.tmp ein", Util.getInstance().RELEVANTFACTORS_FILE.getAbsolutePath());
+				Util.getInstance().RELEVANTFACTORS_FILENAME = path;
+				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: "+path+" geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("Set Path for DimensionlessFactors.tmp file")) {
-			System.out.println("344aab9758bbd18b93739e7893fb3a");
+			try {			
+				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer DimensionlessFactors.tmp ein", Util.getInstance().DIMENSIONLESSFACTORS_FILE.getAbsolutePath());
+				Util.getInstance().DIMENSIONLESSFACTORS_FILENAME = path;
+				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: "+path+" geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("About")) {
 			System.out.println("344aab9758bbd18b93739e7893fb3a");
 		} else if (command.equals("Exit")) {
 			System.exit(0);
-		}
-		else {
-			
 		}
 	}
 }
