@@ -391,47 +391,50 @@ public class WindowRelevantFactors extends JFrame {
 					if (Util.getInstance().fieldsStringCheck(textFieldAbbreviation, "labelAbbr") != true) {
 						return;
 					}
-					if (Util.getInstance().fieldsStringCheck(textFieldUnit, "labelUnit") != true) {
+					if (Util.getInstance().dimensionFieldCheck(textFieldUnit, "labelUnit") != true) {
 						return;
 					}
-					if (Util.getInstance().fieldsStringCheck(textFieldDimension, "labelDimension") != true) {
-						return;
-					}
-
-					if (Util.getInstance().fieldsArrayCheck(textFieldHigh) == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldM) == false) {
+					if (Util.getInstance().dimensionFieldCheck(textFieldDimension, "labelDimension") != true) {
 						return;
 					}
 
-					if (Util.getInstance().fieldsArrayCheck(textFieldK) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldHigh, "labelHigh") == false) {
 						return;
 					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldS) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldLow, "labelLow") == false) {
 						return;
 					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldKel) == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldMol) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldM, "m") == false) {
 						return;
 					}
 
-					if (Util.getInstance().fieldsArrayCheck(textFieldAmp) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldK, "k") == false) {
 						return;
 					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldCand) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldS, "s") == false) {
 						return;
 					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldResultSILow) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldKel, "kel") == false) {
 						return;
 					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldResultSIHigh) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldMol, "mol") == false) {
 						return;
 					}
 
-					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
+					if (Util.getInstance().fieldsArrayCheck(textFieldAmp, "amp") == false) {
+						return;
+					}
+					if (Util.getInstance().fieldsArrayCheck(textFieldCand, "cand") == false) {
+						return;
+					}
+					if (Util.getInstance().fieldsArrayCheck(textFieldResultSILow, "labelSIMin") == false) {
+						return;
+					}
+					if (Util.getInstance().fieldsArrayCheck(textFieldResultSIHigh, "labelSIMax") == false) {
+						return;
+					}
+
+					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow ) == false) {
 
 						return;
 					}
@@ -608,16 +611,19 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldDimensionTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void changedUpdate(DocumentEvent arg0) {
+				checkFields=Util.getInstance().dimensionFieldCheck(textFieldDimensionTemp);
 				doDimensionCheck();
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
+				checkFields=Util.getInstance().dimensionFieldCheck(textFieldDimensionTemp);
 				doDimensionCheck();
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
+				checkFields=Util.getInstance().dimensionFieldCheck(textFieldDimensionTemp);
 				doDimensionCheck();
 			}
 			
@@ -654,7 +660,28 @@ public class WindowRelevantFactors extends JFrame {
 			}
 
 		});
+		textFieldUnitTemp.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().unitFieldCheck(textFieldUnitTemp);
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().unitFieldCheck(textFieldUnitTemp);
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				checkFields = Util.getInstance().unitFieldCheck(textFieldUnitTemp);
+				
+			}
+		});
 		contentPanel.add(textFieldUnitTemp, new GridBagConstraints(4, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 0), 0, 0));
+		
 		textFieldUnit.add(textFieldUnitTemp);
 
 		// ---- JTextField Low ----
@@ -665,7 +692,7 @@ public class WindowRelevantFactors extends JFrame {
 			// note: statechanged is triggered on persistentRestore
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
+				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp);
 				System.out.println("insertUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -674,7 +701,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
+				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp);
 				System.out.println("removeUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -682,7 +709,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp, "labelLow");
+				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp);
 				System.out.println("changedUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -709,7 +736,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void insertUpdate(DocumentEvent e) {
 				System.out.println("insertUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
+					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp);
 
 				}
 				doSICalculationHigh();
@@ -719,7 +746,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void removeUpdate(DocumentEvent e) {
 				System.out.println("removeUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
+					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp);
 
 				}
 				doSICalculationHigh();
@@ -729,7 +756,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 				System.out.println("changedUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp, "labelHigh");
+					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp);
 
 				}
 				doSICalculationHigh();
@@ -747,18 +774,18 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldMTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldMTemp, "m");
+				checkFields = Util.getInstance().fieldsCheck(textFieldMTemp);
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldMTemp, "m");
+				checkFields = Util.getInstance().fieldsCheck(textFieldMTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				Util.getInstance().fieldsCheck(textFieldMTemp, "m");
+				Util.getInstance().fieldsCheck(textFieldMTemp);
 
 			}
 		});
@@ -774,19 +801,19 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp, "k");
+				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp);
 
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp, "k");
+				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp, "k");
+				checkFields = Util.getInstance().fieldsCheck(textFieldKTemp);
 
 			}
 		});
@@ -802,18 +829,18 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp, "s");
+				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp);
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp, "s");
+				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp, "s");
+				checkFields = Util.getInstance().fieldsCheck(textFieldSTemp);
 
 			}
 		});
@@ -828,18 +855,18 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldKelTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldKelTemp, "kel");
+				checkFields = Util.getInstance().fieldsCheck(textFieldKelTemp);
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldKelTemp, "kel");
+				checkFields = Util.getInstance().fieldsCheck(textFieldKelTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldKelTemp, "kel");
+				checkFields = Util.getInstance().fieldsCheck(textFieldKelTemp);
 			}
 		});
 		contentPanel.add(textFieldKelTemp, new GridBagConstraints(10, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -855,18 +882,18 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldMolTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldMolTemp, "mol");
+				checkFields = Util.getInstance().fieldsCheck(textFieldMolTemp);
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldMolTemp, "mol");
+				checkFields = Util.getInstance().fieldsCheck(textFieldMolTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldMolTemp, "mol");
+				checkFields = Util.getInstance().fieldsCheck(textFieldMolTemp);
 			}
 		});
 		// ---- JTextField amp ----
@@ -877,18 +904,18 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldAmpTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldAmpTemp, "amp");
+				checkFields = Util.getInstance().fieldsCheck(textFieldAmpTemp);
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldAmpTemp, "amp");
+				checkFields = Util.getInstance().fieldsCheck(textFieldAmpTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldAmpTemp, "amp");
+				checkFields = Util.getInstance().fieldsCheck(textFieldAmpTemp);
 			}
 		});
 		contentPanel.add(textFieldAmpTemp, new GridBagConstraints(12, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -902,18 +929,18 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldCandTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp, "cand");
+				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp);
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp, "cand");
+				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp, "cand");
+				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp);
 			}
 		});
 		contentPanel.add(textFieldCandTemp, new GridBagConstraints(13, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -926,19 +953,19 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSILowTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldResultSILowTemp, "labelSIMin");
+				checkFields = Util.getInstance().fieldsCheck(textFieldResultSILowTemp);
 
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldResultSILowTemp, "labelSIMin");
+				checkFields = Util.getInstance().fieldsCheck(textFieldResultSILowTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp, "labelSIMin");
+				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp);
 			}
 		});
 
@@ -953,7 +980,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp, "labelSIMax");
+					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
 
 				}
 			}
@@ -961,7 +988,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp, "labelSIMax");
+					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
 
 				}
 			}
@@ -969,7 +996,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp, "labelSIMax");
+					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
 
 				}
 			}
