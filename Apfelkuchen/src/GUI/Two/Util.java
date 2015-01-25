@@ -512,6 +512,45 @@ public class Util {
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read
 	 */
+	protected void readUserCSV(String Inputfile) {
+		System.out.println("Reading: " + Inputfile);
+		ArrayList<String> content = new ArrayList<String>();
+		try {
+			content = readFile(Inputfile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Starts at 1 so that the first row is ignored
+		for (int i = 1; i < content.size(); i++) {
+			try {
+				//dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
+				String test = content.get(i);
+				int count = test.length() - test.replace(";", "").length();
+				String[] parts = content.get(i).split(";");
+				if ((count+1) != 11){
+					System.out.println("Error in line: "+(i+1));
+					System.out.println("count: "+(count+1));
+					System.out.println("----");
+				}
+				
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1]+"*", Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
+				unitsArray.add(tempRawUnits);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Done reading: " + Inputfile);
+	}
+	
+	/**
+	 * This method reads a String Inputfile line by line via the readFile method
+	 * and proceeds to split every line at the ; delimiter and puts those
+	 * values in a temp RawUnits Object which is then put in the unitsArray
+	 * ArrayList
+	 * 
+	 * @param Inputfile A String that will be turned into a File and read
+	 */
 	protected void readCSV(String Inputfile) {
 		System.out.println("Reading: " + Inputfile);
 		ArrayList<String> content = new ArrayList<String>();

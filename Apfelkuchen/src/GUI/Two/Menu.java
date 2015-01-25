@@ -16,7 +16,7 @@ import J2R.*;
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann, Christoph Wütschner
- * @version 2.1.9
+ * @version 2.2.0
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
@@ -28,7 +28,7 @@ public class Menu implements ActionListener {
 		new Menu();
 		new Thread(() -> {
 			Util.getInstance().readCSV(Util.getInstance().CSV_FILENAME);
-			Util.getInstance().readCSV(Util.getInstance().USER_CSV_FILENAME);
+			Util.getInstance().readUserCSV(Util.getInstance().USER_CSV_FILENAME);
 		}).start();
 	}
 	
