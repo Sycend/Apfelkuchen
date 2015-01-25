@@ -17,9 +17,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -37,7 +34,7 @@ import org.xml.sax.SAXException;
  * Util Singleton
  * 
  * @author Dominik Hofmann, Yuri Kalinin, Mark Leibmann
- * @version 6.6.7
+ * @version 6.6.6
  */
 public class Util {
 	protected int row = 0;
