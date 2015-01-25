@@ -34,11 +34,11 @@ import J2R.*;
  * Window1
  * 
  * @author Yuri Kalinin, Florian Then, Dominik Hofmann, Christoph Wütschner, Clemens Kretzer
- * @version 1.3.0
+ * @version 1.3.1
  */
 public class WindowRelevantFactors extends JFrame {
 	// serialVersionUID is generated
-	private static final long serialVersionUID = 1970058653625662918L;
+	private static final long serialVersionUID = -3237399934868230137L;
 	private JScrollPane scrollpane;
 	private JButton buttonRemoveFactor;
 	private JButton buttonNext;
@@ -256,67 +256,67 @@ public class WindowRelevantFactors extends JFrame {
 		
 		buttonNewFactor = new JButton(Util.getInstance().getStringFromXML("buttonNewFactor"));
 		buttonNewFactor.setFocusPainted(false);
-		buttonNewFactor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonNewFactor) {
-					Util.getInstance().row++;
-					newFactor();
-					contentPanel.revalidate();
-					contentPanel.repaint();
-				}
+		buttonNewFactor.addActionListener(ae -> {
+			if (ae.getSource() == buttonNewFactor) {
+				Util.getInstance().row++;
+				newFactor();
+				contentPanel.revalidate();
+				contentPanel.repaint();
 			}
 		});
 		p2.add(buttonNewFactor);
 
 		buttonRemoveFactor = new JButton(Util.getInstance().getStringFromXML("buttonRemoveFactor"));
 		buttonRemoveFactor.setFocusPainted(false);
-		buttonRemoveFactor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonRemoveFactor) {
-					if (textFieldName.size() > 0) {
-						contentPanel.remove(textFieldName.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldAbbreviation.get(Util.getInstance().row - 1));
-						contentPanel.remove(comboBoxRole.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldDimension.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldUnit.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldLow.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldHigh.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldM.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldK.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldS.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldKel.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldMol.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldAmp.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldCand.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldResultSILow.get(Util.getInstance().row - 1));
-						contentPanel.remove(textFieldResultSIHigh.get(Util.getInstance().row - 1));
-						contentPanel.remove(buttonUpdateCSV.get(Util.getInstance().row - 1));
-						textFieldName.remove(Util.getInstance().row - 1);
-						textFieldAbbreviation.remove(Util.getInstance().row - 1);
-						comboBoxRole.remove(Util.getInstance().row - 1);
-						textFieldDimension.remove(Util.getInstance().row - 1);
-						textFieldUnit.remove(Util.getInstance().row - 1);
-						textFieldLow.remove(Util.getInstance().row - 1);
-						textFieldHigh.remove(Util.getInstance().row - 1);
-						textFieldM.remove(Util.getInstance().row - 1);
-						textFieldK.remove(Util.getInstance().row - 1);
-						textFieldS.remove(Util.getInstance().row - 1);
-						textFieldKel.remove(Util.getInstance().row - 1);
-						textFieldMol.remove(Util.getInstance().row - 1);
-						textFieldAmp.remove(Util.getInstance().row - 1);
-						textFieldCand.remove(Util.getInstance().row - 1);
-						textFieldResultSILow.remove(Util.getInstance().row - 1);
-						textFieldResultSIHigh.remove(Util.getInstance().row - 1);
-						buttonUpdateCSV.remove(Util.getInstance().row - 1);
-						Util.getInstance().row--;
-						contentPanel.revalidate();
-						contentPanel.repaint();
-					}
+		buttonRemoveFactor.addActionListener(ae -> {
+			if (ae.getSource() == buttonRemoveFactor) {
+				if (textFieldName.size() > 0) {
+					contentPanel.remove(textFieldName.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldAbbreviation.get(Util.getInstance().row - 1));
+					contentPanel.remove(comboBoxRole.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldDimension.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldUnit.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldLow.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldHigh.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldM.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldK.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldS.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldKel.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldMol.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldAmp.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldCand.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldResultSILow.get(Util.getInstance().row - 1));
+					contentPanel.remove(textFieldResultSIHigh.get(Util.getInstance().row - 1));
+					contentPanel.remove(buttonUpdateCSV.get(Util.getInstance().row - 1));
+					textFieldName.remove(Util.getInstance().row - 1);
+					textFieldAbbreviation.remove(Util.getInstance().row - 1);
+					comboBoxRole.remove(Util.getInstance().row - 1);
+					textFieldDimension.remove(Util.getInstance().row - 1);
+					textFieldUnit.remove(Util.getInstance().row - 1);
+					textFieldLow.remove(Util.getInstance().row - 1);
+					textFieldHigh.remove(Util.getInstance().row - 1);
+					textFieldM.remove(Util.getInstance().row - 1);
+					textFieldK.remove(Util.getInstance().row - 1);
+					textFieldS.remove(Util.getInstance().row - 1);
+					textFieldKel.remove(Util.getInstance().row - 1);
+					textFieldMol.remove(Util.getInstance().row - 1);
+					textFieldAmp.remove(Util.getInstance().row - 1);
+					textFieldCand.remove(Util.getInstance().row - 1);
+					textFieldResultSILow.remove(Util.getInstance().row - 1);
+					textFieldResultSIHigh.remove(Util.getInstance().row - 1);
+					buttonUpdateCSV.remove(Util.getInstance().row - 1);
+					Util.getInstance().row--;
+					contentPanel.revalidate();
+					contentPanel.repaint();
 				}
 			}
 		});
 		p2.add(buttonRemoveFactor);
-
+		
+		/*This Code here is for buttons for the CommandVariables sadly our Team
+		couldn't get it done in time so we commented it out
+		in the current version they mirror the behaviour of the Factor buttons*/
+		
 		/*buttonNewCommandVariable = new JButton(Util.getInstance().dataLabels("buttonNewCommandVariable"));
 		buttonNewCommandVariable.setFocusPainted(false);
 		buttonNewCommandVariable.addActionListener(new ActionListener() {
@@ -386,9 +386,8 @@ public class WindowRelevantFactors extends JFrame {
 		//TODO Add fields Checks
 		buttonNext = new JButton(Util.getInstance().getStringFromXML("buttonNext"));
 		buttonNext.setFocusPainted(false);
-		buttonNext.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonNext) {
+		buttonNext.addActionListener(ae ->{
+				if (ae.getSource() == buttonNext) {
 					if (Util.getInstance().fieldsStringCheck(textFieldAbbreviation, "labelAbbr") != true) {
 						return;
 					}
@@ -446,7 +445,7 @@ public class WindowRelevantFactors extends JFrame {
 					//if (!new File(Util.getInstance().DIMENSIONLESSFACTORS_FILENAME).exists()) {
 						//System.out.println("new WindowDimensionlessFactors(Testvalues)");
 						//Menu.WDF = new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" },
-							//	{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
+								//{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
 					//} else {
 						//System.out.println("restoreDimensionlessFactors()");
 						SingeltonTestMainStart.calculate(true, Menu.callerInstance);
@@ -454,7 +453,7 @@ public class WindowRelevantFactors extends JFrame {
 						//Menu.WDF = new WindowDimensionlessFactors();
 					//}
 				}
-			}
+			
 		});
 		p2.add(buttonNext);
 		getContentPane().add(p2, BorderLayout.NORTH);
@@ -562,17 +561,15 @@ public class WindowRelevantFactors extends JFrame {
 		comboBoxRoleTemp.setEnabled(true);
 		comboBoxRoleTemp.setMinimumSize(getPreferredSize());
 		comboBoxRoleTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-		comboBoxRoleTemp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (comboBoxRoleTemp.getSelectedItem() == "constant") {
-					textFieldHighTemp.setEnabled(false);
-					textFieldResultSIHighTemp.setEnabled(false);
-					textFieldHighTemp.setText(textFieldLowTemp.getText());
-					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
-				} else {
-					textFieldHighTemp.setEnabled(true);
-					textFieldResultSIHighTemp.setEnabled(true);
-				}
+		comboBoxRoleTemp.addActionListener(ae -> {
+			if (comboBoxRoleTemp.getSelectedItem() == "constant") {
+				textFieldHighTemp.setEnabled(false);
+				textFieldResultSIHighTemp.setEnabled(false);
+				textFieldHighTemp.setText(textFieldLowTemp.getText());
+				textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
+			} else {
+				textFieldHighTemp.setEnabled(true);
+				textFieldResultSIHighTemp.setEnabled(true);
 			}
 		});
 		contentPanel.add(comboBoxRoleTemp, new GridBagConstraints(2, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
@@ -977,58 +974,57 @@ public class WindowRelevantFactors extends JFrame {
 				}
 			}
 		});
-
+		
 		contentPanel.add(textFieldResultSIHighTemp, new GridBagConstraints(15, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldResultSIHigh.add(textFieldResultSIHighTemp);
-
+		
 		// ---- buttonUpdateCSV ----
 		JButton buttonUpdateCSVTemp = new JButton(Util.getInstance().getStringFromXML("buttonUpdateCSV"));
 		buttonUpdateCSVTemp.setToolTipText(Util.getInstance().getStringFromXML("textOverUpdateCSV"));
 		buttonUpdateCSVTemp.setFocusPainted(false);
 		buttonUpdateCSVTemp.setEnabled(false);
 		buttonUpdateCSVTemp.setMinimumSize(getPreferredSize());
-		buttonUpdateCSVTemp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonUpdateCSVTemp) {
-					System.out.println("UpdateCSV: Start");
-					try {
-						double gradient = 0;
-						double offset = 0;
-						if (comboBoxRoleTemp.getSelectedItem() == "constant"){
-							gradient = (Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldLowTemp.getText()));
-							System.out.println("gradient: " + gradient);
-							offset = 0;
-							System.out.println("offset: " + offset);
-						} else {
-							gradient = (Double.parseDouble(textFieldResultSIHighTemp.getText()) - Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldHighTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText()));
-							System.out.println("gradient: " + gradient);
-							offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
-							System.out.println("offset: " + offset);
-						}
-						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()),
-								Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
-						Util.getInstance().unitsArray.add(tempRaw);
-						Util.getInstance().writeCSV(Util.getInstance().USER_CSV_FILENAME, tempRaw);
-					} catch (Exception ex) {
-						ex.printStackTrace();
+		buttonUpdateCSVTemp.addActionListener(ae -> {
+			if (ae.getSource() == buttonUpdateCSVTemp) {
+				System.out.println("UpdateCSV: Start");
+				try {
+					double gradient = 0;
+					double offset = 0;
+					if (comboBoxRoleTemp.getSelectedItem() == "constant") {
+						gradient = (Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldLowTemp.getText()));
+						System.out.println("gradient: " + gradient);
+						offset = 0;
+						System.out.println("offset: " + offset);
+					} else {
+						gradient = (Double.parseDouble(textFieldResultSIHighTemp.getText()) - Double.parseDouble(textFieldResultSILowTemp.getText())) / (Double.parseDouble(textFieldHighTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText()));
+						System.out.println("gradient: " + gradient);
+						offset = (Double.parseDouble(textFieldResultSILowTemp.getText()) - Double.parseDouble(textFieldLowTemp.getText())) * gradient;
+						System.out.println("offset: " + offset);
 					}
-					System.out.println("UpdateCSV: done.");
-					textFieldDimensionTemp.setText("");
-					textFieldUnitTemp.setText("");
-					textFieldLowTemp.setText(""+0);
-					textFieldHighTemp.setText(""+0);
-					textFieldMTemp.setText(""+0);
-					textFieldKTemp.setText(""+0);
-					textFieldSTemp.setText(""+0);
-					textFieldKelTemp.setText(""+0);
-					textFieldMolTemp.setText(""+0);
-					textFieldAmpTemp.setText(""+0);
-					textFieldCandTemp.setText(""+0);
-					textFieldResultSILowTemp.setText(""+0);
-					textFieldResultSIHighTemp.setText(""+0);
-					buttonUpdateCSVTemp.setEnabled(false);
+					RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()),
+					Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
+					Util.getInstance().unitsArray.add(tempRaw);
+					Util.getInstance().writeCSV(Util.getInstance().USER_CSV_FILENAME, tempRaw);
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
+				System.out.println("UpdateCSV: done.");
+				textFieldDimensionTemp.setText("");
+				textFieldUnitTemp.setText("");
+				textFieldLowTemp.setText("" + 0);
+				textFieldHighTemp.setText("" + 0);
+				textFieldMTemp.setText("" + 0);
+				textFieldKTemp.setText("" + 0);
+				textFieldSTemp.setText("" + 0);
+				textFieldKelTemp.setText("" + 0);
+				textFieldMolTemp.setText("" + 0);
+				textFieldAmpTemp.setText("" + 0);
+				textFieldCandTemp.setText("" + 0);
+				textFieldResultSILowTemp.setText("" + 0);
+				textFieldResultSIHighTemp.setText("" + 0);
+				buttonUpdateCSVTemp.setEnabled(false);
 			}
+			
 		});
 		buttonUpdateCSVTemp.addMouseListener(new MouseListener() {
 			@Override
