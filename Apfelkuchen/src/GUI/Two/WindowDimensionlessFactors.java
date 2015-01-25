@@ -603,6 +603,12 @@ public class WindowDimensionlessFactors extends JFrame {
 		WindowDimensionlessFactors.rowNames = rowNames;
 		WindowDimensionlessFactors.colNames = colNames;
 		
+		lengthVMatrix = vMatrix.length;
+		widthVMatrix = vMatrix[0].length;
+		
+		for(int i = 0; i < colNames.length; i++ )
+		System.out.println("++++++++++++++++++++++++++++++++++++"+colNames[i]);
+		
 		minV = new String[minMax.length];
 		maxV = new String[minMax.length];
 		for (int i = 0; i < minMax.length; i++) {

@@ -22,9 +22,11 @@ public class VMatrixControllerMain {
 		RCode code = new RCode();
 		code = sVM.SuggestVMatrixCode();
 		callerInstance.setCode(code);
+		
 		callerInstance.runAndReturnResultOnline(sVM
 				.getRunandReturnOnlineString());
 
+		
 	}
 
 	public String[] getVMatrixRowNames() {
