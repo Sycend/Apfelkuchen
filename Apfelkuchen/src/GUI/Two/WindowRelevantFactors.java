@@ -383,12 +383,17 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		p2.add(buttonRemoveCommandVariable);*/
 
-		//TODO Add fields Checks
+	
 		buttonNext = new JButton(Util.getInstance().getStringFromXML("buttonNext"));
 		buttonNext.setFocusPainted(false);
 		buttonNext.addActionListener(ae ->{
 				if (ae.getSource() == buttonNext) {
-					if (Util.getInstance().fieldsStringCheck(textFieldAbbreviation, "labelAbbr") != true) {
+					if(checkFields==false){
+						return;
+					}
+					//This code can be used for checking of fields with regular exception
+					
+					/*if (Util.getInstance().fieldsStringCheck(textFieldAbbreviation, "labelAbbr") != true) {
 						return;
 					}
 					if (Util.getInstance().dimensionFieldCheck(textFieldUnit, "labelUnit") != true) {
@@ -440,7 +445,7 @@ public class WindowRelevantFactors extends JFrame {
 					}
 					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
 						return;
-					}
+					}*/
 					//Util.getInstance().persistentSaveRelevantFactors();
 					Menu.WRF.setVisible(false);
 
@@ -557,6 +562,27 @@ public class WindowRelevantFactors extends JFrame {
 		// ---- JTextField Abbreviation ----
 		textFieldAbbreviationTemp.setColumns(3);
 		textFieldAbbreviationTemp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+		textFieldAbbreviationTemp.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				checkFields=Util.getInstance().abrevFieldCheck(textFieldAbbreviationTemp);
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				checkFields=Util.getInstance().abrevFieldCheck(textFieldAbbreviationTemp);
+				
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				checkFields=Util.getInstance().abrevFieldCheck(textFieldAbbreviationTemp);
+				
+			}
+		});
 		contentPanel.add(textFieldAbbreviationTemp, new GridBagConstraints(1, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 		textFieldAbbreviation.add(textFieldAbbreviationTemp);
 
@@ -666,6 +692,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void removeUpdate(DocumentEvent e) {
 				checkFields = Util.getInstance().unitFieldCheck(textFieldUnitTemp);
 				
+				
 			}
 			
 			@Override
@@ -692,7 +719,7 @@ public class WindowRelevantFactors extends JFrame {
 			// note: statechanged is triggered on persistentRestore
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp);
+				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
 				System.out.println("insertUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -701,7 +728,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp);
+				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
 				System.out.println("removeUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -709,7 +736,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldLowTemp);
+				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
 				System.out.println("changedUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -717,7 +744,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			public void doComboboxCheck() {
 				if (comboBoxRoleTemp.getSelectedItem() == "constant") {
-					textFieldHighTemp.setText(textFieldLowTemp.getText());
+					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
 					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
 				}
 			}
@@ -736,7 +763,8 @@ public class WindowRelevantFactors extends JFrame {
 			public void insertUpdate(DocumentEvent e) {
 				System.out.println("insertUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp);
+					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldHighTemp, textFieldLowTemp);
+					
 
 				}
 				doSICalculationHigh();
@@ -746,7 +774,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void removeUpdate(DocumentEvent e) {
 				System.out.println("removeUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp);
+					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldHighTemp, textFieldLowTemp);
 
 				}
 				doSICalculationHigh();
@@ -756,7 +784,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 				System.out.println("changedUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldHighTemp);
+					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldHighTemp, textFieldLowTemp);
 
 				}
 				doSICalculationHigh();
@@ -953,19 +981,19 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSILowTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldResultSILowTemp);
+				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSILowTemp, textFieldResultSIHighTemp);
 
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldResultSILowTemp);
+				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSILowTemp, textFieldResultSIHighTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().fieldsCheck(textFieldCandTemp);
+				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSILowTemp, textFieldResultSIHighTemp);
 			}
 		});
 
@@ -980,7 +1008,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
+					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSIHighTemp, textFieldResultSILowTemp);
 
 				}
 			}
@@ -988,7 +1016,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
+					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSIHighTemp, textFieldResultSILowTemp);
 
 				}
 			}
@@ -996,7 +1024,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
+					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSIHighTemp, textFieldResultSILowTemp);
 
 				}
 			}

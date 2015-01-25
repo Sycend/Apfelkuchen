@@ -74,10 +74,10 @@ public class Util {
 	}
 
 	/**
-	 * This method is used to perform a persistent save, that means
-	 * that this method takes ALL THE TEXTFIELDS from WindowRelevantFactors
-	 * and puts them into a container Arraylist which is then written into
-	 * a tmp file also the combobox as well
+	 * This method is used to perform a persistent save, that means that this
+	 * method takes ALL THE TEXTFIELDS from WindowRelevantFactors and puts them
+	 * into a container Arraylist which is then written into a tmp file also the
+	 * combobox as well
 	 * 
 	 */
 	protected void persistentSaveRelevantFactors() {
@@ -111,11 +111,14 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * This method restores ALL THE TEXTFIELDS and also the combobox from WindowRelevantFactors.
-	 * The Objects are first read into a Temp Object and then drawn to the WRF Object.
-	 * @param WRF Object which is drawn to
+	 * This method restores ALL THE TEXTFIELDS and also the combobox from
+	 * WindowRelevantFactors. The Objects are first read into a Temp Object and
+	 * then drawn to the WRF Object.
+	 * 
+	 * @param WRF
+	 *            Object which is drawn to
 	 */
 	protected void restorePersistentRelevantFactors(WindowRelevantFactors WRF) {
 		ArrayList<ArrayList<JTextField>> textFieldsContainer = new ArrayList<ArrayList<JTextField>>();
@@ -126,7 +129,7 @@ public class Util {
 			comboBoxRoleTmp = (ArrayList<JComboBox<String>>) input.readObject();
 			input.close();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, Util.getInstance().RELEVANTFACTORS_FILENAME+" Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, Util.getInstance().RELEVANTFACTORS_FILENAME + " Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace();
 		}
 		if (textFieldsContainer.size() > 0) {
@@ -134,31 +137,32 @@ public class Util {
 			for (int i = 0; i < textFieldsContainer.get(0).size(); i++) {
 				row++;
 				WRF.newFactor();
-				WindowRelevantFactors.textFieldName.get(row-1).setText(textFieldsContainer.get(0).get(i).getText()); //i
-				WindowRelevantFactors.textFieldAbbreviation.get(row-1).setText(textFieldsContainer.get(1).get(i).getText());
-				WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(comboBoxRoleTmp.get(i).getSelectedIndex());
-				WindowRelevantFactors.textFieldDimension.get(row-1).setText(textFieldsContainer.get(2).get(i).getText());
-				WindowRelevantFactors.textFieldUnit.get(row-1).setText(textFieldsContainer.get(3).get(i).getText());
-				WindowRelevantFactors.textFieldLow.get(row-1).setText(textFieldsContainer.get(4).get(i).getText());
-				WindowRelevantFactors.textFieldHigh.get(row-1).setText(textFieldsContainer.get(5).get(i).getText());
-				WindowRelevantFactors.textFieldM.get(row-1).setText(textFieldsContainer.get(6).get(i).getText());
-				WindowRelevantFactors.textFieldK.get(row-1).setText(textFieldsContainer.get(7).get(i).getText());
-				WindowRelevantFactors.textFieldS.get(row-1).setText(textFieldsContainer.get(8).get(i).getText());
-				WindowRelevantFactors.textFieldKel.get(row-1).setText(textFieldsContainer.get(9).get(i).getText());
-				WindowRelevantFactors.textFieldMol.get(row-1).setText(textFieldsContainer.get(10).get(i).getText());
-				WindowRelevantFactors.textFieldAmp.get(row-1).setText(textFieldsContainer.get(11).get(i).getText());
-				WindowRelevantFactors.textFieldCand.get(row-1).setText(textFieldsContainer.get(12).get(i).getText());
-				WindowRelevantFactors.textFieldResultSILow.get(row-1).setText(textFieldsContainer.get(13).get(i).getText());
-				WindowRelevantFactors.textFieldResultSIHigh.get(row-1).setText(textFieldsContainer.get(14).get(i).getText());
+				WindowRelevantFactors.textFieldName.get(row - 1).setText(textFieldsContainer.get(0).get(i).getText()); // i
+				WindowRelevantFactors.textFieldAbbreviation.get(row - 1).setText(textFieldsContainer.get(1).get(i).getText());
+				WindowRelevantFactors.comboBoxRole.get(row - 1).setSelectedIndex(comboBoxRoleTmp.get(i).getSelectedIndex());
+				WindowRelevantFactors.textFieldDimension.get(row - 1).setText(textFieldsContainer.get(2).get(i).getText());
+				WindowRelevantFactors.textFieldUnit.get(row - 1).setText(textFieldsContainer.get(3).get(i).getText());
+				WindowRelevantFactors.textFieldLow.get(row - 1).setText(textFieldsContainer.get(4).get(i).getText());
+				WindowRelevantFactors.textFieldHigh.get(row - 1).setText(textFieldsContainer.get(5).get(i).getText());
+				WindowRelevantFactors.textFieldM.get(row - 1).setText(textFieldsContainer.get(6).get(i).getText());
+				WindowRelevantFactors.textFieldK.get(row - 1).setText(textFieldsContainer.get(7).get(i).getText());
+				WindowRelevantFactors.textFieldS.get(row - 1).setText(textFieldsContainer.get(8).get(i).getText());
+				WindowRelevantFactors.textFieldKel.get(row - 1).setText(textFieldsContainer.get(9).get(i).getText());
+				WindowRelevantFactors.textFieldMol.get(row - 1).setText(textFieldsContainer.get(10).get(i).getText());
+				WindowRelevantFactors.textFieldAmp.get(row - 1).setText(textFieldsContainer.get(11).get(i).getText());
+				WindowRelevantFactors.textFieldCand.get(row - 1).setText(textFieldsContainer.get(12).get(i).getText());
+				WindowRelevantFactors.textFieldResultSILow.get(row - 1).setText(textFieldsContainer.get(13).get(i).getText());
+				WindowRelevantFactors.textFieldResultSIHigh.get(row - 1).setText(textFieldsContainer.get(14).get(i).getText());
 				WRF.contentPanel.revalidate();
 				WRF.contentPanel.repaint();
 			}
 		}
 	}
-	
+
 	/**
-	 * This method performs a persistend save of Objects from WindowDimensionlessFactors
-	 * that means that these Objects are written into a tmp file.
+	 * This method performs a persistend save of Objects from
+	 * WindowDimensionlessFactors that means that these Objects are written into
+	 * a tmp file.
 	 */
 	protected void persistentSaveDimensionlessFactors() {
 		if (new File(DIMENSIONLESSFACTORS_FILENAME).exists()) {
@@ -179,10 +183,10 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * This method restores Objects from WindowDimensionlessFactors
-	 * from a tmp file.
+	 * This method restores Objects from WindowDimensionlessFactors from a tmp
+	 * file.
 	 */
 	protected void restorePersistentDimensionlessFactors() {
 		try {
@@ -195,7 +199,7 @@ public class Util {
 			WindowDimensionlessFactors.dimensionlessControlSI = (String[][]) input.readObject();
 			input.close();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, Util.getInstance().DIMENSIONLESSFACTORS_FILENAME+" Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, Util.getInstance().DIMENSIONLESSFACTORS_FILENAME + " Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace();
 		}
 	}
@@ -214,7 +218,8 @@ public class Util {
 	}
 
 	/**
-	 * @param A String[] Array that contains duplicates
+	 * @param A
+	 *            String[] Array that contains duplicates
 	 * @return A String[] Array that contains no more duplicates
 	 */
 	protected String[] removeDuplicates(String[] containsDuplicates) {
@@ -241,39 +246,48 @@ public class Util {
 		String[] tmp = new String[tmp0.size()];
 		return tmp0.toArray(tmp);
 	}
-/**
- * The method check all fields for the following condition: letters or numbers and length
- * @param fields (ArrayList of JTextFiled)
- * @param label
- * @return true - field is correct
- */
-	protected boolean fieldsStringCheck(ArrayList<JTextField> fields, String label) {
+
+	/**
+	 * The method check all fields for the following condition: letters or
+	 * numbers and length
+	 * 
+	 * @param fields
+	 *            (ArrayList of JTextFiled)
+	 * @param label
+	 * @return true - field is correct
+	 */
+	protected boolean abrevFieldCheck(JTextField fields) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
-		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,8}") != true) {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				fields.get(i).setBackground(Color.WHITE);
-				return false;
-			}
+
+		if (fields.getText().matches("[a-zA-Z0-9]{1,8}") == false) {
+			fields.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+			fields.setBackground(bgColor);
+			return false;
+		} else {
+			// JOptionPane.showMessageDialog(new JFrame(), message + " " +
+			// getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+			fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			fields.setBackground(Color.WHITE);
+
+			return true;
 		}
-		return true;
+
 	}
-/**
- * check the field for the following condition : minus, numbers, point,  and constant e
- * the constant e can be used only with the number
- * @param field
- * @return true - field is correct
- */
+
+	/**
+	 * check the field for the following condition : minus, numbers, point, and
+	 * constant e the constant e can be used only with the number
+	 * 
+	 * @param field
+	 * @return true - field is correct
+	 */
 	protected boolean fieldsCheck(JTextField field) {
 
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
 
-		if (field.getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == false) {
+		if (field.getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(E)?(e)?(-)?(\\d+)?") == false) {
 			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 			field.setBackground(bgColor);
 			return false;
@@ -284,38 +298,42 @@ public class Util {
 		}
 
 	}
-/**
- * check ArrayList of fields for the following constraints: letters, characters ^ or /, numbers
- * @param fields
- * @param label
- * @return
- */
-	protected boolean unitFieldCheck(ArrayList<JTextField> fields, String label) {
 
-		String message = getStringFromXML("errorTextDialog0");
-		String title = getStringFromXML("errorTitleDialog0");
-		
-		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
-				return false;
-			} else {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				fields.get(i).setBackground(Color.WHITE);
-
-			}
-		}
-		return true;
-	}
 	/**
-	 * check the field  for the following constraints: letters, characters ^ or /, numbers
+	 * check ArrayList of fields for the following constraints: letters,
+	 * characters ^ or /, numbers
+	 * 
+	 * @param fields
+	 * @param label
+	 * @return
+	 */
+	/*
+	 * Now we don't use this code. protected boolean
+	 * unitFieldCheck(ArrayList<JTextField> fields, String label) {
+	 * 
+	 * String message = getStringFromXML("errorTextDialog0"); String title =
+	 * getStringFromXML("errorTitleDialog0");
+	 * 
+	 * for (int i = 0; i < fields.size(); i++) { if
+	 * (fields.get(i).getText().matches(
+	 * "[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?"
+	 * ) == false) { fields.get(i).setBorder(BorderFactory.createMatteBorder(2,
+	 * 2, 2, 2, Color.red)); fields.get(i).setBackground(bgColor);
+	 * JOptionPane.showMessageDialog(new JFrame(), message + " " +
+	 * getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE); return false;
+	 * } else { fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1,
+	 * 1, Color.BLACK)); fields.get(i).setBackground(Color.WHITE);
+	 * 
+	 * } } return true; }
+	 */
+	/**
+	 * check the field for the following constraints: letters, characters ^ or
+	 * /, numbers
+	 * 
 	 * @param field
 	 * @return
 	 */
 	protected boolean unitFieldCheck(JTextField field) {
-
 
 		if (field.getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
 			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
@@ -328,144 +346,118 @@ public class Util {
 		}
 
 	}
+
 	/**
 	 * check the field for the following constraint: letters and length 20
+	 * 
 	 * @param field
 	 * @return
 	 */
 	protected boolean dimensionFieldCheck(JTextField field) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
-		
-			if (field.getText().matches("[a-zA-Z]{1,20}") != true) {
-				field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-				field.setBackground(bgColor);
-				return false;
-			}else{	
-				field.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				field.setBackground(Color.WHITE);
-				return true;
-			}			
-	}
-/**
- * check ArrayList of fields for the following constraint: letters and length 20
- * @param fields
- * @param label
- * @return
- */
-	protected boolean dimensionFieldCheck(ArrayList<JTextField> fields, String label) {
-		String message = getStringFromXML("errorTextDialog0");
-		String title = getStringFromXML("errorTitleDialog0");
-		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getText().matches("[a-zA-Z]{1,20}") != true) {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				fields.get(i).setBackground(Color.WHITE);
-				return false;
-			}
+
+		if (field.getText().matches("[a-zA-Z]{1,20}") != true) {
+			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+			field.setBackground(bgColor);
+			return false;
+		} else {
+			field.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			field.setBackground(Color.WHITE);
+			return true;
 		}
-		return true;
 	}
-/**
- * check AttayList of fields for the following constraints: letters, characters ^ or /, numbers
- * @param fields
- * @param label
- * @return
- */
-	protected boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
-		String message = getStringFromXML("errorTextDialog0");
-		String title = getStringFromXML("errorTitleDialog0");
-		for (int i = 0; i < fields.size(); i++) {
 
-			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == true) {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				fields.get(i).setBackground(Color.WHITE);
-				return true;
-			}else{
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
-			}
-		}
-
-		return false;
-
-	}
-	
 	/**
-	 * check ArrayList of  SiMin/SiMax and Min/Max fields for the following constraints:
-	 * if comboBox == constant min=max;
-	 * max>min;
-	 * min>0;
-	 * max>0;
+	 * check ArrayList of fields for the following constraint: letters and
+	 * length 20
+	 * 
+	 * @param fields
+	 * @param label
+	 * @return
+	 */
+	/*
+	 * Now we don't use this code. protected boolean
+	 * dimensionFieldCheck(ArrayList<JTextField> fields, String label) { String
+	 * message = getStringFromXML("errorTextDialog0"); String title =
+	 * getStringFromXML("errorTitleDialog0"); for (int i = 0; i < fields.size();
+	 * i++) { if (fields.get(i).getText().matches("[a-zA-Z]{1,20}") != true) {
+	 * fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,
+	 * Color.red)); fields.get(i).setBackground(bgColor);
+	 * JOptionPane.showMessageDialog(new JFrame(), message + " " +
+	 * getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+	 * fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,
+	 * Color.BLACK)); fields.get(i).setBackground(Color.WHITE); return false; }
+	 * } return true; }
+	 */
+	/**
+	 * check AttayList of fields for the following constraints: letters,
+	 * characters ^ or /, numbers
+	 * 
+	 * @param fields
+	 * @param label
+	 * @return
+	 */
+	/*
+	 * Now we don't use this code. protected boolean
+	 * fieldsArrayCheck(ArrayList<JTextField> fields, String label) { String
+	 * message = getStringFromXML("errorTextDialog0"); String title =
+	 * getStringFromXML("errorTitleDialog0"); for (int i = 0; i < fields.size();
+	 * i++) {
+	 * 
+	 * if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?")
+	 * == true) { fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1,
+	 * 1, 1, Color.BLACK)); fields.get(i).setBackground(Color.WHITE); return
+	 * true; }else{ fields.get(i).setBorder(BorderFactory.createMatteBorder(2,
+	 * 2, 2, 2, Color.red)); fields.get(i).setBackground(bgColor);
+	 * JOptionPane.showMessageDialog(new JFrame(), message + " " +
+	 * getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE); } }
+	 * 
+	 * return false;
+	 * 
+	 * }
+	 */
+
+	/**
+	 * check ArrayList of Min/Max and Min/Max fields for the following
+	 * constraints:  min!=max; min>0, max>0, numbers
 	 * SIMin!=SiMax;
-	 * @param siMaxFields
+	 * 
+	 * @param fieldMin
 	 * @param siMinFields
 	 * @return
 	 */
-	protected boolean SIMinMaxValuesCheck(ArrayList<JTextField> siMaxFields, ArrayList<JTextField> siMinFields) {
+	protected boolean MinMaxValuesCheck(JTextField fieldMin, JTextField fieldMax) {
 
-		String message = getStringFromXML("errorTextDialog1");
-		String title = getStringFromXML("errorTitleDialog0");
-		for (int i = 0; i < siMaxFields.size(); i++) {
+		if (fieldMin.getText().matches("\\d+([.]{1})?(\\d+)?(E)?(e)?(-)?(\\d+)?") == false) {
+			fieldMin.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+			fieldMin.setBackground(bgColor);
+			return false;
 
-			if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
-				if (Double.parseDouble(siMaxFields.get(i).getText()) == Double.parseDouble(siMinFields.get(i).getText())) {
-
-					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-					siMaxFields.get(i).setBackground(bgColor);
-					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-					siMinFields.get(i).setBackground(bgColor);
-					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
-
-					return false;
-				} else {
-
-					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-					siMaxFields.get(i).setBackground(Color.WHITE);
-					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-					siMinFields.get(i).setBackground(Color.WHITE);
-				}
-
-				if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
-					if (Double.parseDouble(siMaxFields.get(i).getText()) < 0) {
-						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-						siMaxFields.get(i).setBackground(bgColor);
-						JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
-
+		} else {
+			if (!fieldMax.getText().equals("")) {
+				
+					if (fieldMax.getText().equals(fieldMin.getText())) {
+						fieldMin.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+						fieldMin.setBackground(bgColor);
+						fieldMax.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+						fieldMax.setBackground(bgColor);
 						return false;
 					} else {
-						siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+						fieldMin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+						fieldMin.setBackground(Color.WHITE);
+						fieldMax.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+						fieldMax.setBackground(Color.WHITE);
+						return true;
 					}
 				}
-				if (Double.parseDouble(siMinFields.get(i).getText()) < 0) {
-					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-					siMinFields.get(i).setBackground(bgColor);
-					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
-					return false;
-				} else {
-					siMinFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-					siMinFields.get(i).setBackground(Color.WHITE);
-				}
-
-				if (Double.parseDouble(siMaxFields.get(i).getText()) < Double.parseDouble(siMinFields.get(i).getText())) {
-					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-					siMaxFields.get(i).setBackground(bgColor);
-					JOptionPane.showMessageDialog(new JFrame(), message, title, JOptionPane.ERROR_MESSAGE);
-					return false;
-				} else {
-
-					siMaxFields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-					siMaxFields.get(i).setBackground(Color.WHITE);
-				}
-
 			}
-
+			fieldMin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			fieldMin.setBackground(Color.WHITE);
+			return true;
 		}
-		return true;
-	}
+
+	
 
 	protected String getStringFromXML(String nodeName) {
 		final String fileName = "labels.xml";
@@ -488,12 +480,13 @@ public class Util {
 	public String getSuggestionInput() {
 		return inputFieldSug;
 	}
-	
+
 	/**
-	 * This method writes a RawUnits Object into a File, which is
-	 * converted from the String Inputfile, using the csv ; delimiter separated format
+	 * This method writes a RawUnits Object into a File, which is converted from
+	 * the String Inputfile, using the csv ; delimiter separated format
 	 * 
-	 * @param Inputfile A String which will be turned into a file and then written to
+	 * @param Inputfile
+	 *            A String which will be turned into a file and then written to
 	 * @throws IOException
 	 *             if it can't access the file
 	 * @throws IOException
@@ -543,12 +536,14 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method writes the unitsArray ArrayList into a File, which is
-	 * converted from the String Inputfile, using the csv ; delimiter separated format
+	 * converted from the String Inputfile, using the csv ; delimiter separated
+	 * format
 	 * 
-	 * @param Inputfile A String which will be turned into a file and then written to
+	 * @param Inputfile
+	 *            A String which will be turned into a file and then written to
 	 * @throws IOException
 	 *             if it can't access the file
 	 * @throws IOException
@@ -557,7 +552,7 @@ public class Util {
 	 *             if it can't close the FileWriter
 	 */
 	protected void writeCSV(String Inputfile) {
-		//note: we overwrite the Inputfile
+		// note: we overwrite the Inputfile
 		BufferedWriter fw = null;
 		Writer writer = null;
 		try {
@@ -593,7 +588,7 @@ public class Util {
 				fw.append(";");
 				fw.append("" + String.valueOf(unitsArray.get(i).getGradient()).replace(".", ","));
 				fw.newLine();
-			}			
+			}
 		} catch (IOException e) {
 			System.out.println("Can't write to file.");
 			e.printStackTrace();
@@ -606,15 +601,16 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method reads a String Inputfile line by line via the readFile method
-	 * and proceeds to split every line at the ; delimiter and puts those
-	 * values in a temp RawUnits Object which is then put in the unitsArray
-	 * ArrayList. This method adds a * to the Units, since it is assumed that
-	 * the Units are from a user csv file and users are retards.
+	 * and proceeds to split every line at the ; delimiter and puts those values
+	 * in a temp RawUnits Object which is then put in the unitsArray ArrayList.
+	 * This method adds a * to the Units, since it is assumed that the Units are
+	 * from a user csv file and users are retards.
 	 * 
-	 * @param Inputfile A String that will be turned into a File and read
+	 * @param Inputfile
+	 *            A String that will be turned into a File and read
 	 */
 	protected void readUserCSV(String Inputfile) {
 		System.out.println("Reading: " + Inputfile);
@@ -624,21 +620,22 @@ public class Util {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//Starts at 1 so that the first row is ignored
+
+		// Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
+				// dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();
 				String[] parts = content.get(i).split(";");
-				if ((count+1) != 11){
-					System.out.println("Error in line: "+(i+1));
-					System.out.println("count: "+(count+1));
+				if ((count + 1) != 11) {
+					System.out.println("Error in line: " + (i + 1));
+					System.out.println("count: " + (count + 1));
 					System.out.println("----");
 				}
-				
-				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1]+"*", Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
+
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1] + "*", Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]),
+						Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
 				unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -646,14 +643,14 @@ public class Util {
 		}
 		System.out.println("Done reading: " + Inputfile);
 	}
-	
+
 	/**
 	 * This method reads a String Inputfile line by line via the readFile method
-	 * and proceeds to split every line at the ; delimiter and puts those
-	 * values in a temp RawUnits Object which is then put in the unitsArray
-	 * ArrayList
+	 * and proceeds to split every line at the ; delimiter and puts those values
+	 * in a temp RawUnits Object which is then put in the unitsArray ArrayList
 	 * 
-	 * @param Inputfile A String that will be turned into a File and read
+	 * @param Inputfile
+	 *            A String that will be turned into a File and read
 	 */
 	protected void readCSV(String Inputfile) {
 		System.out.println("Reading: " + Inputfile);
@@ -663,21 +660,22 @@ public class Util {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//Starts at 1 so that the first row is ignored
+
+		// Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
+				// dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();
 				String[] parts = content.get(i).split(";");
-				if ((count+1) != 11){
-					System.out.println("Error in line: "+(i+1));
-					System.out.println("count: "+(count+1));
+				if ((count + 1) != 11) {
+					System.out.println("Error in line: " + (i + 1));
+					System.out.println("count: " + (count + 1));
 					System.out.println("----");
 				}
-				
-				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9].replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
+
+				RawUnits tempRawUnits = new RawUnits(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), Double.parseDouble(parts[9]
+						.replace(",", ".")), Double.parseDouble(parts[10].replace(",", ".")));
 				unitsArray.add(tempRawUnits);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -685,16 +683,18 @@ public class Util {
 		}
 		System.out.println("Done reading: " + Inputfile);
 	}
-	
+
 	/**
 	 * This method reads a String Inputfile line by line via the readFile method
 	 * and proceeds to split every line at the ; delimiter, it then creates
 	 * number of rows of the (Inputfile -1) and draws them on the WRF Object
-	 * that is given to the Method. It proceeds to fill those drawn rows 
-	 * with values given from the Inputfile.
+	 * that is given to the Method. It proceeds to fill those drawn rows with
+	 * values given from the Inputfile.
 	 * 
-	 * @param Inputfile A String that will be turned into a File and read
-	 * @param WRF The WindowRelevantFactors Object that will be drawn on
+	 * @param Inputfile
+	 *            A String that will be turned into a File and read
+	 * @param WRF
+	 *            The WindowRelevantFactors Object that will be drawn on
 	 */
 	protected void readTestCaseCSV(String Inputfile, WindowRelevantFactors WRF) {
 		System.out.println("Reading: " + Inputfile);
@@ -702,56 +702,56 @@ public class Util {
 		try {
 			content = readFile(Inputfile);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, Inputfile+" Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, Inputfile + " Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace();
 		}
-		
-		//Starts at 1 so that the first row is ignored
+
+		// Starts at 1 so that the first row is ignored
 		for (int i = 1; i < content.size(); i++) {
 			try {
-				//name;abbr;role;dimension;unit;low;high;m;k;s;kel;mol;amp;cand;SI-Low;SI-High
+				// name;abbr;role;dimension;unit;low;high;m;k;s;kel;mol;amp;cand;SI-Low;SI-High
 				String test = content.get(i);
 				int count = test.length() - test.replace(";", "").length();
 				String[] parts = content.get(i).split(";");
-				
+
 				if ((count + 1) != 16) {
 					System.out.println("Error in line: " + (i + 1));
 					System.out.println("count: " + (count + 1));
 					System.out.println("----");
 				}
-				
+
 				row++;
 				WRF.newFactor();
-				WindowRelevantFactors.textFieldName.get(row-1).setText(parts[0]);
-				WindowRelevantFactors.textFieldAbbreviation.get(row-1).setText(parts[1]);
-				
+				WindowRelevantFactors.textFieldName.get(row - 1).setText(parts[0]);
+				WindowRelevantFactors.textFieldAbbreviation.get(row - 1).setText(parts[1]);
+
 				if (parts[2].equals("controlled")) {
-					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(0);
+					WindowRelevantFactors.comboBoxRole.get(row - 1).setSelectedIndex(0);
 				}
 				if (parts[2].equals("constant")) {
-					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(1);
-				}			
+					WindowRelevantFactors.comboBoxRole.get(row - 1).setSelectedIndex(1);
+				}
 				if (parts[2].equals("scale-up")) {
-					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(2);
+					WindowRelevantFactors.comboBoxRole.get(row - 1).setSelectedIndex(2);
 				}
 				if (parts[2].equals("dependent")) {
-					WindowRelevantFactors.comboBoxRole.get(row-1).setSelectedIndex(3);
+					WindowRelevantFactors.comboBoxRole.get(row - 1).setSelectedIndex(3);
 				}
-				
-				WindowRelevantFactors.textFieldDimension.get(row-1).setText(parts[3]);
-				WindowRelevantFactors.textFieldUnit.get(row-1).setText(parts[4]);
-				WindowRelevantFactors.textFieldLow.get(row-1).setText(parts[5]);
-				WindowRelevantFactors.textFieldHigh.get(row-1).setText(parts[6]);
-				WindowRelevantFactors.textFieldM.get(row-1).setText(parts[7]);
-				WindowRelevantFactors.textFieldK.get(row-1).setText(parts[8]);
-				WindowRelevantFactors.textFieldS.get(row-1).setText(parts[9]);
-				WindowRelevantFactors.textFieldKel.get(row-1).setText(parts[10]);
-				WindowRelevantFactors.textFieldMol.get(row-1).setText(parts[11]);
-				WindowRelevantFactors.textFieldAmp.get(row-1).setText(parts[12]);
-				WindowRelevantFactors.textFieldCand.get(row-1).setText(parts[13]);
-				WindowRelevantFactors.textFieldResultSILow.get(row-1).setText(parts[14]);
-				WindowRelevantFactors.textFieldResultSIHigh.get(row-1).setText(parts[15]);
-				
+
+				WindowRelevantFactors.textFieldDimension.get(row - 1).setText(parts[3]);
+				WindowRelevantFactors.textFieldUnit.get(row - 1).setText(parts[4]);
+				WindowRelevantFactors.textFieldLow.get(row - 1).setText(parts[5]);
+				WindowRelevantFactors.textFieldHigh.get(row - 1).setText(parts[6]);
+				WindowRelevantFactors.textFieldM.get(row - 1).setText(parts[7]);
+				WindowRelevantFactors.textFieldK.get(row - 1).setText(parts[8]);
+				WindowRelevantFactors.textFieldS.get(row - 1).setText(parts[9]);
+				WindowRelevantFactors.textFieldKel.get(row - 1).setText(parts[10]);
+				WindowRelevantFactors.textFieldMol.get(row - 1).setText(parts[11]);
+				WindowRelevantFactors.textFieldAmp.get(row - 1).setText(parts[12]);
+				WindowRelevantFactors.textFieldCand.get(row - 1).setText(parts[13]);
+				WindowRelevantFactors.textFieldResultSILow.get(row - 1).setText(parts[14]);
+				WindowRelevantFactors.textFieldResultSIHigh.get(row - 1).setText(parts[15]);
+
 				WRF.contentPanel.revalidate();
 				WRF.contentPanel.repaint();
 
@@ -761,16 +761,17 @@ public class Util {
 		}
 		System.out.println("Done reading: " + Inputfile);
 	}
-	
+
 	/**
-	 * This method takes a String as Inputfile and converts it into a File and reads it
-	 * line by line and returns an Arraylist containing every line that has been read from the
-	 * File located in Inputfile String
+	 * This method takes a String as Inputfile and converts it into a File and
+	 * reads it line by line and returns an Arraylist containing every line that
+	 * has been read from the File located in Inputfile String
 	 * 
-	 * @param Inputfile A String that will be turned into a File and read line by line
+	 * @param Inputfile
+	 *            A String that will be turned into a File and read line by line
 	 * @return an Arraylist containing every line that has been read from the
 	 *         file located in Inputfile String
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private ArrayList<String> readFile(String Inputfile) throws Exception {
 		ArrayList<String> tmp = new ArrayList<String>();
@@ -785,10 +786,10 @@ public class Util {
 			}
 			br.close();
 		} else {
-			JOptionPane.showMessageDialog(null, file.getAbsoluteFile()+" Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, file.getAbsoluteFile() + " Konnte nicht gefunden werden.", "Warnung", JOptionPane.WARNING_MESSAGE);
 			System.out.println("Could not find: " + file.getAbsolutePath());
 		}
 		return tmp;
 	}
-	
+
 }// end Util Class
