@@ -76,7 +76,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		setSize(Util.getInstance().currentWidth, Util.getInstance().currentHeight);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle(Util.getInstance().dataLabels("title"));
+		setTitle(Util.getInstance().getStringFromXML("title"));
 		init();
 		setVisible(true);
 	}
@@ -90,7 +90,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		setSize(Util.getInstance().currentWidth, Util.getInstance().currentHeight);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle(Util.getInstance().dataLabels("title"));
+		setTitle(Util.getInstance().getStringFromXML("title"));
 		init();
 		setVisible(true);
 	}
@@ -513,7 +513,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		toggle.addActionListener(actionListener);
 		menuePanel.add(toggle);
 		
-		buttonBack = new JButton(Util.getInstance().dataLabels("buttonBack"));
+		buttonBack = new JButton(Util.getInstance().getStringFromXML("buttonBack"));
 		buttonBack.setFocusPainted(false);
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

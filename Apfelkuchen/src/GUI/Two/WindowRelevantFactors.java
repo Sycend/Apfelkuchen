@@ -85,7 +85,7 @@ public class WindowRelevantFactors extends JFrame {
 	protected static int countErrors = 0;
 
 	public WindowRelevantFactors() {
-		super(Util.getInstance().dataLabels("title"));
+		super(Util.getInstance().getStringFromXML("title"));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Util.getInstance().currentWidth, Util.getInstance().currentHeight);
 		
@@ -108,49 +108,49 @@ public class WindowRelevantFactors extends JFrame {
 		
 		// ---- label Name ----
 		labelName = new JLabel();
-		labelName.setText(Util.getInstance().dataLabels("labelName"));
+		labelName.setText(Util.getInstance().getStringFromXML("labelName"));
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelName.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
 
 		// ---- label Abbreviation ----
 		labelAbbreviation = new JLabel();
-		labelAbbreviation.setText(Util.getInstance().dataLabels("labelAbbr"));
+		labelAbbreviation.setText(Util.getInstance().getStringFromXML("labelAbbr"));
 		labelAbbreviation.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelAbbreviation.setHorizontalAlignment(SwingConstants.LEFT);
 		contentPanel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label Role ----
 		labelRole = new JLabel();
-		labelRole.setText(Util.getInstance().dataLabels("labelRole"));
+		labelRole.setText(Util.getInstance().getStringFromXML("labelRole"));
 		labelRole.setHorizontalAlignment(SwingConstants.CENTER);
 		labelRole.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelRole, new GridBagConstraints(2, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label Dimension ----
 		labelDimension = new JLabel();
-		labelDimension.setText(Util.getInstance().dataLabels("labelDimension"));
+		labelDimension.setText(Util.getInstance().getStringFromXML("labelDimension"));
 		labelDimension.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelDimension.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label Unit ----
 		labelUnit = new JLabel();
-		labelUnit.setText(Util.getInstance().dataLabels("labelUnit"));
+		labelUnit.setText(Util.getInstance().getStringFromXML("labelUnit"));
 		labelUnit.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelUnit.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 
 		// ---- label Low ----
 		labelLow = new JLabel();
-		labelLow.setText(Util.getInstance().dataLabels("labelLow"));
+		labelLow.setText(Util.getInstance().getStringFromXML("labelLow"));
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label High ----
 		labelHigh = new JLabel();
-		labelHigh.setText(Util.getInstance().dataLabels("labelHigh"));
+		labelHigh.setText(Util.getInstance().getStringFromXML("labelHigh"));
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -206,14 +206,14 @@ public class WindowRelevantFactors extends JFrame {
 
 		// ---- label SI Min ----
 		labelResultSIMin = new JLabel();
-		labelResultSIMin.setText(Util.getInstance().dataLabels("labelSIMin"));
+		labelResultSIMin.setText(Util.getInstance().getStringFromXML("labelSIMin"));
 		labelResultSIMin.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMin.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelResultSIMin, new GridBagConstraints(14, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 
 		// ---- label SI Max ----
 		labelResultSIMax = new JLabel();
-		labelResultSIMax.setText(Util.getInstance().dataLabels("labelSIMax"));
+		labelResultSIMax.setText(Util.getInstance().getStringFromXML("labelSIMax"));
 		labelResultSIMax.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMax.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelResultSIMax, new GridBagConstraints(15, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
@@ -254,7 +254,7 @@ public class WindowRelevantFactors extends JFrame {
 		jmb.add(jmHelp);
 		setJMenuBar(jmb);
 		
-		buttonNewFactor = new JButton(Util.getInstance().dataLabels("buttonNewFactor"));
+		buttonNewFactor = new JButton(Util.getInstance().getStringFromXML("buttonNewFactor"));
 		buttonNewFactor.setFocusPainted(false);
 		buttonNewFactor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -268,7 +268,7 @@ public class WindowRelevantFactors extends JFrame {
 		});
 		p2.add(buttonNewFactor);
 
-		buttonRemoveFactor = new JButton(Util.getInstance().dataLabels("buttonRemoveFactor"));
+		buttonRemoveFactor = new JButton(Util.getInstance().getStringFromXML("buttonRemoveFactor"));
 		buttonRemoveFactor.setFocusPainted(false);
 		buttonRemoveFactor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -384,7 +384,7 @@ public class WindowRelevantFactors extends JFrame {
 		p2.add(buttonRemoveCommandVariable);*/
 
 		//TODO Add fields Checks
-		buttonNext = new JButton(Util.getInstance().dataLabels("buttonNext"));
+		buttonNext = new JButton(Util.getInstance().getStringFromXML("buttonNext"));
 		buttonNext.setFocusPainted(false);
 		buttonNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -982,8 +982,8 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSIHigh.add(textFieldResultSIHighTemp);
 
 		// ---- buttonUpdateCSV ----
-		JButton buttonUpdateCSVTemp = new JButton(Util.getInstance().dataLabels("buttonUpdateCSV"));
-		buttonUpdateCSVTemp.setToolTipText(Util.getInstance().dataLabels("textOverUpdateCSV"));
+		JButton buttonUpdateCSVTemp = new JButton(Util.getInstance().getStringFromXML("buttonUpdateCSV"));
+		buttonUpdateCSVTemp.setToolTipText(Util.getInstance().getStringFromXML("textOverUpdateCSV"));
 		buttonUpdateCSVTemp.setFocusPainted(false);
 		buttonUpdateCSVTemp.setEnabled(false);
 		buttonUpdateCSVTemp.setMinimumSize(getPreferredSize());

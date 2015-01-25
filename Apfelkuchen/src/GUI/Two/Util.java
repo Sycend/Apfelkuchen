@@ -74,6 +74,10 @@ public class Util {
 		return utilInstance;
 	}
 
+	/**
+	 * This method SoonTM
+	 * 
+	 */
 	protected void persistentSaveRelevantFactors() {
 		if (new File(RELEVANTFACTORS_FILENAME).exists()) {
 			new File(RELEVANTFACTORS_FILENAME).delete();
@@ -105,7 +109,11 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * This method SoonTM
+	 * @param WRF 
+	 */
 	protected void restorePersistentRelevantFactors(WindowRelevantFactors WRF) {
 		ArrayList<ArrayList<JTextField>> textFieldsContainer = new ArrayList<ArrayList<JTextField>>();
 		ArrayList<JComboBox<String>> comboBoxRoleTmp = new ArrayList<JComboBox<String>>();
@@ -144,7 +152,10 @@ public class Util {
 			}
 		}
 	}
-
+	
+	/**
+	 * This method SoonTM
+	 */
 	protected void persistentSaveDimensionlessFactors() {
 		if (new File(DIMENSIONLESSFACTORS_FILENAME).exists()) {
 			new File(DIMENSIONLESSFACTORS_FILENAME).delete();
@@ -164,7 +175,10 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * This method SoonTM
+	 */
 	protected void restorePersistentDimensionlessFactors() {
 		try {
 			ObjectInputStream input = new ObjectInputStream(new FileInputStream(DIMENSIONLESSFACTORS_FILENAME));
@@ -224,13 +238,13 @@ public class Util {
 	}
 
 	protected boolean fieldsStringCheck(ArrayList<JTextField> fields, String label) {
-		String message = dataLabels("errorTextDialog0");
-		String title = dataLabels("errorTitleDialog0");
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
 			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,12}") != true) {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				fields.get(i).setBackground(Color.WHITE);
 				return false;
@@ -241,8 +255,8 @@ public class Util {
 
 	protected boolean fieldsCheck(JTextField fields, String label) {
 
-		String message = dataLabels("errorTextDialog0");
-		String title = dataLabels("errorTitleDialog0");
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
 
 		if (fields.getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?") == false) {
 			fields.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
@@ -289,8 +303,8 @@ public class Util {
 
 	protected boolean SIMinMaxValuesCheck(ArrayList<JTextField> siMaxFields, ArrayList<JTextField> siMinFields) {
 
-		String message = dataLabels("errorTextDialog1");
-		String title = dataLabels("errorTitleDialog0");
+		String message = getStringFromXML("errorTextDialog1");
+		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < siMaxFields.size(); i++) {
 
 			if (!WindowRelevantFactors.comboBoxRole.get(i).getSelectedItem().equals("constant")) {
@@ -349,7 +363,7 @@ public class Util {
 		return true;
 	}
 
-	protected String dataLabels(String nodeName) {
+	protected String getStringFromXML(String nodeName) {
 		final String fileName = "labels.xml";
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -437,7 +451,7 @@ public class Util {
 	/**
 	 * This method reads a String Inputfile line by line via the readFile method
 	 * and proceeds to split every line at the ; delimiter and puts those
-	 * values in a temp RawUnits Class which is then put in the unitsArray
+	 * values in a temp RawUnits Object which is then put in the unitsArray
 	 * ArrayList
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read
@@ -475,10 +489,13 @@ public class Util {
 	
 	/**
 	 * This method reads a String Inputfile line by line via the readFile method
-	 * and proceeds to split every line at the ; delimiter 
+	 * and proceeds to split every line at the ; delimiter, it then creates
+	 * number of rows of the (Inputfile -1) and draws them on the WRF Object
+	 * that is given to the Method. It proceeds to fill those drawn rows 
+	 * with values given from the Inputfile.
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read
-	 * @param WRF 
+	 * @param WRF The WindowRelevantFactors Object that will be drawn on
 	 */
 	protected void readTestCaseCSV(String Inputfile, WindowRelevantFactors WRF) {
 		System.out.println("Reading: " + Inputfile);
