@@ -37,7 +37,7 @@ import org.xml.sax.SAXException;
  * Util Singleton
  * 
  * @author Dominik Hofmann, Yuri Kalinin, Mark Leibmann
- * @version 6.6.6
+ * @version 6.6.7
  */
 public class Util {
 	protected int row = 0;
@@ -243,12 +243,17 @@ public class Util {
 		String[] tmp = new String[tmp0.size()];
 		return tmp0.toArray(tmp);
 	}
-
+/**
+ * The method check all fields for the following condition: letters or numbers and length
+ * @param fields (ArrayList of JTextFiled)
+ * @param label
+ * @return true - field is correct
+ */
 	protected boolean fieldsStringCheck(ArrayList<JTextField> fields, String label) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,12}") != true) {
+			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,8}") != true) {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
 				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
@@ -259,55 +264,153 @@ public class Util {
 		}
 		return true;
 	}
+/**
+ * check the field for the following condition : minus, numbers, point,  and constant e
+ * the constant e can be used only with the number
+ * @param field
+ * @return true - field is correct
+ */
+	protected boolean fieldsCheck(JTextField field) {
 
-	protected boolean fieldsCheck(JTextField fields, String label) {
+		String message = dataLabels("errorTextDialog0");
+		String title = dataLabels("errorTitleDialog0");
 
-		String message = getStringFromXML("errorTextDialog0");
-		String title = getStringFromXML("errorTitleDialog0");
-
-		if (fields.getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?") == false) {
-			fields.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-			fields.setBackground(bgColor);
-			// JOptionPane.showMessageDialog(new JFrame(), message + " " +
-			// dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
-
+<<<<<<< .mine
+		if (field.getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == false) {
+			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+			field.setBackground(bgColor);
 			return false;
 		} else {
-			fields.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-			fields.setBackground(Color.WHITE);
+			field.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			field.setBackground(Color.WHITE);
 			return true;
 		}
 
 	}
+/**
+ * check ArrayList of fields for the following constraints: letters, characters ^ or /, numbers
+ * @param fields
+ * @param label
+ * @return
+ */
+	protected boolean unitFieldCheck(ArrayList<JTextField> fields, String label) {
 
-	protected boolean fieldsArrayCheck(ArrayList<JTextField> fields) {
-		String re1 = "([-]?\\d+)"; // Integer Number 1
-		String re2 = "([\\.]?)"; // Any Single Character 1
-		String re3 = "([\\d]?)"; // Integer Number 1 }
-
-		String reg4 = "((?:[a-z][a-z]*))"; // Word 1
+		String message = dataLabels("errorTextDialog0");
+		String title = dataLabels("errorTitleDialog0");
+=======
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
+>>>>>>> .r295
 		for (int i = 0; i < fields.size(); i++) {
-			// if (fields.get(i).getText().equals("-")) {
-			// return false;
-			// }
-			Pattern p2 = Pattern.compile(reg4, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-			Matcher m2 = p2.matcher(fields.get(i).getText());
-
-			Pattern p = Pattern.compile(re1 + re2 + re3, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-			Matcher m = p.matcher(fields.get(i).getText());
-			// if (m.find()) {
-			// if (m2.find() == false) {
-			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?") == true) {
-				return true;
+			if (fields.get(i).getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+				return false;
+			} else {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
 
 			}
 		}
-		// }
+		return true;
+	}
+	/**
+	 * check the field  for the following constraints: letters, characters ^ or /, numbers
+	 * @param field
+	 * @return
+	 */
+	protected boolean unitFieldCheck(JTextField field) {
+
+
+		if (field.getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
+			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+			field.setBackground(bgColor);
+			return false;
+		} else {
+			field.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			field.setBackground(Color.WHITE);
+			return true;
+		}
+
+	}
+	/**
+	 * check the field for the following constraint: letters and length 20
+	 * @param field
+	 * @return
+	 */
+	protected boolean dimensionFieldCheck(JTextField field) {
+		String message = dataLabels("errorTextDialog0");
+		String title = dataLabels("errorTitleDialog0");
+		
+			if (field.getText().matches("[a-zA-Z]{1,20}") != true) {
+				field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				field.setBackground(bgColor);
+				return false;
+			}else{	
+				field.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				field.setBackground(Color.WHITE);
+				return true;
+			}			
+	}
+/**
+ * check ArrayList of fields for the following constraint: letters and length 20
+ * @param fields
+ * @param label
+ * @return
+ */
+	protected boolean dimensionFieldCheck(ArrayList<JTextField> fields, String label) {
+		String message = dataLabels("errorTextDialog0");
+		String title = dataLabels("errorTitleDialog0");
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getText().matches("[a-zA-Z]{1,20}") != true) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
+				return false;
+			}
+		}
+		return true;
+	}
+/**
+ * check AttayList of fields for the following constraints: letters, characters ^ or /, numbers
+ * @param fields
+ * @param label
+ * @return
+ */
+	protected boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
+		String message = dataLabels("errorTextDialog0");
+		String title = dataLabels("errorTitleDialog0");
+		for (int i = 0; i < fields.size(); i++) {
+
+			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == true) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
+				return true;
+			}else{
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+			}
+		}
 
 		return false;
 
 	}
-
+	
+	/**
+	 * check ArrayList of  SiMin/SiMax and Min/Max fields for the following constraints:
+	 * if comboBox == constant min=max;
+	 * max>min;
+	 * min>0;
+	 * max>0;
+	 * SIMin!=SiMax;
+	 * @param siMaxFields
+	 * @param siMinFields
+	 * @return
+	 */
 	protected boolean SIMinMaxValuesCheck(ArrayList<JTextField> siMaxFields, ArrayList<JTextField> siMinFields) {
 
 		String message = getStringFromXML("errorTextDialog1");
