@@ -515,7 +515,7 @@ public class Util {
 	 * and proceeds to split every line at the ; delimiter and puts those
 	 * values in a temp RawUnits Object which is then put in the unitsArray
 	 * ArrayList. This method adds a * to the Units, since it is assumed that
-	 * the Units are from a user csv file and user are retards.
+	 * the Units are from a user csv file and users are retards.
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read
 	 */
