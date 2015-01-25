@@ -76,7 +76,10 @@ public class Util {
 	}
 
 	/**
-	 * This method SoonTM
+	 * This method is used to perform a persistent save, that means
+	 * that this method takes ALL THE TEXTFIELDS from WindowRelevantFactors
+	 * and puts them into a container Arraylist which is then written into
+	 * a tmp file also the combobox as well
 	 * 
 	 */
 	protected void persistentSaveRelevantFactors() {
@@ -112,8 +115,9 @@ public class Util {
 	}
 	
 	/**
-	 * This method SoonTM
-	 * @param WRF 
+	 * This method restores ALL THE TEXTFIELDS and also the combobox from WindowRelevantFactors.
+	 * The Objects are first read into a Temp Object and then drawn to the WRF Object.
+	 * @param WRF Object which is drawn to
 	 */
 	protected void restorePersistentRelevantFactors(WindowRelevantFactors WRF) {
 		ArrayList<ArrayList<JTextField>> textFieldsContainer = new ArrayList<ArrayList<JTextField>>();
@@ -155,7 +159,8 @@ public class Util {
 	}
 	
 	/**
-	 * This method SoonTM
+	 * This method performs a persistend save of Objects from WindowDimensionlessFactors
+	 * that means that these Objects are written into a tmp file.
 	 */
 	protected void persistentSaveDimensionlessFactors() {
 		if (new File(DIMENSIONLESSFACTORS_FILENAME).exists()) {
@@ -178,7 +183,8 @@ public class Util {
 	}
 	
 	/**
-	 * This method SoonTM
+	 * This method restores Objects from WindowDimensionlessFactors
+	 * from a tmp file.
 	 */
 	protected void restorePersistentDimensionlessFactors() {
 		try {
@@ -508,7 +514,8 @@ public class Util {
 	 * This method reads a String Inputfile line by line via the readFile method
 	 * and proceeds to split every line at the ; delimiter and puts those
 	 * values in a temp RawUnits Object which is then put in the unitsArray
-	 * ArrayList
+	 * ArrayList. This method adds a * to the Units, since it is assumed that
+	 * the Units are from a user csv file and user are retards.
 	 * 
 	 * @param Inputfile A String that will be turned into a File and read
 	 */
