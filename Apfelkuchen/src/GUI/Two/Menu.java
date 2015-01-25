@@ -16,7 +16,7 @@ import J2R.*;
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann, Christoph Wütschner
- * @version 2.2.0
+ * @version 2.2.3
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
@@ -49,10 +49,11 @@ public class Menu implements ActionListener {
 		JMenuItem settingPathTestCase = new JMenuItem("Set Path for TestCase.csv");
 		JMenuItem settingPathRelevantFactorstmp = new JMenuItem("Set Path for RelevantFactors.tmp file");
 		JMenuItem settingPathDimensionlessFactorstmp = new JMenuItem("Set Path for DimensionlessFactors.tmp file");
-		//add option to autoload tmp file
+		JMenuItem settingAutoloadTMPFiles = new JMenuItem("(De)Activate TMP File Autoloading for Window1");
 		jmOptions.add(settingPathTestCase);
 		jmOptions.add(settingPathRelevantFactorstmp);
 		jmOptions.add(settingPathDimensionlessFactorstmp);
+		jmOptions.add(settingAutoloadTMPFiles);
 		
 		jmb.add(jmOptions);
 		
@@ -66,6 +67,7 @@ public class Menu implements ActionListener {
 		settingPathTestCase.addActionListener(this);
 		settingPathRelevantFactorstmp.addActionListener(this);
 		settingPathDimensionlessFactorstmp.addActionListener(this);
+		settingAutoloadTMPFiles.addActionListener(this);
 		jmiAbout.addActionListener(this);
 		
 		mainMenuWindow.setJMenuBar(jmb);
@@ -76,42 +78,49 @@ public class Menu implements ActionListener {
 		String command = ae.getActionCommand();
 		if (command.equals("New")) {
 			//mainMenuWindow.setVisible(false);
-			//Run.main(null);
-			/*if (!new File(Util.getInstance().RELEVANTFACTORS_FILENAME).exists()) {
-				System.out.println("new WindowRelevantFactors()");
-				WRF = new WindowRelevantFactors();
+			if (Util.getInstance().isAutoloadingWindow1 != false) {
+				if (!new File(Util.getInstance().RELEVANTFACTORS_FILENAME).exists()) {
+					System.out.println("new WindowRelevantFactors()");
+					WRF = new WindowRelevantFactors();
+				} else {
+					System.out.println("restoreRelevantFactors()");
+					WRF = new WindowRelevantFactors();
+					Util.getInstance().restorePersistentRelevantFactors(WRF);
+				}
 			} else {
-				System.out.println("restoreRelevantFactors()");
 				WRF = new WindowRelevantFactors();
-				Util.getInstance().restorePersistentRelevantFactors(WRF);
-				//CSV.readCSVTest(Util.getInstance().TESTCASE_CSV_FILENAME, WRF);
-			}*/
-			
-			WRF = new WindowRelevantFactors();
+			}
 		} else if (command.equals("Set Path for TestCase.csv")) {
-			try {			
+			try {
 				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer TestCase.csv ein", Util.getInstance().TESTCASE_CSV_FILE.getAbsolutePath());
 				Util.getInstance().TESTCASE_CSV_FILENAME = path;
-				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: "+path+" geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("Set Path for RelevantFactors.tmp file")) {
-			try {			
+			try {
 				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer RelevantFactors.tmp ein", Util.getInstance().RELEVANTFACTORS_FILE.getAbsolutePath());
 				Util.getInstance().RELEVANTFACTORS_FILENAME = path;
-				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: "+path+" geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("Set Path for DimensionlessFactors.tmp file")) {
-			try {			
+			try {
 				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer DimensionlessFactors.tmp ein", Util.getInstance().DIMENSIONLESSFACTORS_FILE.getAbsolutePath());
 				Util.getInstance().DIMENSIONLESSFACTORS_FILENAME = path;
-				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: "+path+" geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("(De)Activate TMP File Autoloading for Window1")) {
+			if (Util.getInstance().isAutoloadingWindow1 == true) {
+				Util.getInstance().isAutoloadingWindow1 = false;
+			} else if (Util.getInstance().isAutoloadingWindow1 == false) {
+				Util.getInstance().isAutoloadingWindow1 = true;
+			}
+			JOptionPane.showMessageDialog(null, "isAutoloadingWindow1: " + Util.getInstance().isAutoloadingWindow1, "Info", JOptionPane.WARNING_MESSAGE);
 		} else if (command.equals("About")) {
 			System.out.println("344aab9758bbd18b93739e7893fb3a");
 		} else if (command.equals("Exit")) {

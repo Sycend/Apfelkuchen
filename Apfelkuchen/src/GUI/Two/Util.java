@@ -61,6 +61,7 @@ public class Util {
 	private String inputFieldSug;
 	private static Util utilInstance = null;
 	public Color bgColor = new Color(0xFFC1C1);
+	protected boolean isAutoloadingWindow1 = false;
 
 	private Util() {
 	}
