@@ -1008,7 +1008,7 @@ public class WindowRelevantFactors extends JFrame {
 						RawUnits tempRaw = new RawUnits(textFieldDimensionTemp.getText(), textFieldUnitTemp.getText(), Integer.parseInt(textFieldMTemp.getText()), Integer.parseInt(textFieldKTemp.getText()), Integer.parseInt(textFieldSTemp.getText()), Integer.parseInt(textFieldKelTemp.getText()),
 								Integer.parseInt(textFieldMolTemp.getText()), Integer.parseInt(textFieldAmpTemp.getText()), Integer.parseInt(textFieldCandTemp.getText()), offset, gradient);
 						Util.getInstance().unitsArray.add(tempRaw);
-						Util.getInstance().writeCSV(Util.getInstance().USER_CSV_FILENAME);
+						Util.getInstance().writeCSV(Util.getInstance().USER_CSV_FILENAME, tempRaw);
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -1063,7 +1063,7 @@ public class WindowRelevantFactors extends JFrame {
 		contentPanel.add(buttonUpdateCSVTemp, new GridBagConstraints(16, 14 + Util.getInstance().row, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 10), 0, 0));
 		buttonUpdateCSV.add(buttonUpdateCSVTemp);
 	} // end newFactor
-
+	
 	// Getter Methods
 	public static ArrayList<JTextField> getTextFieldName() {
 		return textFieldName;

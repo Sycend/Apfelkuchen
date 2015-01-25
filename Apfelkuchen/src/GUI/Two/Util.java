@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -383,6 +384,61 @@ public class Util {
 
 	public String getSuggestionInput() {
 		return inputFieldSug;
+	}
+	
+	/**
+	 * This method writes a RawUnits Object into a File, which is
+	 * converted from the String Inputfile, using the csv ; delimiter separated format
+	 * 
+	 * @param Inputfile A String which will be turned into a file and then written to
+	 * @throws IOException
+	 *             if it can't access the file
+	 * @throws IOException
+	 *             if it can't write to the file
+	 * @throws IOException
+	 *             if it can't close the FileWriter
+	 */
+	protected void writeCSV(String filename, RawUnits tempRaw) {
+		BufferedWriter fw = null;
+		try {
+			fw = new BufferedWriter(new FileWriter(new File(filename), true));
+		} catch (IOException e) {
+			System.out.println("Can't access the file.");
+			e.printStackTrace();
+		}
+		try {
+			fw.append(tempRaw.getDimension());
+			fw.append(";");
+			fw.append(tempRaw.getUnit());
+			fw.append(";");
+			fw.append("" + tempRaw.getM());
+			fw.append(";");
+			fw.append("" + tempRaw.getK());
+			fw.append(";");
+			fw.append("" + tempRaw.getS());
+			fw.append(";");
+			fw.append("" + tempRaw.getKel());
+			fw.append(";");
+			fw.append("" + tempRaw.getMol());
+			fw.append(";");
+			fw.append("" + tempRaw.getAmp());
+			fw.append(";");
+			fw.append("" + tempRaw.getCand());
+			fw.append(";");
+			fw.append("" + String.valueOf(tempRaw.getOffset()).replace(".", ","));
+			fw.append(";");
+			fw.append("" + String.valueOf(tempRaw.getGradient()).replace(".", ","));
+			fw.newLine();
+		} catch (IOException e) {
+			System.out.println("Can't write to file.");
+			e.printStackTrace();
+		}
+		try {
+			fw.close();
+		} catch (IOException e) {
+			System.out.println("Can't close the FileWriter.");
+			e.printStackTrace();
+		}
 	}
 	
 	/**

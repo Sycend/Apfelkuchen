@@ -1,8 +1,4 @@
 dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
-UserDim0;UserUnit0;0;1;0;0;0;0;0;0,0;1,7
-UserDim1;UserUnit1;0;1;0;0;0;0;0;0,0;1,8
-UserDim2;UserUnit2;0;1;0;0;0;0;0;0,0;20,0
-Masse;mg_Test;6;6;6;0;0;0;0;0,0;1,0E-6
-Masse;g_Test;0;1;0;0;0;0;0;0,0;0,001
-Masse;kg_Test;0;1;0;0;0;0;0;0,0;1,0
-Masse;t_Test;0;1;0;0;0;0;0;0,0;1000,0
+UserDim0;UserUnit0;1;0;0;0;0;0;0;0,0;1,0
+UserDim1;UserUnit1;0;0;1;0;0;0;0;0,0;1,0
+UserDim2;UserUnit2;0;0;1;0;0;0;0;0,0;2,0
