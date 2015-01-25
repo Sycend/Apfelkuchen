@@ -272,10 +272,9 @@ public class Util {
  */
 	protected boolean fieldsCheck(JTextField field) {
 
-		String message = dataLabels("errorTextDialog0");
-		String title = dataLabels("errorTitleDialog0");
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
 
-<<<<<<< .mine
 		if (field.getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == false) {
 			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 			field.setBackground(bgColor);
@@ -295,17 +294,14 @@ public class Util {
  */
 	protected boolean unitFieldCheck(ArrayList<JTextField> fields, String label) {
 
-		String message = dataLabels("errorTextDialog0");
-		String title = dataLabels("errorTitleDialog0");
-=======
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
->>>>>>> .r295
+		
 		for (int i = 0; i < fields.size(); i++) {
 			if (fields.get(i).getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
 				return false;
 			} else {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
@@ -340,8 +336,8 @@ public class Util {
 	 * @return
 	 */
 	protected boolean dimensionFieldCheck(JTextField field) {
-		String message = dataLabels("errorTextDialog0");
-		String title = dataLabels("errorTitleDialog0");
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
 		
 			if (field.getText().matches("[a-zA-Z]{1,20}") != true) {
 				field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
@@ -360,13 +356,13 @@ public class Util {
  * @return
  */
 	protected boolean dimensionFieldCheck(ArrayList<JTextField> fields, String label) {
-		String message = dataLabels("errorTextDialog0");
-		String title = dataLabels("errorTitleDialog0");
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
 			if (fields.get(i).getText().matches("[a-zA-Z]{1,20}") != true) {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				fields.get(i).setBackground(Color.WHITE);
 				return false;
@@ -381,8 +377,8 @@ public class Util {
  * @return
  */
 	protected boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
-		String message = dataLabels("errorTextDialog0");
-		String title = dataLabels("errorTitleDialog0");
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
 
 			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == true) {
@@ -392,7 +388,7 @@ public class Util {
 			}else{
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + dataLabels(label), title, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
