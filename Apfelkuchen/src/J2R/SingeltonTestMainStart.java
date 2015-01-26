@@ -55,6 +55,8 @@ public class SingeltonTestMainStart {
 			// -------------------------------------------------------------------------------------------
 
 		} else {
+			
+			dMatrix = PrepareForR.createDMatrix();
 
 			vMatrixColNames = WindowDimensionlessFactors.getVMatrixColNames();
 			vMatrixRowNames = WindowDimensionlessFactors.getVMatrixRowNames();

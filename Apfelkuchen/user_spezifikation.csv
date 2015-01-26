@@ -2,3 +2,5 @@ dimension;unit;m;k;s;kel;mol;amp;cand;offset;gradient
 UserDim0;UserUnit0;1;0;0;0;0;0;0;0,0;1,0
 UserDim1;UserUnit1;0;0;1;0;0;0;0;0,0;1,0
 UserDim2;UserUnit2;0;0;1;0;0;0;0;0,0;2,0
+test;t1;3;0;-3;-1;0;0;0;0,0;0,008266666666666667
+test;t;3;0;-3;-1;0;0;0;0,0;0,008266666666666667
