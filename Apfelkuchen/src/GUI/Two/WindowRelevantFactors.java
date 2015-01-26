@@ -393,9 +393,9 @@ public class WindowRelevantFactors extends JFrame {
 					}
 					
 					
-//					if (Util.getInstance().abrevFieldCheck(textFieldAbbreviation) != true) {
-//						return;
-//					}
+					if (Util.getInstance().abrevFieldCheck(textFieldAbbreviation, "labelAbbr") != true) {
+						return;
+					}
 					if (Util.getInstance().dimensionFieldCheck(textFieldUnit, "labelUnit") != true) {
 						return;
 					}

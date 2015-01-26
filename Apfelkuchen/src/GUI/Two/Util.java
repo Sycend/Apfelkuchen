@@ -274,6 +274,25 @@ public class Util {
 		}
 
 	}
+	
+	protected boolean abrevFieldCheck(ArrayList<JTextField> fields, String label) {
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,8}") == false) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+				return false;
+			} else {
+
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
+
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * check the field for the following condition : minus, numbers, point, and
