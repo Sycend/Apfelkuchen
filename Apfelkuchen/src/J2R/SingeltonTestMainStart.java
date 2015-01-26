@@ -1,5 +1,7 @@
 package J2R;
 
+import com.sun.org.apache.bcel.internal.generic.DMUL;
+
 import GUI.Two.Menu;
 import GUI.Two.WindowDimensionlessFactors;
 
@@ -10,7 +12,7 @@ public class SingeltonTestMainStart {
 		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
 		String[] rowNames = PrepareForR.createRowNames();
 		double vMatrix[][];
-	
+		double[][] dMatrix =null;
 		VMatrixControllerMain SuggestVMatrix;
 
 		String[] vMatrixColNames;
@@ -18,7 +20,7 @@ public class SingeltonTestMainStart {
 
 		if (calculateVMatrix) {
 			String[] u_roles = PrepareForR.createRoles();
-			double[][] dMatrix = PrepareForR.createDMatrix();
+			dMatrix = PrepareForR.createDMatrix();
 
 			boolean debug = true;
 
@@ -104,17 +106,32 @@ public class SingeltonTestMainStart {
 			minmax[i][0] = Double.valueOf(x_low[i]).toString();
 			minmax[i][1] = Double.valueOf(x_high[i]).toString();
 		}
+		String[][]dimensionlessCheck=new String[dMatrix[0].length][vMatrix[0].length];
+//		for(int i=0;i<dMatrix[0].length;i++){
+//			for(int j=0;j<vMatrix[0].length;j++){
+//				dimensionlessCheck[i][j]="0";
+//			}
+//		}
+		for(int i=0;i<vMatrix[0].length;i++){
+			for(int j=0;j<dMatrix[0].length;j++){
+				dimensionlessCheck[j][i]="0";
+				for(int k=0;k<dMatrix.length;k++){
+					dimensionlessCheck[j][i]=String.valueOf(Double.parseDouble(dimensionlessCheck[j][i])+dMatrix[k][j]*vMatrix[k][i]);
+				}
+			}
+		}
 
 		if (Menu.WDF == null) {
 			Menu.WDF = new WindowDimensionlessFactors(vMatrix, rowNames,
-					vMatrixColNames, minmax, new String[][] { { "0", "0" },
-							{ "0", "0" }, { "0", "0" }, { "0", "0" },
-							{ "0", "0" }, { "0", "0" }, { "0", "0" } });
+					vMatrixColNames, minmax, dimensionlessCheck);
+//							new String[][] { { "0", "0" },
+//							{ "0", "0" }, { "0", "0" }, { "0", "0" },
+//							{ "0", "0" }, { "0", "0" }, { "0", "0" } });
 		} else {
-			Menu.WDF.ResetValues(vMatrix, rowNames, vMatrixColNames, minmax,
-					new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" },
-							{ "0", "0" }, { "0", "0" }, { "0", "0" },
-							{ "0", "0" } }, true);
+			Menu.WDF.ResetValues(vMatrix, rowNames, vMatrixColNames, minmax,dimensionlessCheck,true);
+//					new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" },
+//							{ "0", "0" }, { "0", "0" }, { "0", "0" },
+//							{ "0", "0" } }, true);
 		}
 
 	}
