@@ -2,6 +2,8 @@ package GUI.Two;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 
 import javax.swing.JFrame;
@@ -16,7 +18,7 @@ import J2R.*;
 /**
  * MainMenu
  * @author Sycend, Yuri Kalinin, Dominik Hofmann, Christoph Wütschner
- * @version 2.2.3
+ * @version 2.2.4
  */
 public class Menu implements ActionListener {
 	private JFrame mainMenuWindow = new JFrame("Main Menu");
@@ -34,7 +36,8 @@ public class Menu implements ActionListener {
 	
 	Menu() {
 		mainMenuWindow.setSize(740, 440);
-		mainMenuWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//	mainMenuWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		JMenuBar jmb = new JMenuBar();
 		JMenu jmFile = new JMenu("File");
 		JMenuItem jmiNew = new JMenuItem("New");
@@ -45,11 +48,44 @@ public class Menu implements ActionListener {
 		jmFile.add(jmiExit);
 		jmb.add(jmFile);
 		
+		mainMenuWindow.addWindowListener(new WindowListener() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.out.println("Close");
+				J2R.getInstance().stopRCaller();
+				System.exit(0);				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+			}
+		});
+		
 		JMenu jmOptions = new JMenu("Options");
 		JMenuItem settingPathTestCase = new JMenuItem("Set Path for TestCase.csv");
-		JMenuItem settingPathRelevantFactorstmp = new JMenuItem("Set Path for RelevantFactors.tmp file");
-		JMenuItem settingPathDimensionlessFactorstmp = new JMenuItem("Set Path for DimensionlessFactors.tmp file");
-		JMenuItem settingAutoloadTMPFiles = new JMenuItem("(De)Activate TMP File Autoloading for Window1");
+		JMenuItem settingPathRelevantFactorstmp = new JMenuItem("Set Path for RelevantFactors.apk file");
+		JMenuItem settingPathDimensionlessFactorstmp = new JMenuItem("Set Path for DimensionlessFactors.apk file");
+		JMenuItem settingAutoloadTMPFiles = new JMenuItem("(De)Activate APK File Autoloading for Window1");
 		jmOptions.add(settingPathTestCase);
 		jmOptions.add(settingPathRelevantFactorstmp);
 		jmOptions.add(settingPathDimensionlessFactorstmp);
@@ -73,7 +109,10 @@ public class Menu implements ActionListener {
 		mainMenuWindow.setJMenuBar(jmb);
 		mainMenuWindow.setVisible(true);
 	}
-
+	public void onExit() {
+		  System.err.println("Exit");
+		  System.exit(0);
+		}
 	public void actionPerformed(ActionEvent ae) {
 		String command = ae.getActionCommand();
 		if (command.equals("New")) {
@@ -100,9 +139,9 @@ public class Menu implements ActionListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("Set Path for RelevantFactors.tmp file")) {
+		} else if (command.equals("Set Path for RelevantFactors.apk file")) {
 			try {
-				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer RelevantFactors.tmp ein", Util.getInstance().RELEVANTFACTORS_FILE.getAbsolutePath());
+				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer RelevantFactors.apk ein", Util.getInstance().RELEVANTFACTORS_FILE.getAbsolutePath());
 				if (path != null) {
 					Util.getInstance().RELEVANTFACTORS_FILENAME = path;
 					JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -110,9 +149,9 @@ public class Menu implements ActionListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("Set Path for DimensionlessFactors.tmp file")) {
+		} else if (command.equals("Set Path for DimensionlessFactors.apk file")) {
 			try {
-				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer DimensionlessFactors.tmp ein", Util.getInstance().DIMENSIONLESSFACTORS_FILE.getAbsolutePath());
+				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer DimensionlessFactors.apk ein", Util.getInstance().DIMENSIONLESSFACTORS_FILE.getAbsolutePath());
 				if (path != null) {
 					Util.getInstance().DIMENSIONLESSFACTORS_FILENAME = path;
 					JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -120,7 +159,7 @@ public class Menu implements ActionListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("(De)Activate TMP File Autoloading for Window1")) {
+		} else if (command.equals("(De)Activate APK File Autoloading for Window1")) {
 			if (Util.getInstance().isAutoloadingWindow1 == true) {
 				Util.getInstance().isAutoloadingWindow1 = false;
 			} else if (Util.getInstance().isAutoloadingWindow1 == false) {

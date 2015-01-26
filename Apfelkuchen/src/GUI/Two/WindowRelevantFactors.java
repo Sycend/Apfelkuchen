@@ -220,9 +220,9 @@ public class WindowRelevantFactors extends JFrame {
 		
 		JMenuBar jmb = new JMenuBar();
 		JMenu jmFile = new JMenu("File");
-		JMenuItem jmiLoadTMPFile = new JMenuItem("Load from tmp file");
+		JMenuItem jmiLoadTMPFile = new JMenuItem("Load from .apk file");
 		JMenuItem jmiLoadTestCaseCSV = new JMenuItem("Load TestCase.csv");
-		JMenuItem jmiSave = new JMenuItem("Save to tmp file");
+		JMenuItem jmiSave = new JMenuItem("Save to .apk file");
 		JMenuItem jmiExit = new JMenuItem("Exit");
 		jmFile.add(jmiLoadTMPFile);
 		jmFile.add(jmiLoadTestCaseCSV);
@@ -230,7 +230,7 @@ public class WindowRelevantFactors extends JFrame {
 		jmFile.add(jmiExit);
 		jmb.add(jmFile);
 		jmiLoadTMPFile.addActionListener(ae -> {
-			System.out.println("Load from tmp file");
+			System.out.println("Load from .apk file");
 			Util.getInstance().restorePersistentRelevantFactors(Menu.WRF);
 		});
 		jmiLoadTestCaseCSV.addActionListener(ae -> {
@@ -238,7 +238,7 @@ public class WindowRelevantFactors extends JFrame {
 			Util.getInstance().readTestCaseCSV(Util.getInstance().TESTCASE_CSV_FILENAME, Menu.WRF);
 		});
 		jmiSave.addActionListener(ae -> {
-			System.out.println("Save to tmp file");
+			System.out.println("Save to .apk file");
 			Util.getInstance().persistentSaveRelevantFactors();
 		});
 		jmiExit.addActionListener(ae -> {

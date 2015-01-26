@@ -41,8 +41,8 @@ public class Util {
 	protected String CSV_FILENAME = "spezifikation.csv";
 	protected String USER_CSV_FILENAME = "user_spezifikation.csv";
 	protected String TESTCASE_CSV_FILENAME = "TestCase.csv";
-	protected String RELEVANTFACTORS_FILENAME = "RelevantFactors.tmp";
-	protected String DIMENSIONLESSFACTORS_FILENAME = "DimensionlessFactors.tmp";
+	protected String RELEVANTFACTORS_FILENAME = "RelevantFactors.apk";
+	protected String DIMENSIONLESSFACTORS_FILENAME = "DimensionlessFactors.apk";
 	protected File CSV_FILE = new File(CSV_FILENAME);
 	protected File USER_CSV_FILE = new File(USER_CSV_FILENAME);
 	protected File TESTCASE_CSV_FILE = new File(TESTCASE_CSV_FILENAME);
@@ -76,7 +76,7 @@ public class Util {
 	/**
 	 * This method is used to perform a persistent save, that means that this
 	 * method takes ALL THE TEXTFIELDS from WindowRelevantFactors and puts them
-	 * into a container Arraylist which is then written into a tmp file also the
+	 * into a container Arraylist which is then written into an apk file also the
 	 * combobox as well
 	 * 
 	 */
@@ -162,7 +162,7 @@ public class Util {
 	/**
 	 * This method performs a persistend save of Objects from
 	 * WindowDimensionlessFactors that means that these Objects are written into
-	 * a tmp file.
+	 * an apk file.
 	 */
 	protected void persistentSaveDimensionlessFactors() {
 		if (new File(DIMENSIONLESSFACTORS_FILENAME).exists()) {
