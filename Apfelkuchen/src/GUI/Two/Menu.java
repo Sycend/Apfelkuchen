@@ -36,8 +36,6 @@ public class Menu implements ActionListener {
 	
 	Menu() {
 		mainMenuWindow.setSize(740, 440);
-	//	mainMenuWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		JMenuBar jmb = new JMenuBar();
 		JMenu jmFile = new JMenu("File");
 		JMenuItem jmiNew = new JMenuItem("New");

@@ -22,10 +22,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import J2R.*;
@@ -86,7 +86,38 @@ public class WindowRelevantFactors extends JFrame {
 
 	public WindowRelevantFactors() {
 		super(Util.getInstance().getStringFromXML("title"));
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		addWindowListener(new WindowListener() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.out.println("Close");
+				J2R.getInstance().stopRCaller();
+				System.exit(0);				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+			}
+		});
 		setSize(Util.getInstance().currentWidth, Util.getInstance().currentHeight);
 		
 		init();
