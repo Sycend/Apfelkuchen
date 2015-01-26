@@ -391,11 +391,11 @@ public class WindowRelevantFactors extends JFrame {
 					if(checkFields==false){
 						return;
 					}
-					//This code can be used for checking of fields with regular exception
 					
-					/*if (Util.getInstance().fieldsStringCheck(textFieldAbbreviation, "labelAbbr") != true) {
-						return;
-					}
+					
+//					if (Util.getInstance().abrevFieldCheck(textFieldAbbreviation) != true) {
+//						return;
+//					}
 					if (Util.getInstance().dimensionFieldCheck(textFieldUnit, "labelUnit") != true) {
 						return;
 					}
@@ -439,13 +439,13 @@ public class WindowRelevantFactors extends JFrame {
 						return;
 					}
 
-					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow ) == false) {
-
-						return;
-					}
-					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
-						return;
-					}*/
+//					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow ) == false) {
+//
+//						return;
+//					}
+//					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
+//						return;
+//					}
 					//Util.getInstance().persistentSaveRelevantFactors();
 					Menu.WRF.setVisible(false);
 

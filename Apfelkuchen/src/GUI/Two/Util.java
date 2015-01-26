@@ -307,25 +307,28 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-	/*
-	 * Now we don't use this code. protected boolean
-	 * unitFieldCheck(ArrayList<JTextField> fields, String label) {
-	 * 
-	 * String message = getStringFromXML("errorTextDialog0"); String title =
-	 * getStringFromXML("errorTitleDialog0");
-	 * 
-	 * for (int i = 0; i < fields.size(); i++) { if
-	 * (fields.get(i).getText().matches(
-	 * "[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?"
-	 * ) == false) { fields.get(i).setBorder(BorderFactory.createMatteBorder(2,
-	 * 2, 2, 2, Color.red)); fields.get(i).setBackground(bgColor);
-	 * JOptionPane.showMessageDialog(new JFrame(), message + " " +
-	 * getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE); return false;
-	 * } else { fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1,
-	 * 1, Color.BLACK)); fields.get(i).setBackground(Color.WHITE);
-	 * 
-	 * } } return true; }
-	 */
+	
+	 
+	public boolean unitFieldCheck(ArrayList<JTextField> fields, String label) {
+
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
+
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+				return false;
+			} else {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
+
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * check the field for the following constraints: letters, characters ^ or
 	 * /, numbers
@@ -376,20 +379,24 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-	/*
-	 * Now we don't use this code. protected boolean
-	 * dimensionFieldCheck(ArrayList<JTextField> fields, String label) { String
-	 * message = getStringFromXML("errorTextDialog0"); String title =
-	 * getStringFromXML("errorTitleDialog0"); for (int i = 0; i < fields.size();
-	 * i++) { if (fields.get(i).getText().matches("[a-zA-Z]{1,20}") != true) {
-	 * fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,
-	 * Color.red)); fields.get(i).setBackground(bgColor);
-	 * JOptionPane.showMessageDialog(new JFrame(), message + " " +
-	 * getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
-	 * fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,
-	 * Color.BLACK)); fields.get(i).setBackground(Color.WHITE); return false; }
-	 * } return true; }
-	 */
+	
+	
+	public boolean dimensionFieldCheck(ArrayList<JTextField> fields, String label) {
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getText().matches("[a-zA-Z]{1,20}") != true) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * check AttayList of fields for the following constraints: letters,
 	 * characters ^ or /, numbers
@@ -398,25 +405,27 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-	/*
-	 * Now we don't use this code. protected boolean
-	 * fieldsArrayCheck(ArrayList<JTextField> fields, String label) { String
-	 * message = getStringFromXML("errorTextDialog0"); String title =
-	 * getStringFromXML("errorTitleDialog0"); for (int i = 0; i < fields.size();
-	 * i++) {
-	 * 
-	 * if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?")
-	 * == true) { fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1,
-	 * 1, 1, Color.BLACK)); fields.get(i).setBackground(Color.WHITE); return
-	 * true; }else{ fields.get(i).setBorder(BorderFactory.createMatteBorder(2,
-	 * 2, 2, 2, Color.red)); fields.get(i).setBackground(bgColor);
-	 * JOptionPane.showMessageDialog(new JFrame(), message + " " +
-	 * getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE); } }
-	 * 
-	 * return false;
-	 * 
-	 * }
-	 */
+	
+	public boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
+		for (int i = 0; i < fields.size(); i++) {
+
+			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == true) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
+				return true;
+			} else {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
+		return false;
+
+	}
+	 
 
 	/**
 	 * check ArrayList of Min/Max and Min/Max fields for the following
