@@ -93,24 +93,30 @@ public class Menu implements ActionListener {
 		} else if (command.equals("Set Path for TestCase.csv")) {
 			try {
 				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer TestCase.csv ein", Util.getInstance().TESTCASE_CSV_FILE.getAbsolutePath());
-				Util.getInstance().TESTCASE_CSV_FILENAME = path;
-				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				if (path != null) {
+					Util.getInstance().TESTCASE_CSV_FILENAME = path;
+					JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("Set Path for RelevantFactors.tmp file")) {
 			try {
 				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer RelevantFactors.tmp ein", Util.getInstance().RELEVANTFACTORS_FILE.getAbsolutePath());
-				Util.getInstance().RELEVANTFACTORS_FILENAME = path;
-				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				if (path != null) {
+					Util.getInstance().RELEVANTFACTORS_FILENAME = path;
+					JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("Set Path for DimensionlessFactors.tmp file")) {
 			try {
 				String path = JOptionPane.showInputDialog(null, "Geben Sie den Pfad zu einer DimensionlessFactors.tmp ein", Util.getInstance().DIMENSIONLESSFACTORS_FILE.getAbsolutePath());
-				Util.getInstance().DIMENSIONLESSFACTORS_FILENAME = path;
-				JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				if (path != null) {
+					Util.getInstance().DIMENSIONLESSFACTORS_FILENAME = path;
+					JOptionPane.showMessageDialog(null, "Erfolgreich den Pfad auf: " + path + " geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

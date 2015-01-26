@@ -274,22 +274,21 @@ public class Util {
 		}
 
 	}
-
-	protected boolean abrevFieldCheck(ArrayList<JTextField> fields) {
+	
+	protected boolean abrevFieldCheck(ArrayList<JTextField> fields, String label) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
 			if (fields.get(i).getText().matches("[a-zA-Z0-9]{1,8}") == false) {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
 				return false;
 			} else {
-				// JOptionPane.showMessageDialog(new JFrame(), message + " " +
-				// getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				fields.get(i).setBackground(Color.WHITE);
 
-				return true;
 			}
 		}
 		return true;
@@ -318,36 +317,6 @@ public class Util {
 		}
 
 	}
-	
-	/**
-	 * check AttayList of fields for the following constraints: letters,
-	 * characters ^ or /, numbers
-	 * 
-	 * @param fields
-	 * @param label
-	 * @return
-	 */
-	
-	  
-	public boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
-		String message = getStringFromXML("errorTextDialog0");
-		String title = getStringFromXML("errorTitleDialog0");
-		for (int i = 0; i < fields.size(); i++) {
-
-			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(E)?(e)?(-)?(\\d+)?") == true) {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-				fields.get(i).setBackground(Color.WHITE);
-				return true;
-			} else {
-				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-				fields.get(i).setBackground(bgColor);
-				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
-			}
-		}
-
-		return false;
-
-	}
 
 	/**
 	 * check ArrayList of fields for the following constraints: letters,
@@ -357,7 +326,8 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-
+	
+	 
 	public boolean unitFieldCheck(ArrayList<JTextField> fields, String label) {
 
 		String message = getStringFromXML("errorTextDialog0");
@@ -428,7 +398,8 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-
+	
+	
 	public boolean dimensionFieldCheck(ArrayList<JTextField> fields, String label) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
@@ -445,12 +416,40 @@ public class Util {
 		return true;
 	}
 
+	/**
+	 * check AttayList of fields for the following constraints: letters,
+	 * characters ^ or /, numbers
+	 * 
+	 * @param fields
+	 * @param label
+	 * @return
+	 */
 	
+	public boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
+		String message = getStringFromXML("errorTextDialog0");
+		String title = getStringFromXML("errorTitleDialog0");
+		for (int i = 0; i < fields.size(); i++) {
+
+			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == true) {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+				fields.get(i).setBackground(Color.WHITE);
+				return true;
+			} else {
+				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+				fields.get(i).setBackground(bgColor);
+				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
+		return false;
+
+	}
 	 
 
 	/**
 	 * check ArrayList of Min/Max and Min/Max fields for the following
-	 * constraints: min!=max; min>0, max>0, numbers SIMin!=SiMax;
+	 * constraints:  min!=max; min>0, max>0, numbers
+	 * SIMin!=SiMax;
 	 * 
 	 * @param fieldMin
 	 * @param siMinFields
@@ -464,26 +463,12 @@ public class Util {
 			return false;
 
 		} else {
-			if (!fieldMax.getText().equals("")) {
-
-				if (fieldMax.getText().equals(fieldMin.getText())) {
-					fieldMin.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-					fieldMin.setBackground(bgColor);
-					fieldMax.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-					fieldMax.setBackground(bgColor);
-					return false;
-				} else {
-					fieldMin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-					fieldMin.setBackground(Color.WHITE);
-					fieldMax.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-					fieldMax.setBackground(Color.WHITE);
-					return true;
-				}
-			}
+		
+			fieldMin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			fieldMin.setBackground(Color.WHITE);
+			return true;
 		}
-		fieldMin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-		fieldMin.setBackground(Color.WHITE);
-		return true;
+
 	}
 
 	protected String getStringFromXML(String nodeName) {
