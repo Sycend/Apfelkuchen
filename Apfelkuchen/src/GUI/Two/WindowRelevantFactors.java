@@ -107,7 +107,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Close");
 				J2R.getInstance().stopRCaller();
-				System.exit(0);				
+				System.exit(0);
 			}
 			
 			@Override
