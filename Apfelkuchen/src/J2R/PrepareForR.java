@@ -1,10 +1,4 @@
-/**
- * There are methods in this class to get the information or strings of the WindowRelevantFactors.
- * There information will be transformed into differnt data frames
- *  
- * @author Christoph Wütschner, Clemens Kretzer, Florian Then
- *
- */
+
 
 package J2R;
 
@@ -16,6 +10,13 @@ import java.math.*;
 
 import GUI.Two.*;
 
+/**
+ * There are methods in this class to get the information or strings of the WindowRelevantFactors.
+ * There information will be transformed into differnt data frames
+ *  
+ * @author Christoph Wütschner, Clemens Kretzer, Florian Then
+ *
+ */
 public class PrepareForR {
 
 	/**

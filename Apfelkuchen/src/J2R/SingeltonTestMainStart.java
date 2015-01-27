@@ -4,7 +4,12 @@ import com.sun.org.apache.bcel.internal.generic.DMUL;
 
 import GUI.Two.Menu;
 import GUI.Two.WindowDimensionlessFactors;
-
+/**
+ * 
+ *  
+ * @author Christoph Wütschner, Clemens Kretzer, Florian Then
+ *
+ */
 public class SingeltonTestMainStart {
 
 	public static void calculate(boolean calculateVMatrix, J2R callerInstance) {
