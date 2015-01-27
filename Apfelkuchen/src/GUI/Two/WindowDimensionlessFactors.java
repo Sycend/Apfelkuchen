@@ -25,8 +25,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author Florian Then, Dominik Hofmann
- * @version 1.0.5
+ * @author Florian Then, Dominik Hofmann, Christoph Wütschner
+ * @version 1.0.6
  * Window2
  */
 public class WindowDimensionlessFactors extends JFrame {
@@ -610,7 +610,15 @@ public class WindowDimensionlessFactors extends JFrame {
 		widthVMatrix--;
 		refreshWindowContent();
 	}
-	
+	/**
+	 * This mehtode sets the internal values to the ones recived in the Attribute list.
+	 * @param vMatrix - the VMatrix as double array
+	 * @param rowNames - the RowNames of the VMatrix as String array
+	 * @param colNames - the ColNames of the VMatrix as String array
+	 * @param minMax - the values for MinMax as String Matrix [min][max] 
+	 * @param dimensionlessControlSI - the control if the matrix is demensionless
+	 * @param refresh - should the window be refreshed 
+	 */
 	public void ResetValues(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax, String[][] dimensionlessControlSI, boolean refresh) {
 		
 		WindowDimensionlessFactors.vMatrix = vMatrix;
