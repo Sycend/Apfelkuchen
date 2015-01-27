@@ -5,13 +5,19 @@ import com.sun.org.apache.bcel.internal.generic.DMUL;
 import GUI.Two.Menu;
 import GUI.Two.WindowDimensionlessFactors;
 /**
- * 
+ * Contains the method calculate which calculates the V-Matrix and Min/Max
  *  
  * @author Christoph Wütschner, Clemens Kretzer, Florian Then
  *
  */
 public class SingeltonTestMainStart {
 
+	/**
+	 * 
+	 * 
+	 * @param calculateVMatrix
+	 * @param callerInstance contains the caller
+	 */
 	public static void calculate(boolean calculateVMatrix, J2R callerInstance) {
 
 		String[] colNames = { "m", "k", "s", "kel", "mol", "amp", "cand" };
