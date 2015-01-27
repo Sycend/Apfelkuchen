@@ -1148,7 +1148,7 @@ public class WindowRelevantFactors extends JFrame {
 	
 	// Getter Methods
 	public static ArrayList<JTextField> getTextFieldName() {
-		return textFieldName;
+		return textFieldAbbreviation;
 	}
 
 	public static ArrayList<JTextField> getTextFieldM() {
