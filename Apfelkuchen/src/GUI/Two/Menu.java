@@ -66,7 +66,7 @@ public class Menu implements ActionListener {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Close");
-				J2R.getInstance().stopRCaller();
+				callerInstance.stopRCaller();
 				System.exit(0);				
 			}
 			
