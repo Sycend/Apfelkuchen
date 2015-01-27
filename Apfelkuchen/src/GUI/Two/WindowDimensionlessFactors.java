@@ -557,7 +557,13 @@ public class WindowDimensionlessFactors extends JFrame {
 			return true;
 		return false;
 	}
-
+	/**
+	 * checks given column:
+	 * is the column deleteable?
+	 * @param column
+	 * 	selected column for check
+	 * @return
+	 */
 	private boolean checkLinearMatrixForDeleteColumn(int column) {
 		boolean isDeleteable = true;
 		for (int i = 0; i < widthVMatrix; i++) {
@@ -568,7 +574,11 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		return isDeleteable;
 	}
-	
+	/**
+	 * refresh WindowContent:
+	 * -	MenuePanel
+	 * -	ContentPanel
+	 */
 	private void refreshWindowContent()
 	{
 		getContentPane().removeAll();
@@ -580,7 +590,11 @@ public class WindowDimensionlessFactors extends JFrame {
 		getContentPane().repaint();
 		setVisible(true);
 	}
-	
+	/**
+	 * delete the given column(dimensionless-factor)
+	 * @param column
+	 * 	column which will get deleted
+	 */
 	private void deleteVMatrixColumn(int column) {
 		for (int col = column; col < widthVMatrix - 1; col++) {
 			for (int i = 0; i < widthVMatrix; i++) {
