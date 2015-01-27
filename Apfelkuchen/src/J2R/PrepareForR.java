@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
+import java.math.*;
+
 import GUI.Two.*;
 
 public class PrepareForR {
@@ -72,6 +74,7 @@ public class PrepareForR {
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
 			min[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSILow().get(i).getText());
+//			min[i]=Math.log10(min[i]);
 		}
 		
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
@@ -88,6 +91,9 @@ public class PrepareForR {
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
 			max[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSIHigh().get(i).getText());
+//			max[i]=Math.log10(max[i]);
+			//max[i]=Math.log(max[i]) / Math.log(10);
+			
 		}
 
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
