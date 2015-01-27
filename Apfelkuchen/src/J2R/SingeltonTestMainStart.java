@@ -76,8 +76,8 @@ public class SingeltonTestMainStart {
 		double[] u_highArray = PrepareForR.createMax();
 
 		MinMaxTestMainFürController minMaxController = new MinMaxTestMainFürController(
-				vMatrix, vMatrixRowNames, vMatrixColNames, u_lowArray,
-				u_highArray);
+				callerInstance, vMatrix, vMatrixRowNames, vMatrixColNames,
+				u_lowArray, u_highArray);
 
 		double[] x_low = minMaxController.getX_lowDoubleArray();
 		double[] x_high = minMaxController.getX_highDoubleArray();
