@@ -65,7 +65,15 @@ suggestVmatrix<-function(u_roles,D,role,debug)
     if((r+1)==n) V[(r+1),]<-1 else diag(V[(r+1):n,])<-1
     #G<-qr.solve(t(D[(1:r),]),t(D))
     #G<-qr.solve(cbind(D[(1:r),]),t(D))
-    G<-qr.solve(cbind(t(D[(1:r),])),t(D))
+    #G<-qr.solve(cbind(t(D[(1:r),])),t(D))
+	#G<-qr.solve(t(as.matrix(D[(1:r),])),t(D))
+	
+	if(r==1) {
+		G<-qr.solve(cbind(D[(1:r),]),t(D))            
+      } else {
+     	G<-qr.solve(t(D[(1:r),]),t(D))        
+	}
+	   
     V[1:r,]<--G[,(r+1):n]
     V<-solve(E)%*%V
     V<-solve(E2)%*%V
