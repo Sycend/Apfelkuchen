@@ -20,7 +20,17 @@ public class SuggestVMatrix {
 	private double[][] dMatrix;
 	private boolean debug;
 	private RCode code;
-	
+	/**
+	 * Constructor for SuggestVMatrix 
+	 * overtakes given Attributes
+	 * @param u_Roles
+	 * @param d_Matrix
+	 * @param d_ColNames
+	 * @param d_Rownames
+	 * @param roleArray
+	 * @param debugBool
+	 * @param codeStart
+	 */
 	public SuggestVMatrix(String[] u_Roles,
 			double[][] d_Matrix,String[] d_ColNames,String[] d_Rownames, String[] roleArray, boolean debugBool,RCode codeStart){
 		u_roles=u_Roles;
@@ -31,7 +41,11 @@ public class SuggestVMatrix {
 		debug=debugBool;
 		code=codeStart;		
 	}
-	
+	/**
+	 * Prepares RCode for SuggestVmatrix Execution in R 
+	 * @return
+	 * RCode ready for SuggestVmatrix Execution in R
+	 */
 	public RCode SuggestVMatrixCode() {
 				
 		
@@ -53,19 +67,35 @@ public class SuggestVMatrix {
 
 		return code;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for runAndReturnResultOnline with SuggestVmatrix
+	 */
 	public String getRunandReturnOnlineString(){	
 		return "vMatrixListe";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the Vmatrix from the Parser
+	 */
 	public String getVDoubleMatrix(){	
 		return "svm1";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the Vmatrix-Colnames from the Parser
+	 */
 	public String getVColnamesStringArray(){	
 		return "svm3";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the Vmatrix-rownames from the Parser
+	 */
 	public String getVRownamesStringArray(){	
 		return "svm2";
 	}

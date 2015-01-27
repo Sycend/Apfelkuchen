@@ -1,13 +1,32 @@
+
+
 package J2R;
 
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
+import java.math.*;
+
 import GUI.Two.*;
 
+/**
+ * There are methods in this class to get the information or strings of the WindowRelevantFactors.
+ * There information will be transformed into differnt data frames
+ *  
+ * @author Christoph Wütschner, Clemens Kretzer, Florian Then
+ *
+ */
 public class PrepareForR {
 
+	/**
+	 * This method creates the D-Matrix by getting the information of the textfields of the Window RelevantFactors.
+	 * These textfields contains the necessary information about the D-Matrix (SI-Einheiten)
+	 * 	(M,K,S,Kel,Mol,Amp,Cand)
+	 * These information will be added to a new Arraylist.
+	 * This Arraylist will be transformed into a double [][]
+	 * This method returns the double [][]
+	 */
 	public static double[][] createDMatrix() {
 		
 
@@ -46,6 +65,12 @@ public class PrepareForR {
 		return dMatrix;
 	}
 
+	/**
+	 * This method creates the Rownames by getting the information of the textfields of the Window RelevantFactors.
+	 * These textfields contains the necessary information about the Rownames
+	 * These information be transformed into a String[]
+	 * This method returns the String[]
+	 */
 	public static String[] createRowNames() {
 
 		String[] rowNames = new String [WindowRelevantFactors.getTextFieldName().size()];
@@ -65,6 +90,12 @@ public class PrepareForR {
 		return rowNames;
 	}
 
+	/**
+	 * This method creates the Min by getting the information of the textfields of the Window RelevantFactors.
+	 * These textfields contains the necessary information about the Min
+	 * These information be transformed into a double[]
+	 * This method returns the double[]
+	 */
 	public static double[] createMin() {
 
 		double[] min = new double [WindowRelevantFactors.getTextFieldSILow().size()];
@@ -72,6 +103,7 @@ public class PrepareForR {
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
 			min[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSILow().get(i).getText());
+//			min[i]=Math.log10(min[i]);
 		}
 		
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
@@ -81,6 +113,12 @@ public class PrepareForR {
 		return min;
 	}
 
+	/**
+	 * This method creates the Max by getting the information of the textfields of the Window RelevantFactors.
+	 * These textfields contains the necessary information about the Max
+	 * These information be transformed into a double[]
+	 * This method returns the double[]
+	 */
 	public static double[] createMax() {
 
 		double[] max = new double [WindowRelevantFactors.getTextFieldName().size()];
@@ -88,6 +126,9 @@ public class PrepareForR {
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
 			max[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSIHigh().get(i).getText());
+//			max[i]=Math.log10(max[i]);
+			//max[i]=Math.log(max[i]) / Math.log(10);
+			
 		}
 
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
@@ -96,7 +137,13 @@ public class PrepareForR {
 		
 		return max;
 	}
-
+	
+	/**
+	 * This method creates the roles by getting the information of the combobox of the Window RelevantFactors.
+	 * These combobox contains the necessary information about the roles
+	 * These information be transformed into a String[]
+	 * This method returns the String[]
+	 */
 	public static String[] createRoles() {
 
 		String[] roles = new String [WindowRelevantFactors.getComboBoxRole().size()];
@@ -114,4 +161,3 @@ public class PrepareForR {
 	}
 
 }
-//test
