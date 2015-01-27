@@ -21,6 +21,16 @@ public class MinMax {
 	private double [] u_low; 
 	private double [] u_high;
 	
+	/**
+	 * Constructor for MinMax 
+	 * overtakes given Attributes
+	 * @param VMatrix		:from SuggestVmatrix
+	 * @param rownamesArray	:from Vmatrix
+	 * @param colnamesArray :from Vmatrix
+	 * @param u_lowArray	:from SI_Low
+	 * @param u_highArray	:from SI_High
+	 * @param codeStart		: RCode
+	 */
 	public MinMax(double [][] VMatrix, String [] rownamesArray, String [] colnamesArray, double [] u_lowArray, double [] u_highArray, RCode codeStart) {
 		V = VMatrix;
 		rownames = rownamesArray;
@@ -30,7 +40,11 @@ public class MinMax {
 		code = codeStart;
 		
 	}
-
+	/**
+	 * Prepares RCode for MinMax Execution in R 
+	 * @return
+	 * RCode ready for MinMax Execution in R
+	 */
 	public RCode MinMaxCode() {
 		
 	
@@ -51,31 +65,59 @@ public class MinMax {
 		return code;
 		
 	};
-	
+	/**
+	 * 
+	 * @return
+	 * String for runAndReturnResultOnline with MinMax
+	 */
 	public String getRunandReturnOnlineString(){	
 		return "MinMaxListe";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the x_low from the Parser
+	 */
 	public String getX_lowDoubleArray(){	
 		return "mm1";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the x_low-colnames from the Parser
+	 */
 	public String getX_lowColnamesStringArray(){	
 		return "mm2";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the x_low-rownames from the Parser
+	 */
 	public String getX_lowRownamesStringArray(){	
 		return "mm3";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the x_high from the Parser
+	 */
 	public String getX_highDoubleArray(){	
 		return "mm4";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the x_high-rownames from the Parser
+	 */
 	public String getX_highColnamesStringArray(){	
 		return "mm5";
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * String for getting the x_high-rownames from the Parser
+	 */	
 	public String getX_highRownamesStringArray(){	
 		return "mm6";
 	}
