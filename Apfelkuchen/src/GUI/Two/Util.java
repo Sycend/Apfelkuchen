@@ -185,7 +185,7 @@ public class Util {
 	}
 
 	/**
-	 * This method restores Objects from WindowDimensionlessFactors from a tmp
+	 * This method restores Objects from WindowDimensionlessFactors from an apk
 	 * file.
 	 */
 	protected void restorePersistentDimensionlessFactors() {
@@ -205,8 +205,7 @@ public class Util {
 	}
 
 	/**
-	 * @return A duplicate free String[] Array that contains all Dimensions
-	 *         found in unitsArray
+	 * @return A duplicate free String[] Array that contains all Dimensions found in unitsArray
 	 */
 	protected String[] getDimensions() {
 		String[] tmp = new String[unitsArray.size()];
@@ -347,7 +346,7 @@ public class Util {
 		}
 		return true;
 	}
-
+	
 	/**
 	 * check the field for the following constraints: letters, characters ^ or
 	 * /, numbers
@@ -398,8 +397,6 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-	
-	
 	public boolean dimensionFieldCheck(ArrayList<JTextField> fields, String label) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
@@ -424,7 +421,6 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-	
 	public boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
@@ -471,6 +467,14 @@ public class Util {
 
 	}
 
+	/**
+	 * This method returns the right String for the given nodeName
+	 * So that Strings are multilingual (currently there are only 
+	 * german Strings in labels.xml)
+	 * 
+	 * @param nodeName A String that is declared in labels.xml
+	 * @return nodeName
+	 */
 	protected String getStringFromXML(String nodeName) {
 		final String fileName = "labels.xml";
 		try {
