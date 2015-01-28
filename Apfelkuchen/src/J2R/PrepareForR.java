@@ -73,15 +73,15 @@ public class PrepareForR {
 	 */
 	public static String[] createRowNames() {
 
-		String[] rowNames = new String [WindowRelevantFactors.getTextFieldName().size()];
+		String[] rowNames = new String [WindowRelevantFactors.getTextFieldAbbr().size()];
 
-		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
-			rowNames[i] = WindowRelevantFactors.getTextFieldName().get(i)
+		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
+			rowNames[i] = WindowRelevantFactors.getTextFieldAbbr().get(i)
 					.getText();
 		}
 			
 			System.out.println();
-		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
+		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
 			System.out.println(rowNames[i]);
 		}
 
@@ -121,9 +121,9 @@ public class PrepareForR {
 	 */
 	public static double[] createMax() {
 
-		double[] max = new double [WindowRelevantFactors.getTextFieldName().size()];
+		double[] max = new double [WindowRelevantFactors.getTextFieldAbbr().size()];
 
-		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
+		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
 			max[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSIHigh().get(i).getText());
 //			max[i]=Math.log10(max[i]);
@@ -131,7 +131,7 @@ public class PrepareForR {
 			
 		}
 
-		for (int i = 0; i < WindowRelevantFactors.getTextFieldName().size(); i++) {
+		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
 			System.out.println(max[i]);
 		}
 		
