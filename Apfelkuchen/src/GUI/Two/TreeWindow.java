@@ -150,6 +150,7 @@ public class TreeWindow extends JFrame {
 		public void windowClosing(WindowEvent e) {
 			textFieldDimension.setBackground(Color.WHITE); 
 			textFieldUnit.setBackground(Color.WHITE);		
+			WindowRelevantFactors.treeOpend=false;
 		}
 		
 		@Override
