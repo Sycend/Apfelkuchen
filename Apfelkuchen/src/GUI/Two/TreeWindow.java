@@ -1,6 +1,7 @@
 package GUI.Two;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,9 +30,11 @@ public class TreeWindow extends JFrame {
 	private JButton buttonOk;
 	private String[] dimensions = Util.getInstance().getDimensions();
 	private boolean checkNode = false;
-	
+	private Color bgColor = new Color(0xADFF2F);
 	public TreeWindow(JTextField textFieldDimension, JTextField textFieldUnit) {
-		
+		//set background of fields
+		textFieldDimension.setBackground(bgColor);
+		textFieldUnit.setBackground(bgColor);
 		// create the root node
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle(Util.getInstance().getStringFromXML("title"));
@@ -75,6 +78,9 @@ public class TreeWindow extends JFrame {
 					if (checkNode == true) {
 						setVisible(false);
 						WindowRelevantFactors.setSelectionItem(selectedItemParent, selectedItem, textFieldDimension, textFieldUnit);
+						WindowRelevantFactors.treeOpend=false; // set flag for opend window
+						textFieldDimension.setBackground(Color.WHITE); 
+						textFieldUnit.setBackground(Color.WHITE);
 						dispose();
 						
 						if (Util.getInstance().unitsArray.size() > 0) {
