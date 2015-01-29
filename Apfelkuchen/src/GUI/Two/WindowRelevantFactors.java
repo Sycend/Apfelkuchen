@@ -82,7 +82,7 @@ public class WindowRelevantFactors extends JFrame {
 
 	protected JPanel contentPanel = new JPanel();
 	protected boolean checkFields = false;
-	protected static int countErrors = 0;
+	protected static boolean treeOpend=false;
 
 	public WindowRelevantFactors() {
 		super(Util.getInstance().getStringFromXML("title"));
@@ -643,9 +643,12 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldDimensionTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
-				repaint();
-				setVisible(true);
+				if (treeOpend == false) {
+					new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
+					treeOpend = true;
+					repaint();
+					setVisible(true);
+				}
 			}
 
 			@Override
@@ -695,9 +698,12 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldUnitTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (treeOpend == false) {
 				new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
+				treeOpend=true;
 				repaint();
 				setVisible(true);
+				}
 			}
 
 			@Override
