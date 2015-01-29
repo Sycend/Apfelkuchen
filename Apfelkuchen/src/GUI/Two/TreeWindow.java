@@ -42,6 +42,7 @@ public class TreeWindow extends JFrame {
 		this.setTitle(Util.getInstance().getStringFromXML("title"));
 		this.setAlwaysOnTop(true);
 		this.setSize(400, 400);
+		this.setLocation(400, 300);
 		this.setVisible(true);
 		
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
