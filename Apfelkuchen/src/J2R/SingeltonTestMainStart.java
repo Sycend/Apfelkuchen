@@ -123,11 +123,6 @@ public class SingeltonTestMainStart {
 			minmax[i][1] = Double.valueOf(x_high[i]).toString();
 		}
 		String[][]dimensionlessCheck=new String[dMatrix[0].length][vMatrix[0].length];
-//		for(int i=0;i<dMatrix[0].length;i++){
-//			for(int j=0;j<vMatrix[0].length;j++){
-//				dimensionlessCheck[i][j]="0";
-//			}
-//		}
 		for(int i=0;i<vMatrix[0].length;i++){
 			for(int j=0;j<dMatrix[0].length;j++){
 				dimensionlessCheck[j][i]="0";

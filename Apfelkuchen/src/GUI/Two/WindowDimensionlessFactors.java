@@ -485,6 +485,9 @@ public class WindowDimensionlessFactors extends JFrame {
 					
 					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
 					colNamesTextFieldsToColNames();
+					
+					//CheckMeth.
+					
 					refreshWindowContent();
 				}
 				else{
