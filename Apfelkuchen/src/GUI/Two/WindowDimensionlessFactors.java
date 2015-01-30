@@ -20,10 +20,11 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import J2R.PrepareForR;
+
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.lang.Math;
 
 /**
@@ -57,6 +58,8 @@ public class WindowDimensionlessFactors extends JFrame {
 	private boolean isInit;
 	private JToggleButton toggle = new JToggleButton();
 	private boolean log;
+	private double[][] dMatrix = PrepareForR.createDMatrix();
+	private ActionListener actionListener;
 	
 	/**
 	 * Konstruktor für WindowDimensionlessFactors
@@ -103,9 +106,27 @@ public class WindowDimensionlessFactors extends JFrame {
 	 */
 	private void init() {
 		setLayout(new BorderLayout());
+		toggle.setText("Change to Natursicht");
+		actionListener =new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				if (toggle.getText() == "Change to Natursicht") {
+					toggle.setText("Change to log-Sicht");
+					log = true;
+					logChange();
+				} else {
+					toggle.setText("Change to Natursicht");
+					log = false;
+					logChange();
+				}
+				
+			}
+		};
+		toggle.addActionListener(actionListener);
 		initMenuePanel();
 		initContentPanel();
 		isInit=true;
+		
+		
 	}
 	
 	/**
@@ -142,15 +163,15 @@ public class WindowDimensionlessFactors extends JFrame {
 				textFieldColNames.add(textFieldColNamesTemp);
 			else{
 				textFieldColNames.set(i,textFieldColNamesTemp);
-				System.out.println("***********************");
-			//	System.out.println(colNames[i]);
-				System.out.println(textFieldColNamesTemp.getText());
-			}
 				
+			}
+			
 			
 		}
 		
-		
+		//System.out.println("***********************");
+		//	System.out.println(++z);
+			//System.out.println(textFieldColNamesTemp.getText());
 		//MinWerte
 		contentPanel.add(new JLabel("MinV"), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 		GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
@@ -489,7 +510,17 @@ public class WindowDimensionlessFactors extends JFrame {
 					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
 					colNamesTextFieldsToColNames();
 					
-					//CheckMeth.
+					
+					
+					String[][]dimensionlessCheck=new String[dMatrix[0].length][vMatrix[0].length];
+					for(int i=0;i<vMatrix[0].length;i++){
+						for(int j=0;j<dMatrix[0].length;j++){
+							dimensionlessCheck[j][i]="0";
+							for(int k=0;k<dMatrix.length;k++){
+								dimensionlessCheck[j][i]=String.valueOf(Double.parseDouble(dimensionlessCheck[j][i])+dMatrix[k][j]*vMatrix[k][i]);
+							}
+						}
+					}
 					
 					refreshWindowContent();
 				}
@@ -516,21 +547,25 @@ public class WindowDimensionlessFactors extends JFrame {
 		labelSI.add(labelCand);
 		
 		//add Controller
-		toggle.setText("Natursicht");
-		ActionListener actionListener = new ActionListener() {
-			public void actionPerformed(ActionEvent actionEvent) {
-				if (toggle.getText() == "Natursicht") {
-					toggle.setText("log-Sicht");
-					log = true;
-					logChange();
-				} else {
-					toggle.setText("Natursicht");
-					log = false;
-					logChange();
-				}
-			}
-		};
-		toggle.addActionListener(actionListener);
+//		toggle.setText("Natursicht");
+//		ActionListener actionListener = new ActionListener() {
+//			public void actionPerformed(ActionEvent actionEvent) {
+//				System.out.println("-----------------");
+//				if (toggle.getText() == "Natursicht") {
+//					toggle.setText("log-Sicht");
+//					log = true;
+//					logChange();
+//					
+//					System.out.println(++z);
+//				} else {
+//					toggle.setText("Natursicht");
+//					log = false;
+//					logChange();
+//					System.out.println(--z);
+//				}
+//			}
+//		};
+		//toggle.addActionListener(actionListener);
 		menuePanel.add(toggle);
 		
 		buttonBack = new JButton(Util.getInstance().getStringFromXML("buttonBack"));
@@ -682,20 +717,19 @@ public class WindowDimensionlessFactors extends JFrame {
 						Math.pow(10.0, Double.parseDouble(maxV[i]))).toString();
 
 			}
-			initContentPanel();;
-			toggle.setText("log-Sicht");
+			toggle.setText("Change to log-Sicht");
 		} else {
 			for (int i = 0; i < minV.length; i++) {
 				minV[i] = Double.valueOf(
 						Math.log10(Double.parseDouble(minV[i]))).toString();
 				maxV[i] = Double.valueOf(
 						Math.log10(Double.parseDouble(maxV[i]))).toString();
-
+				
 			}
-			initContentPanel();
-			refreshWindowContent();
+			
+			
 		}
-
+		refreshWindowContent();
 	}
 	
 	public static double[][] getVMatrix() {
