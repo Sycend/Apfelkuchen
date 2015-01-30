@@ -38,8 +38,10 @@ public class WindowDimensionlessFactors extends JFrame {
 	protected static double[][] vMatrix;
 	protected static String[] rowNames;
 	protected static String[] colNames;
-	protected static String[] minV;
-	protected static String[] maxV;
+	protected static String[] minVLog;
+	protected static String[] maxVLog;
+	protected static String[] minVNat;
+	protected static String[] maxVNat;
 	protected static String[][] dimensionlessControlSI;
 	private int lengthVMatrix;
 	private int widthVMatrix;
@@ -112,13 +114,13 @@ public class WindowDimensionlessFactors extends JFrame {
 				if (toggle.getText() == "Change to Natursicht") {
 					toggle.setText("Change to log-Sicht");
 					log = true;
-					logChange();
+
 				} else {
 					toggle.setText("Change to Natursicht");
 					log = false;
-					logChange();
 				}
 				
+				refreshWindowContent();
 			}
 		};
 		toggle.addActionListener(actionListener);
@@ -181,7 +183,10 @@ public class WindowDimensionlessFactors extends JFrame {
 			textFieldMinVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMinVTemp.setPreferredSize(new Dimension(50, 25));
 			textFieldMinVTemp.setColumns(10);
-			textFieldMinVTemp.setText(minV[i]);
+			if (log)
+				textFieldMinVTemp.setText(minVLog[i]);
+			else 
+				textFieldMinVTemp.setText(minVNat[i]);
 			contentPanel.add(textFieldMinVTemp, new GridBagConstraints(1 + 3 * i, 1, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 			textFieldMinV.add(textFieldMinVTemp);
@@ -200,7 +205,11 @@ public class WindowDimensionlessFactors extends JFrame {
 			textFieldMaxVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMaxVTemp.setPreferredSize(new Dimension(50, 25));
 			textFieldMaxVTemp.setColumns(10);
-			textFieldMaxVTemp.setText(maxV[i]);
+			
+			if (log)
+				textFieldMaxVTemp.setText(maxVLog[i]);
+			else 
+				textFieldMaxVTemp.setText(maxVNat[i]);
 			
 			contentPanel.add(textFieldMaxVTemp, new GridBagConstraints(1 + 3 * i, 2, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
@@ -656,8 +665,8 @@ public class WindowDimensionlessFactors extends JFrame {
 				vMatrix[i][col] = vMatrix[i][col + 1];
 			}
 			colNames[col] = colNames[col + 1];
-			minV[col] = minV[col + 1];
-			maxV[col] = maxV[col + 1];
+			minVLog[col] = minVLog[col + 1];
+			maxVLog[col] = maxVLog[col + 1];
 			for (int j = 0; j < 7; j++) {
 				dimensionlessControlSI[j][col] = dimensionlessControlSI[j][col];
 			}
@@ -686,11 +695,15 @@ public class WindowDimensionlessFactors extends JFrame {
 		for(int i = 0; i < colNames.length; i++ )
 		System.out.println("++++++++++++++++++++++++++++++++++++"+colNames[i]);
 		
-		minV = new String[minMax.length];
-		maxV = new String[minMax.length];
+		minVLog = new String[minMax.length];
+		maxVLog = new String[minMax.length];
+		minVNat = new String[minMax.length];
+		maxVNat = new String[minMax.length];
 		for (int i = 0; i < minMax.length; i++) {
-			minV[i] = minMax[i][0];
-			maxV[i] = minMax[i][1];
+			minVLog[i] = minMax[i][0];
+			maxVLog[i] = minMax[i][1];
+			minVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][0])));
+			maxVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][1])));
 		}
 		
 		WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
@@ -708,29 +721,6 @@ public class WindowDimensionlessFactors extends JFrame {
 			refreshWindowContent();
 	}
 	
-	private void logChange() {
-		if (log) {
-			for (int i = 0; i < minV.length; i++) {
-				minV[i] = Double.valueOf(
-						Math.pow(10.0, Double.parseDouble(minV[i]))).toString();
-				maxV[i] = Double.valueOf(
-						Math.pow(10.0, Double.parseDouble(maxV[i]))).toString();
-
-			}
-			toggle.setText("Change to log-Sicht");
-		} else {
-			for (int i = 0; i < minV.length; i++) {
-				minV[i] = Double.valueOf(
-						Math.log10(Double.parseDouble(minV[i]))).toString();
-				maxV[i] = Double.valueOf(
-						Math.log10(Double.parseDouble(maxV[i]))).toString();
-				
-			}
-			
-			
-		}
-		refreshWindowContent();
-	}
 	
 	public static double[][] getVMatrix() {
 		
