@@ -99,11 +99,14 @@ public class PrepareForR {
 	public static double[] createMin() {
 
 		double[] min = new double [WindowRelevantFactors.getTextFieldSILow().size()];
-
+System.out.println("-------------MIN-------------");
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
 			min[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSILow().get(i).getText());
-//			min[i]=Math.log10(min[i]);
+			System.out.println("N:"+min[i]);
+			
+			min[i]=Math.log10(min[i]);
+			System.out.println("L:"+min[i]);
 		}
 		
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
@@ -123,10 +126,15 @@ public class PrepareForR {
 
 		double[] max = new double [WindowRelevantFactors.getTextFieldAbbr().size()];
 
+		System.out.println("------------MAX----------");
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
 			max[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSIHigh().get(i).getText());
-//			max[i]=Math.log10(max[i]);
+			System.out.println("N:"+ max[i]);
+				max[i]=Math.log10(max[i]);
+				
+				System.out.println("L:"+max[i]);
+
 			//max[i]=Math.log(max[i]) / Math.log(10);
 			
 		}

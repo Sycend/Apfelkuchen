@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.lang.Math;
+
 /**
  * @author Florian Then, Dominik Hofmann, Christoph Wütschner
  * @version 1.0.6
@@ -54,6 +56,7 @@ public class WindowDimensionlessFactors extends JFrame {
 	private JPanel contentPanel;
 	private boolean isInit;
 	private JToggleButton toggle = new JToggleButton();
+	private boolean log;
 	
 	/**
 	 * Konstruktor für WindowDimensionlessFactors
@@ -518,8 +521,12 @@ public class WindowDimensionlessFactors extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				if (toggle.getText() == "Natursicht") {
 					toggle.setText("log-Sicht");
+					log = true;
+					logChange();
 				} else {
 					toggle.setText("Natursicht");
+					log = false;
+					logChange();
 				}
 			}
 		};
@@ -664,6 +671,31 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		if (refresh)
 			refreshWindowContent();
+	}
+	
+	private void logChange() {
+		if (log) {
+			for (int i = 0; i < minV.length; i++) {
+				minV[i] = Double.valueOf(
+						Math.pow(10.0, Double.parseDouble(minV[i]))).toString();
+				maxV[i] = Double.valueOf(
+						Math.pow(10.0, Double.parseDouble(maxV[i]))).toString();
+
+			}
+			initContentPanel();;
+			toggle.setText("log-Sicht");
+		} else {
+			for (int i = 0; i < minV.length; i++) {
+				minV[i] = Double.valueOf(
+						Math.log10(Double.parseDouble(minV[i]))).toString();
+				maxV[i] = Double.valueOf(
+						Math.log10(Double.parseDouble(maxV[i]))).toString();
+
+			}
+			initContentPanel();
+			refreshWindowContent();
+		}
+
 	}
 	
 	public static double[][] getVMatrix() {
