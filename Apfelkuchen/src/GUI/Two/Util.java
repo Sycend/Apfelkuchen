@@ -174,8 +174,8 @@ public class Util {
 			outputstream.writeObject(WindowDimensionlessFactors.vMatrix);
 			outputstream.writeObject(WindowDimensionlessFactors.rowNames);
 			outputstream.writeObject(WindowDimensionlessFactors.colNames);
-			outputstream.writeObject(WindowDimensionlessFactors.minV);
-			outputstream.writeObject(WindowDimensionlessFactors.maxV);
+			outputstream.writeObject(WindowDimensionlessFactors.minVLog);
+			outputstream.writeObject(WindowDimensionlessFactors.maxVLog);
 			outputstream.writeObject(WindowDimensionlessFactors.dimensionlessControlSI);
 			outputstream.flush();
 			outputstream.close();
@@ -194,8 +194,8 @@ public class Util {
 			WindowDimensionlessFactors.vMatrix = (double[][]) input.readObject();
 			WindowDimensionlessFactors.rowNames = (String[]) input.readObject();
 			WindowDimensionlessFactors.colNames = (String[]) input.readObject();
-			WindowDimensionlessFactors.minV = (String[]) input.readObject();
-			WindowDimensionlessFactors.maxV = (String[]) input.readObject();
+			WindowDimensionlessFactors.minVLog = (String[]) input.readObject();
+			WindowDimensionlessFactors.maxVLog = (String[]) input.readObject();
 			WindowDimensionlessFactors.dimensionlessControlSI = (String[][]) input.readObject();
 			input.close();
 		} catch (Exception e) {
