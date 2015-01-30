@@ -477,22 +477,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				colNamesTextFieldsToColNames();
-				for(int i=0;i<widthVMatrix;i++){
-					if(checkLinearMatrixForDeleteColumn(i))
-					{
-						int check=JOptionPane.showConfirmDialog(null, 
-                                "Do you wanna Delete this column? "+colNames[i], 
-                                "Choose", 
-                                JOptionPane.YES_NO_OPTION); 
-						if(check==JOptionPane.YES_OPTION)
-						{
-							colNamesTextFieldsToColNames();
-							deleteVMatrixColumn(i);
-							refreshWindowContent();
-							return;
-						}
-					}
-				}
+				
 				if(checkLinearMatrix()){
 					System.out.println(linearDependenceTextFields.get(1).get(0).getText());
 					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
@@ -505,6 +490,28 @@ public class WindowDimensionlessFactors extends JFrame {
 							}
 						}
 					}
+				}
+				else{
+					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.INFORMATION_MESSAGE);
+				}			
+					
+					for(int i=0;i<widthVMatrix;i++){
+						if(checkLinearMatrixForDeleteColumn(i))
+						{
+							int check=JOptionPane.showConfirmDialog(null, 
+	                                "Do you wanna Delete this column? "+colNames[i], 
+	                                "Choose", 
+	                                JOptionPane.YES_NO_OPTION); 
+							if(check==JOptionPane.YES_OPTION)
+							{
+								colNamesTextFieldsToColNames();
+								deleteVMatrixColumn(i);
+								refreshWindowContent();
+								return;
+							}
+						}
+					}
+					
 					System.out.println("TempArrayList");
 					for(int i=0;i<lengthVMatrix;i++){
 						ArrayList<JTextField> tempArrayList=new ArrayList<JTextField>();
@@ -516,11 +523,6 @@ public class WindowDimensionlessFactors extends JFrame {
 						vMatrixTextFields.set(i,tempArrayList);
 					}			
 					
-					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
-					colNamesTextFieldsToColNames();
-					
-					
-					
 					String[][]dimensionlessCheck=new String[dMatrix[0].length][vMatrix[0].length];
 					for(int i=0;i<vMatrix[0].length;i++){
 						for(int j=0;j<dMatrix[0].length;j++){
@@ -531,13 +533,18 @@ public class WindowDimensionlessFactors extends JFrame {
 						}
 					}
 					
+					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
+					colNamesTextFieldsToColNames();
+					
+					
+					
+					
+					
+					
 					refreshWindowContent();
-				}
-				else{
-					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.INFORMATION_MESSAGE);
-				}				
+					
 			}
-		});
+		}); //-------
 		menuePanel.add(buttonReset);
 		
 		ArrayList<JLabel> labelM = new ArrayList<JLabel>();
@@ -617,9 +624,9 @@ public class WindowDimensionlessFactors extends JFrame {
 					isRestOK = true;
 			}
 		}
-		if (isDiagonalOK == true && isRestOK == true)
-			return true;
-		return false;
+		if (isDiagonalOK == true && isRestOK == false)
+			return false;
+		return true;
 	}
 	/**
 	 * checks given column:
@@ -693,7 +700,6 @@ public class WindowDimensionlessFactors extends JFrame {
 		widthVMatrix = vMatrix[0].length;
 		
 		for(int i = 0; i < colNames.length; i++ )
-		System.out.println("++++++++++++++++++++++++++++++++++++"+colNames[i]);
 		
 		minVLog = new String[minMax.length];
 		maxVLog = new String[minMax.length];
