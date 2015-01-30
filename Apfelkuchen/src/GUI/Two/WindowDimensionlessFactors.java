@@ -135,9 +135,18 @@ public class WindowDimensionlessFactors extends JFrame {
 			
 			contentPanel.add(textFieldColNamesTemp, new GridBagConstraints(1 + 3 * i, 0, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 10, 5), 0, 0));
+			if(!isInit)
+				textFieldColNames.add(textFieldColNamesTemp);
+			else{
+				textFieldColNames.set(i,textFieldColNamesTemp);
+				System.out.println("***********************");
+			//	System.out.println(colNames[i]);
+				System.out.println(textFieldColNamesTemp.getText());
+			}
+				
 			
-			textFieldColNames.add(textFieldColNamesTemp);
 		}
+		
 		
 		//MinWerte
 		contentPanel.add(new JLabel("MinV"), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
@@ -434,6 +443,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		buttonReset = new JButton("Reset");
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				colNamesTextFieldsToColNames();
 				for(int i=0;i<widthVMatrix;i++){
 					if(checkLinearMatrixForDeleteColumn(i))
 					{
@@ -474,7 +484,7 @@ public class WindowDimensionlessFactors extends JFrame {
 					}			
 					
 					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
-					
+					colNamesTextFieldsToColNames();
 					refreshWindowContent();
 				}
 				else{
