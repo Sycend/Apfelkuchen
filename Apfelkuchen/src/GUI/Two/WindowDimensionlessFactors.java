@@ -684,7 +684,11 @@ public class WindowDimensionlessFactors extends JFrame {
 		if (refresh)
 			refreshWindowContent();
 	}
-	
+	/**
+	 * reduce vMatrix width to match real size
+	 * deleted(columns which are not recognized anymore) columns are erased
+	 * colNames included
+	 */
 	private void reduceVmatrix()
 	{
 		String[] colNamesTemp=colNames;
