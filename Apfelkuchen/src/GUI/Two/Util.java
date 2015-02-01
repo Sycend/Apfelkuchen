@@ -430,14 +430,16 @@ public class Util {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				fields.get(i).setBackground(Color.WHITE);
 				return true;
-			} else {
+			}else{
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
 				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
 		}
-
 		return false;
+
+		
 
 	}
 	 
