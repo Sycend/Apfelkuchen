@@ -20,7 +20,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 /**
  * JTree Window for selection of dimensions and units
- * @author Yuri Kalinin, Dominik Hofmann
+ * @author Yuri Kalinin, Dominik Hofmann, Sycend
  * @version 1.0.5
  */
 public class TreeWindow extends JFrame {
@@ -89,8 +89,8 @@ public class TreeWindow extends JFrame {
 						if (Util.getInstance().unitsArray.size() > 0) {
 							for (int i = 0; i < WindowRelevantFactors.textFieldDimension.size(); i++) {
 								for (int n = 0; n < Util.getInstance().unitsArray.size(); n++) {
-									if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension())) {
-										if (WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getUnit())) {
+									if (WindowRelevantFactors.textFieldDimension.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getDimension())
+										&& WindowRelevantFactors.textFieldUnit.get(i).getText().equals(Util.getInstance().unitsArray.get(n).getUnit())) {
 											WindowRelevantFactors.textFieldM.get(i).setText("" + Util.getInstance().unitsArray.get(n).getM());
 											WindowRelevantFactors.textFieldK.get(i).setText("" + Util.getInstance().unitsArray.get(n).getK());
 											WindowRelevantFactors.textFieldS.get(i).setText("" + Util.getInstance().unitsArray.get(n).getS());
@@ -98,7 +98,7 @@ public class TreeWindow extends JFrame {
 											WindowRelevantFactors.textFieldMol.get(i).setText("" + Util.getInstance().unitsArray.get(n).getMol());
 											WindowRelevantFactors.textFieldAmp.get(i).setText("" + Util.getInstance().unitsArray.get(n).getAmp());
 											WindowRelevantFactors.textFieldCand.get(i).setText("" + Util.getInstance().unitsArray.get(n).getCand());
-										}
+										
 									}
 								}
 							}
