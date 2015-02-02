@@ -378,7 +378,7 @@ public class Util {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
 
-		if (field.getText().matches("[a-zA-Z]{1,20}") != true) {
+		if (field.getText().matches("[a-zA-Z]{1,30}") != true) {
 			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 			field.setBackground(bgColor);
 			return false;
@@ -401,7 +401,7 @@ public class Util {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getText().matches("[a-zA-Z]{1,20}") != true) {
+			if (fields.get(i).getText().matches("[a-zA-Z]{1,30}") != true) {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
 				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
