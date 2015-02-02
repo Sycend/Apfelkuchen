@@ -43,30 +43,9 @@ public class SingeltonTestMainStart {
 			SuggestVMatrix = new VMatrixControllerMain(callerInstance, u_roles,
 					dMatrix, colNames, rowNames, role, debug);
 
-			// Test Ausgabe bei Übernahme unnötig
 			vMatrix = SuggestVMatrix.getVMatrix();
 			vMatrixColNames = SuggestVMatrix.getVMatrixColNames();
 			vMatrixRowNames = SuggestVMatrix.getVMatrixRowNames();
-
-			for (int i = 0; i < vMatrixRowNames.length; i++)
-				System.out.println("Test: " + vMatrixRowNames[i]);
-
-			// -------------------------Ausgabe-------------------------------
-
-			for (int i = 0; i < vMatrixRowNames.length; i++) {
-				if (i < vMatrixRowNames.length)
-					System.out.print("  " + vMatrixRowNames[i] + " ");
-				for (int j = 0; j < vMatrixColNames.length; j++) {
-					System.out.print(vMatrix[i][j]);// Spalte /Zeilen
-					System.out.print(" ");
-				}
-				if (i < vMatrixColNames.length) {
-					System.out.print(vMatrixColNames[i]);
-				}
-				System.out.print('\n');
-			}
-
-			// -------------------------------------------------------------------------------------------
 
 		} else {
 			
@@ -77,9 +56,6 @@ public class SingeltonTestMainStart {
 
 			vMatrix = WindowDimensionlessFactors.getVMatrix();
 		}
-
-		// double[] u_lowArray = new double[] { -1, -2, -3, -4, -5 };
-		// double[] u_highArray = new double[] { 1, 2, 3, 4, 5 };
 
 		double[] u_lowArray = PrepareForR.createMin();
 		double[] u_highArray = PrepareForR.createMax();
@@ -99,23 +75,6 @@ public class SingeltonTestMainStart {
 		String[] x_highRowNames = minMaxController
 				.getX_highRownamesStringArray();
 
-		// Test Ausgabe (Bei übernahme nicht nötig)
-
-		for (int i = 0; i < x_low.length; i++) {
-			System.out.print(x_lowRowNames[i]);
-			System.out.print(" ");
-			System.out.print(x_low[i]);
-			System.out.println("");
-			System.out.print(x_highRowNames[i]);
-			System.out.print(" ");
-			System.out.print(x_high[i]);
-			System.out.println("");
-
-		}
-		System.out.println(x_lowColNames[0]);
-		System.out.println(x_highColNames[0]);
-
-		// callerInstance.stopRCaller();
 		String minmax[][] = new String[x_low.length][2];
 
 		for (int i = 0; i < x_low.length; i++) {
@@ -135,14 +94,9 @@ public class SingeltonTestMainStart {
 		if (Menu.WDF == null) {
 			Menu.WDF = new WindowDimensionlessFactors(vMatrix, rowNames,
 					vMatrixColNames, minmax, dimensionlessCheck);
-//							new String[][] { { "0", "0" },
-//							{ "0", "0" }, { "0", "0" }, { "0", "0" },
-//							{ "0", "0" }, { "0", "0" }, { "0", "0" } });
 		} else {
 			Menu.WDF.ResetValues(vMatrix, rowNames, vMatrixColNames, minmax,dimensionlessCheck,true);
-//					new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" },
-//							{ "0", "0" }, { "0", "0" }, { "0", "0" },
-//							{ "0", "0" } }, true);
+
 		}
 
 	}

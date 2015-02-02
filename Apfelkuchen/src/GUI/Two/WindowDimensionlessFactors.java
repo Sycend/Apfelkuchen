@@ -78,9 +78,6 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		 ResetValues(vMatrix, rowNames, colNames,  minMax, dimensionlessControlSI,false);
 		 
-		//Testausgabe um Matrix-Ausmaße zu überprüfen
-		System.out.println("lengthVMatrix: " + lengthVMatrix);
-		System.out.println("vMatrix[0].length: " + vMatrix[0].length);
 		lengthVMatrix = vMatrix.length;
 		widthVMatrix = vMatrix[0].length;
 		
@@ -480,53 +477,27 @@ public class WindowDimensionlessFactors extends JFrame {
 					
 					for (int i = 0; i < lengthVMatrix; i++)
 						for(int j = 0; j < widthVMatrix; j++)
-							vMatrix [i][j] = 0.0;
-					
-					//Arrays.fill(vMatrix,0.0);
-					//vMatrix= new double[lengthVMatrix][widthVMatrix];
-					System.out.println("///////1//////////");
-					for (int i = 0; i < widthVMatrix; i++){
-						for (int j = 0; j < widthVMatrix; j++){
-							System.out.print(linearDependenceTextFields.get(i).get(j).getText() + " ");
-						}
-						System.out.println();
-					}
-						
-					
+							vMatrix [i][j] = 0.0;					
 					
 					for(int l=0;l<widthVMatrix;l++){
 						if(checkLinearMatrixForDeleteColumn(l))
 						{
-							System.out.println("Test");
+							System.out.println(" ");
 						}else{
 							for(int i=0;i<lengthVMatrix;i++){	
-								System.out.println("Länge: " + i);
 								for(int j=0;j<widthVMatrix;j++){
-									System.out.println("Breite: " + j);
-									System.out.println("VMatrix = " + vMatrix[i][l] + "VMatrix = " + vMatrix[i][l] + " + " + "LinearDTF: " + linearDependenceTextFields.get(j).get(l).getText() + " * "  + "vMatrixTFT: " + vMatrixTextFieldsTemp.get(i).get(j).getText());
 									vMatrix[i][l]=vMatrix[i][l]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
 											Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());
-									System.out.println("Result: " + vMatrix[i][l] );
 								}
 							}
 						}						
-					}
-					
-					System.out.println("///////2//////////");
-					for (int i = 0; i < lengthVMatrix; i++){
-						for (int j = 0; j < widthVMatrix; j++){
-							System.out.print(vMatrix[i][j] + " ");
-						}
-						System.out.println();
-					}
-					
+					}					
 				}
 				else{
 					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.INFORMATION_MESSAGE);
 				}			
 
 				boolean [] saveDeleteColum = new boolean[widthVMatrix];
-				System.out.println(saveDeleteColum[0]);
 				for(int i=0;i<widthVMatrix;i++){
 					if(checkLinearMatrixForDeleteColumn(i))
 					{

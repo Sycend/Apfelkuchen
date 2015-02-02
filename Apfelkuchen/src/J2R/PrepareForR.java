@@ -51,17 +51,7 @@ public class PrepareForR {
 
 			}
 		}
-		
-//		for (int i = 0; i < siEinheiten.get(1).size(); i++) {
-//			for (int j = 0; j < 7; j++) {
-//				System.out.print(dMatrix[j][i]+" ");
-//				
-//			}
-//			System.out.println();
-//		}
-		
-		
-		
+
 		return dMatrix;
 	}
 
@@ -80,13 +70,6 @@ public class PrepareForR {
 					.getText();
 		}
 			
-			System.out.println();
-		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
-			System.out.println(rowNames[i]);
-		}
-
-		
-		
 		return rowNames;
 	}
 
@@ -99,18 +82,11 @@ public class PrepareForR {
 	public static double[] createMin() {
 
 		double[] min = new double [WindowRelevantFactors.getTextFieldSILow().size()];
-System.out.println("-------------MIN-------------");
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
 			min[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSILow().get(i).getText());
-			System.out.println("N:"+min[i]);
-			
+						
 			min[i]=Math.log10(min[i]);
-			System.out.println("L:"+min[i]);
-		}
-		
-		for (int i = 0; i < WindowRelevantFactors.getTextFieldSILow().size(); i++) {
-			System.out.println(min[i]);
 		}
 
 		return min;
@@ -126,23 +102,13 @@ System.out.println("-------------MIN-------------");
 
 		double[] max = new double [WindowRelevantFactors.getTextFieldAbbr().size()];
 
-		System.out.println("------------MAX----------");
 		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
 			max[i] = Double.parseDouble(WindowRelevantFactors
 					.getTextFieldSIHigh().get(i).getText());
-			System.out.println("N:"+ max[i]);
-				max[i]=Math.log10(max[i]);
-				
-				System.out.println("L:"+max[i]);
-
-			//max[i]=Math.log(max[i]) / Math.log(10);
-			
+			max[i]=Math.log10(max[i]);
+							
 		}
 
-		for (int i = 0; i < WindowRelevantFactors.getTextFieldAbbr().size(); i++) {
-			System.out.println(max[i]);
-		}
-		
 		return max;
 	}
 	
@@ -159,10 +125,6 @@ System.out.println("-------------MIN-------------");
 		for (int i = 0; i < WindowRelevantFactors.getComboBoxRole().size(); i++) {
 			roles[i] = WindowRelevantFactors.getComboBoxRole().get(i)
 					.getSelectedItem().toString();
-		}
-		
-		for (int i = 0; i < WindowRelevantFactors.getComboBoxRole().size(); i++) {
-			System.out.println(roles[i]);
 		}
 
 		return roles;
