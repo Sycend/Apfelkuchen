@@ -428,7 +428,7 @@ public class Util {
 		String title = getStringFromXML("errorTitleDialog0");
 		for (int i = 0; i < fields.size(); i++) {
 
-			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(e)?") == true) {
+			if (fields.get(i).getText().matches("([-]{1})?\\d+([.]{1})?(\\d+)?(E)?(e)?(-)?(\\d+)?") == true) {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				fields.get(i).setBackground(Color.WHITE);
 				return true;
@@ -451,21 +451,21 @@ public class Util {
 	 * constraints:  min!=max; min>0, max>0, numbers
 	 * SIMin!=SiMax;
 	 * 
-	 * @param fieldMin
+	 * @param field
 	 * @param siMinFields
 	 * @return
 	 */
-	protected boolean MinMaxValuesCheck(JTextField fieldMin, JTextField fieldMax) {
+	protected boolean MinMaxValuesCheck(JTextField field) {
 
-		if (fieldMin.getText().matches("\\d+([.]{1})?(\\d+)?(E)?(e)?(-)?(\\d+)?") == false) {
-			fieldMin.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
-			fieldMin.setBackground(bgColor);
+		if (field.getText().matches("\\d+([.]{1})?(\\d+)?(E)?(e)?(-)?(\\d+)?") == false) {
+			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
+			field.setBackground(bgColor);
 			return false;
 
 		} else {
 		
-			fieldMin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-			fieldMin.setBackground(Color.WHITE);
+			field.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			field.setBackground(Color.WHITE);
 			return true;
 		}
 
