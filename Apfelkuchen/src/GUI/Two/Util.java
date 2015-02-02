@@ -333,7 +333,8 @@ public class Util {
 		String title = getStringFromXML("errorTitleDialog0");
 
 		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
+//			if (fields.get(i).getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
+			if(fields.get(i).getText().equals("")){
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
 				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
@@ -356,7 +357,8 @@ public class Util {
 	 */
 	protected boolean unitFieldCheck(JTextField field) {
 
-		if (field.getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
+//		if (field.getText().matches("[a-zA-Z0-9]{0,6}(\\^)?(\\/)?(\\^)?([a-zA-Z0-9])+((\\^)?(\\/)?([a-zA-Z0-9])+)?") == false) {
+		if(field.getText().equals("")){
 			field.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 			field.setBackground(bgColor);
 			return false;
