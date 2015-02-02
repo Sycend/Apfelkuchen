@@ -20,13 +20,18 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import J2R.PrepareForR;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.lang.Math;
 
 /**
- * @author Florian Then, Dominik Hofmann
- * @version 1.0.5
+ * @author Florian Then, Dominik Hofmann, Christoph Wütschner
+ * @version 1.0.6
  * Window2
  */
 public class WindowDimensionlessFactors extends JFrame {
@@ -35,8 +40,10 @@ public class WindowDimensionlessFactors extends JFrame {
 	protected static double[][] vMatrix;
 	protected static String[] rowNames;
 	protected static String[] colNames;
-	protected static String[] minV;
-	protected static String[] maxV;
+	protected static String[] minVLog;
+	protected static String[] maxVLog;
+	protected static String[] minVNat;
+	protected static String[] maxVNat;
 	protected static String[][] dimensionlessControlSI;
 	private int lengthVMatrix;
 	private int widthVMatrix;
@@ -54,6 +61,9 @@ public class WindowDimensionlessFactors extends JFrame {
 	private JPanel contentPanel;
 	private boolean isInit;
 	private JToggleButton toggle = new JToggleButton();
+	private boolean log;
+	private double[][] dMatrix = PrepareForR.createDMatrix();
+	private ActionListener actionListener;
 	
 	/**
 	 * Konstruktor für WindowDimensionlessFactors
@@ -68,9 +78,6 @@ public class WindowDimensionlessFactors extends JFrame {
 		
 		 ResetValues(vMatrix, rowNames, colNames,  minMax, dimensionlessControlSI,false);
 		 
-		//Testausgabe um Matrix-Ausmaße zu überprüfen
-		System.out.println("lengthVMatrix: " + lengthVMatrix);
-		System.out.println("vMatrix[0].length: " + vMatrix[0].length);
 		lengthVMatrix = vMatrix.length;
 		widthVMatrix = vMatrix[0].length;
 		
@@ -100,9 +107,27 @@ public class WindowDimensionlessFactors extends JFrame {
 	 */
 	private void init() {
 		setLayout(new BorderLayout());
+		toggle.setText("Change to Natursicht");
+		actionListener =new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				if (toggle.getText() == "Change to Natursicht") {
+					toggle.setText("Change to log-Sicht");
+					log = true;
+
+				} else {
+					toggle.setText("Change to Natursicht");
+					log = false;
+				}
+				
+				refreshWindowContent();
+			}
+		};
+		toggle.addActionListener(actionListener);
 		initMenuePanel();
 		initContentPanel();
 		isInit=true;
+		
+		
 	}
 	
 	/**
@@ -111,7 +136,6 @@ public class WindowDimensionlessFactors extends JFrame {
 	private void initContentPanel() {
 		contentPanel = new JPanel();
 		contentPanel.setLayout(new GridBagLayout());
-		//40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] { Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
 		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow,
 		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,	Util.getInstance().currentGridSizeLow, 
@@ -125,6 +149,8 @@ public class WindowDimensionlessFactors extends JFrame {
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
 		
 		//Spalten-Namen
+		if(isInit)
+			textFieldColNames.clear();
 		for (int i = 0; i < widthVMatrix; i++) {
 			JTextField textFieldColNamesTemp = new JTextField();
 			textFieldColNamesTemp.setMaximumSize(new Dimension(50, 25));
@@ -135,10 +161,11 @@ public class WindowDimensionlessFactors extends JFrame {
 			
 			contentPanel.add(textFieldColNamesTemp, new GridBagConstraints(1 + 3 * i, 0, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 10, 5), 0, 0));
-			
 			textFieldColNames.add(textFieldColNamesTemp);
+			
+			
+			
 		}
-		
 		//MinWerte
 		contentPanel.add(new JLabel("MinV"), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 		GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
@@ -148,7 +175,10 @@ public class WindowDimensionlessFactors extends JFrame {
 			textFieldMinVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMinVTemp.setPreferredSize(new Dimension(50, 25));
 			textFieldMinVTemp.setColumns(10);
-			textFieldMinVTemp.setText(minV[i]);
+			if (log)
+				textFieldMinVTemp.setText(minVLog[i]);
+			else 
+				textFieldMinVTemp.setText(minVNat[i]);
 			contentPanel.add(textFieldMinVTemp, new GridBagConstraints(1 + 3 * i, 1, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 1, 5), 0, 0));
 			textFieldMinV.add(textFieldMinVTemp);
@@ -167,7 +197,11 @@ public class WindowDimensionlessFactors extends JFrame {
 			textFieldMaxVTemp.setMaximumSize(new Dimension(50, 25));
 			textFieldMaxVTemp.setPreferredSize(new Dimension(50, 25));
 			textFieldMaxVTemp.setColumns(10);
-			textFieldMaxVTemp.setText(maxV[i]);
+			
+			if (log)
+				textFieldMaxVTemp.setText(maxVLog[i]);
+			else 
+				textFieldMaxVTemp.setText(maxVNat[i]);
 			
 			contentPanel.add(textFieldMaxVTemp, new GridBagConstraints(1 + 3 * i, 2, 3, 1, 0.0, 0.0,
 			GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 5, 10, 5), 0, 0));
@@ -180,6 +214,8 @@ public class WindowDimensionlessFactors extends JFrame {
 		}
 		
 		//VMatrix
+		if (isInit)
+			vMatrixTextFields.clear();
 		for (int i = 0; i < lengthVMatrix; i++) {
 			
 			String tempName = rowNames[i];
@@ -238,6 +274,8 @@ public class WindowDimensionlessFactors extends JFrame {
 		}
 		
 		//Lineare Abhängigkeits Matrix
+		if(isInit)
+			linearDependenceTextFields.clear();
 		for (int i = 0; i < widthVMatrix; i++) {
 			String tempName = colNames[i];
 			if (i == 0) {
@@ -283,10 +321,8 @@ public class WindowDimensionlessFactors extends JFrame {
 				
 				row.add(linearDependenceTextFieldsTemp);
 			}
-			if(!isInit)
-				linearDependenceTextFields.add(row);
-			else
-				linearDependenceTextFields.set(i,row);
+		
+		linearDependenceTextFields.add(row);
 		}
 		
 		//MWerte
@@ -431,9 +467,37 @@ public class WindowDimensionlessFactors extends JFrame {
 		jmHelp.add(jmiAbout);
 		jmb.add(jmHelp);
 		setJMenuBar(jmb);
-		buttonReset = new JButton("Reset");
+		buttonReset = new JButton("Update");
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				colNamesTextFieldsToColNames(); 
+				
+				if(checkLinearMatrix()){
+					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
+					
+					for (int i = 0; i < lengthVMatrix; i++)
+						for(int j = 0; j < widthVMatrix; j++)
+							vMatrix [i][j] = 0.0;					
+					
+					for(int l=0;l<widthVMatrix;l++){
+						if(checkLinearMatrixForDeleteColumn(l))
+						{
+							System.out.print(" ");
+						}else{
+							for(int i=0;i<lengthVMatrix;i++){	
+								for(int j=0;j<widthVMatrix;j++){
+									vMatrix[i][l]=vMatrix[i][l]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
+											Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());
+								}
+							}
+						}						
+					}					
+				}
+				else{
+					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.INFORMATION_MESSAGE);
+				}			
+
+				boolean [] saveDeleteColum = new boolean[widthVMatrix];
 				for(int i=0;i<widthVMatrix;i++){
 					if(checkLinearMatrixForDeleteColumn(i))
 					{
@@ -443,45 +507,37 @@ public class WindowDimensionlessFactors extends JFrame {
                                 JOptionPane.YES_NO_OPTION); 
 						if(check==JOptionPane.YES_OPTION)
 						{
-							colNamesTextFieldsToColNames();
-							deleteVMatrixColumn(i);
-							refreshWindowContent();
-							return;
+							saveDeleteColum[i] = true;
 						}
 					}
 				}
-				if(checkLinearMatrix()){
-					System.out.println(linearDependenceTextFields.get(1).get(0).getText());
-					ArrayList<ArrayList<JTextField>> vMatrixTextFieldsTemp = vMatrixTextFields;
-					vMatrix= new double[lengthVMatrix][widthVMatrix];
-					for(int l=0;l<widthVMatrix;l++){
-						for(int i=0;i<lengthVMatrix;i++){							
-							for(int j=0;j<widthVMatrix;j++){
-								vMatrix[i][l]=vMatrix[i][l]+Double.parseDouble((linearDependenceTextFields.get(j).get(l).getText()))*
-										Double.parseDouble(vMatrixTextFieldsTemp.get(i).get(j).getText());
-							}
+				int z = 0;
+				for (int i=0;i<widthVMatrix;i++){
+					if (saveDeleteColum[z]==true){
+						deleteVMatrixColumn(i);
+						i--;
+					}
+					z++;
+				}
+				
+				
+				String[][]dimensionlessCheck=new String[dMatrix[0].length][widthVMatrix];
+				for(int i=0;i<widthVMatrix;i++){
+					for(int j=0;j<dMatrix[0].length;j++){
+						dimensionlessCheck[j][i]="0";
+						for(int k=0;k<dMatrix.length;k++){
+							dimensionlessCheck[j][i]=String.valueOf(Double.parseDouble(dimensionlessCheck[j][i])+dMatrix[k][j]*vMatrix[k][i]);
 						}
 					}
-					System.out.println("TempArrayList");
-					for(int i=0;i<lengthVMatrix;i++){
-						ArrayList<JTextField> tempArrayList=new ArrayList<JTextField>();
-						for(int j=0;j<widthVMatrix;j++){
-							JTextField tempTextField = new JTextField();
-							tempTextField.setText(String.valueOf(vMatrix[i][j]));
-							tempArrayList.add(tempTextField);
-						}
-						vMatrixTextFields.set(i,tempArrayList);
-					}			
-					
+				}
+								
+				if (widthVMatrix!=0)
 					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
+				
+				refreshWindowContent();
 					
-					refreshWindowContent();
-				}
-				else{
-					JOptionPane.showMessageDialog(new JFrame(),"Please change the linear Matrix","No change !",  JOptionPane.INFORMATION_MESSAGE);
-				}				
 			}
-		});
+		}); 
 		menuePanel.add(buttonReset);
 		
 		ArrayList<JLabel> labelM = new ArrayList<JLabel>();
@@ -499,18 +555,6 @@ public class WindowDimensionlessFactors extends JFrame {
 		labelSI.add(labelAmp);
 		labelSI.add(labelCand);
 		
-		//add Controller
-		toggle.setText("Natursicht");
-		ActionListener actionListener = new ActionListener() {
-			public void actionPerformed(ActionEvent actionEvent) {
-				if (toggle.getText() == "Natursicht") {
-					toggle.setText("log-Sicht");
-				} else {
-					toggle.setText("Natursicht");
-				}
-			}
-		};
-		toggle.addActionListener(actionListener);
 		menuePanel.add(toggle);
 		
 		buttonBack = new JButton(Util.getInstance().getStringFromXML("buttonBack"));
@@ -553,22 +597,32 @@ public class WindowDimensionlessFactors extends JFrame {
 					isRestOK = true;
 			}
 		}
-		if (isDiagonalOK == true && isRestOK == true)
-			return true;
-		return false;
+		if (isDiagonalOK == true && isRestOK == false)
+			return false;
+		return true;
 	}
-
+	/**
+	 * checks given column:
+	 * is the column deleteable?
+	 * @param column
+	 * 	selected column for check
+	 * @return
+	 */
 	private boolean checkLinearMatrixForDeleteColumn(int column) {
 		boolean isDeleteable = true;
 		for (int i = 0; i < widthVMatrix; i++) {
-			if (!linearDependenceTextFields.get(column).get(i).getText().equals("0")) {
+			if (!linearDependenceTextFields.get(i).get(column).getText().equals("0")) {
 				isDeleteable = false;
 			}
 		}
 		
 		return isDeleteable;
 	}
-	
+	/**
+	 * refresh WindowContent:
+	 * -	MenuePanel
+	 * -	ContentPanel
+	 */
 	private void refreshWindowContent()
 	{
 		getContentPane().removeAll();
@@ -580,23 +634,35 @@ public class WindowDimensionlessFactors extends JFrame {
 		getContentPane().repaint();
 		setVisible(true);
 	}
-	
+	/**
+	 * delete the given column(dimensionless-factor)
+	 * @param column
+	 * 	column which will get deleted
+	 */
 	private void deleteVMatrixColumn(int column) {
 		for (int col = column; col < widthVMatrix - 1; col++) {
-			for (int i = 0; i < widthVMatrix; i++) {
+			for (int i = 0; i < lengthVMatrix; i++) {
 				vMatrix[i][col] = vMatrix[i][col + 1];
 			}
 			colNames[col] = colNames[col + 1];
-			minV[col] = minV[col + 1];
-			maxV[col] = maxV[col + 1];
+			minVLog[col] = minVLog[col + 1];
+			maxVLog[col] = maxVLog[col + 1];
 			for (int j = 0; j < 7; j++) {
 				dimensionlessControlSI[j][col] = dimensionlessControlSI[j][col];
 			}
 		}
 		widthVMatrix--;
-		refreshWindowContent();
+		reduceVmatrix();
 	}
-	
+	/**
+	 * This mehtode sets the internal values to the ones recived in the Attribute list.
+	 * @param vMatrix - the VMatrix as double array
+	 * @param rowNames - the RowNames of the VMatrix as String array
+	 * @param colNames - the ColNames of the VMatrix as String array
+	 * @param minMax - the values for MinMax as String Matrix [min][max] 
+	 * @param dimensionlessControlSI - the control if the matrix is demensionless
+	 * @param refresh - should the window be refreshed 
+	 */
 	public void ResetValues(double[][] vMatrix, String[] rowNames, String[] colNames, String[][] minMax, String[][] dimensionlessControlSI, boolean refresh) {
 		
 		WindowDimensionlessFactors.vMatrix = vMatrix;
@@ -607,13 +673,16 @@ public class WindowDimensionlessFactors extends JFrame {
 		widthVMatrix = vMatrix[0].length;
 		
 		for(int i = 0; i < colNames.length; i++ )
-		System.out.println("++++++++++++++++++++++++++++++++++++"+colNames[i]);
 		
-		minV = new String[minMax.length];
-		maxV = new String[minMax.length];
+		minVLog = new String[minMax.length];
+		maxVLog = new String[minMax.length];
+		minVNat = new String[minMax.length];
+		maxVNat = new String[minMax.length];
 		for (int i = 0; i < minMax.length; i++) {
-			minV[i] = minMax[i][0];
-			maxV[i] = minMax[i][1];
+			minVLog[i] = minMax[i][0];
+			maxVLog[i] = minMax[i][1];
+			minVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][0])));
+			maxVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][1])));
 		}
 		
 		WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
@@ -630,11 +699,31 @@ public class WindowDimensionlessFactors extends JFrame {
 		if (refresh)
 			refreshWindowContent();
 	}
-	
+	/**
+	 * reduce vMatrix width to match real size
+	 * deleted(columns which are not recognized anymore) columns are erased
+	 * colNames included
+	 */
+	private void reduceVmatrix()
+	{
+		String[] colNamesTemp=colNames;
+		colNames=new String[widthVMatrix];
+		
+		double[][] vMatrixTemp=vMatrix;
+		vMatrix=new double[lengthVMatrix][widthVMatrix];
+		
+		for(int i=0;i<lengthVMatrix;i++){
+			for(int j=0;j<widthVMatrix;j++){
+				vMatrix[i][j]=vMatrixTemp[i][j];
+			}
+		}
+		for(int i=0;i<widthVMatrix;i++)
+		{
+			colNames[i]=colNamesTemp[i];
+		}
+	}
 	public static double[][] getVMatrix() {
-		
-		return WindowDimensionlessFactors.vMatrix;
-		
+		return WindowDimensionlessFactors.vMatrix;		
 	}
 	
 	public static String[] getVMatrixRowNames() {

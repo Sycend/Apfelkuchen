@@ -82,7 +82,7 @@ public class WindowRelevantFactors extends JFrame {
 
 	protected JPanel contentPanel = new JPanel();
 	protected boolean checkFields = false;
-	protected static int countErrors = 0;
+	protected static boolean treeOpend=false;
 
 	public WindowRelevantFactors() {
 		super(Util.getInstance().getStringFromXML("title"));
@@ -129,8 +129,8 @@ public class WindowRelevantFactors extends JFrame {
 		contentPanel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPanel.setLayout(new GridBagLayout());
 		((GridBagLayout) contentPanel.getLayout()).columnWidths = new int[] { Util.getInstance().currentGridSizeHigh, Util.getInstance().currentGridSizeHigh, Util.getInstance().currentGridSizeHigh, Util.getInstance().currentGridSizeHigh, Util.getInstance().currentGridSizeHigh,
-				Util.getInstance().currentGridSizeLow + 10, Util.getInstance().currentGridSizeLow + 6, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
-				Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		Util.getInstance().currentGridSizeLow + 10, Util.getInstance().currentGridSizeLow + 6, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow,
+		Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, Util.getInstance().currentGridSizeLow, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		((GridBagLayout) contentPanel.getLayout()).rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		((GridBagLayout) contentPanel.getLayout()).columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
 		((GridBagLayout) contentPanel.getLayout()).rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4 };
@@ -143,105 +143,105 @@ public class WindowRelevantFactors extends JFrame {
 		labelName.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelName.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelName, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 5, 5, 5), 0, 0));
-
+		
 		// ---- label Abbreviation ----
 		labelAbbreviation = new JLabel();
 		labelAbbreviation.setText(Util.getInstance().getStringFromXML("labelAbbr"));
 		labelAbbreviation.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelAbbreviation.setHorizontalAlignment(SwingConstants.LEFT);
 		contentPanel.add(labelAbbreviation, new GridBagConstraints(1, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
+		
 		// ---- label Role ----
 		labelRole = new JLabel();
 		labelRole.setText(Util.getInstance().getStringFromXML("labelRole"));
 		labelRole.setHorizontalAlignment(SwingConstants.CENTER);
 		labelRole.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelRole, new GridBagConstraints(2, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
+		
 		// ---- label Dimension ----
 		labelDimension = new JLabel();
 		labelDimension.setText(Util.getInstance().getStringFromXML("labelDimension"));
 		labelDimension.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelDimension.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelDimension, new GridBagConstraints(3, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label Unit ----
 		labelUnit = new JLabel();
 		labelUnit.setText(Util.getInstance().getStringFromXML("labelUnit"));
 		labelUnit.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelUnit.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelUnit, new GridBagConstraints(4, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label Low ----
 		labelLow = new JLabel();
 		labelLow.setText(Util.getInstance().getStringFromXML("labelLow"));
 		labelLow.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLow.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelLow, new GridBagConstraints(5, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
+		
 		// ---- label High ----
 		labelHigh = new JLabel();
 		labelHigh.setText(Util.getInstance().getStringFromXML("labelHigh"));
 		labelHigh.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelHigh.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelHigh, new GridBagConstraints(6, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
+		
 		// ---- label m ----
 		labelM = new JLabel();
 		labelM.setText("m");
 		labelM.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelM.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelM, new GridBagConstraints(7, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label k ----
 		labelK = new JLabel();
 		labelK.setText("k");
 		labelK.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelK.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelK, new GridBagConstraints(8, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label s ----
 		labelS = new JLabel();
 		labelS.setText("s");
 		labelS.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelS.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelS, new GridBagConstraints(9, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label kel ----
 		labelKel = new JLabel();
 		labelKel.setText("kel");
 		labelKel.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelKel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelKel, new GridBagConstraints(10, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label mol ----
 		labelMol = new JLabel();
 		labelMol.setText("mol");
 		labelMol.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelMol.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelMol, new GridBagConstraints(11, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label amp ----
 		labelAmp = new JLabel();
 		labelAmp.setText("amp");
 		labelAmp.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelAmp.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelAmp, new GridBagConstraints(12, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-
+		
 		// ---- label cand ----
 		labelCand = new JLabel();
 		labelCand.setText("cand");
 		labelCand.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		labelCand.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(labelCand, new GridBagConstraints(13, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
+		
 		// ---- label SI Min ----
 		labelResultSIMin = new JLabel();
 		labelResultSIMin.setText(Util.getInstance().getStringFromXML("labelSIMin"));
 		labelResultSIMin.setHorizontalAlignment(SwingConstants.CENTER);
 		labelResultSIMin.setFont(new Font("Tahoma", Font.PLAIN, Util.getInstance().currentFontSize));
 		contentPanel.add(labelResultSIMin, new GridBagConstraints(14, 13, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
-
+		
 		// ---- label SI Max ----
 		labelResultSIMax = new JLabel();
 		labelResultSIMax.setText(Util.getInstance().getStringFromXML("labelSIMax"));
@@ -296,7 +296,7 @@ public class WindowRelevantFactors extends JFrame {
 			}
 		});
 		p2.add(buttonNewFactor);
-
+		
 		buttonRemoveFactor = new JButton(Util.getInstance().getStringFromXML("buttonRemoveFactor"));
 		buttonRemoveFactor.setFocusPainted(false);
 		buttonRemoveFactor.addActionListener(ae -> {
@@ -413,92 +413,69 @@ public class WindowRelevantFactors extends JFrame {
 			}
 		});
 		p2.add(buttonRemoveCommandVariable);*/
-
-	
+		
 		buttonNext = new JButton(Util.getInstance().getStringFromXML("buttonNext"));
 		buttonNext.setFocusPainted(false);
-		buttonNext.addActionListener(ae ->{
-				if (ae.getSource() == buttonNext) {
-					if(checkFields==false){
-						return;
-					}
-					
-					
-					if (Util.getInstance().abrevFieldCheck(textFieldAbbreviation, "labelAbbr") != true) {
-						return;
-					}
-					if (Util.getInstance().dimensionFieldCheck(textFieldUnit, "labelUnit") != true) {
-						return;
-					}
-					if (Util.getInstance().dimensionFieldCheck(textFieldDimension, "labelDimension") != true) {
-						return;
-					}
-
-					if (Util.getInstance().fieldsArrayCheck(textFieldHigh, "labelHigh") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldLow, "labelLow") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldM, "m") == false) {
-						return;
-					}
-
-					if (Util.getInstance().fieldsArrayCheck(textFieldK, "k") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldS, "s") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldKel, "kel") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldMol, "mol") == false) {
-						return;
-					}
-
-					if (Util.getInstance().fieldsArrayCheck(textFieldAmp, "amp") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldCand, "cand") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldResultSILow, "labelSIMin") == false) {
-						return;
-					}
-					if (Util.getInstance().fieldsArrayCheck(textFieldResultSIHigh, "labelSIMax") == false) {
-						return;
-					}
-
-//					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow ) == false) {
-//
-//						return;
-//					}
-//					if (Util.getInstance().SIMinMaxValuesCheck(textFieldResultSIHigh, textFieldResultSILow) == false) {
-//						return;
-//					}
-					//Util.getInstance().persistentSaveRelevantFactors();
-					Menu.WRF.setVisible(false);
-
-					// Test Window2
-					//if (!new File(Util.getInstance().DIMENSIONLESSFACTORS_FILENAME).exists()) {
-						//System.out.println("new WindowDimensionlessFactors(Testvalues)");
-						//Menu.WDF = new WindowDimensionlessFactors(new double[][] { { 1.0, 2.0 }, { -1.0, -2.0 }, { 1.0, 2.0 }, { -1.0, 0.0 }, { 0.0, -2.0 } }, new String[] { "Höhe", "Breite", "Dichte", "Temperatur", "Verhältnis" }, new String[] { "Alpha", "Beta" }, new String[][] { { "-5", "0" },
-								//{ "5", "10" } }, new String[][] { { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" }, { "0", "0" } });
-					//} else {
-						//System.out.println("restoreDimensionlessFactors()");
-						SingeltonTestMainStart.calculate(true, Menu.callerInstance);
-						//Util.getInstance().restorePersistentDimensionlessFactors();
-						//Menu.WDF = new WindowDimensionlessFactors();
-					//}
+		buttonNext.addActionListener(ae -> {
+			if (ae.getSource() == buttonNext) {
+//				if (checkFields == false) {
+//					return;
+//				}
+				
+				if (Util.getInstance().abrevFieldCheck(textFieldAbbreviation, "labelAbbr") != true) {
+					return;
 				}
-			
+				if (Util.getInstance().unitFieldCheck(textFieldUnit, "labelUnit") != true) {
+					return;
+				}
+				if (Util.getInstance().dimensionFieldCheck(textFieldDimension, "labelDimension") != true) {
+					return;
+				}
+				
+			if (Util.getInstance().fieldsArrayCheck(textFieldHigh, "labelHigh") == false) { //FIXME
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldLow, "labelLow") == false) {
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldM, "m") == false) {
+					return;
+				}
+				
+				if (Util.getInstance().fieldsArrayCheck(textFieldK, "k") == false) {
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldS, "s") == false) {
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldKel, "kel") == false) {
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldMol, "mol") == false) {
+					return;
+				}
+				
+				if (Util.getInstance().fieldsArrayCheck(textFieldAmp, "amp") == false) {
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldCand, "cand") == false) {
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldResultSILow, "labelSIMin") == false) {
+					return;
+				}
+				if (Util.getInstance().fieldsArrayCheck(textFieldResultSIHigh, "labelSIMax") == false) {
+					return;
+				}
+				Menu.WRF.setVisible(false);
+				SingeltonTestMainStart.calculate(true, Menu.callerInstance);
+			}
 		});
 		p2.add(buttonNext);
 		getContentPane().add(p2, BorderLayout.NORTH);
-
+		
 		scrollpane = new JScrollPane(contentPanel);
-
+		
 		getContentPane().add(scrollpane, BorderLayout.CENTER);
 	}// end Init
 
@@ -643,9 +620,12 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldDimensionTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
-				repaint();
-				setVisible(true);
+				if (treeOpend == false) {
+					new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
+					treeOpend = true;
+					repaint();
+					setVisible(true);
+				}
 			}
 
 			@Override
@@ -695,9 +675,12 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldUnitTemp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (treeOpend == false) {
 				new TreeWindow(textFieldDimensionTemp, textFieldUnitTemp);
+				treeOpend=true;
 				repaint();
 				setVisible(true);
+				}
 			}
 
 			@Override
@@ -750,7 +733,7 @@ public class WindowRelevantFactors extends JFrame {
 			// note: statechanged is triggered on persistentRestore
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
+				checkFields=Util.getInstance().fieldsCheck(textFieldLowTemp);
 				System.out.println("insertUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -759,7 +742,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
+				checkFields=Util.getInstance().fieldsCheck(textFieldLowTemp);
 				System.out.println("removeUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -767,7 +750,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
+				checkFields=Util.getInstance().fieldsCheck(textFieldLowTemp);
 				System.out.println("changedUpdate");
 				doSICalculationLow();
 				doComboboxCheck();
@@ -775,7 +758,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			public void doComboboxCheck() {
 				if (comboBoxRoleTemp.getSelectedItem() == "constant") {
-					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldLowTemp, textFieldHighTemp);
+					checkFields=Util.getInstance().fieldsCheck(textFieldLowTemp);
 					textFieldResultSIHighTemp.setText(textFieldResultSILowTemp.getText());
 				}
 			}
@@ -794,7 +777,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void insertUpdate(DocumentEvent e) {
 				System.out.println("insertUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldHighTemp, textFieldLowTemp);
+					checkFields=Util.getInstance().fieldsCheck(textFieldHighTemp);
 					
 
 				}
@@ -805,7 +788,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void removeUpdate(DocumentEvent e) {
 				System.out.println("removeUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldHighTemp, textFieldLowTemp);
+					checkFields=Util.getInstance().fieldsCheck(textFieldHighTemp);
 
 				}
 				doSICalculationHigh();
@@ -815,7 +798,7 @@ public class WindowRelevantFactors extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 				System.out.println("changedUpdate");
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldHighTemp, textFieldLowTemp);
+					checkFields=Util.getInstance().fieldsCheck(textFieldHighTemp);
 
 				}
 				doSICalculationHigh();
@@ -844,7 +827,7 @@ public class WindowRelevantFactors extends JFrame {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				Util.getInstance().fieldsCheck(textFieldMTemp);
+				checkFields=Util.getInstance().fieldsCheck(textFieldMTemp);
 
 			}
 		});
@@ -1012,19 +995,19 @@ public class WindowRelevantFactors extends JFrame {
 		textFieldResultSILowTemp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSILowTemp, textFieldResultSIHighTemp);
+				checkFields=Util.getInstance().fieldsCheck(textFieldResultSILowTemp);
 
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSILowTemp, textFieldResultSIHighTemp);
+				checkFields=Util.getInstance().fieldsCheck(textFieldResultSILowTemp);
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSILowTemp, textFieldResultSIHighTemp);
+				checkFields=Util.getInstance().fieldsCheck(textFieldResultSILowTemp);
 			}
 		});
 
@@ -1039,7 +1022,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSIHighTemp, textFieldResultSILowTemp);
+					checkFields=Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
 
 				}
 			}
@@ -1047,7 +1030,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSIHighTemp, textFieldResultSILowTemp);
+					checkFields=Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
 
 				}
 			}
@@ -1055,7 +1038,7 @@ public class WindowRelevantFactors extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				if (!comboBoxRoleTemp.getSelectedItem().equals("constant")) {
-					checkFields = Util.getInstance().MinMaxValuesCheck(textFieldResultSIHighTemp, textFieldResultSILowTemp);
+					checkFields=Util.getInstance().fieldsCheck(textFieldResultSIHighTemp);
 
 				}
 			}
@@ -1147,8 +1130,8 @@ public class WindowRelevantFactors extends JFrame {
 	} // end newFactor
 	
 	// Getter Methods
-	public static ArrayList<JTextField> getTextFieldName() {
-		return textFieldName;
+	public static ArrayList<JTextField> getTextFieldAbbr() {
+		return textFieldAbbreviation;
 	}
 
 	public static ArrayList<JTextField> getTextFieldM() {

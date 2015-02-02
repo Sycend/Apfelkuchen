@@ -38,11 +38,11 @@ import org.xml.sax.SAXException;
  */
 public class Util {
 	protected int row = 0;
-	protected String CSV_FILENAME = "spezifikation.csv";
-	protected String USER_CSV_FILENAME = "user_spezifikation.csv";
-	protected String TESTCASE_CSV_FILENAME = "TestCase.csv";
-	protected String RELEVANTFACTORS_FILENAME = "RelevantFactors.apk";
-	protected String DIMENSIONLESSFACTORS_FILENAME = "DimensionlessFactors.apk";
+	protected String CSV_FILENAME = "./spezifikation.csv";
+	protected String USER_CSV_FILENAME = "./user_spezifikation.csv";
+	protected String TESTCASE_CSV_FILENAME = "./TestCase.csv";
+	protected String RELEVANTFACTORS_FILENAME = "./RelevantFactors.apk";
+	protected String DIMENSIONLESSFACTORS_FILENAME = "./DimensionlessFactors.apk";
 	protected File CSV_FILE = new File(CSV_FILENAME);
 	protected File USER_CSV_FILE = new File(USER_CSV_FILENAME);
 	protected File TESTCASE_CSV_FILE = new File(TESTCASE_CSV_FILENAME);
@@ -174,8 +174,8 @@ public class Util {
 			outputstream.writeObject(WindowDimensionlessFactors.vMatrix);
 			outputstream.writeObject(WindowDimensionlessFactors.rowNames);
 			outputstream.writeObject(WindowDimensionlessFactors.colNames);
-			outputstream.writeObject(WindowDimensionlessFactors.minV);
-			outputstream.writeObject(WindowDimensionlessFactors.maxV);
+			outputstream.writeObject(WindowDimensionlessFactors.minVLog);
+			outputstream.writeObject(WindowDimensionlessFactors.maxVLog);
 			outputstream.writeObject(WindowDimensionlessFactors.dimensionlessControlSI);
 			outputstream.flush();
 			outputstream.close();
@@ -185,7 +185,7 @@ public class Util {
 	}
 
 	/**
-	 * This method restores Objects from WindowDimensionlessFactors from a tmp
+	 * This method restores Objects from WindowDimensionlessFactors from an apk
 	 * file.
 	 */
 	protected void restorePersistentDimensionlessFactors() {
@@ -194,8 +194,8 @@ public class Util {
 			WindowDimensionlessFactors.vMatrix = (double[][]) input.readObject();
 			WindowDimensionlessFactors.rowNames = (String[]) input.readObject();
 			WindowDimensionlessFactors.colNames = (String[]) input.readObject();
-			WindowDimensionlessFactors.minV = (String[]) input.readObject();
-			WindowDimensionlessFactors.maxV = (String[]) input.readObject();
+			WindowDimensionlessFactors.minVLog = (String[]) input.readObject();
+			WindowDimensionlessFactors.maxVLog = (String[]) input.readObject();
 			WindowDimensionlessFactors.dimensionlessControlSI = (String[][]) input.readObject();
 			input.close();
 		} catch (Exception e) {
@@ -205,8 +205,7 @@ public class Util {
 	}
 
 	/**
-	 * @return A duplicate free String[] Array that contains all Dimensions
-	 *         found in unitsArray
+	 * @return A duplicate free String[] Array that contains all Dimensions found in unitsArray
 	 */
 	protected String[] getDimensions() {
 		String[] tmp = new String[unitsArray.size()];
@@ -347,7 +346,7 @@ public class Util {
 		}
 		return true;
 	}
-
+	
 	/**
 	 * check the field for the following constraints: letters, characters ^ or
 	 * /, numbers
@@ -398,8 +397,6 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-	
-	
 	public boolean dimensionFieldCheck(ArrayList<JTextField> fields, String label) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
@@ -424,7 +421,6 @@ public class Util {
 	 * @param label
 	 * @return
 	 */
-	
 	public boolean fieldsArrayCheck(ArrayList<JTextField> fields, String label) {
 		String message = getStringFromXML("errorTextDialog0");
 		String title = getStringFromXML("errorTitleDialog0");
@@ -434,14 +430,16 @@ public class Util {
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 				fields.get(i).setBackground(Color.WHITE);
 				return true;
-			} else {
+			}else{
 				fields.get(i).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.red));
 				fields.get(i).setBackground(bgColor);
 				JOptionPane.showMessageDialog(new JFrame(), message + " " + getStringFromXML(label), title, JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
 		}
-
 		return false;
+
+		
 
 	}
 	 
@@ -471,6 +469,14 @@ public class Util {
 
 	}
 
+	/**
+	 * This method returns the right String for the given nodeName
+	 * So that Strings are multilingual (currently there are only 
+	 * german Strings in labels.xml)
+	 * 
+	 * @param nodeName A String that is declared in labels.xml
+	 * @return nodeName
+	 */
 	protected String getStringFromXML(String nodeName) {
 		final String fileName = "labels.xml";
 		try {

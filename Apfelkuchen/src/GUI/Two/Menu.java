@@ -25,6 +25,7 @@ public class Menu implements ActionListener {
 	protected static WindowRelevantFactors WRF;
 	public static WindowDimensionlessFactors WDF; //public because J2R needs to access it
 	protected static J2R callerInstance = J2R.getInstance();
+	protected boolean window1Open = false;
 	
 	public static void main(String args[]) {
 		new Menu();
@@ -66,7 +67,7 @@ public class Menu implements ActionListener {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Close");
-				J2R.getInstance().stopRCaller();
+				callerInstance.stopRCaller();
 				System.exit(0);				
 			}
 			
@@ -114,18 +115,21 @@ public class Menu implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		String command = ae.getActionCommand();
 		if (command.equals("New")) {
-			//mainMenuWindow.setVisible(false);
-			if (Util.getInstance().isAutoloadingWindow1 != false) {
-				if (!new File(Util.getInstance().RELEVANTFACTORS_FILENAME).exists()) {
-					System.out.println("new WindowRelevantFactors()");
-					WRF = new WindowRelevantFactors();
+			if (window1Open == false) {
+				window1Open = true;
+				//mainMenuWindow.setVisible(false);
+				if (Util.getInstance().isAutoloadingWindow1 != false) {
+					if (!new File(Util.getInstance().RELEVANTFACTORS_FILENAME).exists()) {
+						System.out.println("new WindowRelevantFactors()");
+						WRF = new WindowRelevantFactors();
+					} else {
+						System.out.println("restoreRelevantFactors()");
+						WRF = new WindowRelevantFactors();
+						Util.getInstance().restorePersistentRelevantFactors(WRF);
+					}
 				} else {
-					System.out.println("restoreRelevantFactors()");
 					WRF = new WindowRelevantFactors();
-					Util.getInstance().restorePersistentRelevantFactors(WRF);
 				}
-			} else {
-				WRF = new WindowRelevantFactors();
 			}
 		} else if (command.equals("Set Path for TestCase.csv")) {
 			try {
