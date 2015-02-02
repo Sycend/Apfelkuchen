@@ -1,0 +1,10 @@
+;Name;Abbr;Role;low;high;m;k;s;Kel;mol;amp;cand;GasSusp;DueAusg;Wbilanz
+1;TempEGas;T;contr;443,15;493,15;0;0;0;1;0;0;0;0;0;1
+2;p_Duese;p;contr;0,5;1;-1;1;-2;0;0;0;0;0;2,5;0
+3;MS_Susp;MS;scup;0,00111;0,00222;0;1;-1;0;0;0;0;-1;-1;0
+4;MS_Gas;MG;contr;0,01389;0,02222;3;0;-1;0;0;0;0;1;0;0
+5;D_durchm;dd;const;0,002;0,002;1;0;0;0;0;0;0;0;-2;0
+6;Gasdichte;g_rho;const;0,001;0,001;-3;1;0;0;0;0;0;1;0;0
+7;Verd_enth;enth;const;1995384;1995384;2;0;-2;0;0;0;0;0;0;-1
+8;Wärmekap;cp;const;1005;1005;2;0;-2;-1;0;0;0;0;0;1
+9;SuspDichte;s_rho;const;1000000;1000000;-3;1;0;0;0;0;0;0;-1,5;0

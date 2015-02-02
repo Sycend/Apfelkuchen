@@ -1,0 +1,6 @@
+;Name;Abbr;Role;low;high;m;k;s;Kel;mol;amp;cand;Fr;cT
+1;Durchmesser;d;contr;0,2;0,4;1;0;0;0;0;0;0;-5;0
+2;Vol-Strom;q;scup;1,12E-06;5,50E-06;3;0;-1;0;0;0;0;2;0
+3;Konzentration;cT;contr;5,00E-05;0,0001;0;0;0;0;0;0;0;0;1
+4;Stoffkonst.;S;const;1;1;0;0;0;0;0;0;0;0;0
+5;Gravitationsk.;g;const;9,8;9,8;1;0;-2;0;0;0;0;-1;0
