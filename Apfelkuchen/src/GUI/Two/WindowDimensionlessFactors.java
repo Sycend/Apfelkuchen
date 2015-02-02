@@ -482,7 +482,7 @@ public class WindowDimensionlessFactors extends JFrame {
 					for(int l=0;l<widthVMatrix;l++){
 						if(checkLinearMatrixForDeleteColumn(l))
 						{
-							System.out.println(" ");
+							System.out.print(" ");
 						}else{
 							for(int i=0;i<lengthVMatrix;i++){	
 								for(int j=0;j<widthVMatrix;j++){
