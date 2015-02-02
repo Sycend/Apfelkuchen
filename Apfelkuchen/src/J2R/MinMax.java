@@ -7,10 +7,11 @@ import rcaller.RCode;
  * 
  * @author Christoph Wütschner, Clemens Kretzer, Florian Then
  *
- *Return Value in R = MinMaxListe => runAndReturnResultOnline("MinMaxListe");
- *MinMax returned: MinMaxListe => Liste aus x_low[DoubleArray], colnames(x_low)[StringArray],
- *							 rownames(x_low)[StringArray], x_high[DoubleArray],
- *							 rownames(x_high)[StringArray], colnames(x_high)[StringArray]
+ * @see Return Value in R = MinMaxListe =>
+ *      runAndReturnResultOnline("MinMaxListe"); MinMax returned: MinMaxListe =>
+ *      Liste aus x_low[DoubleArray], colnames(x_low)[StringArray],
+ *      rownames(x_low)[StringArray], x_high[DoubleArray],
+ *      rownames(x_high)[StringArray], colnames(x_high)[StringArray]
  */
 public class MinMax {
 	
