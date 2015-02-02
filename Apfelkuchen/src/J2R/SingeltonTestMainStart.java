@@ -1,7 +1,5 @@
 package J2R;
 
-import com.sun.org.apache.bcel.internal.generic.DMUL;
-
 import GUI.Two.Menu;
 import GUI.Two.WindowDimensionlessFactors;
 /**
@@ -66,14 +64,6 @@ public class SingeltonTestMainStart {
 
 		double[] x_low = minMaxController.getX_lowDoubleArray();
 		double[] x_high = minMaxController.getX_highDoubleArray();
-
-		String[] x_lowColNames = minMaxController.getX_lowColnamesStringArray();
-		String[] x_lowRowNames = minMaxController.getX_lowRownamesStringArray();
-
-		String[] x_highColNames = minMaxController
-				.getX_highColnamesStringArray();
-		String[] x_highRowNames = minMaxController
-				.getX_highRownamesStringArray();
 
 		String minmax[][] = new String[x_low.length][2];
 

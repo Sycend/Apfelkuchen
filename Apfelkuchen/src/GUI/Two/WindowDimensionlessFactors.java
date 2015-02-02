@@ -23,10 +23,8 @@ import javax.swing.SwingConstants;
 import J2R.PrepareForR;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.lang.Math;
 
 /**

@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
-import java.math.*;
-
 import GUI.Two.*;
 
 /**
