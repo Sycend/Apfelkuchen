@@ -470,7 +470,7 @@ public class WindowDimensionlessFactors extends JFrame {
 		jmHelp.add(jmiAbout);
 		jmb.add(jmHelp);
 		setJMenuBar(jmb);
-		buttonReset = new JButton("Reset");
+		buttonReset = new JButton("Update");
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				colNamesTextFieldsToColNames(); 
