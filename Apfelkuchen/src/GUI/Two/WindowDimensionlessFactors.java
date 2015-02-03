@@ -105,7 +105,7 @@ public class WindowDimensionlessFactors extends JFrame {
 	 */
 	private void init() {
 		setLayout(new BorderLayout());
-		toggle.setText("Change to Natursicht");
+		toggle.setText("Change to log-Sicht");
 		actionListener =new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				if (toggle.getText() == "Change to Natursicht") {
@@ -682,7 +682,7 @@ public class WindowDimensionlessFactors extends JFrame {
 			minVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][0])));
 			maxVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][1])));
 		}
-		
+
 		WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
 		for (int j = 0; j < vMatrix[0].length; j++) {
 			WindowDimensionlessFactors.dimensionlessControlSI[0][j] = dimensionlessControlSI[0][j]; //M
