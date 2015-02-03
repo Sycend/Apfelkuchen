@@ -110,11 +110,11 @@ public class WindowDimensionlessFactors extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				if (toggle.getText() == "Change to Natursicht") {
 					toggle.setText("Change to log-Sicht");
-					log = true;
+					log = false;
 
 				} else {
 					toggle.setText("Change to Natursicht");
-					log = false;
+					log = true;
 				}
 				
 				refreshWindowContent();
@@ -532,6 +532,7 @@ public class WindowDimensionlessFactors extends JFrame {
 				if (widthVMatrix!=0)
 					J2R.SingeltonTestMainStart.calculate(false, Menu.callerInstance);
 				
+				toggle.setText("Change to log-Sicht");
 				refreshWindowContent();
 					
 			}
@@ -677,10 +678,10 @@ public class WindowDimensionlessFactors extends JFrame {
 		minVNat = new String[minMax.length];
 		maxVNat = new String[minMax.length];
 		for (int i = 0; i < minMax.length; i++) {
-			minVLog[i] = minMax[i][0];
-			maxVLog[i] = minMax[i][1];
-			minVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][0])));
-			maxVNat[i] = String.valueOf(Math.pow(10.0, Double.parseDouble( minMax[i][1])));
+			minVLog[i] = String.valueOf(Math.round(100000.0*(Double.parseDouble(minMax[i][0])))/100000.0);
+			maxVLog[i] = String.valueOf(Math.round(100000.0*(Double.parseDouble(minMax[i][1])))/100000.0);
+			minVNat[i] = String.valueOf(Math.round(100000.0*Math.pow(10.0,Double.parseDouble(minMax[i][0])))/100000.0);
+			maxVNat[i] = String.valueOf(Math.round(100000.0*Math.pow(10.0,Double.parseDouble(minMax[i][1])))/100000.0);
 		}
 
 		WindowDimensionlessFactors.dimensionlessControlSI = new String[7][dimensionlessControlSI[0].length];
